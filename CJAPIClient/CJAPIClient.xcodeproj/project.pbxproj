@@ -14,7 +14,8 @@
 		1371311018FC4B43007AA17A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1371310F18FC4B43007AA17A /* UIKit.framework */; };
 		1371311318FC4B43007AA17A /* libCJAPIClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 137130FB18FC4B43007AA17A /* libCJAPIClient.a */; };
 		1371311918FC4B43007AA17A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1371311718FC4B43007AA17A /* InfoPlist.strings */; };
-		1371311B18FC4B43007AA17A /* CJAPIClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1371311A18FC4B43007AA17A /* CJAPIClientTests.m */; };
+		1371312718FC539C007AA17A /* CJEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1371312618FC539C007AA17A /* CJEngine.m */; };
+		1371312D18FC544F007AA17A /* CJEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1371312C18FC544F007AA17A /* CJEngineTests.m */; };
 		63065E4101A948239338C74C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D59ADD9DEA42CCAA1A5D9D /* libPods.a */; };
 		75BA524CD7B742E38C4954E5 /* libPods-CJAPIClientTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4CE38E97804E9FB177E109 /* libPods-CJAPIClientTests.a */; };
 /* End PBXBuildFile section */
@@ -52,7 +53,9 @@
 		1371310F18FC4B43007AA17A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		1371311618FC4B43007AA17A /* CJAPIClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CJAPIClientTests-Info.plist"; sourceTree = "<group>"; };
 		1371311818FC4B43007AA17A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1371311A18FC4B43007AA17A /* CJAPIClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CJAPIClientTests.m; sourceTree = "<group>"; };
+		1371312518FC539C007AA17A /* CJEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEngine.h; sourceTree = "<group>"; };
+		1371312618FC539C007AA17A /* CJEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEngine.m; sourceTree = "<group>"; };
+		1371312C18FC544F007AA17A /* CJEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CJEngineTests.m; path = Engine/CJEngineTests.m; sourceTree = "<group>"; };
 		48A3F25556CD4B239434EBF9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		9AB58527C961433B92AA8DF6 /* Pods-CJAPIClientTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJAPIClientTests.xcconfig"; path = "Pods/Pods-CJAPIClientTests.xcconfig"; sourceTree = "<group>"; };
 		CE4CE38E97804E9FB177E109 /* libPods-CJAPIClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CJAPIClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				1371310318FC4B43007AA17A /* CJAPIClient.h */,
+				1371312418FC526E007AA17A /* Engine */,
 				1371310118FC4B43007AA17A /* Supporting Files */,
 			);
 			path = CJAPIClient;
@@ -137,7 +141,7 @@
 		1371311418FC4B43007AA17A /* CJAPIClientTests */ = {
 			isa = PBXGroup;
 			children = (
-				1371311A18FC4B43007AA17A /* CJAPIClientTests.m */,
+				1371312818FC53CE007AA17A /* Engine */,
 				1371311518FC4B43007AA17A /* Supporting Files */,
 			);
 			path = CJAPIClientTests;
@@ -150,6 +154,23 @@
 				1371311718FC4B43007AA17A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1371312418FC526E007AA17A /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				1371312518FC539C007AA17A /* CJEngine.h */,
+				1371312618FC539C007AA17A /* CJEngine.m */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		1371312818FC53CE007AA17A /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				1371312C18FC544F007AA17A /* CJEngineTests.m */,
+			);
+			name = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,7 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1371311B18FC4B43007AA17A /* CJAPIClientTests.m in Sources */,
+				1371312D18FC544F007AA17A /* CJEngineTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
