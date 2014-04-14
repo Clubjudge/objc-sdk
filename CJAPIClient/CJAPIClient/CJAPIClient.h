@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CJEngine.h"
 
 @interface CJAPIClient : NSObject
 
