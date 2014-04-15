@@ -16,6 +16,10 @@
 
 - (id)init;
 
+#pragma mark - Client Key
++ (NSString *)clientKey;
++ (void)setClientKey:(NSString *)clientKey;
+
 #pragma mark - Environment
 - (void)setEnvironment:(NSString *)environment;
 
