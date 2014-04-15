@@ -7,7 +7,14 @@
 //
 
 #import <Kiwi/Kiwi.h>
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "CJEngine.h"
+
+@interface CJEngine()
+
+@property (nonatomic, strong) AFHTTPRequestOperationManager *operationManager;
+
+@end
 
 SPEC_BEGIN(CJENGINESPEC)
 
@@ -19,6 +26,12 @@ describe(@"Engine", ^{
       
       [[engine should] beKindOfClass:[CJEngine class]];
       [[engine should] equal:engine2];
+    });
+    
+    it(@"instantiates an AFHTTPOperationManager", ^{
+      CJEngine *engine = [CJEngine sharedEngine];
+      
+      [[engine.operationManager should] beKindOfClass:[AFHTTPRequestOperationManager class]];
     });
   });
   
