@@ -7,6 +7,7 @@
 //
 
 #import "CJEngine.h"
+#import "CJEngineConfiguration.h"
 
 @implementation CJEngine
 
@@ -31,6 +32,13 @@
   }
   
   return self;
+}
+
+
+#pragma mark - Environment
+- (void)setEnvironment:(NSString *)environment
+{
+  [CJEngineConfiguration setEnvironment:environment];
 }
 
 @end

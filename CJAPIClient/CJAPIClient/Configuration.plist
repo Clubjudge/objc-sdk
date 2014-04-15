@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Configuration</key>
+	<string>$CONFIGURATION</string>
+	<key>Development</key>
+	<dict>
+		<key>kAPIVersion</key>
+		<string>v1</string>
+		<key>kAPIClientKey</key>
+		<string>kittens</string>
+		<key>kAPIBaseURL</key>
+		<string>http://local.clubjudge.com:5000</string>
+	</dict>
+	<key>Debug</key>
+	<dict>
+		<key>kAPIVersion</key>
+		<string>v1</string>
+		<key>kAPIClientKey</key>
+		<string>kittens</string>
+		<key>kAPIBaseURL</key>
+		<string>http://local.clubjudge.com:5000</string>
+	</dict>
+	<key>Staging</key>
+	<dict>
+		<key>kAPIVersion</key>
+		<string>v1</string>
+		<key>kAPIClientKey</key>
+		<string>lerolero</string>
+		<key>kAPIBaseURL</key>
+		<string>http://bifrost.staging.clubjudge.com</string>
+	</dict>
+	<key>Production</key>
+	<dict>
+		<key>kAPIVersion</key>
+		<string>v1</string>
+		<key>kAPIClientKey</key>
+		<string>6Fs2GFLoUQ</string>
+		<key>kAPIBaseURL</key>
+		<string>http://bifrost.clubjudge.com</string>
+	</dict>
+	<key>Release</key>
+	<dict>
+		<key>kAPIVersion</key>
+		<string>v1</string>
+		<key>kAPIClientKey</key>
+		<string>kittens</string>
+		<key>kAPIBaseURL</key>
+		<string>http://local.clubjudge.com:5000</string>
+	</dict>
+</dict>
+</plist>
