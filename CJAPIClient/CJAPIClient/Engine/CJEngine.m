@@ -41,4 +41,17 @@
   [CJEngineConfiguration setEnvironment:environment];
 }
 
+#pragma mark - Client Key
+
+static NSString* theClientKey = nil;
++ (NSString *)clientKey
+{
+  return theClientKey;
+}
+
++ (void)setClientKey:(NSString *)clientKey
+{
+  theClientKey = clientKey;
+}
+
 @end

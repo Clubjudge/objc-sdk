@@ -21,6 +21,14 @@ describe(@"Engine", ^{
       [[engine should] equal:engine2];
     });
   });
+  
+  describe(@".setClientKey", ^{
+    it(@"sets the clientKey class property", ^{
+      [CJEngine setClientKey:@"kittens"];
+      
+      [[[CJEngine clientKey] should] equal:@"kittens"];
+    });
+  });
 });
 
 SPEC_END
