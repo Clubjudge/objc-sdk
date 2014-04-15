@@ -54,4 +54,17 @@ static NSString* theClientKey = nil;
   theClientKey = clientKey;
 }
 
+#pragma mark - User Token
+
+static NSString* theUserToken = nil;
++ (NSString *)userToken
+{
+  return theUserToken;
+}
+
++ (void)setUserToken:(NSString *)userToken
+{
+  theUserToken = userToken;
+}
+
 @end

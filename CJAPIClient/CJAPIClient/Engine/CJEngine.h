@@ -20,6 +20,10 @@
 + (NSString *)clientKey;
 + (void)setClientKey:(NSString *)clientKey;
 
+#pragma mark - User Token
++ (NSString *)userToken;
++ (void)setUserToken:(NSString *)userToken;
+
 #pragma mark - Environment
 - (void)setEnvironment:(NSString *)environment;
 

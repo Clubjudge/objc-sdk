@@ -29,6 +29,14 @@ describe(@"Engine", ^{
       [[[CJEngine clientKey] should] equal:@"kittens"];
     });
   });
+  
+  describe(@".setUserToken", ^{
+    it(@"sets the userToken class property", ^{
+      [CJEngine setUserToken:@"a_user_token"];
+      
+      [[[CJEngine userToken] should] equal:@"a_user_token"];
+    });
+  });
 });
 
 SPEC_END
