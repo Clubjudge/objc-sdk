@@ -42,9 +42,7 @@ static NSString* theEnvironment = @"development";
 + (void)setEnvironment:(NSString *)environment
 {
   NSArray *environments = @[@"development", @"staging", @"production"];
-  
-  NSString *warning = [NSString stringWithFormat:NSLocalizedString(@"%@ is not a supported environment", nil), environment];
-  NSAssert([environments containsObject:environment], warning);
+  NSAssert([environments containsObject:environment], @"%@ is not a supported environment", environment);
   
   theEnvironment = environment;
 }
@@ -73,9 +71,8 @@ static NSDictionary* configurations = nil;
   }
   
   NSDictionary *configuration = [configurations objectForKey:environment];
-  NSString *warning = [NSString stringWithFormat:NSLocalizedString(@"Configuration for %@ not found!", nil), environment];
   
-  NSAssert(configuration, warning);
+  NSAssert(configuration, @"Configuration for %@ not found!", configuration);
   
   return configuration;
 }
