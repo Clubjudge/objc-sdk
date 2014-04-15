@@ -16,4 +16,7 @@
 
 - (id)init;
 
+#pragma mark - Environment
+- (void)setEnvironment:(NSString *)environment;
+
 @end
