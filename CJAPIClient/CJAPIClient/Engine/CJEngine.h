@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
 
 @interface CJEngine : NSObject
+
+@property (nonatomic, strong) AFHTTPRequestOperationManager *operationManager;
 
 #pragma mark - Initialisers
 

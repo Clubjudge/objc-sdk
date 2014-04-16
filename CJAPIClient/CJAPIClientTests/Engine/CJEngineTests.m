@@ -10,12 +10,6 @@
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "CJEngine.h"
 
-@interface CJEngine()
-
-@property (nonatomic, strong) AFHTTPRequestOperationManager *operationManager;
-
-@end
-
 SPEC_BEGIN(CJENGINESPEC)
 
 describe(@"Engine", ^{

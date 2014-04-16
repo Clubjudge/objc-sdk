@@ -8,13 +8,6 @@
 
 #import "CJEngine.h"
 #import "CJEngineConfiguration.h"
-#import <AFNetworking/AFHTTPRequestOperationManager.h>
-
-@interface CJEngine()
-
-@property (nonatomic, strong) AFHTTPRequestOperationManager *operationManager;
-
-@end
 
 @implementation CJEngine
 
