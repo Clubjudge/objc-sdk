@@ -13,6 +13,9 @@
 
 @property (nonatomic, strong) NSString *method;
 @property (nonatomic, strong) NSString *path;
+@property (nonatomic, strong) NSArray *embeds;
+@property (nonatomic, strong) NSArray *fields;
+@property (nonatomic, strong) NSDictionary *parameters;
 
 #pragma mark - Initialisers
 - (instancetype)initWithMethod:(NSString *)method andPath:(NSString *)path;
