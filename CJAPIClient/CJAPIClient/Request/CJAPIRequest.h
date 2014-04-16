@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "CJEngine.h"
 
+typedef void (^CJFailureBlock)(NSError* error);
+
 @interface CJAPIRequest : NSObject
 
 @property (nonatomic, strong) NSString *method;
@@ -18,6 +20,11 @@
 @property (nonatomic, strong) NSDictionary *parameters;
 
 #pragma mark - Initialisers
-- (instancetype)initWithMethod:(NSString *)method andPath:(NSString *)path;
+- (instancetype)initWithMethod:(NSString *)method
+                       andPath:(NSString *)path;
+
+#pragma mark - Actions
+- (void)performWithSuccess:(void (^)(id response, id pagination, id links))success
+                   failure:(CJFailureBlock)failure;
 
 @end

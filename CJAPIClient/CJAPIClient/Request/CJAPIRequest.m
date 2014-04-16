@@ -20,11 +20,23 @@
 #pragma mark - Initialisers
 
 - (instancetype)initWithMethod:(NSString *)method andPath:(NSString *)path
+- (instancetype)initWithMethod:(NSString *)method
+                       andPath:(NSString *)path
 {
-  if (self = [super init]) {
+  if (self = [self init]) {
     [self setMethod:method];
     [self setPath:path];
     self.operationManager = [[CJEngine sharedEngine] operationManager];
+  }
+  
+  return self;
+}
+
+- (instancetype)init
+{
+  if (self = [super init]) {
+    _method = @"GET";
+    _path = @"/";
   }
   
   return self;

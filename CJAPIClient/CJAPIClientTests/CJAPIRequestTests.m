@@ -22,15 +22,21 @@ SPEC_BEGIN(CJAPIREQUESTSPEC)
 describe(@"CJAPIRequest", ^{
   context(@"When initialising", ^{
     describe(@".method", ^{
-      it(@"sets the method property", ^{
-        CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
-                                                             andPath:@"a/path"];
-        
+      it(@"defaults to GET", ^{
+        CJAPIRequest *request = [CJAPIRequest new];
+
         [[request.method should] equal:@"GET"];
       });
       
+      it(@"sets the method property", ^{
+        CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"POST"
+                                                             andPath:@"a/path"];
+        
+        [[request.method should] equal:@"POST"];
+      });
+      
       it(@"works with lowercase methods", ^{
-        CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"get"
+        CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"post"
                                                              andPath:@"a/path"];
         
         [[request.method should] equal:@"GET"];
