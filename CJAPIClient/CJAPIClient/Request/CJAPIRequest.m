@@ -69,6 +69,8 @@ NSString *const kRequestAccessToken = @"token";
     path = [kRequestPathPrefix stringByAppendingString:path];
   }
   
+  path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+  
   _path = path;
 }
 

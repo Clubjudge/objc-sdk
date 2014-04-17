@@ -66,6 +66,13 @@ describe(@"CJAPIRequest", ^{
         
         [[request.path should] equal:@"/a/path/"];
       });
+      
+      it(@"encodes the path using UTF-8", ^{
+        CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
+                                                            andPath:@"a/path?foo=bar bar"];
+        
+        [[request.path should] equal:@"/a/path?foo=bar%20bar"];
+      });
     });
     
     describe(@"#sessionManager", ^{
