@@ -7,7 +7,7 @@
 //
 
 #import <Kiwi/Kiwi.h>
-#import <AFNetworking/AFHTTPRequestOperationManager.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 #import "CJEngine.h"
 
 SPEC_BEGIN(CJENGINESPEC)
@@ -22,10 +22,10 @@ describe(@"Engine", ^{
       [[engine should] equal:engine2];
     });
     
-    it(@"instantiates an AFHTTPOperationManager", ^{
+    it(@"instantiates an AFHTTPSessionManager", ^{
       CJEngine *engine = [CJEngine sharedEngine];
       
-      [[engine.operationManager should] beKindOfClass:[AFHTTPRequestOperationManager class]];
+      [[engine.sessionManager should] beKindOfClass:[AFHTTPSessionManager class]];
     });
   });
   

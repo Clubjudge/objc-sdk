@@ -8,12 +8,12 @@
 
 #import <Kiwi/Kiwi.h>
 #import "CJAPIRequest.h"
-#import <AFNetworking/AFHTTPRequestOperationManager.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 #import "CJEngine.h"
 
 @interface CJAPIRequest()
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *operationManager;
+@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
 
@@ -39,11 +39,17 @@ describe(@"CJAPIRequest", ^{
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"post"
                                                              andPath:@"a/path"];
         
-        [[request.method should] equal:@"GET"];
+        [[request.method should] equal:@"POST"];
       });
     });
     
     describe(@".path", ^{
+      it(@"defaults to /", ^{
+        CJAPIRequest *request = [CJAPIRequest new];
+        
+        [[request.path should] equal:@"/"];
+      });
+      
       it(@"sets the path property", ^{
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
                                                              andPath:@"/a/path/"];
@@ -59,13 +65,13 @@ describe(@"CJAPIRequest", ^{
       });
     });
     
-    describe(@".operationManager", ^{
-      it(@"sets the operationManager property to the shared engine's operationManager", ^{
+    describe(@".sessionManager", ^{
+      it(@"sets the sessionManager property to the shared engine's sessionManager", ^{
         CJEngine *engine = [CJEngine sharedEngine];
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
                                                              andPath:@"a/path/"];
         
-        [[request.operationManager should] equal:engine.operationManager];
+        [[request.sessionManager should] equal:engine.sessionManager];
       });
     });
   });

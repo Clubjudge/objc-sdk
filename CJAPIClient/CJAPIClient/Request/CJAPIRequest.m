@@ -7,11 +7,11 @@
 //
 
 #import "CJAPIRequest.h"
-#import <AFNetworking/AFHTTPRequestOperationManager.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 
 @interface CJAPIRequest()
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *operationManager;
+@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
 
@@ -19,14 +19,13 @@
 
 #pragma mark - Initialisers
 
-- (instancetype)initWithMethod:(NSString *)method andPath:(NSString *)path
 - (instancetype)initWithMethod:(NSString *)method
                        andPath:(NSString *)path
 {
   if (self = [self init]) {
     [self setMethod:method];
     [self setPath:path];
-    self.operationManager = [[CJEngine sharedEngine] operationManager];
+    self.sessionManager = [[CJEngine sharedEngine] sessionManager];
   }
   
   return self;
@@ -62,6 +61,14 @@
   }
   
   _path = path;
+}
+
+#pragma mark - Actions
+
+- (void)performWithSuccess:(void (^)(id response, id pagination, id links))success
+                   failure:(CJFailureBlock)failure
+{
+
 }
 
 @end
