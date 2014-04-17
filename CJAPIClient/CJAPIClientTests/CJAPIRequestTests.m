@@ -8,7 +8,8 @@
 
 #import <Kiwi/Kiwi.h>
 #import "CJAPIRequest.h"
-#import <AFNetworking/AFHTTPSessionManager.h>
+#import <AFNetworking/AFNetworking.h>
+#import <OHHTTPStubs/OHHTTPStubs.h>
 #import "CJEngine.h"
 
 @interface CJAPIRequest()
@@ -23,6 +24,11 @@
 SPEC_BEGIN(CJAPIREQUESTSPEC)
 
 describe(@"CJAPIRequest", ^{
+  
+  beforeAll(^{
+    [OHHTTPStubs removeAllStubs];
+  });
+  
   context(@"When initialising", ^{
     describe(@"#method", ^{
       it(@"defaults to GET", ^{
@@ -180,11 +186,68 @@ describe(@"CJAPIRequest", ^{
       it(@"calls the GETWithSuccess:failure: method", ^{
         [[request should] receive:@selector(GETWithSuccess:failure:)];
         
-        [request performWithSuccess:^(id response, id pagination, id links) {
-          return;
-        } failure:^(NSError *error) {
-          return;
-        }];
+        [request performWithSuccess:nil failure:nil];
+      });
+      
+      context(@"when GET succeeds", ^{
+        __block NSDictionary *stubbedResponse;
+        __block id<OHHTTPStubsDescriptor> stub = nil;
+        
+        beforeEach(^{
+          request = [[CJAPIRequest alloc] initWithMethod:@"GET"
+                                                 andPath:@"/a/path"];
+          
+          stubbedResponse = @{
+                              @"events": @[
+                                  @{@"id": @"5"},
+                                  @{@"id": @"10"}
+                                  ],
+                              @"_pagination": @{
+                                  @"next": @"http://next",
+                                  @"previous": @"http://previous"
+                                  },
+                              @"_links": @{
+                                  @"artists": @"http://artists",
+                                  @"venue": @"http://venue"
+                                  }
+                              };
+          
+          stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+            return [req.URL.path isEqualToString:@"/a/path"];
+          } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+            NSError *error;
+            NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
+                                                               options:kNilOptions
+                                                                 error:&error];
+            
+            return [OHHTTPStubsResponse responseWithData:data
+                                              statusCode:200
+                                                 headers:@{@"Content-Type":@"text/json"}];
+          }];
+          
+          stub.name = @"getSucceeds";
+        });
+        
+        afterEach(^{
+          [OHHTTPStubs removeStub:stub];
+        });
+        
+        it(@"executes the success block with the source, pagination and links info", ^{
+          
+          __block NSDictionary *thePagination = nil;
+          __block NSDictionary *theLinks = nil;
+          __block NSDictionary *theResponse = nil;
+          
+          [request performWithSuccess:^(id response, id pagination, id links) {
+            theResponse = response;
+            thePagination = pagination;
+            theLinks = links;
+          } failure:nil];
+          
+          [[expectFutureValue(theResponse) shouldEventually] equal:[stubbedResponse objectForKey:@"events"]];
+          [[expectFutureValue(thePagination) shouldEventually] equal:[stubbedResponse objectForKey:@"_pagination"]];
+          [[expectFutureValue(theLinks) shouldEventually] equal:[stubbedResponse objectForKey:@"_links"]];
+        });
       });
     });
   });

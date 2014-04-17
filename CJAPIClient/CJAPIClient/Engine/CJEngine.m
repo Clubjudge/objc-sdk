@@ -32,7 +32,11 @@
     
     NSAssert(url, @"Base URL not valid: %@", url);
     
-    self.sessionManager = [[AFHTTPSessionManager manager] initWithBaseURL:url];
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url
+                                                   sessionConfiguration:sessionConfiguration];
+
     self.sessionManager.responseSerializer = [AFJSONResponseSerializer new];
   }
   

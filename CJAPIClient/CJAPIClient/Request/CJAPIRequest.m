@@ -101,7 +101,22 @@ NSString *const kRequestAccessToken = @"token";
 - (void)GETWithSuccess:(void (^)(id response, id pagination, id links))success
                failure:(CJFailureBlock)failure
 {
-  
+  [self.sessionManager GET:self.path
+                parameters:[self prepareParameters]
+                   success:^(NSURLSessionDataTask *task, id responseObject) {
+                     NSString *sourceKey = [[[responseObject allKeys] reject:^BOOL(id object) {
+                       return [(NSString *)object hasPrefix:@"_"];
+                     }] first];
+                     
+                     NSDictionary *source = [responseObject objectForKey:sourceKey];
+                     NSDictionary *pagination = [responseObject objectForKey:@"_pagination"];
+                     NSDictionary *links = [responseObject objectForKey:@"_links"];
+                     
+                     success(source, pagination, links);
+                     
+                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                     
+                   }];
 }
 
 #pragma mark - Parameters
