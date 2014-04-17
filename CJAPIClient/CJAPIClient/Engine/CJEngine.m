@@ -8,13 +8,6 @@
 
 #import "CJEngine.h"
 #import "CJEngineConfiguration.h"
-#import <AFNetworking/AFHTTPRequestOperationManager.h>
-
-@interface CJEngine()
-
-@property (nonatomic, strong) AFHTTPRequestOperationManager *operationManager;
-
-@end
 
 @implementation CJEngine
 
@@ -39,8 +32,12 @@
     
     NSAssert(url, @"Base URL not valid: %@", url);
     
-    self.operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
-    self.operationManager.responseSerializer = [AFJSONResponseSerializer new];
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url
+                                                   sessionConfiguration:sessionConfiguration];
+
+    self.sessionManager.responseSerializer = [AFJSONResponseSerializer new];
   }
   
   return self;

@@ -16,6 +16,8 @@
 		1371311918FC4B43007AA17A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1371311718FC4B43007AA17A /* InfoPlist.strings */; };
 		1371312718FC539C007AA17A /* CJEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1371312618FC539C007AA17A /* CJEngine.m */; };
 		1371312D18FC544F007AA17A /* CJEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1371312C18FC544F007AA17A /* CJEngineTests.m */; };
+		13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AAF18FECDB1007D1DD2 /* CJAPIRequest.m */; };
+		13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */; };
 		13E6371118FC671A00D7EB22 /* CJEngineConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E6371018FC671A00D7EB22 /* CJEngineConfiguration.m */; };
 		13E6371418FC6AA900D7EB22 /* CJEngineConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E6371318FC6AA900D7EB22 /* CJEngineConfigurationTests.m */; };
 		63065E4101A948239338C74C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D59ADD9DEA42CCAA1A5D9D /* libPods.a */; };
@@ -58,6 +60,9 @@
 		1371312518FC539C007AA17A /* CJEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEngine.h; sourceTree = "<group>"; };
 		1371312618FC539C007AA17A /* CJEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEngine.m; sourceTree = "<group>"; };
 		1371312C18FC544F007AA17A /* CJEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CJEngineTests.m; path = Engine/CJEngineTests.m; sourceTree = "<group>"; };
+		13AD9AAE18FECDB1007D1DD2 /* CJAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAPIRequest.h; sourceTree = "<group>"; };
+		13AD9AAF18FECDB1007D1DD2 /* CJAPIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAPIRequest.m; sourceTree = "<group>"; };
+		13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAPIRequestTests.m; sourceTree = "<group>"; };
 		13E6370F18FC671A00D7EB22 /* CJEngineConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEngineConfiguration.h; sourceTree = "<group>"; };
 		13E6371018FC671A00D7EB22 /* CJEngineConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEngineConfiguration.m; sourceTree = "<group>"; };
 		13E6371218FC69BF00D7EB22 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
@@ -130,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				1371310318FC4B43007AA17A /* CJAPIClient.h */,
+				13AD9AAD18FECD9D007D1DD2 /* Request */,
 				1371312418FC526E007AA17A /* Engine */,
 				1371310118FC4B43007AA17A /* Supporting Files */,
 			);
@@ -179,8 +185,18 @@
 			children = (
 				1371312C18FC544F007AA17A /* CJEngineTests.m */,
 				13E6371318FC6AA900D7EB22 /* CJEngineConfigurationTests.m */,
+				13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */,
 			);
 			name = Engine;
+			sourceTree = "<group>";
+		};
+		13AD9AAD18FECD9D007D1DD2 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				13AD9AAE18FECDB1007D1DD2 /* CJAPIRequest.h */,
+				13AD9AAF18FECDB1007D1DD2 /* CJAPIRequest.m */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
+				13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */,
 				13E6371118FC671A00D7EB22 /* CJEngineConfiguration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +359,7 @@
 			files = (
 				1371312D18FC544F007AA17A /* CJEngineTests.m in Sources */,
 				13E6371418FC6AA900D7EB22 /* CJEngineConfigurationTests.m in Sources */,
+				13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

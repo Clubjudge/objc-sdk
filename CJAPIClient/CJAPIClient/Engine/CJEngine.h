@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 
 @interface CJEngine : NSObject
+
+@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 #pragma mark - Initialisers
 
