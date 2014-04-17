@@ -81,8 +81,18 @@ NSString *const kRequestAccessToken = @"token";
 {
   void (^selectedMethod)() = @{
                              kRequestMethodGET : ^{
-                               [self GETWithSuccess:success
-                                            failure:failure];
+                               [self GETWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+                                 NSString *sourceKey = [[[responseObject allKeys] reject:^BOOL(id object) {
+                                   return [(NSString *)object hasPrefix:@"_"];
+                                 }] first];
+                                 
+                                 NSDictionary *source = [responseObject objectForKey:sourceKey];
+                                 NSDictionary *pagination = [responseObject objectForKey:@"_pagination"];
+                                 NSDictionary *links = [responseObject objectForKey:@"_links"];
+                                 
+                                 success(source, pagination, links);
+                                 
+                               } failure:failure];
                              },
                              kRequestMethodPOST : ^{
                                NSLog(@"POST method not implemented yet");
@@ -98,23 +108,13 @@ NSString *const kRequestAccessToken = @"token";
   selectedMethod();
 }
 
-- (void)GETWithSuccess:(void (^)(id response, id pagination, id links))success
+- (void)GETWithSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                failure:(CJFailureBlock)failure
 {
   [self.sessionManager GET:self.path
                 parameters:[self prepareParameters]
-                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                     NSString *sourceKey = [[[responseObject allKeys] reject:^BOOL(id object) {
-                       return [(NSString *)object hasPrefix:@"_"];
-                     }] first];
-                     
-                     NSDictionary *source = [responseObject objectForKey:sourceKey];
-                     NSDictionary *pagination = [responseObject objectForKey:@"_pagination"];
-                     NSDictionary *links = [responseObject objectForKey:@"_links"];
-                     
-                     success(source, pagination, links);
-                     
-                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                   success:success
+                   failure:^(NSURLSessionDataTask *task, NSError *error) {
                      
                    }];
 }
