@@ -13,6 +13,9 @@
 
 @interface CJAPIRequest()
 
+- (void)GETWithSuccess:(void (^)(id response, id pagination, id links))success
+               failure:(CJFailureBlock)failure;
+
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
@@ -124,6 +127,27 @@ describe(@"CJAPIRequest", ^{
       [request setParameters:parameters];
       
       [[request.parameters should] equal:parameters];
+    });
+  });
+  
+  describe(@".perform", ^{
+    context(@"When the method is GET", ^{
+      
+      __block CJAPIRequest *request;
+      beforeEach(^{
+        request = [[CJAPIRequest alloc] init];
+        request.method = @"GET";
+      });
+      
+      it(@"calls the GETWithSuccess:failure: method", ^{
+        [[request should] receive:@selector(GETWithSuccess:failure:)];
+        
+        [request performWithSuccess:^(id response, id pagination, id links) {
+          return;
+        } failure:^(NSError *error) {
+          return;
+        }];
+      });
     });
   });
 });

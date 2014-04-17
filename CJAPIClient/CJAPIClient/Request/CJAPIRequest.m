@@ -9,6 +9,12 @@
 #import "CJAPIRequest.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
 
+NSString *const kRequestMethodGET = @"GET";
+NSString *const kRequestMethodPOST = @"POST";
+NSString *const kRequestMethodPUT = @"PUT";
+NSString *const kRequestMethodDELETE = @"DELETE";
+NSString *const kRequestPathPrefix = @"/";
+
 @interface CJAPIRequest()
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
@@ -34,8 +40,8 @@
 - (instancetype)init
 {
   if (self = [super init]) {
-    _method = @"GET";
-    _path = @"/";
+    _method = kRequestMethodGET;
+    _path = kRequestPathPrefix;
   }
   
   return self;
@@ -46,7 +52,7 @@
 
 - (void)setMethod:(NSString *)method
 {
-  NSArray *methods = @[@"GET", @"POST", @"PUT", @"DELETE"];
+  NSArray *methods = @[kRequestMethodGET, kRequestMethodPOST, kRequestMethodPUT, kRequestMethodDELETE];
   method = [method uppercaseString];
   
   NSAssert([methods containsObject:method], @"%@ is not a supported method", method);
@@ -56,8 +62,8 @@
 
 - (void)setPath:(NSString *)path
 {
-  unless([path hasPrefix:@"/"]) {
-    path = [@"/" stringByAppendingString:path];
+  unless([path hasPrefix:kRequestPathPrefix]) {
+    path = [kRequestPathPrefix stringByAppendingString:path];
   }
   
   _path = path;
@@ -67,6 +73,28 @@
 
 - (void)performWithSuccess:(void (^)(id response, id pagination, id links))success
                    failure:(CJFailureBlock)failure
+{
+  void (^selectedMethod)() = @{
+                             kRequestMethodGET : ^{
+                               [self GETWithSuccess:success
+                                            failure:failure];
+                             },
+                             kRequestMethodPOST : ^{
+                               NSLog(@"POST method not implemented yet");
+                             },
+                             kRequestMethodPUT : ^{
+                               NSLog(@"PUT method not implemented yet");
+                             },
+                             kRequestMethodDELETE : ^{
+                               NSLog(@"DELETE method not implemented yet");
+                             }
+                             }[self.method];
+  
+  selectedMethod();
+}
+
+- (void)GETWithSuccess:(void (^)(id response, id pagination, id links))success
+               failure:(CJFailureBlock)failure
 {
 
 }
