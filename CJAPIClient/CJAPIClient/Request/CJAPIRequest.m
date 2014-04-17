@@ -15,6 +15,9 @@ NSString *const kRequestMethodPUT = @"PUT";
 NSString *const kRequestMethodDELETE = @"DELETE";
 NSString *const kRequestPathPrefix = @"/";
 
+NSString *const kRequestClientId = @"clientId";
+NSString *const kRequestAccessToken = @"token";
+
 @interface CJAPIRequest()
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
@@ -96,7 +99,27 @@ NSString *const kRequestPathPrefix = @"/";
 - (void)GETWithSuccess:(void (^)(id response, id pagination, id links))success
                failure:(CJFailureBlock)failure
 {
+  
+}
 
+#pragma mark - Parameters
+- (NSDictionary *)prepareParameters
+{
+  NSString *clientId = [CJEngine clientKey];
+  NSString *accessToken = [CJEngine userToken];
+  NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:self.parameters];
+  
+  if (clientId) {
+    [parameters setObject:clientId
+                   forKey:kRequestClientId];
+  }
+  
+  if (accessToken) {
+    [parameters setObject:accessToken
+                   forKey:kRequestAccessToken];
+  }
+  
+  return parameters;
 }
 
 @end

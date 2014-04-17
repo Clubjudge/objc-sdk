@@ -24,7 +24,7 @@ SPEC_BEGIN(CJAPIREQUESTSPEC)
 
 describe(@"CJAPIRequest", ^{
   context(@"When initialising", ^{
-    describe(@".method", ^{
+    describe(@"#method", ^{
       it(@"defaults to GET", ^{
         CJAPIRequest *request = [CJAPIRequest new];
 
@@ -46,7 +46,7 @@ describe(@"CJAPIRequest", ^{
       });
     });
     
-    describe(@".path", ^{
+    describe(@"#path", ^{
       it(@"defaults to /", ^{
         CJAPIRequest *request = [CJAPIRequest new];
         
@@ -68,7 +68,7 @@ describe(@"CJAPIRequest", ^{
       });
     });
     
-    describe(@".sessionManager", ^{
+    describe(@"#sessionManager", ^{
       it(@"sets the sessionManager property to the shared engine's sessionManager", ^{
         CJEngine *engine = [CJEngine sharedEngine];
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
@@ -79,7 +79,7 @@ describe(@"CJAPIRequest", ^{
     });
   });
   
-  describe(@".setEmbeds", ^{
+  describe(@"#setEmbeds", ^{
     __block CJAPIRequest *request;
     __block NSArray *embeds;
     
@@ -95,7 +95,7 @@ describe(@"CJAPIRequest", ^{
     });
   });
   
-  describe(@".setFields", ^{
+  describe(@"#setFields", ^{
     __block CJAPIRequest *request;
     __block NSArray *fields;
     
@@ -111,7 +111,7 @@ describe(@"CJAPIRequest", ^{
     });
   });
   
-  describe(@".setParameters", ^{
+  describe(@"#setParameters", ^{
     __block CJAPIRequest *request;
     __block NSDictionary *parameters;
     
@@ -130,12 +130,43 @@ describe(@"CJAPIRequest", ^{
     });
   });
   
-  describe(@".perform", ^{
+  describe(@"prepareParameters", ^{
+    __block CJAPIRequest *request;
+    __block NSDictionary *parameters;
+    
+    beforeEach(^{
+      [CJEngine setClientKey:@"kittens"];
+      [CJEngine setUserToken:@"aToken"];
+      
+      request = [CJAPIRequest new];
+      request.parameters = @{
+                             @"foo": @"bar",
+                             @"baz": @"zab"
+                             };
+      
+      parameters = [request prepareParameters];
+    });
+    
+    it(@"adds the clientId attribute if CJEngine has one", ^{
+      [[[parameters objectForKey:@"clientId"] should] equal:@"kittens"];
+    });
+    
+    it(@"adds the token attribute if CJEngine has one", ^{
+      [[[parameters objectForKey:@"token"] should] equal:@"aToken"];
+    });
+    
+    it(@"preserves the CJRequest's parameters property", ^{
+      [[[parameters objectForKey:@"foo"] should] equal:@"bar"];
+      [[[parameters objectForKey:@"baz"] should] equal:@"zab"];
+    });
+  });
+  
+  describe(@"#perform", ^{
     context(@"When the method is GET", ^{
       
       __block CJAPIRequest *request;
       beforeEach(^{
-        request = [[CJAPIRequest alloc] init];
+        request = [CJAPIRequest new];
         request.method = @"GET";
       });
       

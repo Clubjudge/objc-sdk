@@ -27,4 +27,7 @@ typedef void (^CJFailureBlock)(NSError* error);
 - (void)performWithSuccess:(void (^)(id response, id pagination, id links))success
                    failure:(CJFailureBlock)failure;
 
+#pragma mark - Parameters
+- (NSDictionary *)prepareParameters;
+
 @end
