@@ -187,17 +187,28 @@ NSString *const kRequestAccessToken = @"token";
                        error:(NSError *)error
                        block:(CJFailureBlock)block
 {
+  
+  NSHTTPURLResponse *response = (NSHTTPURLResponse *) task.response;
+  NSData *errorData = [[error userInfo] objectForKey:JSONResponseSerializerWithDataKey];
+  NSError *parseError;
+  NSDictionary *jsonError = [NSJSONSerialization
+                             JSONObjectWithData:errorData
+                             options:kNilOptions
+                             error:&parseError];
+  
+  NSLog(@"%@", [self developerMessageFromResponse:response error:jsonError]);
+  
   if (block) {
-    NSHTTPURLResponse *response = (NSHTTPURLResponse *) task.response;
-    NSData *errorData = [[error userInfo] objectForKey:JSONResponseSerializerWithDataKey];
-    NSError *parseError;
-    NSDictionary *jsonError = [NSJSONSerialization
-                               JSONObjectWithData:errorData
-                               options:kNilOptions
-                               error:&parseError];
-    
     block(jsonError, [NSNumber numberWithInt:response.statusCode]);
   }
+}
+
+- (NSString *)developerMessageFromResponse:(NSHTTPURLResponse *)response
+                                     error:(NSDictionary *)error
+{
+  NSString *message = [NSString stringWithFormat:@"%@ request to %@ returned an error with code %d: %@", self.method, self.path, response.statusCode, [error objectForKey:@"developerMessage"]];
+  
+  return message;
 }
 
 @end

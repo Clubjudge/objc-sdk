@@ -26,6 +26,9 @@
 - (void)DELETEWithSuccess:(void (^)(id response))success
                   failure:(CJFailureBlock)failure;
 
+- (NSString *)developerMessageFromResponse:(NSHTTPURLResponse *)response
+                                     error:(NSDictionary *)error;
+
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
@@ -497,6 +500,33 @@ describe(@"CJAPIRequest", ^{
   });
   
   describe(@"Error handling", ^{
+    describe(@"#developerMessageFromRequest:error:", ^{
+      
+      __block CJAPIRequest *request;
+      __block id responseMock;
+      __block NSDictionary *error;
+      
+      beforeEach(^{
+        request = [[CJAPIRequest alloc] initWithMethod:@"GET"
+                                               andPath:@"/a/get/error/path"];
+        
+        responseMock = [NSHTTPURLResponse mock];
+        [[responseMock should] receive:@selector(statusCode) andReturn:theValue(500)];
+        
+        error = @{
+                  @"developerMessage": @"A developer message"
+                  };
+      });
+      
+      it(@"produces a formatted message for logging", ^{
+        NSString *message = [request developerMessageFromResponse:responseMock
+                                                            error:error];
+        
+        [[message should] equal:@"GET request to /a/get/error/path returned an error with code 500: A developer message"];
+        
+      });
+    });
+    
     context(@"GET requests", ^{
       
       __block id<OHHTTPStubsDescriptor> stub = nil;
@@ -526,7 +556,7 @@ describe(@"CJAPIRequest", ^{
       });
       
       afterEach(^{
-        [OHHTTPStubs removeStub:stub];
+        [OHHTTPStubs removeAllStubs];
       });
       
       it(@"executes the failure block", ^{
@@ -544,6 +574,13 @@ describe(@"CJAPIRequest", ^{
         [[expectFutureValue(developerMessage) shouldEventually] equal:@"There was an error while processing this request. There is probably something wrong with the API server."];
         [[expectFutureValue(userMessage) shouldEventually] equal:@"There was an error while processing this request."];
         [[expectFutureValue(errorCode) shouldEventually] equal:@500];
+      });
+      
+      it(@"logs the error message", ^{
+        [[request shouldEventually] receive:@selector(developerMessageFromResponse:error:)];
+        
+        [request performWithSuccess:nil
+                            failure:nil];
       });
     });
     
@@ -595,6 +632,13 @@ describe(@"CJAPIRequest", ^{
         [[expectFutureValue(userMessage) shouldEventually] equal:@"There was an error while processing this request."];
         [[expectFutureValue(errorCode) shouldEventually] equal:@500];
       });
+      
+      it(@"logs the error message", ^{
+        [[request shouldEventually] receive:@selector(developerMessageFromResponse:error:)];
+        
+        [request performWithSuccess:nil
+                            failure:nil];
+      });
     });
     
     context(@"PUT requests", ^{
@@ -645,6 +689,13 @@ describe(@"CJAPIRequest", ^{
         [[expectFutureValue(userMessage) shouldEventually] equal:@"There was an error while processing this request."];
         [[expectFutureValue(errorCode) shouldEventually] equal:@500];
       });
+      
+      it(@"logs the error message", ^{
+        [[request shouldEventually] receive:@selector(developerMessageFromResponse:error:)];
+        
+        [request performWithSuccess:nil
+                            failure:nil];
+      });
     });
     
     context(@"DELETE requests", ^{
@@ -694,6 +745,13 @@ describe(@"CJAPIRequest", ^{
         [[expectFutureValue(developerMessage) shouldEventually] equal:@"There was an error while processing this request. There is probably something wrong with the API server."];
         [[expectFutureValue(userMessage) shouldEventually] equal:@"There was an error while processing this request."];
         [[expectFutureValue(errorCode) shouldEventually] equal:@500];
+      });
+      
+      it(@"logs the error message", ^{
+        [[request shouldEventually] receive:@selector(developerMessageFromResponse:error:)];
+        
+        [request performWithSuccess:nil
+                            failure:nil];
       });
     });
   });
