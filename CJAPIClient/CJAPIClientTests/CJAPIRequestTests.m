@@ -18,10 +18,13 @@
                failure:(CJFailureBlock)failure;
 
 - (void)POSTWithSuccess:(void (^)(id response))success
-               failure:(CJFailureBlock)failure;
+                failure:(CJFailureBlock)failure;
 
 - (void)PUTWithSuccess:(void (^)(id response))success
-                failure:(CJFailureBlock)failure;
+               failure:(CJFailureBlock)failure;
+
+- (void)DELETEWithSuccess:(void (^)(id response))success
+                  failure:(CJFailureBlock)failure;
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
@@ -413,6 +416,66 @@ describe(@"CJAPIRequest", ^{
           }];
           
           stub.name = @"putSucceeds";
+        });
+        
+        afterEach(^{
+          [OHHTTPStubs removeStub:stub];
+        });
+        
+        it(@"executes the success block", ^{
+          
+          __block BOOL responseProcessed = NO;
+          
+          [request performWithSuccess:^(id response, id pagination, id links) {
+            responseProcessed = YES;
+          } failure:nil];
+          
+          [[expectFutureValue(theValue(responseProcessed)) shouldEventually] beTrue];
+        });
+      });
+    });
+    
+    context(@"When the method is DELETE", ^{
+      
+      __block CJAPIRequest *request;
+      beforeEach(^{
+        request = [[CJAPIRequest alloc] initWithMethod:@"DELETE"
+                                               andPath:@"/a/delete/path"];
+      });
+      
+      it(@"calls the DELETEWithSuccess:failure: method", ^{
+        [[request should] receive:@selector(DELETEWithSuccess:failure:)];
+        
+        [request performWithSuccess:nil failure:nil];
+      });
+      
+      it(@"requests the given path", ^{
+        KWCaptureSpy *spy = [request.sessionManager captureArgument:@selector(DELETE:parameters:success:failure:)
+                                                            atIndex:0];
+        
+        [request performWithSuccess:nil failure:nil];
+        
+        [[expectFutureValue(spy.argument) shouldEventually] equal:request.path];
+      });
+      
+      context(@"when DELETE succeeds", ^{
+        __block id<OHHTTPStubsDescriptor> stub = nil;
+        
+        beforeEach(^{
+          stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+            return [req.URL.path isEqualToString:@"/a/delete/path"];
+          } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+            NSError *error;
+            NSData *data = [NSJSONSerialization dataWithJSONObject:@{}
+                                                           options:kNilOptions
+                                                             error:&error];
+            
+            return [OHHTTPStubsResponse responseWithData:data
+                                              statusCode:204
+                                                 headers:@{@"Content-Type":@"text/json"}];
+          }];
+          
+          stub.name = @"deleteSucceeds";
         });
         
         afterEach(^{

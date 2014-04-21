@@ -92,20 +92,26 @@ NSString *const kRequestAccessToken = @"token";
                                    
                                    success(source, pagination, links);
                                    
-                                 } failure:failure];
+                                 }
+                                              failure:failure];
                                },
                                kRequestMethodPOST : ^{
                                  [self POSTWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
                                    success(responseObject, nil, nil);
-                                 } failure:failure];
+                                 }
+                                               failure:failure];
                                },
                                kRequestMethodPUT : ^{
                                  [self PUTWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
                                    success(responseObject, nil, nil);
-                                 } failure:failure];
+                                 }
+                                              failure:failure];
                                },
                                kRequestMethodDELETE : ^{
-                                 NSLog(@"DELETE method not implemented yet");
+                                 [self DELETEWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+                                   success(responseObject, nil, nil);
+                                 }
+                                                 failure:failure];
                                }
                                }[self.method];
   
@@ -135,14 +141,25 @@ NSString *const kRequestAccessToken = @"token";
 }
 
 - (void)PUTWithSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-                failure:(CJFailureBlock)failure
+               failure:(CJFailureBlock)failure
 {
   [self.sessionManager PUT:self.path
-                 parameters:[self prepareParameters]
-                    success:success
-                    failure:^(NSURLSessionDataTask *task, NSError *error) {
+                parameters:[self prepareParameters]
+                   success:success
+                   failure:^(NSURLSessionDataTask *task, NSError *error) {
                       
-                    }];
+                   }];
+}
+
+- (void)DELETEWithSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                  failure:(CJFailureBlock)failure
+{
+  [self.sessionManager DELETE:self.path
+                   parameters:[self prepareParameters]
+                      success:success
+                      failure:^(NSURLSessionDataTask *task, NSError *error) {
+                     
+                      }];
 }
 
 #pragma mark - Parameters
