@@ -80,32 +80,30 @@ NSString *const kRequestAccessToken = @"token";
                    failure:(CJFailureBlock)failure
 {
   void (^selectedMethod)() = @{
-                             kRequestMethodGET : ^{
-                               [self GETWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
-                                 NSString *sourceKey = [[[responseObject allKeys] reject:^BOOL(id object) {
-                                   return [(NSString *)object hasPrefix:@"_"];
-                                 }] first];
-                                 
-                                 NSDictionary *source = [responseObject objectForKey:sourceKey];
-                                 NSDictionary *pagination = [responseObject objectForKey:@"_pagination"];
-                                 NSDictionary *links = [responseObject objectForKey:@"_links"];
-                                 
-                                 success(source, pagination, links);
-                                 
-                               } failure:failure];
-                             },
-                             kRequestMethodPOST : ^{
-                               [self POSTWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
-                                 success(responseObject, nil, nil);
-                               } failure:failure];
-                             },
-                             kRequestMethodPUT : ^{
-                               NSLog(@"PUT method not implemented yet");
-                             },
-                             kRequestMethodDELETE : ^{
-                               NSLog(@"DELETE method not implemented yet");
-                             }
-                             }[self.method];
+                               kRequestMethodGET : ^{
+                                 [self GETWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+                                   NSString *sourceKey = [[[responseObject allKeys] reject:^BOOL(id object) {
+                                     return [(NSString *)object hasPrefix:@"_"];
+                                   }] first];
+                                   
+                                   NSDictionary *source = [responseObject objectForKey:sourceKey];
+                                   NSDictionary *pagination = [responseObject objectForKey:@"_pagination"];
+                                   NSDictionary *links = [responseObject objectForKey:@"_links"];
+                                   
+                                   success(source, pagination, links);
+                                   
+                                 } failure:failure];
+                               },
+                               kRequestMethodPOST : ^{
+                                 NSLog(@"POST method not implemented yet");
+                               },
+                               kRequestMethodPUT : ^{
+                                 NSLog(@"PUT method not implemented yet");
+                               },
+                               kRequestMethodDELETE : ^{
+                                 NSLog(@"DELETE method not implemented yet");
+                               }
+                               }[self.method];
   
   selectedMethod();
 }
@@ -119,17 +117,6 @@ NSString *const kRequestAccessToken = @"token";
                    failure:^(NSURLSessionDataTask *task, NSError *error) {
                      
                    }];
-}
-
-- (void)POSTWithSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-               failure:(CJFailureBlock)failure
-{
-  [self.sessionManager POST:self.path
-                 parameters:[self prepareParameters]
-                    success:success
-                    failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      
-                    }];
 }
 
 #pragma mark - Parameters
