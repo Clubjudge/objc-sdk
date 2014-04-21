@@ -125,7 +125,7 @@ NSString *const kRequestAccessToken = @"token";
                 parameters:[self prepareParameters]
                    success:success
                    failure:^(NSURLSessionDataTask *task, NSError *error) {
-                     
+                     [self processErrorWithTask:task error:error block:failure];
                    }];
 }
 
@@ -136,7 +136,7 @@ NSString *const kRequestAccessToken = @"token";
                  parameters:[self prepareParameters]
                     success:success
                     failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      
+                      [self processErrorWithTask:task error:error block:failure];
                     }];
 }
 
@@ -147,7 +147,7 @@ NSString *const kRequestAccessToken = @"token";
                 parameters:[self prepareParameters]
                    success:success
                    failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      
+                     [self processErrorWithTask:task error:error block:failure];
                    }];
 }
 
@@ -158,7 +158,7 @@ NSString *const kRequestAccessToken = @"token";
                    parameters:[self prepareParameters]
                       success:success
                       failure:^(NSURLSessionDataTask *task, NSError *error) {
-                     
+                        [self processErrorWithTask:task error:error block:failure];
                       }];
 }
 
@@ -180,6 +180,44 @@ NSString *const kRequestAccessToken = @"token";
   }
   
   return parameters;
+}
+
+#pragma mark - Error handling
+- (void)processErrorWithTask:(NSURLSessionDataTask *)task
+                       error:(NSError *)error
+                       block:(CJFailureBlock)block
+{
+  
+  NSHTTPURLResponse *response = (NSHTTPURLResponse *) task.response;
+  NSData *errorData = [[error userInfo] objectForKey:JSONResponseSerializerWithDataKey];
+  
+  NSDictionary *jsonError = @{};
+
+  if (errorData) {
+    NSError *parseError;
+    jsonError = [NSJSONSerialization JSONObjectWithData:errorData
+                                                options:kNilOptions
+                                                  error:&parseError];
+    
+  } else {
+    jsonError = @{
+                  @"developerMessage": [[error userInfo] objectForKey:@"NSLocalizedDescription"]
+                  };
+  }
+  
+  NSLog(@"%@", [self developerMessageFromResponse:response error:jsonError]);
+  
+  if (block) {
+    block(jsonError, [NSNumber numberWithInt:response.statusCode]);
+  }
+}
+
+- (NSString *)developerMessageFromResponse:(NSHTTPURLResponse *)response
+                                     error:(NSDictionary *)error
+{
+  NSString *message = [NSString stringWithFormat:@"%@ request to %@ returned an error with code %d: %@", self.method, self.path, response.statusCode, [error objectForKey:@"developerMessage"]];
+  
+  return message;
 }
 
 @end

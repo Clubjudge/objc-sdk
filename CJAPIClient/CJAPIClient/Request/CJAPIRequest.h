@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CJEngine.h"
 
-typedef void (^CJFailureBlock)(NSError* error);
+typedef void (^CJFailureBlock)(NSDictionary* error, NSNumber *statusCode);
 
 @interface CJAPIRequest : NSObject
 
