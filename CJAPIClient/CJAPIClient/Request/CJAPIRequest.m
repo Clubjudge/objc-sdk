@@ -125,7 +125,7 @@ NSString *const kRequestAccessToken = @"token";
                 parameters:[self prepareParameters]
                    success:success
                    failure:^(NSURLSessionDataTask *task, NSError *error) {
-                     
+                     [self processErrorWithTask:task error:error block:failure];
                    }];
 }
 
@@ -136,7 +136,7 @@ NSString *const kRequestAccessToken = @"token";
                  parameters:[self prepareParameters]
                     success:success
                     failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      
+                      [self processErrorWithTask:task error:error block:failure];
                     }];
 }
 
@@ -147,7 +147,7 @@ NSString *const kRequestAccessToken = @"token";
                 parameters:[self prepareParameters]
                    success:success
                    failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      
+                     [self processErrorWithTask:task error:error block:failure];
                    }];
 }
 
@@ -158,7 +158,7 @@ NSString *const kRequestAccessToken = @"token";
                    parameters:[self prepareParameters]
                       success:success
                       failure:^(NSURLSessionDataTask *task, NSError *error) {
-                     
+                        [self processErrorWithTask:task error:error block:failure];
                       }];
 }
 
@@ -180,6 +180,24 @@ NSString *const kRequestAccessToken = @"token";
   }
   
   return parameters;
+}
+
+#pragma mark - Error handling
+- (void)processErrorWithTask:(NSURLSessionDataTask *)task
+                       error:(NSError *)error
+                       block:(CJFailureBlock)block
+{
+  if (block) {
+    NSHTTPURLResponse *response = (NSHTTPURLResponse *) task.response;
+    NSData *errorData = [[error userInfo] objectForKey:JSONResponseSerializerWithDataKey];
+    NSError *parseError;
+    NSDictionary *jsonError = [NSJSONSerialization
+                               JSONObjectWithData:errorData
+                               options:kNilOptions
+                               error:&parseError];
+    
+    block(jsonError, [NSNumber numberWithInt:response.statusCode]);
+  }
 }
 
 @end
