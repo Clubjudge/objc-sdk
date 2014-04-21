@@ -190,11 +190,20 @@ NSString *const kRequestAccessToken = @"token";
   
   NSHTTPURLResponse *response = (NSHTTPURLResponse *) task.response;
   NSData *errorData = [[error userInfo] objectForKey:JSONResponseSerializerWithDataKey];
-  NSError *parseError;
-  NSDictionary *jsonError = [NSJSONSerialization
-                             JSONObjectWithData:errorData
-                             options:kNilOptions
-                             error:&parseError];
+  
+  NSDictionary *jsonError = @{};
+
+  if (errorData) {
+    NSError *parseError;
+    jsonError = [NSJSONSerialization JSONObjectWithData:errorData
+                                                options:kNilOptions
+                                                  error:&parseError];
+    
+  } else {
+    jsonError = @{
+                  @"developerMessage": [[error userInfo] objectForKey:@"NSLocalizedDescription"]
+                  };
+  }
   
   NSLog(@"%@", [self developerMessageFromResponse:response error:jsonError]);
   
