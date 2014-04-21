@@ -179,8 +179,8 @@ describe(@"CJAPIRequest", ^{
       
       __block CJAPIRequest *request;
       beforeEach(^{
-        request = [CJAPIRequest new];
-        request.method = @"GET";
+        request = [[CJAPIRequest alloc] initWithMethod:@"GET"
+                                               andPath:@"/a/path"];
       });
       
       it(@"calls the GETWithSuccess:failure: method", ^{
@@ -189,14 +189,20 @@ describe(@"CJAPIRequest", ^{
         [request performWithSuccess:nil failure:nil];
       });
       
+      it(@"requests the given path", ^{
+        KWCaptureSpy *spy = [request.sessionManager captureArgument:@selector(GET:parameters:success:failure:)
+                                                            atIndex:0];
+        
+        [request performWithSuccess:nil failure:nil];
+        
+        [[expectFutureValue(spy.argument) shouldEventually] equal:request.path];
+      });
+      
       context(@"when GET succeeds", ^{
         __block NSDictionary *stubbedResponse;
         __block id<OHHTTPStubsDescriptor> stub = nil;
         
-        beforeEach(^{
-          request = [[CJAPIRequest alloc] initWithMethod:@"GET"
-                                                 andPath:@"/a/path"];
-          
+        beforeEach(^{          
           stubbedResponse = @{
                               @"events": @[
                                   @{@"id": @"5"},
