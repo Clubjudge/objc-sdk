@@ -17,6 +17,9 @@
 - (void)GETWithSuccess:(void (^)(id response, id pagination, id links))success
                failure:(CJFailureBlock)failure;
 
+- (void)POSTWithSuccess:(void (^)(id response))success
+               failure:(CJFailureBlock)failure;
+
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
@@ -253,6 +256,92 @@ describe(@"CJAPIRequest", ^{
           [[expectFutureValue(theResponse) shouldEventually] equal:[stubbedResponse objectForKey:@"events"]];
           [[expectFutureValue(thePagination) shouldEventually] equal:[stubbedResponse objectForKey:@"_pagination"]];
           [[expectFutureValue(theLinks) shouldEventually] equal:[stubbedResponse objectForKey:@"_links"]];
+        });
+      });
+    });
+    
+    context(@"When the method is POST", ^{
+      
+      __block CJAPIRequest *request;
+      __block NSDictionary *params;
+      beforeEach(^{
+        request = [[CJAPIRequest alloc] initWithMethod:@"POST"
+                                               andPath:@"/a/post/path"];
+        params = @{
+                   @"foo": @"bar",
+                   @"bla": @[@"ble", @"bli"],
+                   @"cat": @{
+                       @"name": @"Mittens",
+                       @"breed": @"Persian"
+                       }
+                   };
+        request.parameters = params;
+      });
+      
+      it(@"calls the POSTWithSuccess:failure: method", ^{
+        [[request should] receive:@selector(POSTWithSuccess:failure:)];
+        
+        [request performWithSuccess:nil failure:nil];
+      });
+      
+      it(@"requests the given path", ^{
+        KWCaptureSpy *spy = [request.sessionManager captureArgument:@selector(POST:parameters:success:failure:)
+                                                            atIndex:0];
+        
+        [request performWithSuccess:nil failure:nil];
+        
+        [[expectFutureValue(spy.argument) shouldEventually] equal:request.path];
+      });
+      
+      it(@"sends all parameters", ^{
+        KWCaptureSpy *spy = [request.sessionManager captureArgument:@selector(POST:parameters:success:failure:)
+                                                            atIndex:1];
+        
+        [request performWithSuccess:nil failure:nil];
+        
+        params = [NSMutableDictionary dictionaryWithDictionary:params];
+        [params setValue:[CJEngine userToken] forKeyPath:@"token"];
+        [params setValue:[CJEngine clientKey] forKeyPath:@"clientId"];
+        
+        [[expectFutureValue(spy.argument) shouldEventually] equal:params];
+      });
+      
+      context(@"when POST succeeds", ^{
+        __block id<OHHTTPStubsDescriptor> stub = nil;
+        
+        beforeEach(^{
+          request = [[CJAPIRequest alloc] initWithMethod:@"POST"
+                                                 andPath:@"/a/post/path"];
+          
+          stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+            return [req.URL.path isEqualToString:@"/a/post/path"];
+          } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+            NSError *error;
+            NSData *data = [NSJSONSerialization dataWithJSONObject:@{}
+                                                           options:kNilOptions
+                                                             error:&error];
+            
+            return [OHHTTPStubsResponse responseWithData:data
+                                              statusCode:201
+                                                 headers:@{@"Content-Type":@"text/json"}];
+          }];
+          
+          stub.name = @"postSucceeds";
+        });
+        
+        afterEach(^{
+          [OHHTTPStubs removeStub:stub];
+        });
+        
+        it(@"executes the success block", ^{
+          
+          __block BOOL responseProcessed = NO;
+          
+          [request performWithSuccess:^(id response, id pagination, id links) {
+            responseProcessed = YES;
+          } failure:nil];
+          
+          [[expectFutureValue(theValue(responseProcessed)) shouldEventually] beTrue];
         });
       });
     });
