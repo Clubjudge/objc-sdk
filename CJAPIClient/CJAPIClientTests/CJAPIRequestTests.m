@@ -20,6 +20,9 @@
 - (void)POSTWithSuccess:(void (^)(id response))success
                failure:(CJFailureBlock)failure;
 
+- (void)PUTWithSuccess:(void (^)(id response))success
+                failure:(CJFailureBlock)failure;
+
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
@@ -327,6 +330,89 @@ describe(@"CJAPIRequest", ^{
           }];
           
           stub.name = @"postSucceeds";
+        });
+        
+        afterEach(^{
+          [OHHTTPStubs removeStub:stub];
+        });
+        
+        it(@"executes the success block", ^{
+          
+          __block BOOL responseProcessed = NO;
+          
+          [request performWithSuccess:^(id response, id pagination, id links) {
+            responseProcessed = YES;
+          } failure:nil];
+          
+          [[expectFutureValue(theValue(responseProcessed)) shouldEventually] beTrue];
+        });
+      });
+    });
+    
+    context(@"When the method is PUT", ^{
+      
+      __block CJAPIRequest *request;
+      __block NSDictionary *params;
+      beforeEach(^{
+        request = [[CJAPIRequest alloc] initWithMethod:@"PUT"
+                                               andPath:@"/a/put/path"];
+        params = @{
+                   @"foo": @"bar",
+                   @"bla": @[@"ble", @"bli"],
+                   @"cat": @{
+                       @"name": @"Mittens",
+                       @"breed": @"Persian"
+                       }
+                   };
+        request.parameters = params;
+      });
+      
+      it(@"calls the PUTWithSuccess:failure: method", ^{
+        [[request should] receive:@selector(PUTWithSuccess:failure:)];
+        
+        [request performWithSuccess:nil failure:nil];
+      });
+      
+      it(@"requests the given path", ^{
+        KWCaptureSpy *spy = [request.sessionManager captureArgument:@selector(PUT:parameters:success:failure:)
+                                                            atIndex:0];
+        
+        [request performWithSuccess:nil failure:nil];
+        
+        [[expectFutureValue(spy.argument) shouldEventually] equal:request.path];
+      });
+      
+      it(@"sends all parameters", ^{
+        KWCaptureSpy *spy = [request.sessionManager captureArgument:@selector(PUT:parameters:success:failure:)
+                                                            atIndex:1];
+        
+        [request performWithSuccess:nil failure:nil];
+        
+        params = [NSMutableDictionary dictionaryWithDictionary:params];
+        [params setValue:[CJEngine userToken] forKeyPath:@"token"];
+        [params setValue:[CJEngine clientKey] forKeyPath:@"clientId"];
+        
+        [[expectFutureValue(spy.argument) shouldEventually] equal:params];
+      });
+      
+      context(@"when PUT succeeds", ^{
+        __block id<OHHTTPStubsDescriptor> stub = nil;
+        
+        beforeEach(^{
+          stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+            return [req.URL.path isEqualToString:@"/a/put/path"];
+          } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+            NSError *error;
+            NSData *data = [NSJSONSerialization dataWithJSONObject:@{}
+                                                           options:kNilOptions
+                                                             error:&error];
+            
+            return [OHHTTPStubsResponse responseWithData:data
+                                              statusCode:201
+                                                 headers:@{@"Content-Type":@"text/json"}];
+          }];
+          
+          stub.name = @"putSucceeds";
         });
         
         afterEach(^{

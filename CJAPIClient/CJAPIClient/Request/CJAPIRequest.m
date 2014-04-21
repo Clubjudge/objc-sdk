@@ -100,7 +100,9 @@ NSString *const kRequestAccessToken = @"token";
                                  } failure:failure];
                                },
                                kRequestMethodPUT : ^{
-                                 NSLog(@"PUT method not implemented yet");
+                                 [self PUTWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+                                   success(responseObject, nil, nil);
+                                 } failure:failure];
                                },
                                kRequestMethodDELETE : ^{
                                  NSLog(@"DELETE method not implemented yet");
@@ -125,6 +127,17 @@ NSString *const kRequestAccessToken = @"token";
                 failure:(CJFailureBlock)failure
 {
   [self.sessionManager POST:self.path
+                 parameters:[self prepareParameters]
+                    success:success
+                    failure:^(NSURLSessionDataTask *task, NSError *error) {
+                      
+                    }];
+}
+
+- (void)PUTWithSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                failure:(CJFailureBlock)failure
+{
+  [self.sessionManager PUT:self.path
                  parameters:[self prepareParameters]
                     success:success
                     failure:^(NSURLSessionDataTask *task, NSError *error) {
