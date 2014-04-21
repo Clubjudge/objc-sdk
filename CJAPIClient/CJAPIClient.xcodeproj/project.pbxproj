@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1367E7C019058A590022885C /* CJModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7BF19058A590022885C /* CJModelTests.m */; };
 		137130FF18FC4B43007AA17A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137130FE18FC4B43007AA17A /* Foundation.framework */; };
 		1371310418FC4B43007AA17A /* CJAPIClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1371310318FC4B43007AA17A /* CJAPIClient.h */; };
 		1371310D18FC4B43007AA17A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1371310C18FC4B43007AA17A /* XCTest.framework */; };
@@ -16,6 +17,7 @@
 		1371311918FC4B43007AA17A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1371311718FC4B43007AA17A /* InfoPlist.strings */; };
 		1371312718FC539C007AA17A /* CJEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1371312618FC539C007AA17A /* CJEngine.m */; };
 		1371312D18FC544F007AA17A /* CJEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1371312C18FC544F007AA17A /* CJEngineTests.m */; };
+		13980DBE190589B800D449FA /* CJModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13980DBD190589B800D449FA /* CJModel.m */; };
 		13AA62C619056C880089C443 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AA62C519056C880089C443 /* JSONResponseSerializerWithData.m */; };
 		13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AAF18FECDB1007D1DD2 /* CJAPIRequest.m */; };
 		13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */; };
@@ -49,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1367E7BF19058A590022885C /* CJModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJModelTests.m; sourceTree = "<group>"; };
 		137130FB18FC4B43007AA17A /* libCJAPIClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCJAPIClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		137130FE18FC4B43007AA17A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1371310218FC4B43007AA17A /* CJAPIClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CJAPIClient-Prefix.pch"; sourceTree = "<group>"; };
@@ -61,6 +64,8 @@
 		1371312518FC539C007AA17A /* CJEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEngine.h; sourceTree = "<group>"; };
 		1371312618FC539C007AA17A /* CJEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEngine.m; sourceTree = "<group>"; };
 		1371312C18FC544F007AA17A /* CJEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CJEngineTests.m; path = Engine/CJEngineTests.m; sourceTree = "<group>"; };
+		13980DBC190589B800D449FA /* CJModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJModel.h; sourceTree = "<group>"; };
+		13980DBD190589B800D449FA /* CJModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJModel.m; sourceTree = "<group>"; };
 		13AA62C419056C880089C443 /* JSONResponseSerializerWithData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONResponseSerializerWithData.h; sourceTree = "<group>"; };
 		13AA62C519056C880089C443 /* JSONResponseSerializerWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONResponseSerializerWithData.m; sourceTree = "<group>"; };
 		13AD9AAE18FECDB1007D1DD2 /* CJAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAPIRequest.h; sourceTree = "<group>"; };
@@ -138,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				1371310318FC4B43007AA17A /* CJAPIClient.h */,
+				13980DBB190589B800D449FA /* Models */,
 				13AA62C319056C3D0089C443 /* Serializers */,
 				13AD9AAD18FECD9D007D1DD2 /* Request */,
 				1371312418FC526E007AA17A /* Engine */,
@@ -158,6 +164,7 @@
 		1371311418FC4B43007AA17A /* CJAPIClientTests */ = {
 			isa = PBXGroup;
 			children = (
+				13980DC1190589FC00D449FA /* Models */,
 				13AA62CC1905886A0089C443 /* Request */,
 				1371312818FC53CE007AA17A /* Engine */,
 				1371311518FC4B43007AA17A /* Supporting Files */,
@@ -192,6 +199,23 @@
 				13E6371318FC6AA900D7EB22 /* CJEngineConfigurationTests.m */,
 			);
 			name = Engine;
+			sourceTree = "<group>";
+		};
+		13980DBB190589B800D449FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				13980DBC190589B800D449FA /* CJModel.h */,
+				13980DBD190589B800D449FA /* CJModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		13980DC1190589FC00D449FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1367E7BF19058A590022885C /* CJModelTests.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		13AA62C319056C3D0089C443 /* Serializers */ = {
@@ -368,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13980DBE190589B800D449FA /* CJModel.m in Sources */,
 				13AA62C619056C880089C443 /* JSONResponseSerializerWithData.m in Sources */,
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
 				13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */,
@@ -381,6 +406,7 @@
 			files = (
 				1371312D18FC544F007AA17A /* CJEngineTests.m in Sources */,
 				13E6371418FC6AA900D7EB22 /* CJEngineConfigurationTests.m in Sources */,
+				1367E7C019058A590022885C /* CJModelTests.m in Sources */,
 				13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
