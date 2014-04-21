@@ -158,6 +158,7 @@
 		1371311418FC4B43007AA17A /* CJAPIClientTests */ = {
 			isa = PBXGroup;
 			children = (
+				13AA62CC1905886A0089C443 /* Request */,
 				1371312818FC53CE007AA17A /* Engine */,
 				1371311518FC4B43007AA17A /* Supporting Files */,
 			);
@@ -189,7 +190,6 @@
 			children = (
 				1371312C18FC544F007AA17A /* CJEngineTests.m */,
 				13E6371318FC6AA900D7EB22 /* CJEngineConfigurationTests.m */,
-				13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */,
 			);
 			name = Engine;
 			sourceTree = "<group>";
@@ -201,6 +201,14 @@
 				13AA62C519056C880089C443 /* JSONResponseSerializerWithData.m */,
 			);
 			path = Serializers;
+			sourceTree = "<group>";
+		};
+		13AA62CC1905886A0089C443 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */,
+			);
+			name = Request;
 			sourceTree = "<group>";
 		};
 		13AD9AAD18FECD9D007D1DD2 /* Request */ = {
