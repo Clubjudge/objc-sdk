@@ -37,7 +37,7 @@
     self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url
                                                    sessionConfiguration:sessionConfiguration];
 
-    self.sessionManager.responseSerializer = [AFJSONResponseSerializer new];
+    self.sessionManager.responseSerializer = [JSONResponseSerializerWithData new];
   }
   
   return self;

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFHTTPSessionManager.h>
+#import "JSONResponseSerializerWithData.h"
 
 @interface CJEngine : NSObject
 
