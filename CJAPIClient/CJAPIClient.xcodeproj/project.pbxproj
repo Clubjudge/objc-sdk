@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1316B0941906C7A400107265 /* CJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0931906C7A400107265 /* CJEvent.m */; };
+		1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0971906D61C00107265 /* NSDate+StringParsing.m */; };
+		1316B09A1906D6E600107265 /* CJEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0991906D6E600107265 /* CJEventTests.m */; };
 		1367E7C019058A590022885C /* CJModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7BF19058A590022885C /* CJModelTests.m */; };
 		1367E7C3190678200022885C /* CJPaginationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7C2190678200022885C /* CJPaginationInfo.m */; };
 		1367E7C519067BCB0022885C /* CJPaginationInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7C419067BCB0022885C /* CJPaginationInfoTests.m */; };
@@ -55,6 +58,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1316B0921906C7A400107265 /* CJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEvent.h; sourceTree = "<group>"; };
+		1316B0931906C7A400107265 /* CJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEvent.m; sourceTree = "<group>"; };
+		1316B0961906D61C00107265 /* NSDate+StringParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+StringParsing.h"; sourceTree = "<group>"; };
+		1316B0971906D61C00107265 /* NSDate+StringParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+StringParsing.m"; sourceTree = "<group>"; };
+		1316B0991906D6E600107265 /* CJEventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEventTests.m; sourceTree = "<group>"; };
 		1367E7BF19058A590022885C /* CJModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJModelTests.m; sourceTree = "<group>"; };
 		1367E7C1190678200022885C /* CJPaginationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJPaginationInfo.h; sourceTree = "<group>"; };
 		1367E7C2190678200022885C /* CJPaginationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJPaginationInfo.m; sourceTree = "<group>"; };
@@ -116,6 +124,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1316B0951906D5DB00107265 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1316B0961906D61C00107265 /* NSDate+StringParsing.h */,
+				1316B0971906D61C00107265 /* NSDate+StringParsing.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		137130F218FC4B43007AA17A = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				1371310318FC4B43007AA17A /* CJAPIClient.h */,
+				1316B0951906D5DB00107265 /* Categories */,
 				13980DBB190589B800D449FA /* Models */,
 				13AA62C319056C3D0089C443 /* Serializers */,
 				13AD9AAD18FECD9D007D1DD2 /* Request */,
@@ -220,6 +238,8 @@
 				1367E7C2190678200022885C /* CJPaginationInfo.m */,
 				1367E7C6190690CA0022885C /* CJLinksInfo.h */,
 				1367E7C7190690CA0022885C /* CJLinksInfo.m */,
+				1316B0921906C7A400107265 /* CJEvent.h */,
+				1316B0931906C7A400107265 /* CJEvent.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -230,6 +250,7 @@
 				1367E7BF19058A590022885C /* CJModelTests.m */,
 				1367E7C419067BCB0022885C /* CJPaginationInfoTests.m */,
 				1367E7C91906ADD40022885C /* CJLinksInfoTests.m */,
+				1316B0991906D6E600107265 /* CJEventTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -409,8 +430,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1367E7C3190678200022885C /* CJPaginationInfo.m in Sources */,
+				1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */,
 				13980DBE190589B800D449FA /* CJModel.m in Sources */,
 				13AA62C619056C880089C443 /* JSONResponseSerializerWithData.m in Sources */,
+				1316B0941906C7A400107265 /* CJEvent.m in Sources */,
 				1367E7C8190690CA0022885C /* CJLinksInfo.m in Sources */,
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
 				13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */,
@@ -428,6 +451,7 @@
 				1367E7C019058A590022885C /* CJModelTests.m in Sources */,
 				13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */,
 				1367E7C519067BCB0022885C /* CJPaginationInfoTests.m in Sources */,
+				1316B09A1906D6E600107265 /* CJEventTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
