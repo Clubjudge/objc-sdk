@@ -11,6 +11,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
 #import "CJEngine.h"
+#import "CJPaginationInfo.h"
 
 @interface CJAPIRequest()
 
@@ -221,8 +222,10 @@ describe(@"CJAPIRequest", ^{
                                   @{@"id": @"10"}
                                   ],
                               @"_pagination": @{
-                                  @"next": @"http://next",
-                                  @"previous": @"http://previous"
+                                  @"currentPage": @1,
+                                  @"perPage": @10,
+                                  @"totalPages": @5,
+                                  @"totalItems": @47
                                   },
                               @"_links": @{
                                   @"artists": @"http://artists",
@@ -252,19 +255,29 @@ describe(@"CJAPIRequest", ^{
         
         it(@"executes the success block with the source, pagination and links info", ^{
           
-          __block NSDictionary *thePagination = nil;
+          __block CJPaginationInfo *thePagination = nil;
           __block NSDictionary *theLinks = nil;
           __block NSDictionary *theResponse = nil;
           
-          [request performWithSuccess:^(id response, id pagination, id links) {
+          [request performWithSuccess:^(id response, CJPaginationInfo *pagination, id links) {
             theResponse = response;
             thePagination = pagination;
             theLinks = links;
           } failure:nil];
           
-          [[expectFutureValue(theResponse) shouldEventually] equal:[stubbedResponse objectForKey:@"events"]];
-          [[expectFutureValue(thePagination) shouldEventually] equal:[stubbedResponse objectForKey:@"_pagination"]];
-          [[expectFutureValue(theLinks) shouldEventually] equal:[stubbedResponse objectForKey:@"_links"]];
+          [[expectFutureValue(theResponse) shouldEventually] equal:stubbedResponse[@"events"]];
+          [[expectFutureValue(thePagination.currentPage) shouldEventually] equal:stubbedResponse[@"_pagination"][@"currentPage"]];
+          [[expectFutureValue(theLinks) shouldEventually] equal:stubbedResponse[@"_links"]];
+        });
+        
+        it(@"returns a CJPaginationInfo model to the success block", ^{
+          __block id thePagination = nil;
+          
+          [request performWithSuccess:^(id response, id pagination, id links) {
+            thePagination = pagination;
+          } failure:nil];
+          
+          [[expectFutureValue(thePagination) shouldEventually] beKindOfClass:[CJPaginationInfo class]];
         });
       });
     });
