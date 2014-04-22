@@ -27,8 +27,12 @@
 {
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   [dateFormatter setDateFormat:dateFormat];
-  NSDate *date = [dateFormatter dateFromString:dateString];
   
+  NSLocale *locale = [[NSLocale alloc]
+                      initWithLocaleIdentifier:@"en_US_POSIX"];
+  [dateFormatter setLocale:locale];
+  
+  NSDate *date = [dateFormatter dateFromString:dateString];
   return date;
 }
 
