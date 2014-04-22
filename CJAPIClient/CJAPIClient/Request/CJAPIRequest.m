@@ -8,6 +8,7 @@
 
 #import "CJAPIRequest.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
+#import "CJLinksInfo.h"
 
 NSString *const kRequestMethodGET = @"GET";
 NSString *const kRequestMethodPOST = @"POST";
@@ -76,7 +77,7 @@ NSString *const kRequestAccessToken = @"token";
 
 #pragma mark - Actions
 
-- (void)performWithSuccess:(void (^)(id response, CJPaginationInfo *pagination, id links))success
+- (void)performWithSuccess:(void (^)(id response, CJPaginationInfo *pagination, CJLinksInfo *links))success
                    failure:(CJFailureBlock)failure
 {
   void (^selectedMethod)() = @{
@@ -87,8 +88,9 @@ NSString *const kRequestAccessToken = @"token";
                                    }] first];
                                    
                                    NSDictionary *source = [responseObject objectForKey:sourceKey];
-                                   CJPaginationInfo *pagination = [[CJPaginationInfo alloc] initWithInfo:[responseObject objectForKey:@"_pagination"]];
-                                   NSDictionary *links = [responseObject objectForKey:@"_links"];
+                                   
+                                   CJPaginationInfo *pagination = [[CJPaginationInfo alloc] initWithInfo:responseObject[@"_pagination"]];
+                                   CJLinksInfo *links = [[CJLinksInfo alloc] initWithInfo:responseObject[@"_links"]];
                                    
                                    success(source, pagination, links);
                                    

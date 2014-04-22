@@ -8,6 +8,7 @@
 
 #import "CJLinksInfo.h"
 #import "CJEngineConfiguration.h"
+#import "CJAPIRequest.h"
 
 @interface CJLinksInfo()
 

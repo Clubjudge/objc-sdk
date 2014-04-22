@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CJEngine.h"
 #import "CJPaginationInfo.h"
+@class CJLinksInfo;
 
 typedef void (^CJFailureBlock)(NSDictionary* error, NSNumber *statusCode);
 
@@ -25,7 +26,7 @@ typedef void (^CJFailureBlock)(NSDictionary* error, NSNumber *statusCode);
                        andPath:(NSString *)path;
 
 #pragma mark - Actions
-- (void)performWithSuccess:(void (^)(id response, CJPaginationInfo *pagination, id links))success
+- (void)performWithSuccess:(void (^)(id response, CJPaginationInfo *pagination, CJLinksInfo *links))success
                    failure:(CJFailureBlock)failure;
 
 #pragma mark - Parameters

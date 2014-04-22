@@ -12,6 +12,7 @@
 #import <OHHTTPStubs/OHHTTPStubs.h>
 #import "CJEngine.h"
 #import "CJPaginationInfo.h"
+#import "CJLinksInfo.h"
 
 @interface CJAPIRequest()
 
@@ -256,10 +257,10 @@ describe(@"CJAPIRequest", ^{
         it(@"executes the success block with the source, pagination and links info", ^{
           
           __block CJPaginationInfo *thePagination = nil;
-          __block NSDictionary *theLinks = nil;
+          __block CJLinksInfo *theLinks = nil;
           __block NSDictionary *theResponse = nil;
           
-          [request performWithSuccess:^(id response, CJPaginationInfo *pagination, id links) {
+          [request performWithSuccess:^(id response, CJPaginationInfo *pagination, CJLinksInfo *links) {
             theResponse = response;
             thePagination = pagination;
             theLinks = links;
@@ -267,7 +268,7 @@ describe(@"CJAPIRequest", ^{
           
           [[expectFutureValue(theResponse) shouldEventually] equal:stubbedResponse[@"events"]];
           [[expectFutureValue(thePagination.currentPage) shouldEventually] equal:stubbedResponse[@"_pagination"][@"currentPage"]];
-          [[expectFutureValue(theLinks) shouldEventually] equal:stubbedResponse[@"_links"]];
+          [[expectFutureValue(theLinks.links) shouldEventually] equal:stubbedResponse[@"_links"]];
         });
         
         it(@"returns a CJPaginationInfo model to the success block", ^{

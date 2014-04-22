@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CJAPIRequest.h"
+@class CJAPIRequest;
 
 @interface CJLinksInfo : NSObject
 
