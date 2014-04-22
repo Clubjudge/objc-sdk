@@ -76,7 +76,7 @@ NSString *const kRequestAccessToken = @"token";
 
 #pragma mark - Actions
 
-- (void)performWithSuccess:(void (^)(id response, id pagination, id links))success
+- (void)performWithSuccess:(void (^)(id response, CJPaginationInfo *pagination, id links))success
                    failure:(CJFailureBlock)failure
 {
   void (^selectedMethod)() = @{
@@ -87,7 +87,7 @@ NSString *const kRequestAccessToken = @"token";
                                    }] first];
                                    
                                    NSDictionary *source = [responseObject objectForKey:sourceKey];
-                                   NSDictionary *pagination = [responseObject objectForKey:@"_pagination"];
+                                   CJPaginationInfo *pagination = [[CJPaginationInfo alloc] initWithInfo:[responseObject objectForKey:@"_pagination"]];
                                    NSDictionary *links = [responseObject objectForKey:@"_links"];
                                    
                                    success(source, pagination, links);

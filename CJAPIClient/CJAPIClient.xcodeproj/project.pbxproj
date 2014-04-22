@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1367E7C019058A590022885C /* CJModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7BF19058A590022885C /* CJModelTests.m */; };
+		1367E7C3190678200022885C /* CJPaginationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7C2190678200022885C /* CJPaginationInfo.m */; };
+		1367E7C519067BCB0022885C /* CJPaginationInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7C419067BCB0022885C /* CJPaginationInfoTests.m */; };
 		137130FF18FC4B43007AA17A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137130FE18FC4B43007AA17A /* Foundation.framework */; };
 		1371310418FC4B43007AA17A /* CJAPIClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1371310318FC4B43007AA17A /* CJAPIClient.h */; };
 		1371310D18FC4B43007AA17A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1371310C18FC4B43007AA17A /* XCTest.framework */; };
@@ -52,6 +54,9 @@
 
 /* Begin PBXFileReference section */
 		1367E7BF19058A590022885C /* CJModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJModelTests.m; sourceTree = "<group>"; };
+		1367E7C1190678200022885C /* CJPaginationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJPaginationInfo.h; sourceTree = "<group>"; };
+		1367E7C2190678200022885C /* CJPaginationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJPaginationInfo.m; sourceTree = "<group>"; };
+		1367E7C419067BCB0022885C /* CJPaginationInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJPaginationInfoTests.m; sourceTree = "<group>"; };
 		137130FB18FC4B43007AA17A /* libCJAPIClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCJAPIClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		137130FE18FC4B43007AA17A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1371310218FC4B43007AA17A /* CJAPIClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CJAPIClient-Prefix.pch"; sourceTree = "<group>"; };
@@ -206,6 +211,8 @@
 			children = (
 				13980DBC190589B800D449FA /* CJModel.h */,
 				13980DBD190589B800D449FA /* CJModel.m */,
+				1367E7C1190678200022885C /* CJPaginationInfo.h */,
+				1367E7C2190678200022885C /* CJPaginationInfo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -214,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				1367E7BF19058A590022885C /* CJModelTests.m */,
+				1367E7C419067BCB0022885C /* CJPaginationInfoTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -392,6 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1367E7C3190678200022885C /* CJPaginationInfo.m in Sources */,
 				13980DBE190589B800D449FA /* CJModel.m in Sources */,
 				13AA62C619056C880089C443 /* JSONResponseSerializerWithData.m in Sources */,
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
@@ -408,6 +417,7 @@
 				13E6371418FC6AA900D7EB22 /* CJEngineConfigurationTests.m in Sources */,
 				1367E7C019058A590022885C /* CJModelTests.m in Sources */,
 				13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */,
+				1367E7C519067BCB0022885C /* CJPaginationInfoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
