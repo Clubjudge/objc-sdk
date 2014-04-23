@@ -20,6 +20,7 @@ typedef void (^CJFailureBlock)(NSDictionary* error, NSNumber *statusCode);
 @property (nonatomic, strong) NSArray *embeds;
 @property (nonatomic, strong) NSArray *fields;
 @property (nonatomic, strong) NSDictionary *parameters;
+@property (nonatomic, assign) Class modelClass;
 
 #pragma mark - Initialisers
 - (instancetype)initWithMethod:(NSString *)method
