@@ -13,6 +13,7 @@
 #import "CJEngine.h"
 #import "CJPaginationInfo.h"
 #import "CJLinksInfo.h"
+#import "MockModel.h"
 
 @interface CJAPIRequest()
 
@@ -269,6 +270,51 @@ describe(@"CJAPIRequest", ^{
           [[expectFutureValue(theResponse) shouldEventually] equal:stubbedResponse[@"events"]];
           [[expectFutureValue(thePagination.currentPage) shouldEventually] equal:stubbedResponse[@"_pagination"][@"currentPage"]];
           [[expectFutureValue(theLinks.links) shouldEventually] equal:stubbedResponse[@"_links"]];
+        });
+        
+        context(@"When a model class is defined", ^{
+          
+          beforeEach(^{
+            request.modelClass = [MockModel class];
+          });
+          
+          context(@"When the response is a single entity", ^{
+            beforeAll(^{
+              stubbedResponse = @{
+                                  @"event": @{
+                                      @"id": @"5",
+                                      @"_links": @{
+                                        @"artists": @"http://artists",
+                                        @"venue": @"http://venue"
+                                      }
+                                    }
+                                  };
+            });
+            
+            it(@"Returns a model object to the success block if a modelClass property is defined", ^{
+              __block id theResponse = nil;
+              
+              [request performWithSuccess:^(id response, CJPaginationInfo *pagination, CJLinksInfo *links) {
+                theResponse = response;
+              } failure:nil];
+              
+              [[expectFutureValue(theResponse) shouldEventually] beKindOfClass:[request.modelClass class]];
+            });
+          });
+          
+          context(@"When the response is an array of entities", ^{
+            it(@"Returns an array of model objects to the success block if a modelClass property is defined", ^{
+              __block id theResponse = nil;
+              
+              [request performWithSuccess:^(id response, CJPaginationInfo *pagination, CJLinksInfo *links) {
+                theResponse = response;
+              } failure:nil];
+              
+              [[expectFutureValue(theResponse) shouldEventually] beKindOfClass:[NSArray class]];
+              [[expectFutureValue(theResponse[0]) shouldEventually] beKindOfClass:[request.modelClass class]];
+              [[expectFutureValue(theResponse[1]) shouldEventually] beKindOfClass:[request.modelClass class]];
+            });
+          });
         });
         
         it(@"returns a CJPaginationInfo model to the success block", ^{

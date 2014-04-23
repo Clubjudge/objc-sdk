@@ -92,7 +92,7 @@ NSString *const kRequestAccessToken = @"token";
                                    CJPaginationInfo *pagination = [[CJPaginationInfo alloc] initWithInfo:responseObject[@"_pagination"]];
                                    CJLinksInfo *links = [[CJLinksInfo alloc] initWithInfo:responseObject[@"_links"]];
                                    
-                                   success(source, pagination, links);
+                                   success([self parseSource:source], pagination, links);
                                    
                                  }
                                               failure:failure];
@@ -220,6 +220,32 @@ NSString *const kRequestAccessToken = @"token";
   NSString *message = [NSString stringWithFormat:@"%@ request to %@ returned an error with code %d: %@", self.method, self.path, response.statusCode, [error objectForKey:@"developerMessage"]];
   
   return message;
+}
+
+#pragma mark - Helpers
+- (id)parseSource:(id)source
+{
+  if (_modelClass) {
+    id model = [_modelClass alloc];
+    
+    NSAssert([model respondsToSelector:@selector(initWithInfo:)], @"Model with class %@ must implement initWithInfo:", [_modelClass description]);
+    
+    BOOL multiple = [source isKindOfClass:[NSArray class]];
+    
+    if (multiple) {
+      NSArray *objects = [(NSArray *)source map:^id(id object) {
+        return [model initWithInfo:object];
+      }];
+      
+      return objects;
+    } else {
+      model = [model initWithInfo:source];
+      return model;
+    }
+    
+  }
+  
+  return source;
 }
 
 @end
