@@ -8,50 +8,50 @@
 
 #import <Kiwi/Kiwi.h>
 #import "CJEvent.h"
+#import "CJAPIRequest.h"
 
 SPEC_BEGIN(CJEVENTSPEC)
 
 describe(@"Event Model", ^{
+  NSDictionary *stub = @{
+                         @"id": @55,
+                         @"followersCount": @10,
+                         @"commentsCount": @40,
+                         @"description": @"Lorem ipsum sit dolor amet",
+                         @"flyers": @[],
+                         @"name": @"Tiësto & Calvin Harris - Greater Than Tour",
+                         @"startsAt": @"2014-04-21T18:00:00.000Z",
+                         @"endsAt": @"2014-04-21T20:59:00.000Z",
+                         @"featured": @NO,
+                         @"updatedAt": @"2014-04-22T16:14:34.000Z",
+                         @"follow": @YES,
+                         @"reviewEndsAt": @"2014-04-28T18:00:00.000Z",
+                         @"lineupToBeAnnounced": @NO,
+                         @"reviewable": @YES,
+                         @"published": @YES,
+                         @"friendsFollowingCount": @2,
+                         @"reviewCount": @5,
+                         @"userData": @{},
+                         @"contest": @{},
+                         @"expertReviewRatings": @{},
+                         @"globalRating": @{},
+                         @"_links": @{
+                             @"artists": @"http://local.clubjudge.com:5000/v1/events/31200/artists.json",
+                             @"comments": @"http://local.clubjudge.com:5000/v1/events/31200/comments.json",
+                             @"invitations": @"http://local.clubjudge.com:5000/v1/events/31200/invitations.json",
+                             @"followers": @"http://local.clubjudge.com:5000/v1/events/31200/followers.json",
+                             @"musicGenres": @"http://local.clubjudge.com:5000/v1/events/31200/musicGenres.json",
+                             @"tickets": @"http://local.clubjudge.com:5000/v1/events/31200/tickets.json",
+                             @"venue": @"http://local.clubjudge.com:5000/v1/events/31200/venue.json"
+                             }
+                         };
+  
+  __block CJEvent *event;
+  beforeAll(^{
+    event = [[CJEvent alloc] initWithInfo:stub];
+  });
+  
   context(@"Mapping", ^{
-    
-    NSDictionary *stub = @{
-                           @"id": @55,
-                           @"followersCount": @10,
-                           @"commentsCount": @40,
-                           @"description": @"Lorem ipsum sit dolor amet",
-                           @"flyers": @[],
-                           @"name": @"Tiësto & Calvin Harris - Greater Than Tour",
-                           @"startsAt": @"2014-04-21T18:00:00.000Z",
-                           @"endsAt": @"2014-04-21T20:59:00.000Z",
-                           @"featured": @NO,
-                           @"updatedAt": @"2014-04-22T16:14:34.000Z",
-                           @"follow": @YES,
-                           @"reviewEndsAt": @"2014-04-28T18:00:00.000Z",
-                           @"lineupToBeAnnounced": @NO,
-                           @"reviewable": @YES,
-                           @"published": @YES,
-                           @"friendsFollowingCount": @2,
-                           @"reviewCount": @5,
-                           @"userData": @{},
-                           @"contest": @{},
-                           @"expertReviewRatings": @{},
-                           @"globalRating": @{},
-                           @"_links": @{
-                               @"artists": @"http://local.clubjudge.com:5000/v1/events/31200/artists.json",
-                               @"comments": @"http://local.clubjudge.com:5000/v1/events/31200/comments.json",
-                               @"invitations": @"http://local.clubjudge.com:5000/v1/events/31200/invitations.json",
-                               @"followers": @"http://local.clubjudge.com:5000/v1/events/31200/followers.json",
-                               @"musicGenres": @"http://local.clubjudge.com:5000/v1/events/31200/musicGenres.json",
-                               @"tickets": @"http://local.clubjudge.com:5000/v1/events/31200/tickets.json",
-                               @"venue": @"http://local.clubjudge.com:5000/v1/events/31200/venue.json"
-                               }
-                           };
-    
-    __block CJEvent *event;
-    beforeAll(^{
-      event = [[CJEvent alloc] initWithInfo:stub];
-    });
-    
     describe(@"#Id", ^{
       it(@"produces a correct mapping", ^{
         [[event.Id should] equal:stub[@"id"]];
@@ -205,7 +205,75 @@ describe(@"Event Model", ^{
         [[event.globalRating should] equal:stub[@"globalRating"]];
       });
     });
-
+  });
+  
+  describe(@"#follow", ^{
+    
+    __block CJAPIRequest *request;
+    beforeEach(^{
+      request = [CJAPIRequest alloc];
+      [CJAPIRequest stub:@selector(alloc) andReturn:request];
+    });
+    
+    it(@"sets the following property to YES", ^{
+      [event follow];
+      [[theValue(event.following) should] beYes];
+    });
+    
+    it(@"creates a POST request to /events/:id/followers", ^{
+      [event follow];
+      
+      [[request.method should] equal:@"POST"];
+      [[request.path should] equal:@"/events/55/followers.json"];
+    });
+    
+    it(@"sets the following property to NO if the failure block is executed", ^{
+      KWCaptureSpy *spy = [request captureArgument:@selector(performWithSuccess:failure:)
+                                           atIndex:1];
+      
+      [event follow];
+      
+      void (^block)(NSError *error, NSNumber *statusCode) = spy.argument;
+      NSError *error = nil;
+      block(error, [NSNumber numberWithInteger:500]);
+      
+      
+      [[theValue(event.following) should] beNo];
+    });
+  });
+  
+  describe(@"#unfollow", ^{
+    __block CJAPIRequest *request;
+    beforeEach(^{
+      request = [CJAPIRequest alloc];
+      [CJAPIRequest stub:@selector(alloc) andReturn:request];
+    });
+    
+    it(@"sets the following property to NO", ^{
+      [event unfollow];
+      [[theValue(event.following) should] beNo];
+    });
+    
+    it(@"creates a DELETE request to /events/:id/followers", ^{
+      [event unfollow];
+      
+      [[request.method should] equal:@"DELETE"];
+      [[request.path should] equal:@"/events/55/followers.json"];
+    });
+    
+    it(@"sets the following property to NO if the failure block is executed", ^{
+      KWCaptureSpy *spy = [request captureArgument:@selector(performWithSuccess:failure:)
+                                           atIndex:1];
+      
+      [event unfollow];
+      
+      void (^block)(NSError *error, NSNumber *statusCode) = spy.argument;
+      NSError *error = nil;
+      block(error, [NSNumber numberWithInteger:500]);
+      
+      
+      [[theValue(event.following) should] beYes];
+    });
   });
 });
 
