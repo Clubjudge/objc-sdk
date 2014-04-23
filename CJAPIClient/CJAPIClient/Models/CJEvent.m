@@ -17,9 +17,9 @@
   self = [super initWithInfo:info];
   if (self && info) {
     // Core properties
-    _name = [NSString stringWithString:info[kEventName]];
-    _flyers = [NSArray arrayWithArray:info[kEventFlyers]];
-    _description = [NSString stringWithString:info[kEventDescription]];
+    _name = info[kEventName];
+    _flyers = info[kEventFlyers];
+    _description = info[kEventDescription];
     _startsAt = [NSDate dateWithISO8601String:info[kEventStartsAt]];
     _endsAt = [NSDate dateWithISO8601String:info[kEventEndsAt]];
     _reviewEndsAt = [NSDate dateWithISO8601String:info[kEventReviewEndsAt]];

@@ -17,20 +17,20 @@
   self = [super initWithInfo:info];
   if (self && info) {
     // Core properties
-    _name = [NSString stringWithString:info[kArtistName]];
-    _description = [NSString stringWithString:info[kArtistDescription]];
+    _name = info[kArtistName];
+    _description = info[kArtistDescription];
     _following = [info[kArtistFollowing] boolValue];
-    _followersCount = [info[kArtistFollowersCount] copy];
-    _commentsCount = [info[kArtistCommentsCount] copy];
-    _friendsFollowingCount = [info[kArtistFriendsFollowingCount] copy];
-    _upcomingEventsCount = [info[kArtistUpcomingEventsCount] copy];
-    _socialMentionsCount = [info[kArtistSocialMentionsCount] copy];
-    _socialLinks = [NSArray arrayWithArray:info[kArtistSocialLinks]];
-    _avatars = [NSArray arrayWithArray:info[kArtistAvatars]];
-    _address = [NSDictionary dictionaryWithDictionary:info[kArtistAddress]];
-    _background = [NSDictionary dictionaryWithDictionary:info[kArtistBackground]];
-    _email = [NSString stringWithString:info[kArtistEmail]];
-    _websiteURL = [NSString stringWithString:info[kArtistWebsiteURL]];
+    _followersCount = info[kArtistFollowersCount];
+    _commentsCount = info[kArtistCommentsCount];
+    _friendsFollowingCount = info[kArtistFriendsFollowingCount];
+    _upcomingEventsCount = info[kArtistUpcomingEventsCount];
+    _socialMentionsCount = info[kArtistSocialMentionsCount];
+    _socialLinks = info[kArtistSocialLinks];
+    _avatars = info[kArtistAvatars];
+    _address = info[kArtistAddress];
+    _background = info[kArtistBackground];
+    _email = info[kArtistEmail];
+    _websiteURL = info[kArtistWebsiteURL];
     
     // Embeddables
     // TODO: proper mapping to models
