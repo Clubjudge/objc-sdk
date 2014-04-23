@@ -29,6 +29,8 @@
 		13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AAF18FECDB1007D1DD2 /* CJAPIRequest.m */; };
 		13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */; };
 		13C902721908065F00615874 /* MockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C902711908065F00615874 /* MockModel.m */; };
+		13C90275190819E500615874 /* CJArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C90274190819E500615874 /* CJArtist.m */; };
+		13C9027719081DB500615874 /* CJArtistTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C9027619081DB500615874 /* CJArtistTests.m */; };
 		13E6371118FC671A00D7EB22 /* CJEngineConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E6371018FC671A00D7EB22 /* CJEngineConfiguration.m */; };
 		13E6371418FC6AA900D7EB22 /* CJEngineConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E6371318FC6AA900D7EB22 /* CJEngineConfigurationTests.m */; };
 		63065E4101A948239338C74C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D59ADD9DEA42CCAA1A5D9D /* libPods.a */; };
@@ -92,6 +94,9 @@
 		13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAPIRequestTests.m; sourceTree = "<group>"; };
 		13C902701908065F00615874 /* MockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockModel.h; sourceTree = "<group>"; };
 		13C902711908065F00615874 /* MockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockModel.m; sourceTree = "<group>"; };
+		13C90273190819E500615874 /* CJArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJArtist.h; sourceTree = "<group>"; };
+		13C90274190819E500615874 /* CJArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJArtist.m; sourceTree = "<group>"; };
+		13C9027619081DB500615874 /* CJArtistTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJArtistTests.m; sourceTree = "<group>"; };
 		13E6370F18FC671A00D7EB22 /* CJEngineConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEngineConfiguration.h; sourceTree = "<group>"; };
 		13E6371018FC671A00D7EB22 /* CJEngineConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEngineConfiguration.m; sourceTree = "<group>"; };
 		13E6371218FC69BF00D7EB22 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
@@ -245,6 +250,8 @@
 				1367E7C7190690CA0022885C /* CJLinksInfo.m */,
 				1316B0921906C7A400107265 /* CJEvent.h */,
 				1316B0931906C7A400107265 /* CJEvent.m */,
+				13C90273190819E500615874 /* CJArtist.h */,
+				13C90274190819E500615874 /* CJArtist.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -256,6 +263,7 @@
 				1367E7C419067BCB0022885C /* CJPaginationInfoTests.m */,
 				1367E7C91906ADD40022885C /* CJLinksInfoTests.m */,
 				1316B0991906D6E600107265 /* CJEventTests.m */,
+				13C9027619081DB500615874 /* CJArtistTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -435,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1367E7C3190678200022885C /* CJPaginationInfo.m in Sources */,
+				13C90275190819E500615874 /* CJArtist.m in Sources */,
 				1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */,
 				13980DBE190589B800D449FA /* CJModel.m in Sources */,
 				13AA62C619056C880089C443 /* JSONResponseSerializerWithData.m in Sources */,
@@ -450,6 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13C9027719081DB500615874 /* CJArtistTests.m in Sources */,
 				1367E7CA1906ADD40022885C /* CJLinksInfoTests.m in Sources */,
 				13C902721908065F00615874 /* MockModel.m in Sources */,
 				1371312D18FC544F007AA17A /* CJEngineTests.m in Sources */,

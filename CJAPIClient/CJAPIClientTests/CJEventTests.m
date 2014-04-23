@@ -9,6 +9,7 @@
 #import <Kiwi/Kiwi.h>
 #import "CJEvent.h"
 #import "CJAPIRequest.h"
+#import "CJArtist.h"
 
 SPEC_BEGIN(CJEVENTSPEC)
 
@@ -203,6 +204,16 @@ describe(@"Event Model", ^{
     describe(@"#globalRating", ^{
       it(@"produces a correct mapping", ^{
         [[event.globalRating should] equal:stub[@"globalRating"]];
+      });
+    });
+    
+    describe(@"Embeddables", ^{
+      describe(@"Artists", ^{
+        it(@"produces an array of CJArtists", ^{
+          [event.artists each:^(id artist) {
+            [[artist should] beKindOfClass:[CJArtist class]];
+          }];
+        });
       });
     });
   });
