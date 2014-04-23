@@ -8,7 +8,7 @@
 
 #import "CJArtist.h"
 #import "CJEvent.h"
-#import "CJAPIRequest.h"
+#import "CJModel+Following.h"
 
 @implementation CJArtist
 
@@ -45,31 +45,12 @@
 
 - (void)follow
 {
-  NSString *path = [NSString stringWithFormat:@"/artists/%@/followers.json", self.Id];
-  CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"POST"
-                                                       andPath:path];
-  
-  _following = YES;
-  
-  
-  [request performWithSuccess:nil
-                      failure:^(NSDictionary *error, NSNumber *statusCode) {
-                        self.following = NO;
-                      }];
+  [self followEntity:@"artist"];
 }
 
 - (void)unfollow
 {
-  NSString *path = [NSString stringWithFormat:@"/artists/%@/followers.json", self.Id];
-  CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"DELETE"
-                                                       andPath:path];
-  
-  _following = NO;
-  
-  [request performWithSuccess:nil
-                      failure:^(NSDictionary *error, NSNumber *statusCode) {
-                        self.following = YES;
-                      }];
+  [self unfollowEntity:@"artist"];
 }
 
 @end

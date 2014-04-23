@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130E90A61908283700211DC0 /* CJModel+Following.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90A51908283700211DC0 /* CJModel+Following.m */; };
 		1316B0941906C7A400107265 /* CJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0931906C7A400107265 /* CJEvent.m */; };
 		1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0971906D61C00107265 /* NSDate+StringParsing.m */; };
 		1316B09A1906D6E600107265 /* CJEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0991906D6E600107265 /* CJEventTests.m */; };
@@ -61,6 +62,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		130E90A41908283700211DC0 /* CJModel+Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJModel+Following.h"; sourceTree = "<group>"; };
+		130E90A51908283700211DC0 /* CJModel+Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJModel+Following.m"; sourceTree = "<group>"; };
 		1316B0921906C7A400107265 /* CJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEvent.h; sourceTree = "<group>"; };
 		1316B0931906C7A400107265 /* CJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEvent.m; sourceTree = "<group>"; };
 		1316B0961906D61C00107265 /* NSDate+StringParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+StringParsing.h"; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 			children = (
 				1316B0961906D61C00107265 /* NSDate+StringParsing.h */,
 				1316B0971906D61C00107265 /* NSDate+StringParsing.m */,
+				130E90A41908283700211DC0 /* CJModel+Following.h */,
+				130E90A51908283700211DC0 /* CJModel+Following.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 				1316B0941906C7A400107265 /* CJEvent.m in Sources */,
 				1367E7C8190690CA0022885C /* CJLinksInfo.m in Sources */,
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
+				130E90A61908283700211DC0 /* CJModel+Following.m in Sources */,
 				13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */,
 				13E6371118FC671A00D7EB22 /* CJEngineConfiguration.m in Sources */,
 			);
