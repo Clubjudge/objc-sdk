@@ -65,16 +65,54 @@ describe(@"Event Model", ^{
     });
     
     describe(@"#startsAt", ^{
-      xit(@"produces a correct mapping", ^{
+      it(@"produces a correct mapping", ^{
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.startsAt];
         
-        NSInteger day = components.day;
-        NSInteger month = components.month;
-        NSInteger year = components.year;
-        
-        NSString *date = [event.startsAt description];
+        [[theValue(components.day) should] equal:theValue(21)];
+        [[theValue(components.month) should] equal:theValue(4)];
+        [[theValue(components.year) should] equal:theValue(2014)];
+        [[theValue(components.hour) should] equal:theValue(18)];
+        [[theValue(components.minute) should] equal:theValue(0)];
+        [[theValue(components.second) should] equal:theValue(0)];
+      });
+    });
+    
+    describe(@"#endsAt", ^{
+      it(@"produces a correct mapping", ^{
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.endsAt];
         
         [[theValue(components.day) should] equal:theValue(21)];
+        [[theValue(components.month) should] equal:theValue(4)];
+        [[theValue(components.year) should] equal:theValue(2014)];
+        [[theValue(components.hour) should] equal:theValue(20)];
+        [[theValue(components.minute) should] equal:theValue(59)];
+        [[theValue(components.second) should] equal:theValue(0)];
+      });
+    });
+    
+    describe(@"#updatedAt", ^{
+      it(@"produces a correct mapping", ^{
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.updatedAt];
+        
+        [[theValue(components.day) should] equal:theValue(22)];
+        [[theValue(components.month) should] equal:theValue(4)];
+        [[theValue(components.year) should] equal:theValue(2014)];
+        [[theValue(components.hour) should] equal:theValue(16)];
+        [[theValue(components.minute) should] equal:theValue(14)];
+        [[theValue(components.second) should] equal:theValue(34)];
+      });
+    });
+    
+    describe(@"#reviewEndsAt", ^{
+      it(@"produces a correct mapping", ^{
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.reviewEndsAt];
+        
+        [[theValue(components.day) should] equal:theValue(28)];
+        [[theValue(components.month) should] equal:theValue(4)];
+        [[theValue(components.year) should] equal:theValue(2014)];
+        [[theValue(components.hour) should] equal:theValue(18)];
+        [[theValue(components.minute) should] equal:theValue(0)];
+        [[theValue(components.second) should] equal:theValue(0)];
       });
     });
     

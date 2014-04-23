@@ -14,12 +14,10 @@
 {
   if (!dateString) return nil;
   
-  if ([dateString hasSuffix:@"Z"]) {
-    dateString = [[dateString substringToIndex:(dateString.length-1)] stringByAppendingString:@"-0000"];
-  }
+  dateString = [dateString stringByReplacingOccurrencesOfString:@".000Z" withString:@""];
   
   return [self dateFromString:dateString
-                   withFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+                   withFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
 }
 
 + (NSDate *)dateFromString:(NSString *)dateString
@@ -31,6 +29,7 @@
   NSLocale *locale = [[NSLocale alloc]
                       initWithLocaleIdentifier:@"en_US_POSIX"];
   [dateFormatter setLocale:locale];
+  [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
   
   NSDate *date = [dateFormatter dateFromString:dateString];
   return date;
