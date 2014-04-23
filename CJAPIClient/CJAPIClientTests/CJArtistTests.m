@@ -72,10 +72,10 @@ describe(@"Artist Model", ^{
                            @"comments": @"http://local.clubjudge.com:5000/v1/artists/1981/comments.json",
                            @"musicGenres": @"http://local.clubjudge.com:5000/v1/artists/1981/musicGenres.json"
                          },
-                         @"events": @[
-                             @{@"id": @10},
-                             @{@"id": @5}
-                         ]
+                         @"events": @{@"source": @[
+                                          @{@"id": @10},
+                                          @{@"id": @5}
+                                        ]}
                       };
   
   __block CJArtist *artist;

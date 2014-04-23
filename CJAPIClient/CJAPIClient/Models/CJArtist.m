@@ -34,7 +34,7 @@
     
     // Embeddables
     // TODO: proper mapping to models
-    _events = [(NSArray *) info[kArtistEvents] map:^id(NSDictionary *event) {
+    _events = [(NSArray *) info[kArtistEvents][@"source"] map:^id(NSDictionary *event) {
       return [[CJEvent alloc] initWithInfo:event];
     }];
     _musicGenres = [NSArray arrayWithArray:info[kArtistMusicGenres]];
