@@ -72,6 +72,12 @@ NSString *const kRequestAccessToken = @"token";
   
   path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
   
+  NSURL *url = [NSURL URLWithString:path];
+  url = [url URLByDeletingPathExtension];
+  url = [url URLByAppendingPathExtension:@"json"];
+  
+  path = [url relativeString];
+  
   _path = path;
 }
 
