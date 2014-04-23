@@ -9,6 +9,7 @@
 #import <Kiwi/Kiwi.h>
 #import "CJArtist.h"
 #import "CJAPIRequest.h"
+#import "CJEvent.h"
 
 SPEC_BEGIN(CJARTISTSPEC)
 
@@ -70,11 +71,15 @@ describe(@"Artist Model", ^{
                            @"followers": @"http://local.clubjudge.com:5000/v1/artists/1981/followers.json",
                            @"comments": @"http://local.clubjudge.com:5000/v1/artists/1981/comments.json",
                            @"musicGenres": @"http://local.clubjudge.com:5000/v1/artists/1981/musicGenres.json"
-                         }
+                         },
+                         @"events": @[
+                             @{@"id": @10},
+                             @{@"id": @5}
+                         ]
                       };
   
   __block CJArtist *artist;
-  beforeEach(^{
+  beforeAll(^{
     artist = [[CJArtist alloc] initWithInfo:stub];
   });
   
@@ -118,6 +123,16 @@ describe(@"Artist Model", ^{
     describe(@"#friendsFollowingCount", ^{
       it(@"produces a correct mapping", ^{
         [[artist.friendsFollowingCount should] equal:stub[@"friendsFollowingCount"]];
+      });
+    });
+    
+    describe(@"Embeddables", ^{
+      describe(@"Events", ^{
+        it(@"produces an array of CJEvents", ^{
+          [artist.events each:^(id event) {
+            [[event should] beKindOfClass:[CJEvent class]];
+          }];
+        });
       });
     });
   });
