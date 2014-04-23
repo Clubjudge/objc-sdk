@@ -129,6 +129,13 @@ describe(@"Venue Model", ^{
       });
     });
     
+    describe(@"#geolocation", ^{
+      it(@"maps to a CLCoordinate2D", ^{
+        [[theValue(venue.geolocation.longitude) should] equal:@4.911916];
+        [[theValue(venue.geolocation.latitude) should] equal:@52.3537109];
+      });
+    });
+    
     describe(@"Embeddables", ^{
       describe(@"Events", ^{
         it(@"produces an array of CJEvents", ^{

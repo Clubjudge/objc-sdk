@@ -7,6 +7,7 @@
 //
 
 #import "CJModel.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface CJVenue : CJModel
 
@@ -21,7 +22,7 @@
 @property(nonatomic, strong) NSNumber *socialMentionsCount;
 @property(nonatomic, strong) NSNumber *reviewCount;
 @property(nonatomic, strong) NSArray *socialLinks;
-@property(nonatomic, strong) NSDictionary *geolocation;
+@property(nonatomic, assign) CLLocationCoordinate2D geolocation;
 @property(nonatomic, strong) NSDictionary *background;
 @property(nonatomic, strong) NSDictionary *address;
 @property(nonatomic, strong) NSArray *logos;

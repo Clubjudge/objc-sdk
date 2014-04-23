@@ -27,7 +27,11 @@
     _socialMentionsCount = info[kVenueSocialMentionsCount];
     _reviewCount = info[kVenueReviewCount];
     _socialLinks = info[kVenueSocialLinks];
-    _geolocation = info[kVenueGeolocation];
+    
+    double lat = [info[kVenueGeolocation][@"lat"] doubleValue];
+    double lon = [info[kVenueGeolocation][@"lon"] doubleValue];
+    _geolocation = CLLocationCoordinate2DMake(lat, lon);
+    
     _background = info[kVenueBackground];
     _address = info[kVenueAddress];
     _logos = info[kVenueLogos];
