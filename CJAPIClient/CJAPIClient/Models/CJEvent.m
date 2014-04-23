@@ -10,6 +10,7 @@
 #import "NSDate+StringParsing.h"
 #import "CJModel+Following.h"
 #import "CJArtist.h"
+#import "CJVenue.h"
 
 @implementation CJEvent
 
@@ -44,7 +45,7 @@
     _artists = [(NSArray *) info[kEventArtists] map:^id(NSDictionary *artist) {
       return [[CJArtist alloc] initWithInfo:artist];
     }];
-    _venue = [NSDictionary dictionaryWithDictionary:info[kEventVenue]];
+    _venue = [[CJVenue alloc] initWithInfo:info[kEventVenue]];
     _musicGenres = [NSArray arrayWithArray:info[kEventMusicGenres]];
     _followers = [NSArray arrayWithArray:info[kEventFollowers]];
   }

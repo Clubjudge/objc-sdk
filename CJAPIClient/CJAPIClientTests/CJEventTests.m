@@ -10,6 +10,7 @@
 #import "CJEvent.h"
 #import "CJAPIRequest.h"
 #import "CJArtist.h"
+#import "CJVenue.h"
 
 SPEC_BEGIN(CJEVENTSPEC)
 
@@ -36,6 +37,9 @@ describe(@"Event Model", ^{
                          @"contest": @{},
                          @"expertReviewRatings": @{},
                          @"globalRating": @{},
+                         @"venue": @{
+                              @"id": @55
+                             },
                          @"_links": @{
                              @"artists": @"http://local.clubjudge.com:5000/v1/events/31200/artists.json",
                              @"comments": @"http://local.clubjudge.com:5000/v1/events/31200/comments.json",
@@ -213,6 +217,12 @@ describe(@"Event Model", ^{
           [event.artists each:^(id artist) {
             [[artist should] beKindOfClass:[CJArtist class]];
           }];
+        });
+      });
+      
+      describe(@"Venue", ^{
+        it(@"produces a CJVenue", ^{
+          [[event.venue should] beKindOfClass:[CJVenue class]];
         });
       });
     });
