@@ -73,18 +73,18 @@ describe(@"Venue Model", ^{
                            @"followers": @"http://local.clubjudge.com:5000/v1/venues/2150/followers.json",
                            @"ratings": @"http://local.clubjudge.com:5000/v1/venues/2150/ratings.json"
                          },
-                         @"events": @[
+                         @"events": @{@"source": @[
                              @{@"id": @10},
                              @{@"id": @5}
-                            ],
-                         @"upcoming": @[
-                             @{@"id": @10},
-                             @{@"id": @5}
-                            ],
-                         @"recent": @[
-                             @{@"id": @10},
-                             @{@"id": @5}
-                             ]
+                             ]},
+                         @"upcoming": @{@"source": @[
+                                        @{@"id": @10},
+                                        @{@"id": @5}
+                                        ]},
+                         @"recent": @{@"source": @[
+                                      @{@"id": @10},
+                                      @{@"id": @5}
+                                      ]}
                          };
   
   __block CJVenue *venue;

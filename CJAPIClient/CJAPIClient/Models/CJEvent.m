@@ -42,7 +42,7 @@
     
     // Embeddables
     // TODO: proper mapping to models
-    _artists = [(NSArray *) info[kEventArtists] map:^id(NSDictionary *artist) {
+    _artists = [(NSArray *) info[kEventArtists][@"source"] map:^id(NSDictionary *artist) {
       return [[CJArtist alloc] initWithInfo:artist];
     }];
     _venue = [[CJVenue alloc] initWithInfo:info[kEventVenue]];
