@@ -41,13 +41,13 @@
     
     // Embeddables
     // TODO: proper mapping to models
-    _events = [(NSArray *) info[kVenueEvents] map:^id(NSDictionary *event) {
+    _events = [(NSArray *) info[kVenueEvents][@"source"] map:^id(NSDictionary *event) {
       return [[CJEvent alloc] initWithInfo:event];
     }];
-    _recentEvents = [(NSArray *) info[kVenueRecentEvents] map:^id(NSDictionary *event) {
+    _recentEvents = [(NSArray *) info[kVenueRecentEvents][@"source"] map:^id(NSDictionary *event) {
       return [[CJEvent alloc] initWithInfo:event];
     }];
-    _upcomingEvents = [(NSArray *) info[kVenueUpcomingEvents] map:^id(NSDictionary *event) {
+    _upcomingEvents = [(NSArray *) info[kVenueUpcomingEvents][@"source"] map:^id(NSDictionary *event) {
       return [[CJEvent alloc] initWithInfo:event];
     }];
     _followers = [NSArray arrayWithArray:info[kVenueFollowers]];

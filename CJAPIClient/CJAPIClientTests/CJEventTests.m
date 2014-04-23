@@ -37,6 +37,11 @@ describe(@"Event Model", ^{
                          @"contest": @{},
                          @"expertReviewRatings": @{},
                          @"globalRating": @{},
+                         @"artists": @{
+                              @"source": @[
+                                  @{@"id": @55}
+                                  ]
+                             },
                          @"venue": @{
                               @"id": @55
                              },
