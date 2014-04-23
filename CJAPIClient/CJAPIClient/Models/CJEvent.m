@@ -9,6 +9,7 @@
 #import "CJEvent.h"
 #import "NSDate+StringParsing.h"
 #import "CJAPIRequest.h"
+#import "CJArtist.h"
 
 @implementation CJEvent
 
@@ -40,7 +41,9 @@
     
     // Embeddables
     // TODO: proper mapping to models
-    _artists = [NSArray arrayWithArray:info[kEventArtists]];
+    _artists = [(NSArray *) info[kEventArtists] map:^id(NSDictionary *artist) {
+      return [[CJArtist alloc] initWithInfo:artist];
+    }];
     _venue = [NSDictionary dictionaryWithDictionary:info[kEventVenue]];
     _musicGenres = [NSArray arrayWithArray:info[kEventMusicGenres]];
     _followers = [NSArray arrayWithArray:info[kEventFollowers]];
