@@ -76,23 +76,30 @@ describe(@"CJAPIRequest", ^{
       
       it(@"sets the path property", ^{
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
-                                                             andPath:@"/a/path/"];
+                                                             andPath:@"/a/path.json"];
         
-        [[request.path should] equal:@"/a/path/"];
+        [[request.path should] equal:@"/a/path.json"];
       });
       
       it(@"adds forward slashes at the beginning", ^{
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
-                                                             andPath:@"a/path/"];
+                                                             andPath:@"a/path.json"];
         
-        [[request.path should] equal:@"/a/path/"];
+        [[request.path should] equal:@"/a/path.json"];
       });
       
       it(@"encodes the path using UTF-8", ^{
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
-                                                            andPath:@"a/path?foo=bar bar"];
+                                                            andPath:@"a/path.json?foo=bar bar"];
         
-        [[request.path should] equal:@"/a/path?foo=bar%20bar"];
+        [[request.path should] equal:@"/a/path.json?foo=bar%20bar"];
+      });
+      
+      it(@"automatically adds .json at the end", ^{
+        CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
+                                                             andPath:@"a/path"];
+        
+        [[request.path should] equal:@"/a/path.json"];
       });
     });
     
@@ -236,7 +243,7 @@ describe(@"CJAPIRequest", ^{
                               };
           
           stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-            return [req.URL.path isEqualToString:@"/a/path"];
+            return [req.URL.path isEqualToString:@"/a/path.json"];
           } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
             NSError *error;
             NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
@@ -383,7 +390,7 @@ describe(@"CJAPIRequest", ^{
                                                  andPath:@"/a/post/path"];
           
           stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-            return [req.URL.path isEqualToString:@"/a/post/path"];
+            return [req.URL.path isEqualToString:@"/a/post/path.json"];
           } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
             NSError *error;
             NSData *data = [NSJSONSerialization dataWithJSONObject:@{}
@@ -466,7 +473,7 @@ describe(@"CJAPIRequest", ^{
         
         beforeEach(^{
           stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-            return [req.URL.path isEqualToString:@"/a/put/path"];
+            return [req.URL.path isEqualToString:@"/a/put/path.json"];
           } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
             NSError *error;
             NSData *data = [NSJSONSerialization dataWithJSONObject:@{}
@@ -526,7 +533,7 @@ describe(@"CJAPIRequest", ^{
         
         beforeEach(^{
           stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-            return [req.URL.path isEqualToString:@"/a/delete/path"];
+            return [req.URL.path isEqualToString:@"/a/delete/path.json"];
           } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
             NSError *error;
             NSData *data = [NSJSONSerialization dataWithJSONObject:@{}
@@ -582,7 +589,7 @@ describe(@"CJAPIRequest", ^{
         NSString *message = [request developerMessageFromResponse:responseMock
                                                             error:error];
         
-        [[message should] equal:@"GET request to /a/get/error/path returned an error with code 500: A developer message"];
+        [[message should] equal:@"GET request to /a/get/error/path.json returned an error with code 500: A developer message"];
         
       });
     });
@@ -596,7 +603,7 @@ describe(@"CJAPIRequest", ^{
                                                andPath:@"/a/get/error/path"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return [req.URL.path isEqualToString:@"/a/get/error/path"];
+          return [req.URL.path isEqualToString:@"/a/get/error/path.json"];
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:@{
@@ -653,7 +660,7 @@ describe(@"CJAPIRequest", ^{
                                                andPath:@"/a/post/error/path"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return [req.URL.path isEqualToString:@"/a/post/error/path"];
+          return [req.URL.path isEqualToString:@"/a/post/error/path.json"];
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:@{
@@ -710,7 +717,7 @@ describe(@"CJAPIRequest", ^{
                                                andPath:@"/a/put/error/path"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return [req.URL.path isEqualToString:@"/a/put/error/path"];
+          return [req.URL.path isEqualToString:@"/a/put/error/path.json"];
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:@{
@@ -767,7 +774,7 @@ describe(@"CJAPIRequest", ^{
                                                andPath:@"/a/delete/error/path"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return [req.URL.path isEqualToString:@"/a/delete/error/path"];
+          return [req.URL.path isEqualToString:@"/a/delete/error/path.json"];
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:@{
