@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CJModel.h"
+@class CJVenue;
 
 @interface CJEvent : CJModel
 
@@ -37,7 +38,7 @@
 #pragma mark - Embeddables
 
 @property(nonatomic, strong) NSArray *artists;
-@property(nonatomic, strong) NSDictionary *venue;
+@property(nonatomic, strong) CJVenue *venue;
 @property(nonatomic, strong) NSArray *musicGenres;
 @property(nonatomic, strong) NSArray *followers;
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		130E90A61908283700211DC0 /* CJModel+Following.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90A51908283700211DC0 /* CJModel+Following.m */; };
+		130E90A919082DD800211DC0 /* CJVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90A819082DD800211DC0 /* CJVenue.m */; };
+		130E90AB1908347C00211DC0 /* CJVenueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90AA1908347C00211DC0 /* CJVenueTests.m */; };
 		1316B0941906C7A400107265 /* CJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0931906C7A400107265 /* CJEvent.m */; };
 		1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0971906D61C00107265 /* NSDate+StringParsing.m */; };
 		1316B09A1906D6E600107265 /* CJEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0991906D6E600107265 /* CJEventTests.m */; };
@@ -64,6 +66,9 @@
 /* Begin PBXFileReference section */
 		130E90A41908283700211DC0 /* CJModel+Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJModel+Following.h"; sourceTree = "<group>"; };
 		130E90A51908283700211DC0 /* CJModel+Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJModel+Following.m"; sourceTree = "<group>"; };
+		130E90A719082DD800211DC0 /* CJVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJVenue.h; sourceTree = "<group>"; };
+		130E90A819082DD800211DC0 /* CJVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJVenue.m; sourceTree = "<group>"; };
+		130E90AA1908347C00211DC0 /* CJVenueTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJVenueTests.m; sourceTree = "<group>"; };
 		1316B0921906C7A400107265 /* CJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEvent.h; sourceTree = "<group>"; };
 		1316B0931906C7A400107265 /* CJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEvent.m; sourceTree = "<group>"; };
 		1316B0961906D61C00107265 /* NSDate+StringParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+StringParsing.h"; sourceTree = "<group>"; };
@@ -257,6 +262,8 @@
 				1316B0931906C7A400107265 /* CJEvent.m */,
 				13C90273190819E500615874 /* CJArtist.h */,
 				13C90274190819E500615874 /* CJArtist.m */,
+				130E90A719082DD800211DC0 /* CJVenue.h */,
+				130E90A819082DD800211DC0 /* CJVenue.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,6 +276,7 @@
 				1367E7C91906ADD40022885C /* CJLinksInfoTests.m */,
 				1316B0991906D6E600107265 /* CJEventTests.m */,
 				13C9027619081DB500615874 /* CJArtistTests.m */,
+				130E90AA1908347C00211DC0 /* CJVenueTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -455,6 +463,7 @@
 				1316B0941906C7A400107265 /* CJEvent.m in Sources */,
 				1367E7C8190690CA0022885C /* CJLinksInfo.m in Sources */,
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
+				130E90A919082DD800211DC0 /* CJVenue.m in Sources */,
 				130E90A61908283700211DC0 /* CJModel+Following.m in Sources */,
 				13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */,
 				13E6371118FC671A00D7EB22 /* CJEngineConfiguration.m in Sources */,
@@ -465,6 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				130E90AB1908347C00211DC0 /* CJVenueTests.m in Sources */,
 				13C9027719081DB500615874 /* CJArtistTests.m in Sources */,
 				1367E7CA1906ADD40022885C /* CJLinksInfoTests.m in Sources */,
 				13C902721908065F00615874 /* MockModel.m in Sources */,
