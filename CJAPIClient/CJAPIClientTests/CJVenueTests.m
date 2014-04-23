@@ -129,10 +129,71 @@ describe(@"Venue Model", ^{
       });
     });
     
+    describe(@"#address", ^{
+      it(@"produces a correct mapping", ^{
+        [[venue.address should] equal:stub[@"address"]];
+      });
+    });
+    
+    describe(@"#background", ^{
+      it(@"produces a correct mapping", ^{
+        [[venue.background should] equal:stub[@"background"]];
+      });
+    });
+    
+    describe(@"#logos", ^{
+      it(@"produces a correct mapping", ^{
+        [[venue.logos should] equal:stub[@"logos"]];
+      });
+    });
+    
+    describe(@"#socialLinks", ^{
+      it(@"produces a correct mapping", ^{
+        [[venue.socialLinks should] equal:stub[@"socialLinks"]];
+      });
+    });
+    
+    describe(@"#email", ^{
+      it(@"produces a correct mapping", ^{
+        [[venue.email should] equal:stub[@"email"]];
+      });
+    });
+    
+    describe(@"#websiteURL", ^{
+      it(@"produces a correct mapping", ^{
+        [[venue.websiteURL should] equal:stub[@"websiteUrl"]];
+      });
+    });
+    
+    describe(@"#phoneNumber", ^{
+      it(@"produces a correct mapping", ^{
+        [[venue.phoneNumber should] equal:stub[@"phoneNumber"]];
+      });
+    });
+    
+    describe(@"#reviewCount", ^{
+      it(@"produces a correct mapping", ^{
+        [[venue.reviewCount should] equal:stub[@"reviewCount"]];
+      });
+    });
+    
     describe(@"#geolocation", ^{
       it(@"maps to a CLCoordinate2D", ^{
         [[theValue(venue.geolocation.longitude) should] equal:@4.911916];
         [[theValue(venue.geolocation.latitude) should] equal:@52.3537109];
+      });
+    });
+    
+    describe(@"#updatedAt", ^{
+      it(@"produces a correct mapping", ^{
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:venue.updatedAt];
+        
+        [[theValue(components.day) should] equal:theValue(17)];
+        [[theValue(components.month) should] equal:theValue(12)];
+        [[theValue(components.year) should] equal:theValue(2013)];
+        [[theValue(components.hour) should] equal:theValue(13)];
+        [[theValue(components.minute) should] equal:theValue(01)];
+        [[theValue(components.second) should] equal:theValue(21)];
       });
     });
     
