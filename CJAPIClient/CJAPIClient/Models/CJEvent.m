@@ -8,7 +8,7 @@
 
 #import "CJEvent.h"
 #import "NSDate+StringParsing.h"
-#import "CJAPIRequest.h"
+#import "CJModel+Following.h"
 #import "CJArtist.h"
 
 @implementation CJEvent
@@ -53,31 +53,12 @@
 
 - (void)follow
 {
-  NSString *path = [NSString stringWithFormat:@"/events/%@/followers.json", self.Id];
-  CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"POST"
-                                                       andPath:path];
-  
-  _following = YES;
-  
-  
-  [request performWithSuccess:nil
-                      failure:^(NSDictionary *error, NSNumber *statusCode) {
-                        self.following = NO;
-                      }];
+  [self followEntity:@"event"];
 }
 
 - (void)unfollow
 {
-  NSString *path = [NSString stringWithFormat:@"/events/%@/followers.json", self.Id];
-  CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"DELETE"
-                                                       andPath:path];
-  
-  _following = NO;
-  
-  [request performWithSuccess:nil
-                      failure:^(NSDictionary *error, NSNumber *statusCode) {
-                        self.following = YES;
-                      }];
+  [self unfollowEntity:@"event"];
 }
 
 @end
