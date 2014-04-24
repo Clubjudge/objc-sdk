@@ -7,13 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+@class CJLinksInfo;
 
 @interface CJModel : NSObject
 
 @property (nonatomic, strong) id Id;
 
+#pragma mark - Links
+@property (readonly) CJLinksInfo *links;
+
+#pragma mark - Actions
 - (id)initWithInfo:(NSDictionary *)info;
 
 @end
 
 #define kID @"id"
+#define kLinks @"_links"

@@ -10,6 +10,9 @@
 #import "CJEvent.h"
 #import "CJUser.h"
 #import "CJMusicGenre.h"
+#import "CJLinksInfo.h"
+#import "CJComment.h"
+#import "CJUser.h"
 #import "CJModel+Following.h"
 
 @implementation CJArtist
@@ -33,6 +36,14 @@
     _background = info[kArtistBackground];
     _email = info[kArtistEmail];
     _websiteURL = info[kArtistWebsiteURL];
+    
+    // Links
+    self.links.mapping = @{
+                           @"events": [CJEvent class],
+                           @"comments": [CJComment class],
+                           @"followers": [CJUser class],
+                           @"musicGenres": [CJMusicGenre class],
+                           };
     
     // Embeddables
     _events = [(NSArray *) info[kArtistEvents][@"source"] map:^id(NSDictionary *event) {

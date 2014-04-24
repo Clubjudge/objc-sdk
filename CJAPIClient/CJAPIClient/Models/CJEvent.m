@@ -13,6 +13,9 @@
 #import "CJVenue.h"
 #import "CJUser.h"
 #import "CJMusicGenre.h"
+#import "CJLinksInfo.h"
+#import "CJComment.h"
+#import "CJTicket.h"
 
 @implementation CJEvent
 
@@ -41,6 +44,16 @@
     _contest = info[kEventContest];
     _expertReviewRatings = info[kEventExpertReviewRatings];
     _globalRating = info[kEventGlobalRating];
+    
+    // Links
+    self.links.mapping = @{
+                           @"artists": [CJArtist class],
+                           @"comments": [CJComment class],
+                           @"followers": [CJUser class],
+                           @"musicGenres": [CJMusicGenre class],
+                           @"tickets": [CJTicket class],
+                           @"venue": [CJVenue class]
+                           };
     
     // Embeddables
     _artists = [(NSArray *) info[kEventArtists][@"source"] map:^id(NSDictionary *artist) {
