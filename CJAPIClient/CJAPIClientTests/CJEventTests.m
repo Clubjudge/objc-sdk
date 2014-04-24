@@ -12,6 +12,7 @@
 #import "CJArtist.h"
 #import "CJVenue.h"
 #import "CJUser.h"
+#import "CJMusicGenre.h"
 
 SPEC_BEGIN(CJEVENTSPEC)
 
@@ -44,6 +45,11 @@ describe(@"Event Model", ^{
                                   ]
                              },
                          @"followers": @{
+                             @"source": @[
+                                 @{@"id": @55}
+                                 ]
+                             },
+                         @"musicGenres": @{
                              @"source": @[
                                  @{@"id": @55}
                                  ]
@@ -241,6 +247,14 @@ describe(@"Event Model", ^{
         it(@"produces an array of CJUsers", ^{
           [event.followers each:^(id user) {
             [[user should] beKindOfClass:[CJUser class]];
+          }];
+        });
+      });
+      
+      describe(@"Music Genres", ^{
+        it(@"produces an array of CJMusicGenres", ^{
+          [event.musicGenres each:^(id genre) {
+            [[genre should] beKindOfClass:[CJMusicGenre class]];
           }];
         });
       });

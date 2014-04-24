@@ -9,6 +9,7 @@
 #import "CJArtist.h"
 #import "CJEvent.h"
 #import "CJUser.h"
+#import "CJMusicGenre.h"
 #import "CJModel+Following.h"
 
 @implementation CJArtist
@@ -34,11 +35,12 @@
     _websiteURL = info[kArtistWebsiteURL];
     
     // Embeddables
-    // TODO: proper mapping to models
     _events = [(NSArray *) info[kArtistEvents][@"source"] map:^id(NSDictionary *event) {
       return [[CJEvent alloc] initWithInfo:event];
     }];
-    _musicGenres = [NSArray arrayWithArray:info[kArtistMusicGenres]];
+    _musicGenres = [(NSArray *) info[kArtistMusicGenres][@"source"] map:^id(NSDictionary *genre) {
+      return [[CJMusicGenre alloc] initWithInfo:genre];
+    }];
     _followers = [(NSArray *) info[kArtistFollowers][@"source"] map:^id(NSDictionary *user) {
       return [[CJUser alloc] initWithInfo:user];
     }];

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130A0990190953BD0043FB0C /* CJMusicGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A098F190953BD0043FB0C /* CJMusicGenre.m */; };
+		130A09921909549C0043FB0C /* CJMusicGenreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A09911909549C0043FB0C /* CJMusicGenreTests.m */; };
 		130E90A61908283700211DC0 /* CJModel+Following.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90A51908283700211DC0 /* CJModel+Following.m */; };
 		130E90A919082DD800211DC0 /* CJVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90A819082DD800211DC0 /* CJVenue.m */; };
 		130E90AB1908347C00211DC0 /* CJVenueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90AA1908347C00211DC0 /* CJVenueTests.m */; };
@@ -68,6 +70,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		130A098E190953BD0043FB0C /* CJMusicGenre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMusicGenre.h; sourceTree = "<group>"; };
+		130A098F190953BD0043FB0C /* CJMusicGenre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMusicGenre.m; sourceTree = "<group>"; };
+		130A09911909549C0043FB0C /* CJMusicGenreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMusicGenreTests.m; sourceTree = "<group>"; };
 		130E90A41908283700211DC0 /* CJModel+Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJModel+Following.h"; sourceTree = "<group>"; };
 		130E90A51908283700211DC0 /* CJModel+Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJModel+Following.m"; sourceTree = "<group>"; };
 		130E90A719082DD800211DC0 /* CJVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJVenue.h; sourceTree = "<group>"; };
@@ -278,6 +283,8 @@
 				13968CBC19092379008692D1 /* CJUser.m */,
 				13968CC019093388008692D1 /* CJMe.h */,
 				13968CC119093388008692D1 /* CJMe.m */,
+				130A098E190953BD0043FB0C /* CJMusicGenre.h */,
+				130A098F190953BD0043FB0C /* CJMusicGenre.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,6 +300,7 @@
 				130E90AA1908347C00211DC0 /* CJVenueTests.m */,
 				13968CBE1909294F008692D1 /* CJUserTests.m */,
 				13644A12190934BE001D3AF0 /* CJMeTests.m */,
+				130A09911909549C0043FB0C /* CJMusicGenreTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -483,6 +491,7 @@
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
 				130E90A919082DD800211DC0 /* CJVenue.m in Sources */,
 				130E90A61908283700211DC0 /* CJModel+Following.m in Sources */,
+				130A0990190953BD0043FB0C /* CJMusicGenre.m in Sources */,
 				13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */,
 				13E6371118FC671A00D7EB22 /* CJEngineConfiguration.m in Sources */,
 			);
@@ -498,6 +507,7 @@
 				1367E7CA1906ADD40022885C /* CJLinksInfoTests.m in Sources */,
 				13C902721908065F00615874 /* MockModel.m in Sources */,
 				1371312D18FC544F007AA17A /* CJEngineTests.m in Sources */,
+				130A09921909549C0043FB0C /* CJMusicGenreTests.m in Sources */,
 				13968CBF1909294F008692D1 /* CJUserTests.m in Sources */,
 				13E6371418FC6AA900D7EB22 /* CJEngineConfigurationTests.m in Sources */,
 				1367E7C019058A590022885C /* CJModelTests.m in Sources */,

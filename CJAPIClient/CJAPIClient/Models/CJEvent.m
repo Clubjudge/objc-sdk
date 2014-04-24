@@ -12,6 +12,7 @@
 #import "CJArtist.h"
 #import "CJVenue.h"
 #import "CJUser.h"
+#import "CJMusicGenre.h"
 
 @implementation CJEvent
 
@@ -42,12 +43,13 @@
     _globalRating = info[kEventGlobalRating];
     
     // Embeddables
-    // TODO: proper mapping to models
     _artists = [(NSArray *) info[kEventArtists][@"source"] map:^id(NSDictionary *artist) {
       return [[CJArtist alloc] initWithInfo:artist];
     }];
     _venue = [[CJVenue alloc] initWithInfo:info[kEventVenue]];
-    _musicGenres = [NSArray arrayWithArray:info[kEventMusicGenres]];    
+    _musicGenres = [(NSArray *) info[kEventMusicGenres][@"source"] map:^id(NSDictionary *genre) {
+      return [[CJMusicGenre alloc] initWithInfo:genre];
+    }];
     _followers = [(NSArray *) info[kEventFollowers][@"source"] map:^id(NSDictionary *user) {
       return [[CJUser alloc] initWithInfo:user];
     }];
