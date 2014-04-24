@@ -9,6 +9,7 @@
 #import <Kiwi/Kiwi.h>
 #import "CJLinksInfo.h"
 #import "CJAPIRequest.h"
+#import "MockModel.h"
 
 SPEC_BEGIN(CJLINKSINFOSPEC)
 
@@ -72,6 +73,20 @@ describe(@"Links info", ^{
                                };
       
       [[request.parameters should] equal:params];
+    });
+    
+    context(@"has a mapping dictionary", ^{
+      beforeAll(^{
+        linksInfo.mapping = @{
+                              @"first": [MockModel class]
+                              };
+        
+        request = [linksInfo requestForLink:@"first"];
+      });
+      
+      it(@"sets the request's modelClass", ^{
+        [[theValue(request.modelClass) should] equal:theValue([MockModel class])];
+      });
     });
   });
 });
