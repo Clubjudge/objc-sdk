@@ -216,14 +216,14 @@ NSString *const kRequestAccessToken = @"token";
   NSLog(@"%@", [self developerMessageFromResponse:response error:jsonError]);
   
   if (block) {
-    block(jsonError, [NSNumber numberWithInt:response.statusCode]);
+    block(jsonError, [NSNumber numberWithInteger:response.statusCode]);
   }
 }
 
 - (NSString *)developerMessageFromResponse:(NSHTTPURLResponse *)response
                                      error:(NSDictionary *)error
 {
-  NSString *message = [NSString stringWithFormat:@"%@ request to %@ returned an error with code %d: %@", self.method, self.path, response.statusCode, [error objectForKey:@"developerMessage"]];
+  NSString *message = [NSString stringWithFormat:@"%@ request to %@ returned an error with code %@: %@", self.method, self.path, [NSNumber numberWithInteger:response.statusCode], [error objectForKey:@"developerMessage"]];
   
   return message;
 }
