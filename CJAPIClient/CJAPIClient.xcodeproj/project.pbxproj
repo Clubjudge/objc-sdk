@@ -11,6 +11,8 @@
 		130A09921909549C0043FB0C /* CJMusicGenreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A09911909549C0043FB0C /* CJMusicGenreTests.m */; };
 		130A0995190960BD0043FB0C /* CJComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A0994190960BD0043FB0C /* CJComment.m */; };
 		130A09971909656C0043FB0C /* CJCommentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A09961909656C0043FB0C /* CJCommentTests.m */; };
+		130A099A1909BC4E0043FB0C /* CJTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A09991909BC4E0043FB0C /* CJTicket.m */; };
+		130A099C1909BE720043FB0C /* CJTicketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A099B1909BE720043FB0C /* CJTicketTests.m */; };
 		130E90A61908283700211DC0 /* CJModel+Following.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90A51908283700211DC0 /* CJModel+Following.m */; };
 		130E90A919082DD800211DC0 /* CJVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90A819082DD800211DC0 /* CJVenue.m */; };
 		130E90AB1908347C00211DC0 /* CJVenueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90AA1908347C00211DC0 /* CJVenueTests.m */; };
@@ -78,6 +80,9 @@
 		130A0993190960BD0043FB0C /* CJComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJComment.h; sourceTree = "<group>"; };
 		130A0994190960BD0043FB0C /* CJComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJComment.m; sourceTree = "<group>"; };
 		130A09961909656C0043FB0C /* CJCommentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJCommentTests.m; sourceTree = "<group>"; };
+		130A09981909BC4E0043FB0C /* CJTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJTicket.h; sourceTree = "<group>"; };
+		130A09991909BC4E0043FB0C /* CJTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJTicket.m; sourceTree = "<group>"; };
+		130A099B1909BE720043FB0C /* CJTicketTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJTicketTests.m; sourceTree = "<group>"; };
 		130E90A41908283700211DC0 /* CJModel+Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJModel+Following.h"; sourceTree = "<group>"; };
 		130E90A51908283700211DC0 /* CJModel+Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJModel+Following.m"; sourceTree = "<group>"; };
 		130E90A719082DD800211DC0 /* CJVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJVenue.h; sourceTree = "<group>"; };
@@ -292,6 +297,8 @@
 				130A098F190953BD0043FB0C /* CJMusicGenre.m */,
 				130A0993190960BD0043FB0C /* CJComment.h */,
 				130A0994190960BD0043FB0C /* CJComment.m */,
+				130A09981909BC4E0043FB0C /* CJTicket.h */,
+				130A09991909BC4E0043FB0C /* CJTicket.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -309,6 +316,7 @@
 				13644A12190934BE001D3AF0 /* CJMeTests.m */,
 				130A09911909549C0043FB0C /* CJMusicGenreTests.m */,
 				130A09961909656C0043FB0C /* CJCommentTests.m */,
+				130A099B1909BE720043FB0C /* CJTicketTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -491,6 +499,7 @@
 				13968CBD19092379008692D1 /* CJUser.m in Sources */,
 				13968CC219093388008692D1 /* CJMe.m in Sources */,
 				13C90275190819E500615874 /* CJArtist.m in Sources */,
+				130A099A1909BC4E0043FB0C /* CJTicket.m in Sources */,
 				1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */,
 				13980DBE190589B800D449FA /* CJModel.m in Sources */,
 				130A0995190960BD0043FB0C /* CJComment.m in Sources */,
@@ -512,6 +521,7 @@
 			files = (
 				13644A13190934BE001D3AF0 /* CJMeTests.m in Sources */,
 				130E90AB1908347C00211DC0 /* CJVenueTests.m in Sources */,
+				130A099C1909BE720043FB0C /* CJTicketTests.m in Sources */,
 				13C9027719081DB500615874 /* CJArtistTests.m in Sources */,
 				1367E7CA1906ADD40022885C /* CJLinksInfoTests.m in Sources */,
 				13C902721908065F00615874 /* MockModel.m in Sources */,
