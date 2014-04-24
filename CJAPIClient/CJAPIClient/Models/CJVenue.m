@@ -11,6 +11,9 @@
 #import "NSDate+StringParsing.h"
 #import "CJEvent.h"
 #import "CJUser.h"
+#import "CJComment.h"
+#import "CJRating.h"
+#import "CJLinksInfo.h"
 
 @implementation CJVenue
 
@@ -39,6 +42,16 @@
     _email = info[kVenueEmail];
     _websiteURL = info[kVenueWebsiteURL];
     _phoneNumber = info[kVenuePhoneNumber];
+    
+    // Links
+    self.links.mapping = @{
+                           @"events": [CJEvent class],
+                           @"upcoming": [CJEvent class],
+                           @"recent": [CJEvent class],
+                           @"comments": [CJComment class],
+                           @"followers": [CJUser class],
+                           @"ratings": [CJRating class]
+                           };
     
     // Embeddables
     _events = [(NSArray *) info[kVenueEvents][@"source"] map:^id(NSDictionary *event) {

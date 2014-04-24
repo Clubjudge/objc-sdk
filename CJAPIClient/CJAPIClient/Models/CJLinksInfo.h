@@ -12,6 +12,7 @@
 @interface CJLinksInfo : NSObject
 
 @property (readonly) NSDictionary *links;
+@property (nonatomic, strong) NSDictionary *mapping;
 
 #pragma mark - Initialisation
 - (instancetype)initWithInfo:(NSDictionary *)info;

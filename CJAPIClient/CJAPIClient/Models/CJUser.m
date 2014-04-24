@@ -7,6 +7,8 @@
 //
 
 #import "CJUser.h"
+#import "CJLinksInfo.h"
+#import "CJEvent.h"
 #import "NSDate+StringParsing.h"
 
 @implementation CJUser
@@ -34,6 +36,11 @@
     _birthdate = [NSDate dateWithISO8601String:info[kUserBirthdate]];
     _friend = [info[kUserFriend] boolValue];
     _pendingFriend = [info[kUserPendingFriend] boolValue];
+    
+    // Links
+    self.links.mapping = @{
+                           @"events": [CJEvent class]
+                           };
   }
   return self;
 }

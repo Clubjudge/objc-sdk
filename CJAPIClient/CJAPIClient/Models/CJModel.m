@@ -7,6 +7,7 @@
 //
 
 #import "CJModel.h"
+#import "CJLinksInfo.h"
 
 @implementation CJModel
 
@@ -15,6 +16,9 @@
   self = [super init];
   if (self && info) {
     _Id = info[kID];
+    
+    // Links
+    _links = [[CJLinksInfo alloc] initWithInfo:info[kLinks]];
   }
   return self;
 }

@@ -38,6 +38,8 @@
 		13968CBF1909294F008692D1 /* CJUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13968CBE1909294F008692D1 /* CJUserTests.m */; };
 		13968CC219093388008692D1 /* CJMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 13968CC119093388008692D1 /* CJMe.m */; };
 		13980DBE190589B800D449FA /* CJModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13980DBD190589B800D449FA /* CJModel.m */; };
+		13A6B59E1909D3320083FFE7 /* CJRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A6B59D1909D3320083FFE7 /* CJRating.m */; };
+		13A6B5A01909D3420083FFE7 /* CJRatingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A6B59F1909D3420083FFE7 /* CJRatingTests.m */; };
 		13AA62C619056C880089C443 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AA62C519056C880089C443 /* JSONResponseSerializerWithData.m */; };
 		13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AAF18FECDB1007D1DD2 /* CJAPIRequest.m */; };
 		13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */; };
@@ -120,6 +122,9 @@
 		13968CC119093388008692D1 /* CJMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMe.m; sourceTree = "<group>"; };
 		13980DBC190589B800D449FA /* CJModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJModel.h; sourceTree = "<group>"; };
 		13980DBD190589B800D449FA /* CJModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJModel.m; sourceTree = "<group>"; };
+		13A6B59C1909D3320083FFE7 /* CJRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJRating.h; sourceTree = "<group>"; };
+		13A6B59D1909D3320083FFE7 /* CJRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJRating.m; sourceTree = "<group>"; };
+		13A6B59F1909D3420083FFE7 /* CJRatingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJRatingTests.m; sourceTree = "<group>"; };
 		13AA62C419056C880089C443 /* JSONResponseSerializerWithData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONResponseSerializerWithData.h; sourceTree = "<group>"; };
 		13AA62C519056C880089C443 /* JSONResponseSerializerWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONResponseSerializerWithData.m; sourceTree = "<group>"; };
 		13AD9AAE18FECDB1007D1DD2 /* CJAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAPIRequest.h; sourceTree = "<group>"; };
@@ -299,6 +304,8 @@
 				130A0994190960BD0043FB0C /* CJComment.m */,
 				130A09981909BC4E0043FB0C /* CJTicket.h */,
 				130A09991909BC4E0043FB0C /* CJTicket.m */,
+				13A6B59C1909D3320083FFE7 /* CJRating.h */,
+				13A6B59D1909D3320083FFE7 /* CJRating.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -317,6 +324,7 @@
 				130A09911909549C0043FB0C /* CJMusicGenreTests.m */,
 				130A09961909656C0043FB0C /* CJCommentTests.m */,
 				130A099B1909BE720043FB0C /* CJTicketTests.m */,
+				13A6B59F1909D3420083FFE7 /* CJRatingTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -508,6 +516,7 @@
 				1367E7C8190690CA0022885C /* CJLinksInfo.m in Sources */,
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
 				130E90A919082DD800211DC0 /* CJVenue.m in Sources */,
+				13A6B59E1909D3320083FFE7 /* CJRating.m in Sources */,
 				130E90A61908283700211DC0 /* CJModel+Following.m in Sources */,
 				130A0990190953BD0043FB0C /* CJMusicGenre.m in Sources */,
 				13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */,
@@ -534,6 +543,7 @@
 				13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */,
 				1367E7C519067BCB0022885C /* CJPaginationInfoTests.m in Sources */,
 				1316B09A1906D6E600107265 /* CJEventTests.m in Sources */,
+				13A6B5A01909D3420083FFE7 /* CJRatingTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

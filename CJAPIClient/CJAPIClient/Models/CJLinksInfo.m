@@ -52,6 +52,10 @@
   
   request.parameters = [self dictionaryFromQuerystring:[url query]];
   
+  if (_mapping[link]) {
+    request.modelClass = _mapping[link];
+  }
+  
   return request;
 }
 
