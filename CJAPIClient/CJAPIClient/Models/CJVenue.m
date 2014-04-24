@@ -10,6 +10,7 @@
 #import "CJModel+Following.h"
 #import "NSDate+StringParsing.h"
 #import "CJEvent.h"
+#import "CJUser.h"
 
 @implementation CJVenue
 
@@ -40,7 +41,6 @@
     _phoneNumber = info[kVenuePhoneNumber];
     
     // Embeddables
-    // TODO: proper mapping to models
     _events = [(NSArray *) info[kVenueEvents][@"source"] map:^id(NSDictionary *event) {
       return [[CJEvent alloc] initWithInfo:event];
     }];
@@ -50,7 +50,9 @@
     _upcomingEvents = [(NSArray *) info[kVenueUpcomingEvents][@"source"] map:^id(NSDictionary *event) {
       return [[CJEvent alloc] initWithInfo:event];
     }];
-    _followers = [NSArray arrayWithArray:info[kVenueFollowers]];
+    _followers = [(NSArray *) info[kVenueFollowers][@"source"] map:^id(NSDictionary *user) {
+      return [[CJUser alloc] initWithInfo:user];
+    }];
   }
   return self;
 }

@@ -10,6 +10,7 @@
 #import "CJArtist.h"
 #import "CJAPIRequest.h"
 #import "CJEvent.h"
+#import "CJUser.h"
 
 SPEC_BEGIN(CJARTISTSPEC)
 
@@ -131,6 +132,14 @@ describe(@"Artist Model", ^{
         it(@"produces an array of CJEvents", ^{
           [artist.events each:^(id event) {
             [[event should] beKindOfClass:[CJEvent class]];
+          }];
+        });
+      });
+      
+      describe(@"Followers", ^{
+        it(@"produces an array of CJUsers", ^{
+          [artist.followers each:^(id user) {
+            [[user should] beKindOfClass:[CJUser class]];
           }];
         });
       });

@@ -8,6 +8,7 @@
 
 #import "CJArtist.h"
 #import "CJEvent.h"
+#import "CJUser.h"
 #import "CJModel+Following.h"
 
 @implementation CJArtist
@@ -38,7 +39,9 @@
       return [[CJEvent alloc] initWithInfo:event];
     }];
     _musicGenres = [NSArray arrayWithArray:info[kArtistMusicGenres]];
-    _followers = [NSArray arrayWithArray:info[kArtistFollowers]];
+    _followers = [(NSArray *) info[kArtistFollowers][@"source"] map:^id(NSDictionary *user) {
+      return [[CJUser alloc] initWithInfo:user];
+    }];
   }
   return self;
 }

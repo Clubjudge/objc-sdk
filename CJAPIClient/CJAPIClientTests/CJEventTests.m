@@ -11,6 +11,7 @@
 #import "CJAPIRequest.h"
 #import "CJArtist.h"
 #import "CJVenue.h"
+#import "CJUser.h"
 
 SPEC_BEGIN(CJEVENTSPEC)
 
@@ -41,6 +42,11 @@ describe(@"Event Model", ^{
                               @"source": @[
                                   @{@"id": @55}
                                   ]
+                             },
+                         @"followers": @{
+                             @"source": @[
+                                 @{@"id": @55}
+                                 ]
                              },
                          @"venue": @{
                               @"id": @55
@@ -228,6 +234,14 @@ describe(@"Event Model", ^{
       describe(@"Venue", ^{
         it(@"produces a CJVenue", ^{
           [[event.venue should] beKindOfClass:[CJVenue class]];
+        });
+      });
+      
+      describe(@"Followers", ^{
+        it(@"produces an array of CJUsers", ^{
+          [event.followers each:^(id user) {
+            [[user should] beKindOfClass:[CJUser class]];
+          }];
         });
       });
     });
