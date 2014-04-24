@@ -40,6 +40,8 @@
 		13980DBE190589B800D449FA /* CJModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13980DBD190589B800D449FA /* CJModel.m */; };
 		13A6B59E1909D3320083FFE7 /* CJRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A6B59D1909D3320083FFE7 /* CJRating.m */; };
 		13A6B5A01909D3420083FFE7 /* CJRatingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A6B59F1909D3420083FFE7 /* CJRatingTests.m */; };
+		13A6B5A31909D5710083FFE7 /* CJCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A6B5A21909D5710083FFE7 /* CJCity.m */; };
+		13A6B5A51909D6730083FFE7 /* CityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A6B5A41909D6730083FFE7 /* CityTests.m */; };
 		13AA62C619056C880089C443 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AA62C519056C880089C443 /* JSONResponseSerializerWithData.m */; };
 		13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AAF18FECDB1007D1DD2 /* CJAPIRequest.m */; };
 		13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */; };
@@ -125,6 +127,9 @@
 		13A6B59C1909D3320083FFE7 /* CJRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJRating.h; sourceTree = "<group>"; };
 		13A6B59D1909D3320083FFE7 /* CJRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJRating.m; sourceTree = "<group>"; };
 		13A6B59F1909D3420083FFE7 /* CJRatingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJRatingTests.m; sourceTree = "<group>"; };
+		13A6B5A11909D5710083FFE7 /* CJCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJCity.h; sourceTree = "<group>"; };
+		13A6B5A21909D5710083FFE7 /* CJCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJCity.m; sourceTree = "<group>"; };
+		13A6B5A41909D6730083FFE7 /* CityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTests.m; sourceTree = "<group>"; };
 		13AA62C419056C880089C443 /* JSONResponseSerializerWithData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONResponseSerializerWithData.h; sourceTree = "<group>"; };
 		13AA62C519056C880089C443 /* JSONResponseSerializerWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONResponseSerializerWithData.m; sourceTree = "<group>"; };
 		13AD9AAE18FECDB1007D1DD2 /* CJAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAPIRequest.h; sourceTree = "<group>"; };
@@ -306,6 +311,8 @@
 				130A09991909BC4E0043FB0C /* CJTicket.m */,
 				13A6B59C1909D3320083FFE7 /* CJRating.h */,
 				13A6B59D1909D3320083FFE7 /* CJRating.m */,
+				13A6B5A11909D5710083FFE7 /* CJCity.h */,
+				13A6B5A21909D5710083FFE7 /* CJCity.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -325,6 +332,7 @@
 				130A09961909656C0043FB0C /* CJCommentTests.m */,
 				130A099B1909BE720043FB0C /* CJTicketTests.m */,
 				13A6B59F1909D3420083FFE7 /* CJRatingTests.m */,
+				13A6B5A41909D6730083FFE7 /* CityTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -515,6 +523,7 @@
 				1316B0941906C7A400107265 /* CJEvent.m in Sources */,
 				1367E7C8190690CA0022885C /* CJLinksInfo.m in Sources */,
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
+				13A6B5A31909D5710083FFE7 /* CJCity.m in Sources */,
 				130E90A919082DD800211DC0 /* CJVenue.m in Sources */,
 				13A6B59E1909D3320083FFE7 /* CJRating.m in Sources */,
 				130E90A61908283700211DC0 /* CJModel+Following.m in Sources */,
@@ -539,6 +548,7 @@
 				13968CBF1909294F008692D1 /* CJUserTests.m in Sources */,
 				130A09971909656C0043FB0C /* CJCommentTests.m in Sources */,
 				13E6371418FC6AA900D7EB22 /* CJEngineConfigurationTests.m in Sources */,
+				13A6B5A51909D6730083FFE7 /* CityTests.m in Sources */,
 				1367E7C019058A590022885C /* CJModelTests.m in Sources */,
 				13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */,
 				1367E7C519067BCB0022885C /* CJPaginationInfoTests.m in Sources */,
