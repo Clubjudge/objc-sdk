@@ -10,7 +10,7 @@
 
 @interface CJModel : NSObject
 
-@property (readonly) NSNumber* Id;
+@property (nonatomic, strong) id Id;
 
 - (id)initWithInfo:(NSDictionary *)info;
 

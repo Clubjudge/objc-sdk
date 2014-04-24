@@ -14,7 +14,7 @@
 {
   self = [super init];
   if (self && info) {
-    _Id = [info objectForKey:kID];
+    _Id = info[kID];
   }
   return self;
 }

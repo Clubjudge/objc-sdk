@@ -12,9 +12,16 @@
 
 + (NSDate *)dateWithISO8601String:(NSString *)dateString
 {
-  if (!dateString) return nil;
+  if (!dateString || [dateString isKindOfClass:[NSNull class]]) return nil;
   
-  dateString = [dateString stringByReplacingOccurrencesOfString:@".000Z" withString:@""];
+  NSError *error = NULL;
+  NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\.\\d*Z"
+                                                                         options:NSRegularExpressionCaseInsensitive
+                                                                           error:&error];
+  dateString = [regex stringByReplacingMatchesInString:dateString
+                                               options:0
+                                                 range:NSMakeRange(0, [dateString length])
+                                          withTemplate:@"$2$1"];
   
   return [self dateFromString:dateString
                    withFormat:@"yyyy-MM-dd'T'HH:mm:ss"];

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		130A0990190953BD0043FB0C /* CJMusicGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A098F190953BD0043FB0C /* CJMusicGenre.m */; };
 		130A09921909549C0043FB0C /* CJMusicGenreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A09911909549C0043FB0C /* CJMusicGenreTests.m */; };
+		130A0995190960BD0043FB0C /* CJComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A0994190960BD0043FB0C /* CJComment.m */; };
+		130A09971909656C0043FB0C /* CJCommentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130A09961909656C0043FB0C /* CJCommentTests.m */; };
 		130E90A61908283700211DC0 /* CJModel+Following.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90A51908283700211DC0 /* CJModel+Following.m */; };
 		130E90A919082DD800211DC0 /* CJVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90A819082DD800211DC0 /* CJVenue.m */; };
 		130E90AB1908347C00211DC0 /* CJVenueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130E90AA1908347C00211DC0 /* CJVenueTests.m */; };
@@ -73,6 +75,9 @@
 		130A098E190953BD0043FB0C /* CJMusicGenre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMusicGenre.h; sourceTree = "<group>"; };
 		130A098F190953BD0043FB0C /* CJMusicGenre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMusicGenre.m; sourceTree = "<group>"; };
 		130A09911909549C0043FB0C /* CJMusicGenreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMusicGenreTests.m; sourceTree = "<group>"; };
+		130A0993190960BD0043FB0C /* CJComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJComment.h; sourceTree = "<group>"; };
+		130A0994190960BD0043FB0C /* CJComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJComment.m; sourceTree = "<group>"; };
+		130A09961909656C0043FB0C /* CJCommentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJCommentTests.m; sourceTree = "<group>"; };
 		130E90A41908283700211DC0 /* CJModel+Following.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJModel+Following.h"; sourceTree = "<group>"; };
 		130E90A51908283700211DC0 /* CJModel+Following.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJModel+Following.m"; sourceTree = "<group>"; };
 		130E90A719082DD800211DC0 /* CJVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJVenue.h; sourceTree = "<group>"; };
@@ -285,6 +290,8 @@
 				13968CC119093388008692D1 /* CJMe.m */,
 				130A098E190953BD0043FB0C /* CJMusicGenre.h */,
 				130A098F190953BD0043FB0C /* CJMusicGenre.m */,
+				130A0993190960BD0043FB0C /* CJComment.h */,
+				130A0994190960BD0043FB0C /* CJComment.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -301,6 +308,7 @@
 				13968CBE1909294F008692D1 /* CJUserTests.m */,
 				13644A12190934BE001D3AF0 /* CJMeTests.m */,
 				130A09911909549C0043FB0C /* CJMusicGenreTests.m */,
+				130A09961909656C0043FB0C /* CJCommentTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -485,6 +493,7 @@
 				13C90275190819E500615874 /* CJArtist.m in Sources */,
 				1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */,
 				13980DBE190589B800D449FA /* CJModel.m in Sources */,
+				130A0995190960BD0043FB0C /* CJComment.m in Sources */,
 				13AA62C619056C880089C443 /* JSONResponseSerializerWithData.m in Sources */,
 				1316B0941906C7A400107265 /* CJEvent.m in Sources */,
 				1367E7C8190690CA0022885C /* CJLinksInfo.m in Sources */,
@@ -509,6 +518,7 @@
 				1371312D18FC544F007AA17A /* CJEngineTests.m in Sources */,
 				130A09921909549C0043FB0C /* CJMusicGenreTests.m in Sources */,
 				13968CBF1909294F008692D1 /* CJUserTests.m in Sources */,
+				130A09971909656C0043FB0C /* CJCommentTests.m in Sources */,
 				13E6371418FC6AA900D7EB22 /* CJEngineConfigurationTests.m in Sources */,
 				1367E7C019058A590022885C /* CJModelTests.m in Sources */,
 				13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */,
