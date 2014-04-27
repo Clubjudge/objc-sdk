@@ -9,6 +9,12 @@
 #import "CJEngine.h"
 #import "CJEngineConfiguration.h"
 
+@interface CJEngine()
+
+@property (nonatomic, strong) AFHTTPSessionManager *authSessionManager;
+
+@end
+
 @implementation CJEngine
 
 #pragma mark - Initialisers
@@ -28,16 +34,8 @@
 - (id)init
 {
   if (self = [super init]) {
-    NSURL *url = [NSURL URLWithString:[[CJEngineConfiguration sharedConfiguration] APIBaseURL]];
-    
-    NSAssert(url, @"Base URL not valid: %@", url);
-    
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
-    self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url
-                                                   sessionConfiguration:sessionConfiguration];
-
-    self.sessionManager.responseSerializer = [JSONResponseSerializerWithData new];
+    [self setupSessionManager];
+    [self setupAuthManager];
   }
   
   return self;
@@ -74,6 +72,53 @@ static NSString* theUserToken = nil;
 + (void)setUserToken:(NSString *)userToken
 {
   theUserToken = userToken;
+}
+
+#pragma mark - Authentication
+
+- (void)authenticateWithFacebookToken:(NSString *)facebookToken
+{
+  [self.authSessionManager POST:@"facebook_token"
+                     parameters:@{@"token": facebookToken}
+                        success:^(NSURLSessionDataTask *task, id responseObject) {
+                          [CJEngine setUserToken:responseObject[@"access_token"]];
+                        }
+                        failure:^(NSURLSessionDataTask *task, NSError *error) {
+                          [CJEngine setUserToken:nil];
+                        }];
+}
+
+- (void)authenticateWithUsername:(NSString *)username andPassword:(NSString *)password
+{
+  NSLog(@"Authenticating with username/password is not implemented yet!");
+}
+
+#pragma mark - Custom
+- (void)setupSessionManager
+{
+  NSURL *url = [NSURL URLWithString:[[CJEngineConfiguration sharedConfiguration] APIBaseURL]];
+  
+  NSAssert(url, @"Base URL not valid: %@", url);
+  
+  NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+  
+  self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url
+                                                 sessionConfiguration:sessionConfiguration];
+  
+  self.sessionManager.responseSerializer = [JSONResponseSerializerWithData new];
+}
+
+- (void)setupAuthManager
+{
+  NSURL *url = [NSURL URLWithString:[[CJEngineConfiguration sharedConfiguration] authAPIBaseURL]];
+  
+  NSAssert(url, @"Base Auth URL not valid: %@", url);
+  
+  NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+  self.authSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url
+                                                     sessionConfiguration:sessionConfiguration];
+  
+  self.authSessionManager.responseSerializer = [JSONResponseSerializerWithData new];
 }
 
 @end

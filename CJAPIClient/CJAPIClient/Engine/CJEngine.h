@@ -31,4 +31,8 @@
 #pragma mark - Environment
 - (void)setEnvironment:(NSString *)environment;
 
+#pragma mark - Authentication
+- (void)authenticateWithFacebookToken:(NSString *)facebookToken;
+- (void)authenticateWithUsername:(NSString *)username andPassword:(NSString *)password;
+
 @end
