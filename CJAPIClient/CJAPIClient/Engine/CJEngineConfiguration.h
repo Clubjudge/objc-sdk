@@ -23,5 +23,6 @@
 #pragma mark - Keys
 - (NSString *)APIVersion;
 - (NSString *)APIBaseURL;
+- (NSString *)authAPIBaseURL;
 
 @end

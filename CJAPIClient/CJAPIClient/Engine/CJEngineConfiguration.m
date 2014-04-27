@@ -10,6 +10,7 @@
 
 #define kAPIVersion @"v1"
 #define CJConfigurationAPIBaseUrl @"kAPIBaseURL"
+#define CJConfigurationAuthAPIBaseUrl @"kAuthAPIBaseURL"
 
 @interface CJEngineConfiguration()
 
@@ -58,13 +59,16 @@ static NSDictionary* configurations = nil;
   if (configurations == nil) {
     configurations = [NSDictionary dictionaryWithObjects:@[
                                                            @{
-                                                             @"kAPIBaseURL": @"http://local.clubjudge.com:5000"
+                                                             @"kAPIBaseURL": @"http://local.clubjudge.com:5000",
+                                                             @"kAuthAPIBaseURL": @"http://local.clubjudge.com:3000/baws/auth"
                                                              },
                                                            @{
-                                                             @"kAPIBaseURL": @"http://bifrost.staging.clubjudge.com"
+                                                             @"kAPIBaseURL": @"http://bifrost.staging.clubjudge.com",
+                                                             @"kAuthAPIBaseURL": @"http://staging.clubjudge.com/baws/auth"
                                                              },
                                                            @{
-                                                             @"kAPIBaseURL": @"http://bifrost.clubjudge.com"
+                                                             @"kAPIBaseURL": @"http://bifrost.clubjudge.com",
+                                                             @"kAuthAPIBaseURL": @"https://auth.clubjudge.com"
                                                              },
                                                            ]
                                                  forKeys:@[@"development", @"staging", @"production"]];
@@ -90,6 +94,14 @@ static NSDictionary* configurations = nil;
   NSString *baseUrl = [configuration objectForKey:CJConfigurationAPIBaseUrl];
   
   return [NSString stringWithFormat:@"%@/%@", baseUrl, [self APIVersion]];
+}
+
+- (NSString *)authAPIBaseURL {
+  CJEngineConfiguration *sharedConfiguration = [CJEngineConfiguration sharedConfiguration];
+  NSDictionary *configuration = [sharedConfiguration configurationForEnvironment:[CJEngineConfiguration environment]];
+  NSString *baseUrl = [configuration objectForKey:CJConfigurationAuthAPIBaseUrl];
+  
+  return [NSString stringWithFormat:@"%@", baseUrl];
 }
 
 @end
