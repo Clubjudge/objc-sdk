@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 #import "CJModel.h"
 @class CJVenue;
 
@@ -46,6 +47,8 @@
 
 - (void)follow;
 - (void)unfollow;
+
+- (NSUInteger)distanceFromLocation:(CLLocation *)location;
 
 @end
 

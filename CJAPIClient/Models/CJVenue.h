@@ -42,6 +42,8 @@
 - (void)follow;
 - (void)unfollow;
 
+- (NSUInteger)distanceFromLocation:(CLLocation *)location;
+
 @end
 
 #pragma mark - Mapping
