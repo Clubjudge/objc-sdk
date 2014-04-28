@@ -78,7 +78,7 @@ Pod::Spec.new do |s|
 
   s.source_files  = "CJAPIClient", "CJAPICLient/**/*.{h,m}"
 
-  s.public_header_files = "CJAPIClient/CJAPIClient.h"
+  s.public_header_files = "CJAPIClient/**/*.h"
 
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

@@ -26,7 +26,6 @@
 		1367E7C8190690CA0022885C /* CJLinksInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7C7190690CA0022885C /* CJLinksInfo.m */; };
 		1367E7CA1906ADD40022885C /* CJLinksInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7C91906ADD40022885C /* CJLinksInfoTests.m */; };
 		137130FF18FC4B43007AA17A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137130FE18FC4B43007AA17A /* Foundation.framework */; };
-		1371310418FC4B43007AA17A /* CJAPIClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1371310318FC4B43007AA17A /* CJAPIClient.h */; };
 		1371310D18FC4B43007AA17A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1371310C18FC4B43007AA17A /* XCTest.framework */; };
 		1371310E18FC4B43007AA17A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137130FE18FC4B43007AA17A /* Foundation.framework */; };
 		1371311018FC4B43007AA17A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1371310F18FC4B43007AA17A /* UIKit.framework */; };
@@ -71,7 +70,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				1371310418FC4B43007AA17A /* CJAPIClient.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +106,6 @@
 		137130FB18FC4B43007AA17A /* libCJAPIClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCJAPIClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		137130FE18FC4B43007AA17A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1371310218FC4B43007AA17A /* CJAPIClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CJAPIClient-Prefix.pch"; sourceTree = "<group>"; };
-		1371310318FC4B43007AA17A /* CJAPIClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CJAPIClient.h; sourceTree = "<group>"; };
 		1371310B18FC4B43007AA17A /* CJAPIClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CJAPIClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1371310C18FC4B43007AA17A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		1371310F18FC4B43007AA17A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -222,7 +219,6 @@
 		1371310018FC4B43007AA17A /* CJAPIClient */ = {
 			isa = PBXGroup;
 			children = (
-				1371310318FC4B43007AA17A /* CJAPIClient.h */,
 				1316B0951906D5DB00107265 /* Categories */,
 				13980DBB190589B800D449FA /* Models */,
 				13AA62C319056C3D0089C443 /* Serializers */,
