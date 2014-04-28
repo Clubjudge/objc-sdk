@@ -14,6 +14,7 @@
 #import "CJComment.h"
 #import "CJUser.h"
 #import "CJModel+Following.h"
+#import <ObjectiveSugar/ObjectiveSugar.h>
 
 @implementation CJArtist
 

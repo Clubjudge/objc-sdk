@@ -9,6 +9,7 @@
 #import "CJLinksInfo.h"
 #import "CJEngineConfiguration.h"
 #import "CJAPIRequest.h"
+#import <ObjectiveSugar/ObjectiveSugar.h>
 
 @interface CJLinksInfo()
 

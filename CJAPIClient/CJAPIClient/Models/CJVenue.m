@@ -14,6 +14,7 @@
 #import "CJComment.h"
 #import "CJRating.h"
 #import "CJLinksInfo.h"
+#import <ObjectiveSugar/ObjectiveSugar.h>
 
 @implementation CJVenue
 
