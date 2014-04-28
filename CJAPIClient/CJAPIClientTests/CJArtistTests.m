@@ -12,6 +12,7 @@
 #import "CJEvent.h"
 #import "CJUser.h"
 #import "CJMusicGenre.h"
+#import <ObjectiveSugar/ObjectiveSugar.h>
 
 SPEC_BEGIN(CJARTISTSPEC)
 

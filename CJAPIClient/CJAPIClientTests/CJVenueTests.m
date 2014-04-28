@@ -12,6 +12,7 @@
 #import "CJAPIRequest.h"
 #import "CJEvent.h"
 #import "CJUser.h"
+#import <ObjectiveSugar/ObjectiveSugar.h>
 
 SPEC_BEGIN(CJVENUESPEC)
 

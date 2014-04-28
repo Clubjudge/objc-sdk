@@ -9,6 +9,7 @@
 #import "CJAPIRequest.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
 #import "CJLinksInfo.h"
+#import <ObjectiveSugar/ObjectiveSugar.h>
 
 NSString *const kRequestMethodGET = @"GET";
 NSString *const kRequestMethodPOST = @"POST";
@@ -58,10 +59,13 @@ NSString *const kRequestAccessToken = @"token";
 {
   NSArray *methods = @[kRequestMethodGET, kRequestMethodPOST, kRequestMethodPUT, kRequestMethodDELETE];
   method = [method uppercaseString];
+  BOOL methodAllowed = [methods containsObject:method];
   
-  NSAssert([methods containsObject:method], @"%@ is not a supported method", method);
+  NSAssert(methodAllowed, @"%@ is not a supported method", method);
   
-  _method = method;
+  if (methodAllowed) {
+    _method = method;
+  }
 }
 
 - (void)setPath:(NSString *)path
