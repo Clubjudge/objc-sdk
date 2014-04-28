@@ -302,6 +302,15 @@ describe(@"Venue Model", ^{
       [[theValue(venue.following) should] beYes];
     });
   });
+  
+  describe(@"#distanceFromCoordinate:location", ^{
+    it(@"returns the distance in meters to the model´s geolocation property", ^{
+      CLLocation *location = [[CLLocation alloc] initWithLatitude:53.3537109 longitude:5.9119169];
+      NSUInteger meters = [venue distanceFromLocation:location];
+      
+      [[theValue(meters) should] equal:theValue(130084)];
+    });
+  });
 });
 
 SPEC_END

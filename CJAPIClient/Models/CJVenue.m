@@ -14,6 +14,7 @@
 #import "CJComment.h"
 #import "CJRating.h"
 #import "CJLinksInfo.h"
+#import "CJModel+Distance.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
 @implementation CJVenue
@@ -71,6 +72,8 @@
   return self;
 }
 
+#pragma mark - Actions
+
 - (void)follow
 {
   [self followEntity:@"venue"];
@@ -79,6 +82,14 @@
 - (void)unfollow
 {
   [self unfollowEntity:@"venue"];
+}
+
+- (NSUInteger)distanceFromLocation:(CLLocation *)location
+{
+  CLLocation *venueLocation = [[CLLocation alloc] initWithLatitude:self.geolocation.latitude longitude:self.geolocation.longitude];
+  
+  return [self distanceToLocation:venueLocation
+                     fromLocation:location];
 }
 
 @end

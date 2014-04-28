@@ -81,4 +81,11 @@
   [self unfollowEntity:@"event"];
 }
 
+- (NSUInteger)distanceFromLocation:(CLLocation *)location
+{
+  NSAssert(self.venue, @"You need to embed a CJVenue model for this to work!");
+  
+  return [self.venue distanceFromLocation:location];
+}
+
 @end
