@@ -240,26 +240,31 @@ NSString *const kRequestAccessToken = @"token";
 - (id)parseSource:(id)source
 {
   if (_modelClass) {
-    id model = [_modelClass alloc];
-    
-    NSAssert([model respondsToSelector:@selector(initWithInfo:)], @"Model with class %@ must implement initWithInfo:", [_modelClass description]);
-    
     BOOL multiple = [source isKindOfClass:[NSArray class]];
-    
     if (multiple) {
       NSArray *objects = [(NSArray *)source map:^id(id object) {
-        return [model initWithInfo:object];
+        return [self parseObject:object
+                  withModelClass:_modelClass];
       }];
       
       return objects;
     } else {
-      model = [model initWithInfo:source];
-      return model;
+      return [self parseObject:source
+                withModelClass:_modelClass];
     }
     
   }
   
   return source;
+}
+
+- (id)parseObject:(id)object
+   withModelClass:(id)modelClass
+{
+  id model = [_modelClass alloc];
+  NSAssert([model respondsToSelector:@selector(initWithInfo:)], @"Model with class %@ must implement initWithInfo:", [_modelClass description]);
+  
+  return [model initWithInfo:object];
 }
 
 @end
