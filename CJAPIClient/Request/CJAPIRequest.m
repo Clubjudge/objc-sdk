@@ -19,6 +19,8 @@ NSString *const kRequestPathPrefix = @"/";
 
 NSString *const kRequestClientId = @"clientId";
 NSString *const kRequestAccessToken = @"token";
+NSString *const kRequestFields = @"fields";
+NSString *const kRequestEmbeds = @"embeds";
 
 @interface CJAPIRequest()
 
@@ -193,6 +195,16 @@ NSString *const kRequestAccessToken = @"token";
   if (accessToken) {
     [parameters setObject:accessToken
                    forKey:kRequestAccessToken];
+  }
+  
+  if (_fields) {
+    [parameters setObject:_fields
+                   forKey:kRequestFields];
+  }
+  
+  if (_embeds) {
+    [parameters setObject:_embeds
+                   forKey:kRequestEmbeds];
   }
   
   return parameters;
