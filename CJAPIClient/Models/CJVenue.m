@@ -34,9 +34,11 @@
     _reviewCount = info[kVenueReviewCount];
     _socialLinks = info[kVenueSocialLinks];
     
-    double lat = [info[kVenueGeolocation][@"lat"] doubleValue];
-    double lon = [info[kVenueGeolocation][@"lon"] doubleValue];
-    _geolocation = CLLocationCoordinate2DMake(lat, lon);
+    unless ([[NSNull null] isEqual:info[kVenueGeolocation][@"lat"]] && [[NSNull null] isEqual:info[kVenueGeolocation][@"lon"]]) {
+      double lat = [info[kVenueGeolocation][@"lat"] doubleValue];
+      double lon = [info[kVenueGeolocation][@"lon"] doubleValue];
+      _geolocation = CLLocationCoordinate2DMake(lat, lon);
+    }
     
     _background = info[kVenueBackground];
     _address = info[kVenueAddress];
