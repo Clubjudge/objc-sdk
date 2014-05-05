@@ -14,6 +14,9 @@
 #import "CJPaginationInfo.h"
 #import "CJLinksInfo.h"
 #import "MockModel.h"
+#import "CJAPIRequest+PromiseKit.h"
+#import <PromiseKit/Promise.h>
+#import <ObjectiveSugar/ObjectiveSugar.h>
 
 @interface CJAPIRequest()
 
@@ -819,6 +822,118 @@ describe(@"CJAPIRequest", ^{
         
         [request performWithSuccess:nil
                             failure:nil];
+      });
+    });
+  });
+  
+  context(@"PromiseKit support", ^{
+    __block CJAPIRequest *request;
+    beforeEach(^{
+      request = [[CJAPIRequest alloc] initWithMethod:@"GET"
+                                             andPath:@"/a/path"];
+      
+    });
+    
+    describe(@"#perform", ^{
+      it(@"returns a Promise", ^{
+        id promise = [request perform];
+        [[promise should] beKindOfClass:[Promise class]];
+      });
+      
+      context(@"when the request succeeds", ^{
+        __block NSDictionary *stubbedResponse;
+        __block id<OHHTTPStubsDescriptor> stub = nil;
+        
+        beforeEach(^{
+          stubbedResponse = @{
+                              @"events": @[
+                                  @{@"id": @"5"},
+                                  @{@"id": @"10"}
+                                  ],
+                              @"_pagination": @{
+                                  @"currentPage": @1,
+                                  @"perPage": @10,
+                                  @"totalPages": @5,
+                                  @"totalItems": @47
+                                  },
+                              @"_links": @{
+                                  @"artists": @"http://artists",
+                                  @"venue": @"http://venue"
+                                  }
+                              };
+          
+          stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+            return [req.URL.path isEqualToString:@"/a/path.json"];
+          } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+            NSError *error;
+            NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
+                                                           options:kNilOptions
+                                                             error:&error];
+            
+            return [OHHTTPStubsResponse responseWithData:data
+                                              statusCode:200
+                                                 headers:@{@"Content-Type":@"text/json"}];
+          }];
+          
+          stub.name = @"getSucceeds";
+        });
+        
+        it(@"executes #then with a response dictionary", ^{
+          Promise *myRequest = [request perform];
+          
+          __block BOOL hasResponse = NO;
+          __block BOOL hasPagination = NO;
+          __block BOOL hasLinks = NO;
+          
+          myRequest.then(^(NSDictionary *result){
+            hasResponse = [result hasKey:@"response"];
+            hasPagination = [result hasKey:@"pagination"];
+            hasLinks = [result hasKey:@"links"];
+          });
+          
+          [[expectFutureValue(theValue(hasResponse)) shouldEventually] beYes];
+          [[expectFutureValue(theValue(hasPagination)) shouldEventually] beYes];
+          [[expectFutureValue(theValue(hasLinks)) shouldEventually] beYes];
+        });
+      });
+      
+      context(@"when the request fails", ^{
+        __block id<OHHTTPStubsDescriptor> stub = nil;
+        
+        beforeEach(^{
+          [request setPath:@"/an/error/path"];
+          
+          stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+            return [req.URL.path isEqualToString:@"/an/error/path.json"];
+          } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+            NSError *error;
+            NSData *data = [NSJSONSerialization dataWithJSONObject:@{
+                                                                     @"developerMessage": @"There was an error while processing this request. There is probably something wrong with the API server.",
+                                                                     @"userMessage": @"There was an error while processing this request.",
+                                                                     @"errorCode": @500
+                                                                     }
+                                                           options:kNilOptions
+                                                             error:&error];
+            
+            return [OHHTTPStubsResponse responseWithData:data
+                                              statusCode:500
+                                                 headers:@{@"Content-Type":@"text/json"}];
+          }];
+          
+          stub.name = @"getError";
+        });
+        
+        it(@"executes #catch with an error dictionary", ^{
+          Promise *myRequest = [request perform];
+          
+          __block BOOL hasError = NO;
+          
+          myRequest.catch(^(NSError *error){
+            hasError = YES;
+          });
+          
+          [[expectFutureValue(theValue(hasError)) shouldEventually] beYes];
+        });
       });
     });
   });

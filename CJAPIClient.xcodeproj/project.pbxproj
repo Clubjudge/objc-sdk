@@ -19,6 +19,7 @@
 		1316B0941906C7A400107265 /* CJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0931906C7A400107265 /* CJEvent.m */; };
 		1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0971906D61C00107265 /* NSDate+StringParsing.m */; };
 		1316B09A1906D6E600107265 /* CJEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0991906D6E600107265 /* CJEventTests.m */; };
+		1353CE14191796890043554F /* CJAPIRequest+PromiseKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1353CE13191796890043554F /* CJAPIRequest+PromiseKit.m */; };
 		13644A13190934BE001D3AF0 /* CJMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13644A12190934BE001D3AF0 /* CJMeTests.m */; };
 		1367E7C019058A590022885C /* CJModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7BF19058A590022885C /* CJModelTests.m */; };
 		1367E7C3190678200022885C /* CJPaginationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7C2190678200022885C /* CJPaginationInfo.m */; };
@@ -96,6 +97,8 @@
 		1316B0961906D61C00107265 /* NSDate+StringParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+StringParsing.h"; sourceTree = "<group>"; };
 		1316B0971906D61C00107265 /* NSDate+StringParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+StringParsing.m"; sourceTree = "<group>"; };
 		1316B0991906D6E600107265 /* CJEventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEventTests.m; sourceTree = "<group>"; };
+		1353CE12191796890043554F /* CJAPIRequest+PromiseKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJAPIRequest+PromiseKit.h"; sourceTree = "<group>"; };
+		1353CE13191796890043554F /* CJAPIRequest+PromiseKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJAPIRequest+PromiseKit.m"; sourceTree = "<group>"; };
 		13644A12190934BE001D3AF0 /* CJMeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMeTests.m; sourceTree = "<group>"; };
 		1367E7BF19058A590022885C /* CJModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJModelTests.m; sourceTree = "<group>"; };
 		1367E7C1190678200022885C /* CJPaginationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJPaginationInfo.h; sourceTree = "<group>"; };
@@ -178,14 +181,40 @@
 		1316B0951906D5DB00107265 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				1316B0961906D61C00107265 /* NSDate+StringParsing.h */,
-				1316B0971906D61C00107265 /* NSDate+StringParsing.m */,
+				1353CE17191796A10043554F /* NSDate */,
+				1353CE16191796970043554F /* CJModel */,
+				1353CE151917968D0043554F /* CJAPIRequest */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		1353CE151917968D0043554F /* CJAPIRequest */ = {
+			isa = PBXGroup;
+			children = (
+				1353CE12191796890043554F /* CJAPIRequest+PromiseKit.h */,
+				1353CE13191796890043554F /* CJAPIRequest+PromiseKit.m */,
+			);
+			name = CJAPIRequest;
+			sourceTree = "<group>";
+		};
+		1353CE16191796970043554F /* CJModel */ = {
+			isa = PBXGroup;
+			children = (
 				130E90A41908283700211DC0 /* CJModel+Following.h */,
 				130E90A51908283700211DC0 /* CJModel+Following.m */,
 				13A25E75190E70E30035122D /* CJModel+Distance.h */,
 				13A25E76190E70E30035122D /* CJModel+Distance.m */,
 			);
-			path = Categories;
+			name = CJModel;
+			sourceTree = "<group>";
+		};
+		1353CE17191796A10043554F /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				1316B0961906D61C00107265 /* NSDate+StringParsing.h */,
+				1316B0971906D61C00107265 /* NSDate+StringParsing.m */,
+			);
+			name = NSDate;
 			sourceTree = "<group>";
 		};
 		137130F218FC4B43007AA17A = {
@@ -517,6 +546,7 @@
 				13968CBD19092379008692D1 /* CJUser.m in Sources */,
 				13968CC219093388008692D1 /* CJMe.m in Sources */,
 				13C90275190819E500615874 /* CJArtist.m in Sources */,
+				1353CE14191796890043554F /* CJAPIRequest+PromiseKit.m in Sources */,
 				130A099A1909BC4E0043FB0C /* CJTicket.m in Sources */,
 				1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */,
 				13980DBE190589B800D449FA /* CJModel.m in Sources */,
