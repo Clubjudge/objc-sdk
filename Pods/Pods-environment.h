@@ -54,3 +54,9 @@
 #define COCOAPODS_VERSION_MINOR_ObjectiveSugar 1
 #define COCOAPODS_VERSION_PATCH_ObjectiveSugar 0
 
+// PromiseKit/base
+#define COCOAPODS_POD_AVAILABLE_PromiseKit_base
+#define COCOAPODS_VERSION_MAJOR_PromiseKit_base 0
+#define COCOAPODS_VERSION_MINOR_PromiseKit_base 9
+#define COCOAPODS_VERSION_PATCH_PromiseKit_base 4
+
