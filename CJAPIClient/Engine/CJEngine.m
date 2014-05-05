@@ -34,6 +34,7 @@
 - (id)init
 {
   if (self = [super init]) {
+    [CJEngine setVersion:1];
     [self setupSessionManager];
     [self setupAuthManager];
   }
