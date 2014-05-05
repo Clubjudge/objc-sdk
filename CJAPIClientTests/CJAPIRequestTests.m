@@ -702,13 +702,6 @@ describe(@"CJAPIRequest", ^{
         [[expectFutureValue(userMessage) shouldEventually] equal:@"There was an error while processing this request."];
         [[expectFutureValue(errorCode) shouldEventually] equal:@500];
       });
-      
-      it(@"logs the error message", ^{
-        [[request shouldEventually] receive:@selector(developerMessageFromResponse:error:)];
-        
-        [request performWithSuccess:nil
-                            failure:nil];
-      });
     });
     
     context(@"PUT requests", ^{
