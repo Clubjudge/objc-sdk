@@ -145,7 +145,6 @@
 		13C9027619081DB500615874 /* CJArtistTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJArtistTests.m; sourceTree = "<group>"; };
 		13E6370F18FC671A00D7EB22 /* CJEngineConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEngineConfiguration.h; sourceTree = "<group>"; };
 		13E6371018FC671A00D7EB22 /* CJEngineConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEngineConfiguration.m; sourceTree = "<group>"; };
-		13E6371218FC69BF00D7EB22 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		13E6371318FC6AA900D7EB22 /* CJEngineConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEngineConfigurationTests.m; sourceTree = "<group>"; };
 		48A3F25556CD4B239434EBF9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		9AB58527C961433B92AA8DF6 /* Pods-CJAPIClientTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJAPIClientTests.xcconfig"; path = "Pods/Pods-CJAPIClientTests.xcconfig"; sourceTree = "<group>"; };
@@ -266,7 +265,6 @@
 		1371310118FC4B43007AA17A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				13E6371218FC69BF00D7EB22 /* Configuration.plist */,
 				1371310218FC4B43007AA17A /* CJAPIClient-Prefix.pch */,
 			);
 			name = "Supporting Files";
