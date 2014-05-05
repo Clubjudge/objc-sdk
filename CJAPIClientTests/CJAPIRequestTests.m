@@ -168,7 +168,7 @@ describe(@"CJAPIRequest", ^{
                      };
     });
     
-    it(@"sets the fields array", ^{
+    it(@"sets correctly", ^{
       [request setParameters:parameters];
       
       [[request.parameters should] equal:parameters];
@@ -190,6 +190,20 @@ describe(@"CJAPIRequest", ^{
                              };
       
       parameters = [request prepareParameters];
+    });
+    
+    it(@"adds the fields array if the request has one", ^{
+      request.fields = @[@"name", @"id"];
+      parameters = [request prepareParameters];
+      
+      [[parameters[@"fields"] should] equal:request.fields];
+    });
+    
+    it(@"adds the embeds array if the request has one", ^{
+      request.embeds = @[@"name", @"id"];
+      parameters = [request prepareParameters];
+      
+      [[parameters[@"embeds"] should] equal:request.embeds];
     });
     
     it(@"adds the clientId attribute if CJEngine has one", ^{
