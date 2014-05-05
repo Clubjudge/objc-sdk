@@ -60,7 +60,7 @@
     _artists = [(NSArray *) info[kEventArtists][@"source"] map:^id(NSDictionary *artist) {
       return [[CJArtist alloc] initWithInfo:artist];
     }];
-    _venue = [[CJVenue alloc] initWithInfo:info[kEventVenue]];
+    _venue = [[CJVenue alloc] initWithInfo:info[kEventVenue][@"source"]];
     _musicGenres = [(NSArray *) info[kEventMusicGenres][@"source"] map:^id(NSDictionary *genre) {
       return [[CJMusicGenre alloc] initWithInfo:genre];
     }];
