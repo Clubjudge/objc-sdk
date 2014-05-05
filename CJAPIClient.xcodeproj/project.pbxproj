@@ -19,6 +19,7 @@
 		1316B0941906C7A400107265 /* CJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0931906C7A400107265 /* CJEvent.m */; };
 		1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0971906D61C00107265 /* NSDate+StringParsing.m */; };
 		1316B09A1906D6E600107265 /* CJEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0991906D6E600107265 /* CJEventTests.m */; };
+		133C45381917CBE500E27D75 /* CJEngine+PromiseKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 133C45371917CBE500E27D75 /* CJEngine+PromiseKit.m */; };
 		1353CE14191796890043554F /* CJAPIRequest+PromiseKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1353CE13191796890043554F /* CJAPIRequest+PromiseKit.m */; };
 		13644A13190934BE001D3AF0 /* CJMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13644A12190934BE001D3AF0 /* CJMeTests.m */; };
 		1367E7C019058A590022885C /* CJModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7BF19058A590022885C /* CJModelTests.m */; };
@@ -97,6 +98,8 @@
 		1316B0961906D61C00107265 /* NSDate+StringParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+StringParsing.h"; sourceTree = "<group>"; };
 		1316B0971906D61C00107265 /* NSDate+StringParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+StringParsing.m"; sourceTree = "<group>"; };
 		1316B0991906D6E600107265 /* CJEventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEventTests.m; sourceTree = "<group>"; };
+		133C45361917CBE500E27D75 /* CJEngine+PromiseKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJEngine+PromiseKit.h"; sourceTree = "<group>"; };
+		133C45371917CBE500E27D75 /* CJEngine+PromiseKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJEngine+PromiseKit.m"; sourceTree = "<group>"; };
 		1353CE12191796890043554F /* CJAPIRequest+PromiseKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJAPIRequest+PromiseKit.h"; sourceTree = "<group>"; };
 		1353CE13191796890043554F /* CJAPIRequest+PromiseKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJAPIRequest+PromiseKit.m"; sourceTree = "<group>"; };
 		13644A12190934BE001D3AF0 /* CJMeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMeTests.m; sourceTree = "<group>"; };
@@ -180,11 +183,21 @@
 		1316B0951906D5DB00107265 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				133C45351917CBD700E27D75 /* CJEngine */,
 				1353CE17191796A10043554F /* NSDate */,
 				1353CE16191796970043554F /* CJModel */,
 				1353CE151917968D0043554F /* CJAPIRequest */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		133C45351917CBD700E27D75 /* CJEngine */ = {
+			isa = PBXGroup;
+			children = (
+				133C45361917CBE500E27D75 /* CJEngine+PromiseKit.h */,
+				133C45371917CBE500E27D75 /* CJEngine+PromiseKit.m */,
+			);
+			name = CJEngine;
 			sourceTree = "<group>";
 		};
 		1353CE151917968D0043554F /* CJAPIRequest */ = {
@@ -554,6 +567,7 @@
 				1367E7C8190690CA0022885C /* CJLinksInfo.m in Sources */,
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,
 				13A6B5A31909D5710083FFE7 /* CJCity.m in Sources */,
+				133C45381917CBE500E27D75 /* CJEngine+PromiseKit.m in Sources */,
 				130E90A919082DD800211DC0 /* CJVenue.m in Sources */,
 				13A6B59E1909D3320083FFE7 /* CJRating.m in Sources */,
 				130E90A61908283700211DC0 /* CJModel+Following.m in Sources */,
