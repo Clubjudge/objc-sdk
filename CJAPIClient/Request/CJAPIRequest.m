@@ -198,12 +198,12 @@ NSString *const kRequestEmbeds = @"embeds";
   }
   
   if (_fields) {
-    [parameters setObject:_fields
+    [parameters setObject:[_fields join:@","]
                    forKey:kRequestFields];
   }
   
   if (_embeds) {
-    [parameters setObject:_embeds
+    [parameters setObject:[_embeds join:@","]
                    forKey:kRequestEmbeds];
   }
   

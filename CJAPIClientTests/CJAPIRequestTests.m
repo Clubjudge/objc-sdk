@@ -192,18 +192,18 @@ describe(@"CJAPIRequest", ^{
       parameters = [request prepareParameters];
     });
     
-    it(@"adds the fields array if the request has one", ^{
+    it(@"adds the fields array as a comma separated string if the request has one", ^{
       request.fields = @[@"name", @"id"];
       parameters = [request prepareParameters];
       
-      [[parameters[@"fields"] should] equal:request.fields];
+      [[parameters[@"fields"] should] equal:@"name,id"];
     });
     
-    it(@"adds the embeds array if the request has one", ^{
-      request.embeds = @[@"name", @"id"];
+    it(@"adds the embeds array as a comma separated string if the request has one", ^{
+      request.embeds = @[@"venue", @"artists"];
       parameters = [request prepareParameters];
       
-      [[parameters[@"embeds"] should] equal:request.embeds];
+      [[parameters[@"embeds"] should] equal:@"venue,artists"];
     });
     
     it(@"adds the clientId attribute if CJEngine has one", ^{
