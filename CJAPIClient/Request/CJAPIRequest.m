@@ -70,9 +70,13 @@ NSString *const kRequestAccessToken = @"token";
 
 - (void)setPath:(NSString *)path
 {
-  unless([path hasPrefix:kRequestPathPrefix]) {
-    path = [kRequestPathPrefix stringByAppendingString:path];
+  if([path hasPrefix:kRequestPathPrefix]) {
+    path = [path substringFromIndex:1];
   }
+  
+  NSString *version = [NSString stringWithFormat:@"/v%ld/", (long)[CJEngine version]];
+  
+  path = [version stringByAppendingString:path];
   
   path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
   

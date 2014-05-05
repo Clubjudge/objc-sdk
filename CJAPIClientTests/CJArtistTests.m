@@ -178,7 +178,7 @@ describe(@"Artist Model", ^{
       [artist follow];
       
       [[request.method should] equal:@"POST"];
-      [[request.path should] equal:@"/artists/1981/followers.json"];
+      [[request.path should] equal:@"/v1/artists/1981/followers.json"];
     });
     
     it(@"sets the following property to NO if the failure block is executed", ^{
@@ -212,7 +212,7 @@ describe(@"Artist Model", ^{
       [artist unfollow];
       
       [[request.method should] equal:@"DELETE"];
-      [[request.path should] equal:@"/artists/1981/followers.json"];
+      [[request.path should] equal:@"/v1/artists/1981/followers.json"];
     });
     
     it(@"sets the following property to NO if the failure block is executed", ^{

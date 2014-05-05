@@ -279,7 +279,7 @@ describe(@"Event Model", ^{
       [event follow];
       
       [[request.method should] equal:@"POST"];
-      [[request.path should] equal:@"/events/55/followers.json"];
+      [[request.path should] equal:@"/v1/events/55/followers.json"];
     });
     
     it(@"sets the following property to NO if the failure block is executed", ^{
@@ -313,7 +313,7 @@ describe(@"Event Model", ^{
       [event unfollow];
       
       [[request.method should] equal:@"DELETE"];
-      [[request.path should] equal:@"/events/55/followers.json"];
+      [[request.path should] equal:@"/v1/events/55/followers.json"];
     });
     
     it(@"sets the following property to NO if the failure block is executed", ^{

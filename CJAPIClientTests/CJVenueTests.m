@@ -251,7 +251,7 @@ describe(@"Venue Model", ^{
       [venue follow];
       
       [[request.method should] equal:@"POST"];
-      [[request.path should] equal:@"/venues/2150/followers.json"];
+      [[request.path should] equal:@"/v1/venues/2150/followers.json"];
     });
     
     it(@"sets the following property to NO if the failure block is executed", ^{
@@ -285,7 +285,7 @@ describe(@"Venue Model", ^{
       [venue unfollow];
       
       [[request.method should] equal:@"DELETE"];
-      [[request.path should] equal:@"/venues/2150/followers.json"];
+      [[request.path should] equal:@"/v1/venues/2150/followers.json"];
     });
     
     it(@"sets the following property to NO if the failure block is executed", ^{
