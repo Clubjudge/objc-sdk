@@ -77,18 +77,32 @@ static NSString* theUserToken = nil;
 #pragma mark - Authentication
 
 - (void)authenticateWithFacebookToken:(NSString *)facebookToken
+                          withSuccess:(CJLoginSuccessBlock)success
+                           andFailure:(CJLoginFailureBlock)failure
 {
   [self.authSessionManager POST:@"facebook_token"
                      parameters:@{@"token": facebookToken}
                         success:^(NSURLSessionDataTask *task, id responseObject) {
-                          [CJEngine setUserToken:responseObject[@"access_token"]];
+                          NSString *token = responseObject[@"access_token"];
+                          [CJEngine setUserToken:token];
+                          
+                          if (success) {
+                            success(token);
+                          }
                         }
                         failure:^(NSURLSessionDataTask *task, NSError *error) {
                           [CJEngine setUserToken:nil];
+                          
+                          if (failure) {
+                            failure(error);
+                          }
                         }];
 }
 
-- (void)authenticateWithUsername:(NSString *)username andPassword:(NSString *)password
+- (void)authenticateWithUsername:(NSString *)username
+                     andPassword:(NSString *)password
+                     withSuccess:(CJLoginSuccessBlock)success
+                      andFailure:(CJLoginFailureBlock)failure
 {
   NSLog(@"Authenticating with username/password is not implemented yet!");
 }

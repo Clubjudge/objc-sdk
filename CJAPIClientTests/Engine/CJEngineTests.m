@@ -11,6 +11,7 @@
 #import "CJEngine.h"
 #import "CJEngineConfiguration.h"
 #import <OHHTTPStubs/OHHTTPStubs.h>
+#import "CJEngine+PromiseKit.h"
 
 @interface CJEngine()
 
@@ -58,10 +59,9 @@ describe(@"Engine", ^{
     });
   });
   
-  describe(@"#authenticateWithFacebookToken:", ^{
+  describe(@"#authenticateWithFacebookToken:withSuccess:andFailure", ^{
     it(@"POSTs a request to the authentication API", ^{
       CJEngine *engine = [CJEngine sharedEngine];
-      //
       
       KWCaptureSpy *pathSpy = [engine.authSessionManager captureArgument:@selector(POST:parameters:success:failure:) atIndex:0];
       KWCaptureSpy *tokenSpy = [engine.authSessionManager captureArgument:@selector(POST:parameters:success:failure:) atIndex:1];
@@ -103,8 +103,21 @@ describe(@"Engine", ^{
       
       it(@"sets the Engine's .userToken to the \"access_token\" key in the response", ^{
         CJEngine *engine = [CJEngine sharedEngine];
-        [engine authenticateWithFacebookToken:@"123456"];
+        [engine authenticateWithFacebookToken:@"123456" withSuccess:nil andFailure:nil];
         [[expectFutureValue([CJEngine userToken]) shouldEventually] equal:@"a_token"];
+      });
+      
+      it(@"invokes the success block with the token as an argument", ^{
+        CJEngine *engine = [CJEngine sharedEngine];
+        __block NSString *expectedToken = nil;
+        
+        [engine authenticateWithFacebookToken:@"123456"
+                                  withSuccess:^(NSString *token) {
+                                    expectedToken = token;
+                                  }
+                                   andFailure:nil];
+        
+        [[expectFutureValue(expectedToken) shouldEventually] equal:@"a_token"];
       });
     });
     
@@ -144,6 +157,28 @@ describe(@"Engine", ^{
         [engine authenticateWithFacebookToken:@"123456"];
         [[expectFutureValue([CJEngine userToken]) shouldEventually] beNil];
       });
+      
+      it(@"invokes the failure block with the error as an argument", ^{
+        CJEngine *engine = [CJEngine sharedEngine];
+        __block NSError *expectedError = nil;
+        
+        [engine authenticateWithFacebookToken:@"123456"
+                                  withSuccess:nil
+                                   andFailure:^(NSError *error) {
+                                     expectedError = error;
+                                   }];
+        
+        [[expectFutureValue(expectedError) shouldEventually] beNonNil];
+      });
+      
+      describe(@"PromiseKit support", ^{
+        it(@"returns a Promise", ^{
+          CJEngine *engine = [CJEngine sharedEngine];
+          id promise = [engine authenticateWithFacebookToken:@"123456"];
+          [[promise should] beKindOfClass:[Promise class]];
+        });
+      });
+
     });
   });
 });

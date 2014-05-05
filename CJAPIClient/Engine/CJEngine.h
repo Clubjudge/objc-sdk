@@ -83,13 +83,26 @@
 #pragma mark - Authentication
 
 /**
- Requests a user access token given a Facebook OAuth token
- */
-- (void)authenticateWithFacebookToken:(NSString *)facebookToken;
+ A block used for successful login requests. It includes the user's access token. */
+typedef void (^CJLoginSuccessBlock)(NSString *token);
 
 /**
- Requests a user access token given a username/password combo
+ A block used for failed login requests. It contains raw error object.
  */
-- (void)authenticateWithUsername:(NSString *)username andPassword:(NSString *)password;
+typedef void (^CJLoginFailureBlock)(NSError *error);
 
+/**
+ Requests a user access token given a Facebook OAuth token, with success and failure blocks
+ */
+- (void)authenticateWithFacebookToken:(NSString *)facebookToken
+                          withSuccess:(CJLoginSuccessBlock)success
+                           andFailure:(CJLoginFailureBlock)failure;
+
+/**
+ Requests a user access token given a username/password combo, with success and failure blocks
+ */
+- (void)authenticateWithUsername:(NSString *)username
+                     andPassword:(NSString *)password
+                     withSuccess:(CJLoginSuccessBlock)success
+                      andFailure:(CJLoginFailureBlock)failure;
 @end
