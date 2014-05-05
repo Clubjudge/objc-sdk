@@ -63,7 +63,7 @@ describe(@"Links info", ^{
     });
     
     it(@"creates a request using only the link's path component", ^{
-      [[request.path should] equal:@"/events/31200/artists.json"];
+      [[request.path should] equal:@"/v1/events/31200/artists.json"];
     });
     
     it(@"creates a request with the querystring components as parameters", ^{

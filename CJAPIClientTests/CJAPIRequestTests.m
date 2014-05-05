@@ -81,28 +81,35 @@ describe(@"CJAPIRequest", ^{
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
                                                              andPath:@"/a/path.json"];
         
-        [[request.path should] equal:@"/a/path.json"];
+        [[request.path should] equal:@"/v1/a/path.json"];
       });
       
       it(@"adds forward slashes at the beginning", ^{
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
                                                              andPath:@"a/path.json"];
         
-        [[request.path should] equal:@"/a/path.json"];
+        [[request.path should] equal:@"/v1/a/path.json"];
       });
       
       it(@"encodes the path using UTF-8", ^{
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
                                                             andPath:@"a/path.json?foo=bar bar"];
         
-        [[request.path should] equal:@"/a/path.json?foo=bar%20bar"];
+        [[request.path should] equal:@"/v1/a/path.json?foo=bar%20bar"];
       });
       
       it(@"automatically adds .json at the end", ^{
         CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
                                                              andPath:@"a/path"];
         
-        [[request.path should] equal:@"/a/path.json"];
+        [[request.path should] equal:@"/v1/a/path.json"];
+      });
+      
+      it(@"automatically adds the API version to the path", ^{
+        CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
+                                                             andPath:@"a/path"];
+        
+        [[request.path should] equal:@"/v1/a/path.json"];
       });
     });
     
@@ -246,7 +253,7 @@ describe(@"CJAPIRequest", ^{
                               };
           
           stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-            return [req.URL.path isEqualToString:@"/a/path.json"];
+            return [req.URL.path isEqualToString:@"/v1/a/path.json"];
           } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
             NSError *error;
             NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
@@ -393,7 +400,7 @@ describe(@"CJAPIRequest", ^{
                                                  andPath:@"/a/post/path"];
           
           stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-            return [req.URL.path isEqualToString:@"/a/post/path.json"];
+            return [req.URL.path isEqualToString:@"/v1/a/post/path.json"];
           } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
             NSError *error;
             NSData *data = [NSJSONSerialization dataWithJSONObject:@{}
@@ -476,7 +483,7 @@ describe(@"CJAPIRequest", ^{
         
         beforeEach(^{
           stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-            return [req.URL.path isEqualToString:@"/a/put/path.json"];
+            return [req.URL.path isEqualToString:@"/v1/a/put/path.json"];
           } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
             NSError *error;
             NSData *data = [NSJSONSerialization dataWithJSONObject:@{}
@@ -536,7 +543,7 @@ describe(@"CJAPIRequest", ^{
         
         beforeEach(^{
           stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-            return [req.URL.path isEqualToString:@"/a/delete/path.json"];
+            return [req.URL.path isEqualToString:@"/v1/a/delete/path.json"];
           } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
             NSError *error;
             NSData *data = [NSJSONSerialization dataWithJSONObject:@{}
@@ -592,7 +599,7 @@ describe(@"CJAPIRequest", ^{
         NSString *message = [request developerMessageFromResponse:responseMock
                                                             error:error];
         
-        [[message should] equal:@"GET request to /a/get/error/path.json returned an error with code 500: A developer message"];
+        [[message should] equal:@"GET request to /v1/a/get/error/path.json returned an error with code 500: A developer message"];
         
       });
     });
@@ -606,7 +613,7 @@ describe(@"CJAPIRequest", ^{
                                                andPath:@"/a/get/error/path"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return [req.URL.path isEqualToString:@"/a/get/error/path.json"];
+          return [req.URL.path isEqualToString:@"/v1/a/get/error/path.json"];
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:@{
@@ -663,7 +670,7 @@ describe(@"CJAPIRequest", ^{
                                                andPath:@"/a/post/error/path"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return [req.URL.path isEqualToString:@"/a/post/error/path.json"];
+          return [req.URL.path isEqualToString:@"/v1/a/post/error/path.json"];
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:@{
@@ -713,7 +720,7 @@ describe(@"CJAPIRequest", ^{
                                                andPath:@"/a/put/error/path"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return [req.URL.path isEqualToString:@"/a/put/error/path.json"];
+          return [req.URL.path isEqualToString:@"/v1/a/put/error/path.json"];
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:@{
@@ -770,7 +777,7 @@ describe(@"CJAPIRequest", ^{
                                                andPath:@"/a/delete/error/path"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return [req.URL.path isEqualToString:@"/a/delete/error/path.json"];
+          return [req.URL.path isEqualToString:@"/v1/a/delete/error/path.json"];
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:@{
@@ -856,7 +863,7 @@ describe(@"CJAPIRequest", ^{
                               };
           
           stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-            return [req.URL.path isEqualToString:@"/a/path.json"];
+            return [req.URL.path isEqualToString:@"/v1/a/path.json"];
           } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
             NSError *error;
             NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
@@ -897,7 +904,7 @@ describe(@"CJAPIRequest", ^{
           [request setPath:@"/an/error/path"];
           
           stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-            return [req.URL.path isEqualToString:@"/an/error/path.json"];
+            return [req.URL.path isEqualToString:@"/v1/an/error/path.json"];
           } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
             NSError *error;
             NSData *data = [NSJSONSerialization dataWithJSONObject:@{

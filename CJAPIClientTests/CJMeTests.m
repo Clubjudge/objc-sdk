@@ -62,7 +62,7 @@ describe(@"Me Model", ^{
     
     it(@"returns a request with a path to /me.json", ^{
       CJAPIRequest *request = [me requestForUpdate];
-      [[request.path should] equal:@"/me.json"];
+      [[request.path should] equal:@"/v1/me.json"];
     });
     
     it(@"returns a request with the user's preferences as its parameters", ^{
