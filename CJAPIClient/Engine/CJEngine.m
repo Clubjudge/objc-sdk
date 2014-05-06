@@ -11,7 +11,11 @@
 
 @interface CJEngine()
 
+#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
 @property (nonatomic, strong) AFHTTPSessionManager *authSessionManager;
+#else
+@property (nonatomic, strong) AFHTTPRequestOperationManager *authSessionManager;
+#endif
 
 @end
 
@@ -20,7 +24,7 @@
 #pragma mark - Initialisers
 
 + (CJEngine *)sharedEngine
-{
+{  
   static CJEngine *sharedEngine = nil;
   static dispatch_once_t onceToken;
   
@@ -83,7 +87,7 @@ static NSString* theUserToken = nil;
 {
   [self.authSessionManager POST:@"facebook_token"
                      parameters:@{@"token": facebookToken}
-                        success:^(NSURLSessionDataTask *task, id responseObject) {
+                        success:^(id operation, id responseObject) {
                           NSString *token = responseObject[@"access_token"];
                           [CJEngine setUserToken:token];
                           
@@ -91,7 +95,7 @@ static NSString* theUserToken = nil;
                             success(token);
                           }
                         }
-                        failure:^(NSURLSessionDataTask *task, NSError *error) {
+                        failure:^(id operation, NSError *error) {
                           [CJEngine setUserToken:nil];
                           
                           if (failure) {
@@ -115,10 +119,16 @@ static NSString* theUserToken = nil;
   
   NSAssert(url, @"Base URL not valid: %@", url);
   
+  #if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
+  
   NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
   
   self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url
                                                  sessionConfiguration:sessionConfiguration];
+  
+  #else
+    self.sessionManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+  #endif
   
   self.sessionManager.responseSerializer = [JSONResponseSerializerWithData new];
 }
@@ -129,9 +139,15 @@ static NSString* theUserToken = nil;
   
   NSAssert(url, @"Base Auth URL not valid: %@", url);
   
+  #if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
+  
   NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
   self.authSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url
                                                      sessionConfiguration:sessionConfiguration];
+  
+  #else
+    self.authSessionManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+  #endif
   
   self.authSessionManager.responseSerializer = [JSONResponseSerializerWithData new];
 }
