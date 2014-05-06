@@ -44,6 +44,9 @@
 
 - (NSUInteger)distanceFromLocation:(CLLocation *)location;
 
+- (NSString *)imagePathForLogoWithSize:(NSInteger)size;
+- (NSString *)imagePathForBackgroundWithSize:(NSInteger)size;
+
 @end
 
 #pragma mark - Mapping

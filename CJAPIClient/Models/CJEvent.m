@@ -17,6 +17,7 @@
 #import "CJComment.h"
 #import "CJTicket.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
+#import "CJModel+Images.h"
 
 @implementation CJEvent
 
@@ -86,6 +87,16 @@
   NSAssert(self.venue, @"You need to embed a CJVenue model for this to work!");
   
   return [self.venue distanceFromLocation:location];
+}
+
+- (NSString *)imagePathForFlyerAtPosition:(NSInteger)position
+                                 withSize:(NSInteger)size
+{
+  NSAssert((position < _flyers.count), @"There is no flyer at position %d", position);
+  
+  NSDictionary *flyer = [_flyers objectAtIndex:position];
+  
+  return [self imagePathForImageInfo:flyer andSize:size];
 }
 
 @end

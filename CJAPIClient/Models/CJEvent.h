@@ -50,6 +50,9 @@
 
 - (NSUInteger)distanceFromLocation:(CLLocation *)location;
 
+- (NSString *)imagePathForFlyerAtPosition:(NSInteger)position
+                                 withSize:(NSInteger)size;
+
 @end
 
 #pragma mark - Mapping
