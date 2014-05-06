@@ -7,9 +7,14 @@
 //
 
 #import "CJAPIRequest.h"
-#import <AFNetworking/AFHTTPSessionManager.h>
 #import "CJLinksInfo.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
+
+#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
+#import <AFNetworking/AFHTTPSessionManager.h>
+#else
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
+#endif
 
 NSString *const kRequestMethodGET = @"GET";
 NSString *const kRequestMethodPOST = @"POST";
@@ -24,8 +29,11 @@ NSString *const kRequestEmbeds = @"embeds";
 
 @interface CJAPIRequest()
 
+#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
-
+#else
+@property (nonatomic, strong) AFHTTPRequestOperationManager *sessionManager;
+#endif
 @end
 
 @implementation CJAPIRequest
@@ -98,7 +106,7 @@ NSString *const kRequestEmbeds = @"embeds";
 {
   void (^selectedMethod)() = @{
                                kRequestMethodGET : ^{
-                                 [self GETWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+                                 [self GETWithSuccess:^(id operation, id responseObject) {
                                    NSString *sourceKey = [[[responseObject allKeys] reject:^BOOL(id object) {
                                      return [(NSString *)object hasPrefix:@"_"];
                                    }] first];
@@ -114,19 +122,19 @@ NSString *const kRequestEmbeds = @"embeds";
                                               failure:failure];
                                },
                                kRequestMethodPOST : ^{
-                                 [self POSTWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+                                 [self POSTWithSuccess:^(id operation, id responseObject) {
                                    success(responseObject, nil, nil);
                                  }
                                                failure:failure];
                                },
                                kRequestMethodPUT : ^{
-                                 [self PUTWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+                                 [self PUTWithSuccess:^(id operation, id responseObject) {
                                    success(responseObject, nil, nil);
                                  }
                                               failure:failure];
                                },
                                kRequestMethodDELETE : ^{
-                                 [self DELETEWithSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+                                 [self DELETEWithSuccess:^(id operation, id responseObject) {
                                    success(responseObject, nil, nil);
                                  }
                                                  failure:failure];
@@ -136,47 +144,47 @@ NSString *const kRequestEmbeds = @"embeds";
   selectedMethod();
 }
 
-- (void)GETWithSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+- (void)GETWithSuccess:(void (^)(id operation, id responseObject))success
                failure:(CJFailureBlock)failure
 {
   [self.sessionManager GET:self.path
                 parameters:[self prepareParameters]
                    success:success
-                   failure:^(NSURLSessionDataTask *task, NSError *error) {
-                     [self processErrorWithTask:task error:error block:failure];
+                   failure:^(id operation, NSError *error) {
+                     [self processErrorWithTask:operation error:error block:failure];
                    }];
 }
 
-- (void)POSTWithSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+- (void)POSTWithSuccess:(void (^)(id operation, id responseObject))success
                 failure:(CJFailureBlock)failure
 {
   [self.sessionManager POST:self.path
                  parameters:[self prepareParameters]
                     success:success
-                    failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      [self processErrorWithTask:task error:error block:failure];
+                    failure:^(id operation, NSError *error) {
+                      [self processErrorWithTask:operation error:error block:failure];
                     }];
 }
 
-- (void)PUTWithSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+- (void)PUTWithSuccess:(void (^)(id operation, id responseObject))success
                failure:(CJFailureBlock)failure
 {
   [self.sessionManager PUT:self.path
                 parameters:[self prepareParameters]
                    success:success
-                   failure:^(NSURLSessionDataTask *task, NSError *error) {
-                     [self processErrorWithTask:task error:error block:failure];
+                   failure:^(id operation, NSError *error) {
+                     [self processErrorWithTask:operation error:error block:failure];
                    }];
 }
 
-- (void)DELETEWithSuccess:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+- (void)DELETEWithSuccess:(void (^)(id operation, id responseObject))success
                   failure:(CJFailureBlock)failure
 {
   [self.sessionManager DELETE:self.path
                    parameters:[self prepareParameters]
                       success:success
-                      failure:^(NSURLSessionDataTask *task, NSError *error) {
-                        [self processErrorWithTask:task error:error block:failure];
+                      failure:^(id operation, NSError *error) {
+                        [self processErrorWithTask:operation error:error block:failure];
                       }];
 }
 
