@@ -43,6 +43,10 @@ SPEC_BEGIN(CJAPIREQUESTSPEC)
 
 describe(@"CJAPIRequest", ^{
   
+  beforeEach(^{
+    [OHHTTPStubs removeAllStubs];
+  });
+  
   afterEach(^{
     [OHHTTPStubs removeAllStubs];
   });
