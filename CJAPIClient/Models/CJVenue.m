@@ -16,6 +16,7 @@
 #import "CJLinksInfo.h"
 #import "CJModel+Distance.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
+#import "CJModel+Images.h"
 
 @implementation CJVenue
 
@@ -92,6 +93,16 @@
   
   return [self distanceToLocation:venueLocation
                      fromLocation:location];
+}
+
+- (NSString *)imagePathForLogoWithSize:(NSInteger)size
+{
+  return [self imagePathForImageInfo:[_logos firstObject] andSize:size];
+}
+
+- (NSString *)imagePathForBackgroundWithSize:(NSInteger)size
+{
+  return [self imagePathForImageInfo:_background andSize:size];
 }
 
 @end

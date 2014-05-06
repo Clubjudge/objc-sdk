@@ -14,6 +14,12 @@
 #import "CJUser.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
+@interface CJVenue()
+
+- (BOOL)isRetinaDisplay;
+
+@end
+
 SPEC_BEGIN(CJVENUESPEC)
 
 describe(@"Venue Model", ^{
@@ -43,8 +49,28 @@ describe(@"Venue Model", ^{
                            @"zipCode": @"1091 GR"
                          },
                          @"follow": @NO,
-                         @"background": @{},
-                         @"logos": @[],
+                         @"background": @{
+                           @"square_32": @"http://local.clubjudge.com:3000//venues/2150/background//square_32.png",
+                           @"square_60": @"http://local.clubjudge.com:3000//venues/2150/background//square_60.png",
+                           @"square_90": @"http://local.clubjudge.com:3000//venues/2150/background//square_90.png",
+                           @"square_120": @"http://local.clubjudge.com:3000//venues/2150/background//square_120.png",
+                           @"square_160": @"http://local.clubjudge.com:3000//venues/2150/background//square_160.png",
+                           @"square_180": @"http://local.clubjudge.com:3000//venues/2150/background//square_180.png",
+                           @"square_250": @"http://local.clubjudge.com:3000//venues/2150/background//square_250.png",
+                           @"portrait_600": @"http://local.clubjudge.com:3000//venues/2150/background//portrait_600.png"
+                         },
+                         @"logos": @[
+                                     @{
+                                       @"square_32": @"http://local.clubjudge.com:3000//venues/2150/square_32.jpg",
+                                       @"square_60": @"http://local.clubjudge.com:3000//venues/2150/square_60.jpg",
+                                       @"square_90": @"http://local.clubjudge.com:3000//venues/2150/square_90.jpg",
+                                       @"square_120": @"http://local.clubjudge.com:3000//venues/2150/square_120.jpg",
+                                       @"square_160": @"http://local.clubjudge.com:3000//venues/2150/square_160.jpg",
+                                       @"square_180": @"http://local.clubjudge.com:3000//venues/2150/square_180.jpg",
+                                       @"square_250": @"http://local.clubjudge.com:3000//venues/2150/square_250.jpg",
+                                       @"portrait_600": @"http://local.clubjudge.com:3000//venues/2150/portrait_600.jpg"
+                                     }
+                                    ],
                          @"socialLinks": @[
                                           @{
                                             @"name": @"Facebook",
@@ -309,6 +335,50 @@ describe(@"Venue Model", ^{
       NSUInteger meters = [venue distanceFromLocation:location];
       
       [[theValue(meters) should] equal:theValue(130084)];
+    });
+  });
+  
+  describe(@"#imagePathForLogoWithSize:", ^{
+    context(@"when device has a 1x resolution", ^{
+      it(@"returns a URL string", ^{
+        [venue stub:@selector(isRetinaDisplay) andReturn:theValue(NO)];
+        
+        NSString *path = [venue imagePathForLogoWithSize:120];
+        
+        [[path should] equal:@"http://local.clubjudge.com:3000//venues/2150/square_120.jpg"];
+      });
+    });
+    
+    context(@"when device has a 2x resolution", ^{
+      it(@"returns a URL string with an @2x modifier", ^{
+        [venue stub:@selector(isRetinaDisplay) andReturn:theValue(YES)];
+        
+        NSString *path = [venue imagePathForLogoWithSize:120];
+        
+        [[path should] equal:@"http://local.clubjudge.com:3000//venues/2150/square_120@2x.jpg"];
+      });
+    });
+  });
+  
+  describe(@"#imagePathForBackgroundWithSize:", ^{
+    context(@"when device has a 1x resolution", ^{
+      it(@"returns a URL string", ^{
+        [venue stub:@selector(isRetinaDisplay) andReturn:theValue(NO)];
+        
+        NSString *path = [venue imagePathForBackgroundWithSize:120];
+        
+        [[path should] equal:@"http://local.clubjudge.com:3000//venues/2150/background//square_120.png"];
+      });
+    });
+    
+    context(@"when device has a 2x resolution", ^{
+      it(@"returns a URL string with an @2x modifier", ^{
+        [venue stub:@selector(isRetinaDisplay) andReturn:theValue(YES)];
+        
+        NSString *path = [venue imagePathForBackgroundWithSize:120];
+        
+        [[path should] equal:@"http://local.clubjudge.com:3000//venues/2150/background//square_120@2x.png"];
+      });
     });
   });
 });

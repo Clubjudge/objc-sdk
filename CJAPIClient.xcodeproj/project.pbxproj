@@ -20,6 +20,7 @@
 		1316B0981906D61C00107265 /* NSDate+StringParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0971906D61C00107265 /* NSDate+StringParsing.m */; };
 		1316B09A1906D6E600107265 /* CJEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316B0991906D6E600107265 /* CJEventTests.m */; };
 		133C45381917CBE500E27D75 /* CJEngine+PromiseKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 133C45371917CBE500E27D75 /* CJEngine+PromiseKit.m */; };
+		133C45871919222400E27D75 /* CJModel+Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 133C45861919222400E27D75 /* CJModel+Images.m */; };
 		1353CE14191796890043554F /* CJAPIRequest+PromiseKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1353CE13191796890043554F /* CJAPIRequest+PromiseKit.m */; };
 		13644A13190934BE001D3AF0 /* CJMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13644A12190934BE001D3AF0 /* CJMeTests.m */; };
 		1367E7C019058A590022885C /* CJModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367E7BF19058A590022885C /* CJModelTests.m */; };
@@ -100,6 +101,8 @@
 		1316B0991906D6E600107265 /* CJEventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEventTests.m; sourceTree = "<group>"; };
 		133C45361917CBE500E27D75 /* CJEngine+PromiseKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJEngine+PromiseKit.h"; sourceTree = "<group>"; };
 		133C45371917CBE500E27D75 /* CJEngine+PromiseKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJEngine+PromiseKit.m"; sourceTree = "<group>"; };
+		133C45851919222400E27D75 /* CJModel+Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJModel+Images.h"; sourceTree = "<group>"; };
+		133C45861919222400E27D75 /* CJModel+Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJModel+Images.m"; sourceTree = "<group>"; };
 		1353CE12191796890043554F /* CJAPIRequest+PromiseKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJAPIRequest+PromiseKit.h"; sourceTree = "<group>"; };
 		1353CE13191796890043554F /* CJAPIRequest+PromiseKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJAPIRequest+PromiseKit.m"; sourceTree = "<group>"; };
 		13644A12190934BE001D3AF0 /* CJMeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMeTests.m; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 				130E90A51908283700211DC0 /* CJModel+Following.m */,
 				13A25E75190E70E30035122D /* CJModel+Distance.h */,
 				13A25E76190E70E30035122D /* CJModel+Distance.m */,
+				133C45851919222400E27D75 /* CJModel+Images.h */,
+				133C45861919222400E27D75 /* CJModel+Images.m */,
 			);
 			name = CJModel;
 			sourceTree = "<group>";
@@ -563,6 +568,7 @@
 				13980DBE190589B800D449FA /* CJModel.m in Sources */,
 				130A0995190960BD0043FB0C /* CJComment.m in Sources */,
 				13AA62C619056C880089C443 /* JSONResponseSerializerWithData.m in Sources */,
+				133C45871919222400E27D75 /* CJModel+Images.m in Sources */,
 				1316B0941906C7A400107265 /* CJEvent.m in Sources */,
 				1367E7C8190690CA0022885C /* CJLinksInfo.m in Sources */,
 				1371312718FC539C007AA17A /* CJEngine.m in Sources */,

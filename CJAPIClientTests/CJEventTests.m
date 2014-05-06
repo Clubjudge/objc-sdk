@@ -15,6 +15,12 @@
 #import "CJMusicGenre.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
+@interface CJEvent()
+
+- (BOOL)isRetinaDisplay;
+
+@end
+
 SPEC_BEGIN(CJEVENTSPEC)
 
 describe(@"Event Model", ^{
@@ -23,7 +29,18 @@ describe(@"Event Model", ^{
                          @"followersCount": @10,
                          @"commentsCount": @40,
                          @"description": @"Lorem ipsum sit dolor amet",
-                         @"flyers": @[],
+                         @"flyers": @[
+                                       @{
+                                         @"square_32": @"http://local.clubjudge.com:3000//flyers/87251/square_32.png",
+                                         @"square_60": @"http://local.clubjudge.com:3000//flyers/87251/square_60.png",
+                                         @"square_90": @"http://local.clubjudge.com:3000//flyers/87251/square_90.png",
+                                         @"square_120": @"http://local.clubjudge.com:3000//flyers/87251/square_120.png",
+                                         @"square_160": @"http://local.clubjudge.com:3000//flyers/87251/square_160.png",
+                                         @"square_180": @"http://local.clubjudge.com:3000//flyers/87251/square_180.png",
+                                         @"square_250": @"http://local.clubjudge.com:3000//flyers/87251/square_250.png",
+                                         @"portrait_600": @"http://local.clubjudge.com:3000//flyers/87251/portrait_600.png"
+                                       }
+                                    ],
                          @"name": @"Tiësto & Calvin Harris - Greater Than Tour",
                          @"startsAt": @"2014-04-21T18:00:00.000Z",
                          @"endsAt": @"2014-04-21T20:59:00.000Z",
@@ -328,6 +345,30 @@ describe(@"Event Model", ^{
       
       
       [[theValue(event.following) should] beYes];
+    });
+  });
+  
+  describe(@"#imagePathForFlyerAtPosition:withSize:", ^{
+    context(@"when device has a 1x resolution", ^{
+      it(@"returns a URL string", ^{
+        [event stub:@selector(isRetinaDisplay) andReturn:theValue(NO)];
+        
+        NSString *path = [event imagePathForFlyerAtPosition:0
+                                                withSize:120];
+        
+        [[path should] equal:@"http://local.clubjudge.com:3000//flyers/87251/square_120.png"];
+      });
+    });
+    
+    context(@"when device has a 2x resolution", ^{
+      it(@"returns a URL string with an @2x modifier", ^{
+        [event stub:@selector(isRetinaDisplay) andReturn:theValue(YES)];
+        
+        NSString *path = [event imagePathForFlyerAtPosition:0
+                                                   withSize:120];
+        
+        [[path should] equal:@"http://local.clubjudge.com:3000//flyers/87251/square_120@2x.png"];
+      });
     });
   });
 });
