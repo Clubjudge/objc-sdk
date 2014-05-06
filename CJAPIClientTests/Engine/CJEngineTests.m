@@ -15,7 +15,7 @@
 
 @interface CJEngine()
 
-#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
+#ifdef IS_OS_7_OR_LATER
 @property (nonatomic, strong) AFHTTPSessionManager *authSessionManager;
 #else
 @property (nonatomic, strong) AFHTTPRequestOperationManager *authSessionManager;

@@ -12,7 +12,7 @@
 
 #import <Foundation/Foundation.h>
 
-#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
+#ifdef IS_OS_7_OR_LATER
   #import <AFNetworking/AFHTTPSessionManager.h>
 #else
   #import <AFNetworking/AFHTTPRequestOperationManager.h>
@@ -27,7 +27,7 @@
  
  @warning Requests for user authentication are handled by another, private manager.
  */
-#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
+#ifdef IS_OS_7_OR_LATER
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 #else
 @property (nonatomic, strong) AFHTTPRequestOperationManager *sessionManager;
