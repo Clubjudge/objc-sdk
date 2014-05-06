@@ -27,7 +27,9 @@ NSString *const kRequestAccessToken = @"token";
 NSString *const kRequestFields = @"fields";
 NSString *const kRequestEmbeds = @"embeds";
 
-@interface CJAPIRequest()
+@interface CJAPIRequest() {
+  dispatch_queue_t parseBackgroundQueue;
+}
 
 #ifdef IS_OS_7_OR_LATER
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
@@ -47,6 +49,8 @@ NSString *const kRequestEmbeds = @"embeds";
     [self setMethod:method];
     [self setPath:path];
     self.sessionManager = [[CJEngine sharedEngine] sessionManager];
+    
+    parseBackgroundQueue = dispatch_queue_create("background", NULL);
   }
   
   return self;
@@ -107,16 +111,21 @@ NSString *const kRequestEmbeds = @"embeds";
   void (^selectedMethod)() = @{
                                kRequestMethodGET : ^{
                                  [self GETWithSuccess:^(id operation, id responseObject) {
-                                   NSString *sourceKey = [[[responseObject allKeys] reject:^BOOL(id object) {
-                                     return [(NSString *)object hasPrefix:@"_"];
-                                   }] first];
-                                   
-                                   NSDictionary *source = [responseObject objectForKey:sourceKey];
-                                   
-                                   CJPaginationInfo *pagination = [[CJPaginationInfo alloc] initWithInfo:responseObject[@"_pagination"]];
-                                   CJLinksInfo *links = [[CJLinksInfo alloc] initWithInfo:responseObject[@"_links"]];
-                                   
-                                   success([self parseSource:source], pagination, links);
+                                   dispatch_async(parseBackgroundQueue, ^{
+                                     NSString *sourceKey = [[[responseObject allKeys] reject:^BOOL(id object) {
+                                       return [(NSString *)object hasPrefix:@"_"];
+                                     }] first];
+                                     
+                                     NSDictionary *source = [responseObject objectForKey:sourceKey];
+                                     
+                                     CJPaginationInfo *pagination = [[CJPaginationInfo alloc] initWithInfo:responseObject[@"_pagination"]];
+                                     CJLinksInfo *links = [[CJLinksInfo alloc] initWithInfo:responseObject[@"_links"]];
+                                     id parsedResponse = [self parseSource:source];
+                                     
+                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                       success(parsedResponse, pagination, links);
+                                     });
+                                   });
                                    
                                  }
                                               failure:failure];
