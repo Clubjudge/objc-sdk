@@ -9,6 +9,13 @@
 #import "CJEngine.h"
 #import "CJEngineConfiguration.h"
 
+enum
+{
+  CJAPISessionManagerMainManager = 0,
+  CJAPISessionManagerAuthManager = 1
+};
+typedef NSUInteger CJAPISessionManager;
+
 @interface CJEngine()
 
 #ifdef IS_OS_7_OR_LATER
@@ -39,6 +46,7 @@
 {
   if (self = [super init]) {
     [CJEngine setVersion:1];
+    [self setCachePolicy:CJAPIRequestUseProtocolCachePolicy];
     [self setupSessionManager];
     [self setupAuthManager];
   }
@@ -129,6 +137,14 @@ static NSString* theUserToken = nil;
 }
 
 #pragma mark - Custom
+
+- (void)setCachePolicy:(CJAPIRequestCachePolicy)cachePolicy
+{
+  _cachePolicy = cachePolicy;
+  
+  self.sessionManager.requestSerializer.cachePolicy = [self cachePolicyForManager:CJAPISessionManagerMainManager];
+}
+
 - (void)setupSessionManager
 {
   NSURL *url = [NSURL URLWithString:[[CJEngineConfiguration sharedConfiguration] APIBaseURL]];
@@ -147,6 +163,7 @@ static NSString* theUserToken = nil;
   #endif
   
   self.sessionManager.responseSerializer = [JSONResponseSerializerWithData new];
+  self.sessionManager.requestSerializer = [self requestSerializerForManager:CJAPISessionManagerMainManager];
 }
 
 - (void)setupAuthManager
@@ -166,6 +183,41 @@ static NSString* theUserToken = nil;
   #endif
   
   self.authSessionManager.responseSerializer = [JSONResponseSerializerWithData new];
+  self.authSessionManager.requestSerializer = [self requestSerializerForManager:CJAPISessionManagerAuthManager];
+}
+
+- (AFHTTPRequestSerializer *)requestSerializerForManager:(NSInteger)manager
+{
+  CJAPIRequestSerializer *serializer = [[CJAPIRequestSerializer alloc] init];
+  serializer.cachePolicy = [self cachePolicyForManager:manager];
+  
+  return serializer;
+}
+
+- (NSInteger)cachePolicyForManager:(NSInteger)manager
+{
+  NSURLRequestCachePolicy cachePolicy;
+  
+  switch (manager) {
+    case CJAPISessionManagerMainManager: {
+      cachePolicy = self.cachePolicy;
+      
+      if (cachePolicy == CJAPIRequestReturnCacheDataThenLoad) {
+        cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+      }
+      
+      break;
+    }
+      
+    case CJAPISessionManagerAuthManager:
+      cachePolicy = CJAPIRequestReloadIgnoringCacheData;
+      break;
+      
+    default:
+      cachePolicy = CJAPIRequestUseProtocolCachePolicy;
+  }
+  
+  return cachePolicy;
 }
 
 @end
