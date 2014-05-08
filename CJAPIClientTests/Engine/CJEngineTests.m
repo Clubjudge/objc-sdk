@@ -74,10 +74,12 @@ describe(@"Engine", ^{
       KWCaptureSpy *pathSpy = [engine.authSessionManager captureArgument:@selector(POST:parameters:success:failure:) atIndex:0];
       KWCaptureSpy *tokenSpy = [engine.authSessionManager captureArgument:@selector(POST:parameters:success:failure:) atIndex:1];
       
-      [engine authenticateWithFacebookToken:@"12345667abcd"];
+      [engine authenticateWithFacebookToken:@"12345667abcd"
+                                withSuccess:nil
+                                 andFailure:nil];
       
-      [[expectFutureValue(pathSpy.argument) shouldEventually] equal:@"facebook_token"];
-      [[expectFutureValue(tokenSpy.argument) shouldEventually] equal:@{@"token": @"12345667abcd"}];
+      [[expectFutureValue(pathSpy.argument) shouldEventually] equal:@"tokens"];
+      [[expectFutureValue(tokenSpy.argument) shouldEventually] equal:@{@"facebook_token": @"12345667abcd", @"app_key": [CJEngine clientKey]}];
     });
     
     context(@"when POST succeeds", ^{
@@ -86,11 +88,11 @@ describe(@"Engine", ^{
       
       beforeEach(^{
         stubbedResponse = @{
-                            @"access_token": @"a_token"
+                            @"token": @"a_token"
                             };
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return ([req.URL.path isEqualToString:@"/baws/auth/facebook_token"]);
+          return ([req.URL.path isEqualToString:@"/baws/auth/tokens"]);
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
@@ -109,7 +111,7 @@ describe(@"Engine", ^{
         [OHHTTPStubs removeStub:stub];
       });
       
-      it(@"sets the Engine's .userToken to the \"access_token\" key in the response", ^{
+      it(@"sets the Engine's .userToken to the \"token\" key in the response", ^{
         CJEngine *engine = [CJEngine sharedEngine];
         [engine authenticateWithFacebookToken:@"123456" withSuccess:nil andFailure:nil];
         [[expectFutureValue([CJEngine userToken]) shouldEventually] equal:@"a_token"];
@@ -141,7 +143,7 @@ describe(@"Engine", ^{
         [CJEngine setUserToken:@"something"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return ([req.URL.path isEqualToString:@"/baws/auth/facebook_token"]);
+          return ([req.URL.path isEqualToString:@"/baws/auth/tokens"]);
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
@@ -162,7 +164,7 @@ describe(@"Engine", ^{
       
       it(@"sets the Engine's .userToken to nil", ^{
         CJEngine *engine = [CJEngine sharedEngine];
-        [engine authenticateWithFacebookToken:@"123456"];
+        [engine authenticateWithFacebookToken:@"123456" withSuccess:nil andFailure:nil];
         [[expectFutureValue([CJEngine userToken]) shouldEventually] beNil];
       });
       

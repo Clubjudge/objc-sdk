@@ -85,10 +85,10 @@ static NSString* theUserToken = nil;
                           withSuccess:(CJLoginSuccessBlock)success
                            andFailure:(CJLoginFailureBlock)failure
 {
-  [self.authSessionManager POST:@"facebook_token"
-                     parameters:@{@"token": facebookToken}
+  [self.authSessionManager POST:@"tokens"
+                     parameters:@{@"facebook_token": facebookToken, @"app_key": [CJEngine clientKey]}
                         success:^(id operation, id responseObject) {
-                          NSString *token = responseObject[@"access_token"];
+                          NSString *token = responseObject[@"token"];
                           [CJEngine setUserToken:token];
                           
                           if (success) {
