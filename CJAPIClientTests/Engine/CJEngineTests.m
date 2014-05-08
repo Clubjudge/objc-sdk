@@ -74,10 +74,12 @@ describe(@"Engine", ^{
       KWCaptureSpy *pathSpy = [engine.authSessionManager captureArgument:@selector(POST:parameters:success:failure:) atIndex:0];
       KWCaptureSpy *tokenSpy = [engine.authSessionManager captureArgument:@selector(POST:parameters:success:failure:) atIndex:1];
       
-      [engine authenticateWithFacebookToken:@"12345667abcd"];
+      [engine authenticateWithFacebookToken:@"12345667abcd"
+                                withSuccess:nil
+                                 andFailure:nil];
       
-      [[expectFutureValue(pathSpy.argument) shouldEventually] equal:@"facebook_token"];
-      [[expectFutureValue(tokenSpy.argument) shouldEventually] equal:@{@"token": @"12345667abcd"}];
+      [[expectFutureValue(pathSpy.argument) shouldEventually] equal:@"tokens"];
+      [[expectFutureValue(tokenSpy.argument) shouldEventually] equal:@{@"facebook_token": @"12345667abcd", @"app_key": [CJEngine clientKey]}];
     });
     
     context(@"when POST succeeds", ^{
@@ -86,11 +88,11 @@ describe(@"Engine", ^{
       
       beforeEach(^{
         stubbedResponse = @{
-                            @"access_token": @"a_token"
+                            @"token": @"a_token"
                             };
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return ([req.URL.path isEqualToString:@"/baws/auth/facebook_token"]);
+          return ([req.URL.path isEqualToString:@"/baws/auth/tokens"]);
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
@@ -109,7 +111,7 @@ describe(@"Engine", ^{
         [OHHTTPStubs removeStub:stub];
       });
       
-      it(@"sets the Engine's .userToken to the \"access_token\" key in the response", ^{
+      it(@"sets the Engine's .userToken to the \"token\" key in the response", ^{
         CJEngine *engine = [CJEngine sharedEngine];
         [engine authenticateWithFacebookToken:@"123456" withSuccess:nil andFailure:nil];
         [[expectFutureValue([CJEngine userToken]) shouldEventually] equal:@"a_token"];
@@ -141,7 +143,7 @@ describe(@"Engine", ^{
         [CJEngine setUserToken:@"something"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return ([req.URL.path isEqualToString:@"/baws/auth/facebook_token"]);
+          return ([req.URL.path isEqualToString:@"/baws/auth/tokens"]);
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
@@ -162,7 +164,7 @@ describe(@"Engine", ^{
       
       it(@"sets the Engine's .userToken to nil", ^{
         CJEngine *engine = [CJEngine sharedEngine];
-        [engine authenticateWithFacebookToken:@"123456"];
+        [engine authenticateWithFacebookToken:@"123456" withSuccess:nil andFailure:nil];
         [[expectFutureValue([CJEngine userToken]) shouldEventually] beNil];
       });
       
@@ -187,6 +189,145 @@ describe(@"Engine", ^{
         });
       });
 
+    });
+  });
+  
+  
+  describe(@"#authenticateWithUsername:andPassword:withSuccess:andFailure", ^{
+    it(@"POSTs a request to the authentication API", ^{
+      CJEngine *engine = [CJEngine sharedEngine];
+      
+      KWCaptureSpy *pathSpy = [engine.authSessionManager captureArgument:@selector(POST:parameters:success:failure:) atIndex:0];
+      KWCaptureSpy *tokenSpy = [engine.authSessionManager captureArgument:@selector(POST:parameters:success:failure:) atIndex:1];
+      
+      [engine authenticateWithUsername:@"a_username"
+                           andPassword:@"a_password"
+                           withSuccess:nil
+                            andFailure:nil];
+      
+      [[expectFutureValue(pathSpy.argument) shouldEventually] equal:@"tokens"];
+      [[expectFutureValue(tokenSpy.argument) shouldEventually] equal:@{@"email": @"a_username", @"password": @"a_password", @"app_key": [CJEngine clientKey]}];
+    });
+    
+    context(@"when POST succeeds", ^{
+      __block NSDictionary *stubbedResponse;
+      __block id<OHHTTPStubsDescriptor> stub = nil;
+      
+      beforeEach(^{
+        stubbedResponse = @{
+                            @"token": @"a_token"
+                            };
+        
+        stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+          return ([req.URL.path isEqualToString:@"/baws/auth/tokens"]);
+        } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+          NSError *error;
+          NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
+                                                         options:kNilOptions
+                                                           error:&error];
+          
+          return [OHHTTPStubsResponse responseWithData:data
+                                            statusCode:200
+                                               headers:@{@"Content-Type":@"text/json"}];
+        }];
+        
+        stub.name = @"postSucceeds";
+      });
+      
+      afterEach(^{
+        [OHHTTPStubs removeStub:stub];
+      });
+      
+      it(@"sets the Engine's .userToken to the \"token\" key in the response", ^{
+        CJEngine *engine = [CJEngine sharedEngine];
+        [engine authenticateWithUsername:@"a_username"
+                             andPassword:@"a_password"
+                             withSuccess:nil
+                              andFailure:nil];
+        
+        [[expectFutureValue([CJEngine userToken]) shouldEventually] equal:@"a_token"];
+      });
+      
+      it(@"invokes the success block with the token as an argument", ^{
+        CJEngine *engine = [CJEngine sharedEngine];
+        __block NSString *expectedToken = nil;
+        
+        [engine authenticateWithUsername:@"a_username"
+                             andPassword:@"a_password"
+                             withSuccess:^(NSString *token) {
+                               expectedToken = token;
+                             }
+                              andFailure:nil];
+
+        [[expectFutureValue(expectedToken) shouldEventually] equal:@"a_token"];
+      });
+    });
+    
+    context(@"when POST fails", ^{
+      __block NSDictionary *stubbedResponse;
+      __block id<OHHTTPStubsDescriptor> stub = nil;
+      
+      beforeEach(^{
+        stubbedResponse = @{
+                            @"error": @"bla"
+                            };
+        
+        [CJEngine setUserToken:@"something"];
+        
+        stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+          return ([req.URL.path isEqualToString:@"/baws/auth/tokens"]);
+        } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+          NSError *error;
+          NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
+                                                         options:kNilOptions
+                                                           error:&error];
+          
+          return [OHHTTPStubsResponse responseWithData:data
+                                            statusCode:500
+                                               headers:@{@"Content-Type":@"text/json"}];
+        }];
+        
+        stub.name = @"postSucceeds";
+      });
+      
+      afterEach(^{
+        [OHHTTPStubs removeStub:stub];
+      });
+      
+      it(@"sets the Engine's .userToken to nil", ^{
+        CJEngine *engine = [CJEngine sharedEngine];
+        [engine authenticateWithUsername:@"a_username"
+                             andPassword:@"a_password"
+                             withSuccess:nil
+                              andFailure:nil];
+        
+        [[expectFutureValue([CJEngine userToken]) shouldEventually] beNil];
+      });
+      
+      it(@"invokes the failure block with the error as an argument", ^{
+        CJEngine *engine = [CJEngine sharedEngine];
+        __block NSError *expectedError = nil;
+        
+        [engine authenticateWithUsername:@"a_username"
+                             andPassword:@"a_password"
+                             withSuccess:nil
+                              andFailure:^(NSError *error) {
+                                expectedError = error;
+                              }];
+        
+        [[expectFutureValue(expectedError) shouldEventually] beNonNil];
+      });
+      
+      describe(@"PromiseKit support", ^{
+        it(@"returns a Promise", ^{
+          CJEngine *engine = [CJEngine sharedEngine];
+          id promise = [engine authenticateWithUsername:@"a_username"
+                                            andPassword:@"a_password"];
+          
+          [[promise should] beKindOfClass:[Promise class]];
+        });
+      });
+      
     });
   });
 });

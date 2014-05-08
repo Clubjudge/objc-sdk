@@ -85,10 +85,10 @@ static NSString* theUserToken = nil;
                           withSuccess:(CJLoginSuccessBlock)success
                            andFailure:(CJLoginFailureBlock)failure
 {
-  [self.authSessionManager POST:@"facebook_token"
-                     parameters:@{@"token": facebookToken}
+  [self.authSessionManager POST:@"tokens"
+                     parameters:@{@"facebook_token": facebookToken, @"app_key": [CJEngine clientKey]}
                         success:^(id operation, id responseObject) {
-                          NSString *token = responseObject[@"access_token"];
+                          NSString *token = responseObject[@"token"];
                           [CJEngine setUserToken:token];
                           
                           if (success) {
@@ -109,7 +109,23 @@ static NSString* theUserToken = nil;
                      withSuccess:(CJLoginSuccessBlock)success
                       andFailure:(CJLoginFailureBlock)failure
 {
-  NSLog(@"Authenticating with username/password is not implemented yet!");
+  [self.authSessionManager POST:@"tokens"
+                     parameters:@{@"email": username, @"password": password, @"app_key": [CJEngine clientKey]}
+                        success:^(id operation, id responseObject) {
+                          NSString *token = responseObject[@"token"];
+                          [CJEngine setUserToken:token];
+                          
+                          if (success) {
+                            success(token);
+                          }
+                        }
+                        failure:^(id operation, NSError *error) {
+                          [CJEngine setUserToken:nil];
+                          
+                          if (failure) {
+                            failure(error);
+                          }
+                        }];
 }
 
 #pragma mark - Custom
