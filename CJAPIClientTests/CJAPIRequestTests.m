@@ -35,7 +35,10 @@
 - (NSString *)developerMessageFromResponse:(NSHTTPURLResponse *)response
                                      error:(NSDictionary *)error;
 
+- (BOOL)willDeleteCached;
+
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
+@property (nonatomic, assign) NSInteger retries;
 
 @end
 
@@ -49,6 +52,10 @@ describe(@"CJAPIRequest", ^{
   
   afterEach(^{
     [OHHTTPStubs removeAllStubs];
+  });
+  
+  beforeAll(^{
+    [CJEngine setVersion:1];
   });
   
   context(@"When initialising", ^{
@@ -179,7 +186,7 @@ describe(@"CJAPIRequest", ^{
     });
   });
   
-  describe(@"prepareParameters", ^{
+  describe(@"#prepareParameters", ^{
     __block CJAPIRequest *request;
     __block NSDictionary *parameters;
     
@@ -305,6 +312,96 @@ describe(@"CJAPIRequest", ^{
           [[expectFutureValue(theResponse) shouldEventually] equal:stubbedResponse[@"events"]];
           [[expectFutureValue(thePagination.currentPage) shouldEventually] equal:stubbedResponse[@"_pagination"][@"currentPage"]];
           [[expectFutureValue(theLinks.links) shouldEventually] equal:stubbedResponse[@"_links"]];
+        });
+  
+        context(@"When the cache policy is not CJAPIRequestReturnCacheDataThenLoad", ^{
+          beforeAll(^{
+            [CJEngine sharedEngine].cachePolicy = CJAPIRequestReturnCacheDataElseLoad;
+          });
+          
+          afterAll(^{
+            [CJEngine sharedEngine].cachePolicy = CJAPIRequestUseProtocolCachePolicy;
+          });
+          
+          it(@"performs the request only once", ^{
+            __block NSInteger requestCount = 0;
+            
+            [request performWithSuccess:^(id response, id pagination, id links) {
+              requestCount++;
+            } failure:nil];
+            
+            [[expectFutureValue(theValue(requestCount)) shouldEventually] equal:theValue(1)];
+          });
+        });
+        
+        context(@"When the cache policy is CJAPIRequestReturnCacheDataThenLoad", ^{
+          beforeAll(^{
+            [CJEngine sharedEngine].cachePolicy = CJAPIRequestReturnCacheDataThenLoad;
+          });
+          
+          afterAll(^{
+            [CJEngine sharedEngine].cachePolicy = CJAPIRequestUseProtocolCachePolicy;
+          });
+          
+          context(@"when the network is reachable", ^{
+            beforeEach(^{
+              [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable) andReturn:theValue(YES)];
+            });
+            
+            context(@"when there is a cached result", ^{
+              beforeEach(^{
+                [request stub:@selector(willDeleteCached) andReturn:theValue(YES)];
+                request.retries = 0;
+              });
+              
+              it(@"performs the request twice", ^{
+                __block NSInteger requestCount = 0;
+                
+                [request performWithSuccess:^(id response, id pagination, id links) {
+                  requestCount++;
+                } failure:nil];
+                
+                [[expectFutureValue(theValue(requestCount)) shouldEventually] equal:theValue(2)];
+              });
+            });
+            
+            context(@"when there isn't a cached result", ^{
+              beforeEach(^{
+                [request stub:@selector(willDeleteCached) andReturn:theValue(NO)];
+              });
+              
+              it(@"performs the request only once", ^{
+                __block NSInteger requestCount = 0;
+                
+                [request performWithSuccess:^(id response, id pagination, id links) {
+                  requestCount++;
+                } failure:nil];
+                
+                [[expectFutureValue(theValue(requestCount)) shouldEventually] equal:theValue(1)];
+              });
+            });
+          });
+          
+          context(@"when the network is not reachable", ^{
+            beforeEach(^{
+              [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable) andReturn:theValue(NO)];
+            });
+            
+            it(@"performs the request only once", ^{
+              __block NSInteger requestCount = 0;
+              
+              [request performWithSuccess:^(id response, id pagination, id links) {
+                requestCount++;
+              } failure:nil];
+              
+              [[expectFutureValue(theValue(requestCount)) shouldEventually] equal:theValue(1)];
+            });
+            
+            it(@"does not delete the cache", ^{
+              [[request shouldNotEventually] receive:@selector(willDeleteCached)];
+              [request performWithSuccess:nil failure:nil];
+            });
+          });
         });
         
         context(@"When a model class is defined", ^{

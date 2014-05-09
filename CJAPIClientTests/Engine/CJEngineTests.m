@@ -44,10 +44,34 @@ describe(@"Engine", ^{
       [[engine should] equal:engine2];
     });
     
-    it(@"instantiates a session manager", ^{
-      CJEngine *engine = [CJEngine sharedEngine];
+    describe(@"Request Session manager", ^{
+      __block CJEngine *engine = nil;
+      beforeAll(^{
+        engine = [[CJEngine sharedEngine] init];
+      });
       
-      [[engine.sessionManager should] beNonNil];
+      it(@"instantiates a session manager", ^{
+        [[engine.sessionManager should] beNonNil];
+      });
+      
+      it(@"sets a request serializer with the Engine's default cache policy", ^{
+        [[theValue(engine.sessionManager.requestSerializer.cachePolicy) should] equal:theValue(CJAPIRequestUseProtocolCachePolicy)];
+      });
+    });
+    
+    describe(@"Auth Session manager", ^{
+      __block CJEngine *engine = nil;
+      beforeAll(^{
+        engine = [CJEngine sharedEngine];
+      });
+      
+      it(@"instantiates a session manager", ^{
+        [[engine.authSessionManager should] beNonNil];
+      });
+      
+      it(@"sets a request serializer with a no cache policy", ^{
+        [[theValue(engine.authSessionManager.requestSerializer.cachePolicy) should] equal:theValue(CJAPIRequestReloadIgnoringCacheData)];
+      });
     });
   });
   
@@ -64,6 +88,28 @@ describe(@"Engine", ^{
       [CJEngine setUserToken:@"a_user_token"];
       
       [[[CJEngine userToken] should] equal:@"a_user_token"];
+    });
+  });
+  
+  describe(@"#cachePolicy", ^{
+    __block CJEngine *engine = nil;
+    beforeAll(^{
+      engine = [CJEngine sharedEngine];
+    });
+    
+    it(@"sets the cachePolicy for the engine's sessionManager request serializer", ^{
+      [engine setCachePolicy:CJAPIRequestReturnCacheDataElseLoad];
+      [[theValue(engine.sessionManager.requestSerializer.cachePolicy) should] equal:theValue(CJAPIRequestReturnCacheDataElseLoad)];
+    });
+    
+    context(@"when the cache policy is CJAPIRequestReturnCacheDataThenLoad", ^{
+      beforeAll(^{
+        [engine setCachePolicy:CJAPIRequestReturnCacheDataThenLoad];
+      });
+      
+      it(@"sets the cachePolicy to CJAPIRequestReturnCacheDataElseLoad", ^{
+        [[theValue(engine.sessionManager.requestSerializer.cachePolicy) should] equal:theValue(CJAPIRequestReturnCacheDataElseLoad)];
+      });
     });
   });
   

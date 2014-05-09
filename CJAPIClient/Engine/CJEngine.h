@@ -19,6 +19,24 @@
 #endif
 
 #import "JSONResponseSerializerWithData.h"
+#import "CJAPIRequestSerializer.h"
+
+enum
+{
+  CJAPIRequestUseProtocolCachePolicy = 0,
+  
+  CJAPIRequestReloadIgnoringLocalCacheData = 1,
+  CJAPIRequestReloadIgnoringLocalAndRemoteCacheData = 4, // Unimplemented
+  CJAPIRequestReloadIgnoringCacheData = CJAPIRequestReloadIgnoringLocalCacheData,
+  
+  CJAPIRequestReturnCacheDataElseLoad = 2,
+  CJAPIRequestReturnCacheDataDontLoad = 3,
+  
+  CJAPIRequestReloadRevalidatingCacheData = 5, // Unimplemented
+  
+  CJAPIRequestReturnCacheDataThenLoad = 6,
+};
+typedef NSUInteger CJAPIRequestCachePolicy;
 
 @interface CJEngine : NSObject
 
@@ -32,6 +50,11 @@
 #else
 @property (nonatomic, strong) AFHTTPRequestOperationManager *sessionManager;
 #endif
+
+/**
+ The cache policy to use when performing CJAPIRequests. The default is CJAPIRequestUseProtocolCachePolicy, which is the same as NSURLRequestUseProtocolCachePolicy
+ */
+@property (nonatomic, assign) CJAPIRequestCachePolicy cachePolicy;
 
 ///---------------------
 /// @name Initialization

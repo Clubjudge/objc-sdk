@@ -48,6 +48,7 @@
 		13AA62C619056C880089C443 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AA62C519056C880089C443 /* JSONResponseSerializerWithData.m */; };
 		13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AAF18FECDB1007D1DD2 /* CJAPIRequest.m */; };
 		13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */; };
+		13AFF8E4191C041E00BACFC2 /* CJAPIRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 13AFF8E3191C041E00BACFC2 /* CJAPIRequestSerializer.m */; };
 		13C902721908065F00615874 /* MockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C902711908065F00615874 /* MockModel.m */; };
 		13C90275190819E500615874 /* CJArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C90274190819E500615874 /* CJArtist.m */; };
 		13C9027719081DB500615874 /* CJArtistTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C9027619081DB500615874 /* CJArtistTests.m */; };
@@ -144,6 +145,8 @@
 		13AD9AAE18FECDB1007D1DD2 /* CJAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAPIRequest.h; sourceTree = "<group>"; };
 		13AD9AAF18FECDB1007D1DD2 /* CJAPIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAPIRequest.m; sourceTree = "<group>"; };
 		13AD9AB118FECF64007D1DD2 /* CJAPIRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAPIRequestTests.m; sourceTree = "<group>"; };
+		13AFF8E2191C041E00BACFC2 /* CJAPIRequestSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAPIRequestSerializer.h; sourceTree = "<group>"; };
+		13AFF8E3191C041E00BACFC2 /* CJAPIRequestSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAPIRequestSerializer.m; sourceTree = "<group>"; };
 		13C902701908065F00615874 /* MockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockModel.h; sourceTree = "<group>"; };
 		13C902711908065F00615874 /* MockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockModel.m; sourceTree = "<group>"; };
 		13C90273190819E500615874 /* CJArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJArtist.h; sourceTree = "<group>"; };
@@ -388,6 +391,8 @@
 			children = (
 				13AA62C419056C880089C443 /* JSONResponseSerializerWithData.h */,
 				13AA62C519056C880089C443 /* JSONResponseSerializerWithData.m */,
+				13AFF8E2191C041E00BACFC2 /* CJAPIRequestSerializer.h */,
+				13AFF8E3191C041E00BACFC2 /* CJAPIRequestSerializer.m */,
 			);
 			path = Serializers;
 			sourceTree = "<group>";
@@ -578,6 +583,7 @@
 				13A6B59E1909D3320083FFE7 /* CJRating.m in Sources */,
 				130E90A61908283700211DC0 /* CJModel+Following.m in Sources */,
 				130A0990190953BD0043FB0C /* CJMusicGenre.m in Sources */,
+				13AFF8E4191C041E00BACFC2 /* CJAPIRequestSerializer.m in Sources */,
 				13AD9AB018FECDB1007D1DD2 /* CJAPIRequest.m in Sources */,
 				13E6371118FC671A00D7EB22 /* CJEngineConfiguration.m in Sources */,
 			);
