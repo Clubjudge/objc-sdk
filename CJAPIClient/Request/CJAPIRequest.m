@@ -16,6 +16,8 @@
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #endif
 
+NSInteger const kRequestMaxRetries = 1;
+
 NSString *const kRequestMethodGET = @"GET";
 NSString *const kRequestMethodPOST = @"POST";
 NSString *const kRequestMethodPUT = @"PUT";
@@ -30,6 +32,8 @@ NSString *const kRequestEmbeds = @"embeds";
 @interface CJAPIRequest() {
   dispatch_queue_t parseBackgroundQueue;
 }
+
+@property (nonatomic, assign) NSInteger retries;
 
 #ifdef IS_OS_7_OR_LATER
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
@@ -49,6 +53,7 @@ NSString *const kRequestEmbeds = @"embeds";
     [self setMethod:method];
     [self setPath:path];
     self.sessionManager = [[CJEngine sharedEngine] sessionManager];
+    self.retries = 0;
     
     parseBackgroundQueue = dispatch_queue_create("background", NULL);
   }
@@ -123,7 +128,16 @@ NSString *const kRequestEmbeds = @"embeds";
                                      id parsedResponse = [self parseSource:source];
                                      
                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                       success(parsedResponse, pagination, links);
+                                       if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad) {
+                                         if ([self willDeleteCached] && self.retries < kRequestMaxRetries) {
+                                           self.retries++;
+                                           [self performWithSuccess:success failure:failure];
+                                         }
+                                       }
+                                       
+                                       if (success) {
+                                         success(parsedResponse, pagination, links);
+                                       }
                                      });
                                    });
                                    
@@ -294,6 +308,23 @@ NSString *const kRequestEmbeds = @"embeds";
   NSAssert([model respondsToSelector:@selector(initWithInfo:)], @"Model with class %@ must implement initWithInfo:", [_modelClass description]);
   
   return [model initWithInfo:object];
+}
+
+- (BOOL)willDeleteCached
+{
+  BOOL willDelete = NO;
+  
+  NSMutableURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:self.path relativeToURL:self.sessionManager.baseURL] absoluteString] parameters:self.parameters error:nil];
+  
+  NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
+  
+  if (cachedResponse) {
+    willDelete = YES;
+    
+    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
+  }
+  
+  return willDelete;
 }
 
 @end

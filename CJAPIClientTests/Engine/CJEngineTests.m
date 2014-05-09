@@ -47,7 +47,7 @@ describe(@"Engine", ^{
     describe(@"Request Session manager", ^{
       __block CJEngine *engine = nil;
       beforeAll(^{
-        engine = [CJEngine sharedEngine];
+        engine = [[CJEngine sharedEngine] init];
       });
       
       it(@"instantiates a session manager", ^{
