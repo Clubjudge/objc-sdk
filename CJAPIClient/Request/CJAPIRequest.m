@@ -128,7 +128,7 @@ NSString *const kRequestEmbeds = @"embeds";
                                      id parsedResponse = [self parseSource:source];
                                      
                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                       if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad) {
+                                       if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad && [[AFNetworkReachabilityManager sharedManager] isReachable]) {
                                          if ([self willDeleteCached] && self.retries < kRequestMaxRetries) {
                                            self.retries++;
                                            [self performWithSuccess:success failure:failure];

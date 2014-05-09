@@ -343,26 +343,48 @@ describe(@"CJAPIRequest", ^{
             [CJEngine sharedEngine].cachePolicy = CJAPIRequestUseProtocolCachePolicy;
           });
           
-          context(@"when there is a cached result", ^{
+          context(@"when the network is reachable", ^{
             beforeEach(^{
-              [request stub:@selector(willDeleteCached) andReturn:theValue(YES)];
-              request.retries = 0;
+              [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable) andReturn:theValue(YES)];
             });
             
-            it(@"performs the request twice", ^{
-              __block NSInteger requestCount = 0;
+            context(@"when there is a cached result", ^{
+              beforeEach(^{
+                [request stub:@selector(willDeleteCached) andReturn:theValue(YES)];
+                request.retries = 0;
+              });
               
-              [request performWithSuccess:^(id response, id pagination, id links) {
-                requestCount++;
-              } failure:nil];
+              it(@"performs the request twice", ^{
+                __block NSInteger requestCount = 0;
+                
+                [request performWithSuccess:^(id response, id pagination, id links) {
+                  requestCount++;
+                } failure:nil];
+                
+                [[expectFutureValue(theValue(requestCount)) shouldEventually] equal:theValue(2)];
+              });
+            });
+            
+            context(@"when there isn't a cached result", ^{
+              beforeEach(^{
+                [request stub:@selector(willDeleteCached) andReturn:theValue(NO)];
+              });
               
-              [[expectFutureValue(theValue(requestCount)) shouldEventually] equal:theValue(2)];
+              it(@"performs the request only once", ^{
+                __block NSInteger requestCount = 0;
+                
+                [request performWithSuccess:^(id response, id pagination, id links) {
+                  requestCount++;
+                } failure:nil];
+                
+                [[expectFutureValue(theValue(requestCount)) shouldEventually] equal:theValue(1)];
+              });
             });
           });
           
-          context(@"when there isn't a cached result", ^{
+          context(@"when the network is not reachable", ^{
             beforeEach(^{
-              [request stub:@selector(willDeleteCached) andReturn:theValue(NO)];
+              [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable) andReturn:theValue(NO)];
             });
             
             it(@"performs the request only once", ^{
@@ -373,6 +395,11 @@ describe(@"CJAPIRequest", ^{
               } failure:nil];
               
               [[expectFutureValue(theValue(requestCount)) shouldEventually] equal:theValue(1)];
+            });
+            
+            it(@"does not delete the cache", ^{
+              [[request shouldNotEventually] receive:@selector(willDeleteCached)];
+              [request performWithSuccess:nil failure:nil];
             });
           });
         });

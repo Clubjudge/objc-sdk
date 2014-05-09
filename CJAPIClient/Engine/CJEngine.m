@@ -45,6 +45,7 @@ typedef NSUInteger CJAPISessionManager;
 - (id)init
 {
   if (self = [super init]) {
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [CJEngine setVersion:1];
     [self setCachePolicy:CJAPIRequestUseProtocolCachePolicy];
     [self setupSessionManager];
