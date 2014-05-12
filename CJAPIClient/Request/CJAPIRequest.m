@@ -146,19 +146,25 @@ NSString *const kRequestEmbeds = @"embeds";
                                },
                                kRequestMethodPOST : ^{
                                  [self POSTWithSuccess:^(id operation, id responseObject) {
-                                   success(responseObject, nil, nil);
+                                   if (success) {
+                                     success(responseObject, nil, nil);
+                                   }
                                  }
                                                failure:failure];
                                },
                                kRequestMethodPUT : ^{
                                  [self PUTWithSuccess:^(id operation, id responseObject) {
-                                   success(responseObject, nil, nil);
+                                   if (success) {
+                                     success(responseObject, nil, nil);
+                                   }
                                  }
                                               failure:failure];
                                },
                                kRequestMethodDELETE : ^{
                                  [self DELETEWithSuccess:^(id operation, id responseObject) {
-                                   success(responseObject, nil, nil);
+                                   if (success) {
+                                     success(responseObject, nil, nil);
+                                   }
                                  }
                                                  failure:failure];
                                }
