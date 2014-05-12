@@ -6,5 +6,4 @@
 
 #ifdef __OBJC__
   #import <Foundation/Foundation.h>
-  #define IS_OS_7_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 #endif

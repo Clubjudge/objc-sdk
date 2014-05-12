@@ -10,6 +10,8 @@
   `CJEngine` is a singleton that provides core utilities for CJKit. These include a shared Session Manager, environment, client key and user token facilities as well as user authentication methods.
  */
 
+#define IS_OS_7_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+
 #import <Foundation/Foundation.h>
 
 #ifdef IS_OS_7_OR_LATER
