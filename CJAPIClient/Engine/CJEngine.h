@@ -109,7 +109,7 @@ typedef NSUInteger CJAPIRequestCachePolicy;
 /**
  Sets the environment (development, staging or production) to make requests against
  */
-- (void)setEnvironment:(NSString *)environment;
++ (void)setEnvironment:(NSString *)environment;
 
 ///---------------------
 /// @name User Authentication
