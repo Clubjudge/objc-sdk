@@ -38,6 +38,9 @@
 - (void)follow;
 - (void)unfollow;
 
+- (NSString *)imagePathForAvatarWithSize:(NSInteger)size;
+- (NSString *)imagePathForBackgroundWithSize:(NSInteger)size;
+
 @end
 
 #pragma mark - Mapping

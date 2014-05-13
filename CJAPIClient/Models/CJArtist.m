@@ -14,6 +14,7 @@
 #import "CJComment.h"
 #import "CJUser.h"
 #import "CJModel+Following.h"
+#import "CJModel+Images.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
 @implementation CJArtist
@@ -68,6 +69,16 @@
 - (void)unfollow
 {
   [self unfollowEntity:@"artist"];
+}
+
+- (NSString *)imagePathForAvatarWithSize:(NSInteger)size
+{
+  return [self imagePathForImageInfo:[_avatars firstObject] andSize:size];
+}
+
+- (NSString *)imagePathForBackgroundWithSize:(NSInteger)size
+{
+  return [self imagePathForImageInfo:_background andSize:size];
 }
 
 @end
