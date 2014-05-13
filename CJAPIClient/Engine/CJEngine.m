@@ -57,7 +57,7 @@ typedef NSUInteger CJAPISessionManager;
 
 
 #pragma mark - Environment
-- (void)setEnvironment:(NSString *)environment
++ (void)setEnvironment:(NSString *)environment
 {
   [CJEngineConfiguration setEnvironment:environment];
 }
