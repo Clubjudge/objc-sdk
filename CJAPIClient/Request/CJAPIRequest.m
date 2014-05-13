@@ -320,7 +320,7 @@ NSString *const kRequestEmbeds = @"embeds";
 {
   BOOL willDelete = NO;
   
-  NSMutableURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:self.path relativeToURL:self.sessionManager.baseURL] absoluteString] parameters:self.parameters error:nil];
+  NSMutableURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:self.path relativeToURL:self.sessionManager.baseURL] absoluteString] parameters:[self prepareParameters] error:nil];
   
   NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
   
