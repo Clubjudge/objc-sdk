@@ -38,7 +38,6 @@
 - (BOOL)willDeleteCached;
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
-@property (nonatomic, assign) NSInteger retries;
 
 @end
 
@@ -1048,6 +1047,87 @@ describe(@"CJAPIRequest", ^{
           });
           
           [[expectFutureValue(theValue(hasError)) shouldEventually] beYes];
+        });
+      });
+      
+      context(@"When cache policy is CJAPIRequestReturnCacheDataThenLoad", ^{
+        __block NSDictionary *stubbedResponse;
+        __block id<OHHTTPStubsDescriptor> stub = nil;
+        
+        beforeEach(^{
+          [[CJEngine sharedEngine] setCachePolicy:CJAPIRequestReturnCacheDataThenLoad];
+          request = [[CJAPIRequest alloc] initWithMethod:@"GET"
+                                                 andPath:@"/a/path"];
+          request.retries = 0;
+          
+          [request stub:@selector(willDeleteCached) andReturn:theValue(YES)];
+          
+          stubbedResponse = @{
+                              @"events": @[
+                                  @{@"id": @"5"},
+                                  @{@"id": @"10"}
+                                  ],
+                              @"_pagination": @{
+                                  @"currentPage": @1,
+                                  @"perPage": @10,
+                                  @"totalPages": @5,
+                                  @"totalItems": @47
+                                  },
+                              @"_links": @{
+                                  @"artists": @"http://artists",
+                                  @"venue": @"http://venue"
+                                  }
+                              };
+          
+          stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+            return [req.URL.path isEqualToString:@"/v1/a/path.json"];
+          } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+            NSError *error;
+            NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
+                                                           options:kNilOptions
+                                                             error:&error];
+            
+            return [OHHTTPStubsResponse responseWithData:data
+                                              statusCode:200
+                                                 headers:@{@"Content-Type":@"text/json"}];
+          }];
+          
+          stub.name = @"getSucceeds";
+        });
+        
+        afterEach(^{
+          request.retries = 0;
+        });
+        
+        it(@"fulfills with a Promise as its second argument", ^{
+          __block id theNextRequest = nil;
+          
+          [request perform]
+          .then(^(id data, id nextRequest) {
+            theNextRequest = nextRequest;
+          });
+          
+          [[expectFutureValue(theNextRequest) shouldEventually] beKindOfClass:[Promise class]];
+        });
+        
+        it(@"fulfills the new Promise with fresh data", ^{
+          __block BOOL hasResponse = NO;
+          __block BOOL hasPagination = NO;
+          __block BOOL hasLinks = NO;
+          
+          [request perform]
+          .then(^(id data, Promise *nextRequest) {
+            return nextRequest;
+          })
+          .then(^(NSDictionary *result){
+            hasResponse = [result hasKey:@"response"];
+            hasPagination = [result hasKey:@"pagination"];
+            hasLinks = [result hasKey:@"links"];
+          });
+          
+          [[expectFutureValue(theValue(hasResponse)) shouldEventually] beYes];
+          [[expectFutureValue(theValue(hasPagination)) shouldEventually] beYes];
+          [[expectFutureValue(theValue(hasLinks)) shouldEventually] beYes];
         });
       });
     });

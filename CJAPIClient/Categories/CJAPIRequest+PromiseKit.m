@@ -12,12 +12,40 @@
 
 - (Promise *)perform
 {
+  __block PromiseResolver freshFulfiller;
+  __block PromiseResolver freshRejecter;
+  Promise *freshDataPromise = [Promise new:^(PromiseResolver fulfiller, PromiseResolver rejecter) {
+    freshFulfiller = fulfiller;
+    freshRejecter = rejecter;
+  }];
+  
   return [Promise new:^(PromiseResolver fulfiller, PromiseResolver rejecter) {
     [self performWithSuccess:^(id response, CJPaginationInfo *pagination, CJLinksInfo *links) {
       NSDictionary *responseObject = @{@"response": response, @"pagination": pagination, @"links": links};
-      fulfiller(responseObject);
+      
+      if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad) {
+        if ([self.retries integerValue] < kRequestMaxRetries) {
+          // Serving cached data, attach another Promise
+          fulfiller(PMKManifold(responseObject, freshDataPromise));
+        } else {
+          // Serving fresh data
+          freshFulfiller(responseObject);
+        }
+      } else {
+        fulfiller(responseObject);
+      }
     } failure:^(NSDictionary *error, NSNumber *statusCode) {
-      rejecter(error);
+      if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad) {
+        if ([self.retries integerValue] < kRequestMaxRetries) {
+          // Serving cached data, attach another Promise
+          rejecter(PMKManifold(error, freshDataPromise));
+        } else {
+          // Serving fresh data
+          freshRejecter(error);
+        }
+      } else {
+        rejecter(error);
+      }
     }];
   }];
 }
