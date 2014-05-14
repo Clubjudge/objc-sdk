@@ -27,6 +27,7 @@
   if (self && info) {
     // Core properties
     _name = info[kEventName];
+    _background = info[kEventBackground];
     _flyers = info[kEventFlyers];
     _description = info[kEventDescription];
     _startsAt = [NSDate dateWithISO8601String:info[kEventStartsAt]];
@@ -97,6 +98,11 @@
   NSDictionary *flyer = [_flyers objectAtIndex:position];
   
   return [self imagePathForImageInfo:flyer andSize:size];
+}
+
+- (NSString *)imagePathForBackgroundwithSize:(NSInteger)size
+{
+  return [self imagePathForImageInfo:_background andSize:size];
 }
 
 @end
