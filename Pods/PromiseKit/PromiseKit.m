@@ -19,6 +19,12 @@ static const id PMKNull = @"PMKNull";
 static void RejectRecursively(Promise *);
 static void FulfillRecursively(Promise *);
 
+@interface PMKArray : NSObject
+{ @public NSArray *objs; }
+@end
+
+
+
 /**
  `then` and `catch` are method-signature tolerant, this function calls
  the block correctly and normalizes the return value to `id`.
@@ -35,47 +41,58 @@ static id safely_call_block(id frock, id result) {
         const NSUInteger nargs = sig.numberOfArguments;
         const char rtype = sig.methodReturnType[0];
 
-        #define call_block_with_rtype(type) @(nargs > 1 \
-            ? ((type (^)(id))frock)(result) \
-            : ((type (^)(void))frock)())
+        #define call_block_with_rtype(type) ({^type{ \
+            switch (nargs) { \
+                default:  @throw PMKE(@"Invalid argument count for handler block"); \
+                case 1:   return ((type(^)(void))frock)(); \
+                case 2: { \
+                    type (^block)(id) = frock; \
+                    return [result class] == [PMKArray class] \
+                        ? block(result[0]) \
+                        : block(result); \
+                } \
+                case 3: { \
+                    type (^block)(id, id) = frock; \
+                    return [result class] == [PMKArray class] \
+                        ? block(result[0], result[1]) \
+                        : block(result, nil); \
+                } \
+                case 4: { \
+                    type (^block)(id, id, id) = frock; \
+                    return [result class] == [PMKArray class] \
+                        ? block(result[0], result[1], result[2]) \
+                        : block(result, nil, nil); \
+                } \
+            }}();})
 
         switch (rtype) {
             case 'v':
-                if (nargs > 1) {
-                    void (^block)(id) = frock;
-                    block(result);
-                } else {
-                    void (^block)(void) = frock;
-                    block();
-                }
+                call_block_with_rtype(void);
                 return PMKNull;
             case '@':
-                return (nargs > 1
-                    ? ((id (^)(id))frock)(result)
-                    : ((id (^)(void))frock)())
-                ?: PMKNull;
+                return call_block_with_rtype(id) ?: PMKNull;
             case '*': {
-                char *str = nargs > 1
-                    ? ((char *(^)(id))frock)(result)
-                    : ((char *(^)(void))frock)();
+                char *str = call_block_with_rtype(char *);
                 return str ? @(str) : PMKNull;
             }
-            case 'c': return call_block_with_rtype(char);
-            case 'i': return call_block_with_rtype(int);
-            case 's': return call_block_with_rtype(short);
-            case 'l': return call_block_with_rtype(long);
-            case 'q': return call_block_with_rtype(long long);
-            case 'C': return call_block_with_rtype(unsigned char);
-            case 'I': return call_block_with_rtype(unsigned int);
-            case 'S': return call_block_with_rtype(unsigned short);
-            case 'L': return call_block_with_rtype(unsigned long);
-            case 'Q': return call_block_with_rtype(unsigned long long);
-            case 'f': return call_block_with_rtype(float);
-            case 'd': return call_block_with_rtype(double);
-            case 'B': return call_block_with_rtype(_Bool);
+            case 'c': return @(call_block_with_rtype(char));
+            case 'i': return @(call_block_with_rtype(int));
+            case 's': return @(call_block_with_rtype(short));
+            case 'l': return @(call_block_with_rtype(long));
+            case 'q': return @(call_block_with_rtype(long long));
+            case 'C': return @(call_block_with_rtype(unsigned char));
+            case 'I': return @(call_block_with_rtype(unsigned int));
+            case 'S': return @(call_block_with_rtype(unsigned short));
+            case 'L': return @(call_block_with_rtype(unsigned long));
+            case 'Q': return @(call_block_with_rtype(unsigned long long));
+            case 'f': return @(call_block_with_rtype(float));
+            case 'd': return @(call_block_with_rtype(double));
+            case 'B': return @(call_block_with_rtype(_Bool));
             case '^':
-                if (strcmp(sig.methodReturnType, "^v") == 0)
+                if (strcmp(sig.methodReturnType, "^v") == 0) {
+                    call_block_with_rtype(void);
                     return PMKNull;
+                }
                 // else fall through!
             default:
                 @throw PMKE(@"Unsupported method signature… Why not fork and fix?");
@@ -167,8 +184,6 @@ static id safely_call_block(id frock, id result) {
     BOOL const wasarray = [promises isKindOfClass:[NSArray class]];
     if ([promises isKindOfClass:[Promise class]])
         promises = @[promises];
-    if (![promises isKindOfClass:[NSArray class]])
-        return [Promise promiseWithValue:promises];
 
     NSPointerArray *results = [NSPointerArray strongObjectsPointerArray];
     results.count = promises.count;
@@ -195,6 +210,9 @@ static id safely_call_block(id frock, id result) {
                 fulfiller(passme);
         };
         [promises enumerateObjectsUsingBlock:^(Promise *promise, NSUInteger ii, BOOL *stop) {
+            if (!IsPromise(promise))
+                promise = [Promise promiseWithValue:promise];
+
             promise.catch(^(id o){
                 failed = YES;
                 both(ii, o);
@@ -393,4 +411,24 @@ Promise *dispatch_promise_on(dispatch_queue_t queue, id block) {
             });
         });
     }];
+}
+
+
+
+@implementation PMKArray
+
+- (id)objectAtIndexedSubscript:(NSUInteger)idx {
+    return objs.count >= idx+1 ? objs[idx] : nil;
+}
+
+@end
+
+
+
+#undef PMKManifold
+
+id PMKManifold(NSArray *args) {
+    PMKArray *aa = [PMKArray new];
+    aa->objs = args;
+    return aa;
 }
