@@ -32,6 +32,7 @@
 @property(nonatomic, strong) NSNumber *friendsFollowingCount;
 @property(nonatomic, strong) NSNumber *reviewCount;
 @property(nonatomic, strong) NSDictionary *userData;
+@property(nonatomic, strong) NSDictionary *background;
 @property(nonatomic, strong) NSDictionary *contest;
 @property(nonatomic, strong) NSDictionary *expertReviewRatings;
 @property(nonatomic, strong) NSDictionary *globalRating;
@@ -53,12 +54,15 @@
 - (NSString *)imagePathForFlyerAtPosition:(NSInteger)position
                                  withSize:(NSInteger)size;
 
+- (NSString *)imagePathForBackgroundwithSize:(NSInteger)size;
+
 @end
 
 #pragma mark - Mapping
 
 #define kEventName @"name"
 #define kEventFlyers @"flyers"
+#define kEventBackground @"background"
 #define kEventDescription @"description"
 #define kEventStartsAt @"startsAt"
 #define kEventEndsAt @"endsAt"
