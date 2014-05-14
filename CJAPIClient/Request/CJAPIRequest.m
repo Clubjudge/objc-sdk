@@ -16,8 +16,6 @@
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #endif
 
-NSInteger const kRequestMaxRetries = 1;
-
 NSString *const kRequestMethodGET = @"GET";
 NSString *const kRequestMethodPOST = @"POST";
 NSString *const kRequestMethodPUT = @"PUT";
@@ -32,8 +30,6 @@ NSString *const kRequestEmbeds = @"embeds";
 @interface CJAPIRequest() {
   dispatch_queue_t parseBackgroundQueue;
 }
-
-@property (nonatomic, assign) NSInteger retries;
 
 #ifdef IS_OS_7_OR_LATER
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
@@ -128,15 +124,15 @@ NSString *const kRequestEmbeds = @"embeds";
                                      id parsedResponse = [self parseSource:source];
                                      
                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                       if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad && [[AFNetworkReachabilityManager sharedManager] isReachable]) {
-                                         if ([self willDeleteCached] && self.retries < kRequestMaxRetries) {
-                                           self.retries++;
-                                           [self performWithSuccess:success failure:failure];
-                                         }
-                                       }
-                                       
                                        if (success) {
                                          success(parsedResponse, pagination, links);
+                                       }
+                                       
+                                       if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad && [[AFNetworkReachabilityManager sharedManager] isReachable]) {
+                                         if ([self willDeleteCached] && [self.retries integerValue] < kRequestMaxRetries) {
+                                           self.retries = @([self.retries intValue] + 1);
+                                           [self performWithSuccess:success failure:failure];
+                                         }
                                        }
                                      });
                                    });

@@ -57,6 +57,11 @@ typedef void (^CJFailureBlock)(NSDictionary* error, NSNumber *statusCode);
  */
 @property (nonatomic, assign) Class modelClass;
 
+/**
+ The number of times the request has been performed. Useful when used in conjunction with the CJAPIRequestReturnCacheDataThenLoad cache policy.
+ */
+@property (nonatomic, strong) NSNumber *retries;
+
 ///---------------------
 /// @name Initialization
 ///---------------------
@@ -85,3 +90,5 @@ typedef void (^CJFailureBlock)(NSDictionary* error, NSNumber *statusCode);
 - (NSDictionary *)prepareParameters;
 
 @end
+
+#define kRequestMaxRetries 1
