@@ -21,7 +21,15 @@
   
   return [Promise new:^(PromiseResolver fulfiller, PromiseResolver rejecter) {
     [self performWithSuccess:^(id response, CJPaginationInfo *pagination, CJLinksInfo *links) {
-      NSDictionary *responseObject = @{@"response": response, @"pagination": pagination, @"links": links};
+      NSMutableDictionary *responseObject = [NSMutableDictionary dictionaryWithDictionary:@{@"response": response}];
+      
+      if (pagination) {
+        responseObject[@"pagination"] = pagination;
+      }
+      
+      if (links) {
+        responseObject[@"links"] = links;
+      }
       
       if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad) {
         if ([self.retries integerValue] < kRequestMaxRetries) {
