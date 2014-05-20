@@ -40,7 +40,9 @@
 		13968CBF1909294F008692D1 /* CJUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13968CBE1909294F008692D1 /* CJUserTests.m */; };
 		13968CC219093388008692D1 /* CJMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 13968CC119093388008692D1 /* CJMe.m */; };
 		13980DBE190589B800D449FA /* CJModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13980DBD190589B800D449FA /* CJModel.m */; };
+		139F556A192B5BB10068FC8A /* CJReviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 139F5569192B5BB10068FC8A /* CJReviewTests.m */; };
 		13A25E77190E70E30035122D /* CJModel+Distance.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A25E76190E70E30035122D /* CJModel+Distance.m */; };
+		13A3FA13192A6C7F0056A4DC /* CJReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A3FA12192A6C7F0056A4DC /* CJReview.m */; };
 		13A6B59E1909D3320083FFE7 /* CJRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A6B59D1909D3320083FFE7 /* CJRating.m */; };
 		13A6B5A01909D3420083FFE7 /* CJRatingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A6B59F1909D3420083FFE7 /* CJRatingTests.m */; };
 		13A6B5A31909D5710083FFE7 /* CJCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A6B5A21909D5710083FFE7 /* CJCity.m */; };
@@ -132,8 +134,11 @@
 		13968CC119093388008692D1 /* CJMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMe.m; sourceTree = "<group>"; };
 		13980DBC190589B800D449FA /* CJModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJModel.h; sourceTree = "<group>"; };
 		13980DBD190589B800D449FA /* CJModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJModel.m; sourceTree = "<group>"; };
+		139F5569192B5BB10068FC8A /* CJReviewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJReviewTests.m; sourceTree = "<group>"; };
 		13A25E75190E70E30035122D /* CJModel+Distance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJModel+Distance.h"; sourceTree = "<group>"; };
 		13A25E76190E70E30035122D /* CJModel+Distance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJModel+Distance.m"; sourceTree = "<group>"; };
+		13A3FA11192A6C7F0056A4DC /* CJReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJReview.h; sourceTree = "<group>"; };
+		13A3FA12192A6C7F0056A4DC /* CJReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJReview.m; sourceTree = "<group>"; };
 		13A6B59C1909D3320083FFE7 /* CJRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJRating.h; sourceTree = "<group>"; };
 		13A6B59D1909D3320083FFE7 /* CJRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJRating.m; sourceTree = "<group>"; };
 		13A6B59F1909D3420083FFE7 /* CJRatingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJRatingTests.m; sourceTree = "<group>"; };
@@ -362,6 +367,8 @@
 				13A6B59D1909D3320083FFE7 /* CJRating.m */,
 				13A6B5A11909D5710083FFE7 /* CJCity.h */,
 				13A6B5A21909D5710083FFE7 /* CJCity.m */,
+				13A3FA11192A6C7F0056A4DC /* CJReview.h */,
+				13A3FA12192A6C7F0056A4DC /* CJReview.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -382,6 +389,7 @@
 				130A099B1909BE720043FB0C /* CJTicketTests.m */,
 				13A6B59F1909D3420083FFE7 /* CJRatingTests.m */,
 				13A6B5A41909D6730083FFE7 /* CityTests.m */,
+				139F5569192B5BB10068FC8A /* CJReviewTests.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -562,6 +570,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13A3FA13192A6C7F0056A4DC /* CJReview.m in Sources */,
 				1367E7C3190678200022885C /* CJPaginationInfo.m in Sources */,
 				13A25E77190E70E30035122D /* CJModel+Distance.m in Sources */,
 				13968CBD19092379008692D1 /* CJUser.m in Sources */,
@@ -603,6 +612,7 @@
 				130A09921909549C0043FB0C /* CJMusicGenreTests.m in Sources */,
 				13968CBF1909294F008692D1 /* CJUserTests.m in Sources */,
 				130A09971909656C0043FB0C /* CJCommentTests.m in Sources */,
+				139F556A192B5BB10068FC8A /* CJReviewTests.m in Sources */,
 				13E6371418FC6AA900D7EB22 /* CJEngineConfigurationTests.m in Sources */,
 				13A6B5A51909D6730083FFE7 /* CityTests.m in Sources */,
 				1367E7C019058A590022885C /* CJModelTests.m in Sources */,
