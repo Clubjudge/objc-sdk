@@ -8,7 +8,7 @@
 
 #import "AFURLRequestSerialization.h"
 
-@interface CJAPIRequestSerializer : AFHTTPRequestSerializer
+@interface CJAPIRequestSerializer : AFJSONRequestSerializer
 
 @property (nonatomic, assign) NSURLRequestCachePolicy cachePolicy;
 
