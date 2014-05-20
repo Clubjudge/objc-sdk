@@ -16,7 +16,3 @@
 @property (nonatomic, assign) BOOL inferred;
 
 @end
-
-#define kMusicGenreParentId @"parentId"
-#define kMusicGenreName @"name"
-#define kMusicGenreInferred @"inferred"

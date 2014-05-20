@@ -15,5 +15,3 @@
 @property (nonatomic, strong) NSNumber *score;
 
 @end
-
-#define kRatingScore @"score"

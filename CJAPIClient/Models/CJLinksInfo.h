@@ -21,9 +21,3 @@
 - (CJAPIRequest *)requestForLink:(NSString *)link;
 
 @end
-
-#define kLinksFirst     @"first"
-#define kLinksPrevious  @"previous"
-#define kLinksSelf      @"self"
-#define kLinksNext      @"next"
-#define kLinksLast      @"last"

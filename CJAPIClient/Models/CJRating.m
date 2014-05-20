@@ -10,6 +10,8 @@
 
 @implementation CJRating
 
+static NSString *kRatingScore = @"score";
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

@@ -42,29 +42,3 @@
 - (NSString *)imagePathForBackgroundWithSize:(NSInteger)size;
 
 @end
-
-#pragma mark - Mapping
-
-#define kArtistName @"name"
-#define kArtistDescription @"description"
-#define kArtistFollowing @"follow"
-#define kArtistFollowersCount @"followersCount"
-#define kArtistCommentsCount @"commentsCount"
-#define kArtistFriendsFollowingCount @"friendsFollowingCount"
-#define kArtistUpcomingEventsCount @"upcomingEventsCount"
-#define kArtistSocialMentionsCount @"socialMentionsCount"
-#define kArtistSocialLinks @"socialLinks"
-#define kArtistAvatars @"avatars"
-#define kArtistAddress @"address"
-#define kArtistBackground @"background"
-#define kArtistEmail @"email"
-#define kArtistWebsiteURL @"websiteUrl"
-
-#define kArtistEvents @"events"
-#define kArtistMusicGenres @"musicGenres"
-#define kArtistFollowers @"followers"
-
-#define kArtistLinkEvents @"events"
-#define kArtistLinkComments @"comments"
-#define kArtistLinkFollowers @"followers"
-#define kArtistLinkGenres @"musicGenres"

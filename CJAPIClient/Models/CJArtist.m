@@ -19,6 +19,30 @@
 
 @implementation CJArtist
 
+static NSString *kArtistName = @"name";
+static NSString *kArtistDescription = @"description";
+static NSString *kArtistFollowing = @"follow";
+static NSString *kArtistFollowersCount = @"followersCount";
+static NSString *kArtistCommentsCount = @"commentsCount";
+static NSString *kArtistFriendsFollowingCount = @"friendsFollowingCount";
+static NSString *kArtistUpcomingEventsCount = @"upcomingEventsCount";
+static NSString *kArtistSocialMentionsCount = @"socialMentionsCount";
+static NSString *kArtistSocialLinks = @"socialLinks";
+static NSString *kArtistAvatars = @"avatars";
+static NSString *kArtistAddress = @"address";
+static NSString *kArtistBackground = @"background";
+static NSString *kArtistEmail = @"email";
+static NSString *kArtistWebsiteURL = @"websiteUrl";
+
+static NSString *kArtistEvents = @"events";
+static NSString *kArtistMusicGenres = @"musicGenres";
+static NSString *kArtistFollowers = @"followers";
+
+static NSString *kArtistLinkEvents = @"events";
+static NSString *kArtistLinkComments = @"comments";
+static NSString *kArtistLinkFollowers = @"followers";
+static NSString *kArtistLinkGenres = @"musicGenres";
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

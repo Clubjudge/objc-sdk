@@ -10,6 +10,12 @@
 
 @implementation CJCity
 
+static NSString *kCityName = @"name";
+static NSString *kCityAliases = @"aliases";
+static NSString *kCityRegion = @"region";
+static NSString *kCityCountry = @"country";
+static NSString *kCityGeolocation = @"geolocation";
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

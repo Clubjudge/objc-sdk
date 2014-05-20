@@ -8,15 +8,15 @@
 
 #import "CJEngineConfiguration.h"
 
-#define kAPIVersion @"v1"
-#define CJConfigurationAPIBaseUrl @"kAPIBaseURL"
-#define CJConfigurationAuthAPIBaseUrl @"kAuthAPIBaseURL"
-
 @interface CJEngineConfiguration()
 
 @end
 
 @implementation CJEngineConfiguration
+
+static NSString *kAPIVersion = @"v1";
+static NSString *CJConfigurationAPIBaseUrl = @"kAPIBaseURL";
+static NSString *CJConfigurationAuthAPIBaseUrl = @"kAuthAPIBaseURL";
 
 #pragma mark - Initialisers
 

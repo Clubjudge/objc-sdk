@@ -18,9 +18,3 @@
 @property (readonly) CLLocationCoordinate2D geolocation;
 
 @end
-
-#define kCityName @"name"
-#define kCityAliases @"aliases"
-#define kCityRegion @"region"
-#define kCityCountry @"country"
-#define kCityGeolocation @"geolocation"
