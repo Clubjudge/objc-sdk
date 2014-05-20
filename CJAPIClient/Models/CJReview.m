@@ -8,6 +8,9 @@
 
 #import "CJReview.h"
 #import "CJRating.h"
+#import "CJUser.h"
+#import "CJVenue.h"
+#import "CJEvent.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
 @implementation CJReview
@@ -32,14 +35,20 @@
 #pragma mark - Helpers
 - (CJAPIRequest *)requestForTarget
 {
-  return[[CJAPIRequest alloc] initWithMethod:@"GET"
-                                     andPath:[NSString stringWithFormat:@"/%@s/%@", self.targetType, self.targetId]];
+  CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
+                                                       andPath:[NSString stringWithFormat:@"/%@s/%@", self.targetType, self.targetId]];
+  request.modelClass = [self classForTargetType:self.targetType];
+  
+  return request;
 }
 
 - (CJAPIRequest *)requestForUser
 {
-  return[[CJAPIRequest alloc] initWithMethod:@"GET"
-                                     andPath:[NSString stringWithFormat:@"/users/%@", self.userId]];
+  CJAPIRequest *request =[[CJAPIRequest alloc] initWithMethod:@"GET"
+                                                      andPath:[NSString stringWithFormat:@"/users/%@", self.userId]];
+  request.modelClass = [CJUser class];
+  
+  return request;
 }
 
 - (ReviewType)typeForString:(NSString *)string
@@ -55,6 +64,17 @@
   }
   
   return type;
+}
+
+- (Class)classForTargetType:(NSString *)type
+{
+  Class class = [CJVenue class];
+  
+  if ([type isEqualToString:@"event"]) {
+    class = [CJEvent class];
+  }
+  
+  return class;
 }
 
 @end
