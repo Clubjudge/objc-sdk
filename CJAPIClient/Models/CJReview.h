@@ -29,10 +29,3 @@ typedef enum {
 - (CJAPIRequest *)requestForTarget;
 
 @end
-
-#define kReviewPoints @"points"
-#define kReviewTargetId @"targetId"
-#define kReviewTargetType @"targetType"
-#define kReviewType @"type"
-#define kReviewUserId @"userId"
-#define kReviewValues @"values"

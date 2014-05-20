@@ -19,6 +19,12 @@
 
 @implementation CJLinksInfo
 
+static NSString *kLinksFirst = @"first";
+static NSString *kLinksPrevious = @"previous";
+static NSString *kLinksSelf = @"self";
+static NSString *kLinksNext = @"next";
+static NSString *kLinksLast = @"last";
+
 #pragma mark - Initialisation
 
 - (instancetype) initWithInfo:(NSDictionary *)info

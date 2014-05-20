@@ -20,6 +20,3 @@
 - (id)initWithInfo:(NSDictionary *)info;
 
 @end
-
-#define kID @"id"
-#define kLinks @"_links"

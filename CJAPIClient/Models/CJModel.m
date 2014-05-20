@@ -11,6 +11,9 @@
 
 @implementation CJModel
 
+static NSString *kID = @"id";
+static NSString *kLinks = @"links";
+
 - (id)initWithInfo:(NSDictionary *)info
 {
   self = [super init];

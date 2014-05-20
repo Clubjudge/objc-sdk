@@ -10,6 +10,11 @@
 
 @implementation CJTicket
 
+static NSString *kTicketName = @"name";
+static NSString *kTicketCents = @"cents";
+static NSString *kTicketCurrency = @"currency";
+static NSString *kTicketText = @"text";
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

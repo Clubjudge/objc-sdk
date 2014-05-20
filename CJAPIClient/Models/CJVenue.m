@@ -20,6 +20,35 @@
 
 @implementation CJVenue
 
+static NSString *kVenueName = @"name";
+static NSString *kVenueDescription = @"description";
+static NSString *kVenueFollowing = @"follow";
+static NSString *kVenueUpdatedAt = @"updatedAt";
+static NSString *kVenueFollowersCount = @"followersCount";
+static NSString *kVenueCommentsCount = @"commentsCount";
+static NSString *kVenueSocialMentionsCount = @"socialMentionsCount";
+static NSString *kVenueReviewCount = @"reviewCount";
+static NSString *kVenueSocialLinks = @"socialLinks";
+static NSString *kVenueLogos = @"logos";
+static NSString *kVenueAddress = @"address";
+static NSString *kVenueBackground = @"background";
+static NSString *kVenueGeolocation = @"geolocation";
+static NSString *kVenueEmail = @"email";
+static NSString *kVenueWebsiteURL = @"websiteUrl";
+static NSString *kVenuePhoneNumber = @"phoneNumber";
+
+static NSString *kVenueEvents = @"events";
+static NSString *kVenueUpcomingEvents = @"upcoming";
+static NSString *kVenueRecentEvents = @"recent";
+static NSString *kVenueFollowers = @"followers";
+
+static NSString *kVenueLinkEvents = @"events";
+static NSString *kVenueLinkUpcomingEvents = @"upcoming";
+static NSString *kVenueLinkRecentEvents = @"recent";
+static NSString *kVenueLinkComments = @"comments";
+static NSString *kVenueLinkFollowers = @"followers";
+static NSString *kVenueLinkRatings = @"ratings";
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

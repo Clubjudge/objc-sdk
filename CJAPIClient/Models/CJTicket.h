@@ -17,8 +17,3 @@
 @property (nonatomic, strong) NSString *text;
 
 @end
-
-#define kTicketName @"name"
-#define kTicketCents @"cents"
-#define kTicketCurrency @"currency"
-#define kTicketText @"text"

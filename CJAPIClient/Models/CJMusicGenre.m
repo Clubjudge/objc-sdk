@@ -10,6 +10,10 @@
 
 @implementation CJMusicGenre
 
+static NSString *kMusicGenreParentId = @"parentId";
+static NSString *kMusicGenreName = @"name";
+static NSString *kMusicGenreInferred = @"inferred";
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

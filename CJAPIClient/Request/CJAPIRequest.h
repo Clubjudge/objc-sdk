@@ -91,4 +91,4 @@ typedef void (^CJFailureBlock)(NSDictionary* error, NSNumber *statusCode);
 
 @end
 
-#define kRequestMaxRetries 1
+#define kCJAPIRequestMaxRetries 1

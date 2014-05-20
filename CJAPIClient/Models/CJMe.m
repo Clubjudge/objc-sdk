@@ -11,6 +11,8 @@
 
 @implementation CJMe
 
+static NSString *kMePreferences = @"preferences";
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

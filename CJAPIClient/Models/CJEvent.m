@@ -21,6 +21,41 @@
 
 @implementation CJEvent
 
+static NSString *kEventName = @"name";
+static NSString *kEventFlyers = @"flyers";
+static NSString *kEventBackground = @"background";
+static NSString *kEventDescription = @"description";
+static NSString *kEventStartsAt = @"startsAt";
+static NSString *kEventEndsAt = @"endsAt";
+static NSString *kEventReviewEndsAt = @"reviewEndsAt";
+static NSString *kEventUpdatedAt = @"updatedAt";
+static NSString *kEventFeatured = @"featured";
+static NSString *kEventFollowing = @"follow";
+static NSString *kEventLineupTBA = @"lineupToBeAnnounced";
+static NSString *kEventReviewable = @"reviewable";
+static NSString *kEventPublished = @"published";
+static NSString *kEventFollowersCount = @"followersCount";
+static NSString *kEventCommentsCount = @"commentsCount";
+static NSString *kEventFriendsFollowingCount = @"friendsFollowingCount";
+static NSString *kEventReviewCount = @"reviewCount";
+static NSString *kEventUserData = @"userData";
+static NSString *kEventContest = @"contest";
+static NSString *kEventExpertReviewRatings = @"expertReviewRatings";
+static NSString *kEventGlobalRating = @"globalRating";
+
+static NSString *kEventArtists = @"artists";
+static NSString *kEventVenue = @"venue";
+static NSString *kEventMusicGenres = @"musicGenres";
+static NSString *kEventFollowers = @"followers";
+
+static NSString *kEventLinkArtists = @"artists";
+static NSString *kEventLinkComments = @"comments";
+static NSString *kEventLinkInvitations = @"invitations";
+static NSString *kEventLinkFollowers = @"followers";
+static NSString *kEventLinkGenres = @"musicGenres";
+static NSString *kEventLinkTickets = @"tickets";
+static NSString *kEventLinkVenue = @"venue";
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

@@ -129,7 +129,7 @@ NSString *const kRequestEmbeds = @"embeds";
                                        }
                                        
                                        if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad && [[AFNetworkReachabilityManager sharedManager] isReachable]) {
-                                         if ([self willDeleteCached] && [self.retries integerValue] < kRequestMaxRetries) {
+                                         if ([self willDeleteCached] && [self.retries integerValue] < kCJAPIRequestMaxRetries) {
                                            self.retries = @([self.retries intValue] + 1);
                                            [self performWithSuccess:success failure:failure];
                                          }

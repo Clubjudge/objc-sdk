@@ -18,5 +18,3 @@
 - (CJAPIRequest *)requestForUpdate;
 
 @end
-
-#define kMePreferences @"preferences"

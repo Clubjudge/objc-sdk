@@ -24,8 +24,3 @@ typedef enum {
 @property (nonatomic, strong) CJUser *user;
 
 @end
-
-#define kCommentMessage @"message"
-#define kCommentCreatedAt @"timestamp"
-#define kCommentType @"type"
-#define kCommentUser @"user"

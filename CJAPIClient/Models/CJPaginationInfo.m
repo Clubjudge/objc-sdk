@@ -10,6 +10,11 @@
 
 @implementation CJPaginationInfo
 
+static NSString *kCurrentPage = @"currentPage";
+static NSString *kPerPage = @"perPage";
+static NSString *kTotalPages = @"totalPages";
+static NSString *kTotalItems = @"totalItems";
+
 - (instancetype) initWithInfo:(NSDictionary *)info
 {
   self = [super init];

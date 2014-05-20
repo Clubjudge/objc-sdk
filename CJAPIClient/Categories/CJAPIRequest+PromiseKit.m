@@ -32,7 +32,7 @@
       }
       
       if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad) {
-        if ([self.retries integerValue] < kRequestMaxRetries) {
+        if ([self.retries integerValue] < kCJAPIRequestMaxRetries) {
           // Serving cached data, attach another Promise
           fulfiller(PMKManifold(responseObject, freshDataPromise));
         } else {
@@ -44,7 +44,7 @@
       }
     } failure:^(NSDictionary *error, NSNumber *statusCode) {
       if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad) {
-        if ([self.retries integerValue] < kRequestMaxRetries) {
+        if ([self.retries integerValue] < kCJAPIRequestMaxRetries) {
           // Serving cached data, attach another Promise
           rejecter(PMKManifold(error, freshDataPromise));
         } else {

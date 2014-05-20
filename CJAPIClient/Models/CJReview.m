@@ -15,6 +15,13 @@
 
 @implementation CJReview
 
+static NSString *kReviewPoints = @"points";
+static NSString *kReviewTargetId = @"targetId";
+static NSString *kReviewTargetType = @"targetType";
+static NSString *kReviewType = @"type";
+static NSString *kReviewUserId = @"userId";
+static NSString *kReviewValues = @"values";
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

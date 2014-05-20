@@ -13,6 +13,27 @@
 
 @implementation CJUser
 
+static NSString*kUserEmail = @"email";
+static NSString*kUserAddress = @"address";
+static NSString*kUserFirstName = @"firstName";
+static NSString*kUserLastName = @"lastName";
+static NSString*kUserFullName = @"fullName";
+static NSString*kUserAvatarURL = @"avatarUrl";
+static NSString*kUserCreatedAt = @"createdAt";
+static NSString*kUserReviewsCount = @"reviewsCount";
+static NSString*kUserExpertReviewsCount = @"expertReviewsCount";
+static NSString*kUserFriendsCount = @"friendsCount";
+static NSString*kUserMutualFriendsCount = @"mutualFriendsCount";
+static NSString*kUserUpcomingEventsCount = @"upcomingEventsCount";
+static NSString*kUserPastEventsCount = @"pastEventsCount";
+static NSString*kUserScore = @"score";
+static NSString*kUserGender = @"gender";
+static NSString*kUserBirthdate = @"bornOn";
+static NSString*kUserFriend = @"isFriend";
+static NSString*kUserPendingFriend = @"isPendingFriend";
+
+static NSString*kUserLinkEvents = @"events";
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

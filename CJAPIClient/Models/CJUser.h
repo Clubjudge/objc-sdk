@@ -32,26 +32,3 @@
 @property (nonatomic, assign) BOOL pendingFriend;
 
 @end
-
-#pragma mark - Mapping
-
-#define kUserEmail @"email"
-#define kUserAddress @"address"
-#define kUserFirstName @"firstName"
-#define kUserLastName @"lastName"
-#define kUserFullName @"fullName"
-#define kUserAvatarURL @"avatarUrl"
-#define kUserCreatedAt @"createdAt"
-#define kUserReviewsCount @"reviewsCount"
-#define kUserExpertReviewsCount @"expertReviewsCount"
-#define kUserFriendsCount @"friendsCount"
-#define kUserMutualFriendsCount @"mutualFriendsCount"
-#define kUserUpcomingEventsCount @"upcomingEventsCount"
-#define kUserPastEventsCount @"pastEventsCount"
-#define kUserScore @"score"
-#define kUserGender @"gender"
-#define kUserBirthdate @"bornOn"
-#define kUserFriend @"isFriend"
-#define kUserPendingFriend @"isPendingFriend"
-
-#define kUserLinkEvents @"events"

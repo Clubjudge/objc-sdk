@@ -18,8 +18,3 @@
 - (instancetype)initWithInfo:(NSDictionary *)info;
 
 @end
-
-#define kCurrentPage  @"currentPage"
-#define kPerPage      @"perPage"
-#define kTotalPages   @"totalPages"
-#define kTotalItems   @"totalItems"
