@@ -12,7 +12,7 @@
 @implementation CJModel
 
 static NSString *kID = @"id";
-static NSString *kLinks = @"links";
+static NSString *kLinks = @"_links";
 
 - (id)initWithInfo:(NSDictionary *)info
 {
