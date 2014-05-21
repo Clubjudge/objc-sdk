@@ -17,7 +17,11 @@ static NSString *kRatingScore = @"score";
   self = [super initWithInfo:info];
   if (self && info) {
     // Core properties
-    _score = info[kRatingScore];
+    if ([info[kRatingScore] isKindOfClass:[NSNumber class]]) {
+      _score = info[kRatingScore];
+    } else if ([info[kRatingScore] isKindOfClass:[NSString class]]) {
+      _textReview = info[kRatingScore];
+    }
   }
   return self;
 }
