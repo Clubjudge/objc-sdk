@@ -259,7 +259,7 @@ NSString *const kRequestEmbeds = @"embeds";
     jsonError = [NSJSONSerialization JSONObjectWithData:errorData
                                                 options:kNilOptions
                                                   error:&parseError];
-    
+    unless(jsonError) jsonError = @{};    
   } else {
     jsonError = @{
                   @"developerMessage": [[error userInfo] objectForKey:@"NSLocalizedDescription"]
