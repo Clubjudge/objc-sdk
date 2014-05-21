@@ -12,6 +12,7 @@
 
 #pragma mark - Core properties
 @property (nonatomic, strong) NSString* Id;
-@property (nonatomic, strong) NSNumber *score;
+@property (nonatomic, readonly) NSNumber *score;
+@property (nonatomic, readonly) NSString *textReview;
 
 @end

@@ -17,6 +17,11 @@ describe(@"Rating Model", ^{
                          @"score": @7.5
                          };
   
+  NSDictionary *textStub = @{
+                         @"id": @"crowd",
+                         @"score": @"Lorem ipsum"
+                         };
+  
   __block CJRating *rating;
   beforeAll(^{
     rating = [[CJRating alloc] initWithInfo:stub];
@@ -29,9 +34,23 @@ describe(@"Rating Model", ^{
       });
     });
     
-    describe(@"#score", ^{
-      it(@"produces a correct mapping", ^{
-        [[rating.score should] equal:stub[@"score"]];
+    context(@"When score is a number", ^{
+      describe(@"#score", ^{
+        it(@"produces a correct mapping", ^{
+          [[rating.score should] equal:stub[@"score"]];
+        });
+      });
+    });
+    
+    context(@"When score is a string", ^{
+      beforeEach(^{
+        rating = [[CJRating alloc] initWithInfo:textStub];
+      });
+      
+      describe(@"#textReview", ^{
+        it(@"produces a correct mapping", ^{
+          [[rating.textReview should] equal:textStub[@"score"]];
+        });
       });
     });
   });
