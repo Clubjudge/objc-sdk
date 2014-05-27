@@ -10,7 +10,7 @@
 #import "CJAPIRequest.h"
 #import <AFNetworking/AFNetworking.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
-#import "CJEngine.h"
+#import "CJEngine+CJPersistentQueueController.h"
 #import "CJPaginationInfo.h"
 #import "CJLinksInfo.h"
 #import "MockModel.h"
@@ -36,6 +36,8 @@
                                      error:(NSDictionary *)error;
 
 - (BOOL)willDeleteCached;
+
+- (void)saveRequestForLater;
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
@@ -1128,6 +1130,146 @@ describe(@"CJAPIRequest", ^{
           [[expectFutureValue(theValue(hasResponse)) shouldEventually] beYes];
           [[expectFutureValue(theValue(hasPagination)) shouldEventually] beYes];
           [[expectFutureValue(theValue(hasLinks)) shouldEventually] beYes];
+        });
+      });
+    });
+  });
+  
+  describe(@"Persistent Queue support", ^{
+    __block CJAPIRequest *request;
+    __block CJPersistentQueueController *queueController;
+    
+    context(@"When it's a POST request", ^{
+      beforeEach(^{
+        request = [[CJAPIRequest alloc] initWithMethod:@"POST" andPath:@"/bla"];
+        
+        queueController = [CJPersistentQueueController sharedController];
+      });
+      
+      context(@"When the network is available", ^{
+        beforeEach(^{
+          [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable)
+                                                   andReturn:theValue(YES)];
+        });
+        
+        it(@"does not add the request to the queue", ^{
+          [[queueController.queue shouldNot] receive:@selector(addObject:)];
+          [request performWithSuccess:nil failure:nil];
+        });
+      });
+      
+      context(@"When the network is unavailable", ^{
+        beforeEach(^{
+          [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable)
+                                                   andReturn:theValue(NO)];
+        });
+        
+        it(@"adds the request to the queue", ^{
+          [[queueController.queue should] receive:@selector(addObject:)];
+          [request performWithSuccess:nil failure:nil];
+        });
+        
+        it(@"invokes it's success block immediately with nil values", ^{
+          
+          [request stub:@selector(saveRequestForLater)];
+          __block BOOL invoked = NO;
+          
+          [request performWithSuccess:^(id response, CJPaginationInfo *pagination, CJLinksInfo *links) {
+            invoked = YES;
+          }
+                              failure:nil];
+          
+          [[expectFutureValue(theValue(invoked)) shouldEventually] beTrue];
+        });
+      });
+    });
+    
+    context(@"When it's a PUT request", ^{
+      beforeEach(^{
+        request = [[CJAPIRequest alloc] initWithMethod:@"PUT" andPath:@"/bla"];
+        
+        queueController = [CJPersistentQueueController sharedController];
+      });
+      
+      context(@"When the network is available", ^{
+        beforeEach(^{
+          [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable)
+                                                   andReturn:theValue(YES)];
+        });
+        
+        it(@"does not add the request to the queue", ^{
+          [[queueController.queue shouldNot] receive:@selector(addObject:)];
+          [request performWithSuccess:nil failure:nil];
+        });
+      });
+      
+      context(@"When the network is unavailable", ^{
+        beforeEach(^{
+          [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable)
+                                                   andReturn:theValue(NO)];
+        });
+        
+        it(@"adds the request to the queue", ^{
+          [[queueController.queue should] receive:@selector(addObject:)];
+          [request performWithSuccess:nil failure:nil];
+        });
+        
+        it(@"invokes it's success block immediately with nil values", ^{
+          
+          [request stub:@selector(saveRequestForLater)];
+          __block BOOL invoked = NO;
+          
+          [request performWithSuccess:^(id response, CJPaginationInfo *pagination, CJLinksInfo *links) {
+            invoked = YES;
+          }
+                              failure:nil];
+          
+          [[expectFutureValue(theValue(invoked)) shouldEventually] beTrue];
+        });
+      });
+    });
+    
+    context(@"When it's a DELETE request", ^{
+      beforeEach(^{
+        request = [[CJAPIRequest alloc] initWithMethod:@"DELETE" andPath:@"/bla"];
+        
+        queueController = [CJPersistentQueueController sharedController];
+      });
+      
+      context(@"When the network is available", ^{
+        beforeEach(^{
+          [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable)
+                                                   andReturn:theValue(YES)];
+        });
+        
+        it(@"does not add the request to the queue", ^{
+          [[queueController.queue shouldNot] receive:@selector(addObject:)];
+          [request performWithSuccess:nil failure:nil];
+        });
+      });
+      
+      context(@"When the network is unavailable", ^{
+        beforeEach(^{
+          [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable)
+                                                   andReturn:theValue(NO)];
+        });
+        
+        it(@"adds the request to the queue", ^{
+          [[queueController.queue should] receive:@selector(addObject:)];
+          [request performWithSuccess:nil failure:nil];
+        });
+        
+        it(@"invokes it's success block immediately with nil values", ^{
+          
+          [request stub:@selector(saveRequestForLater)];
+          __block BOOL invoked = NO;
+          
+          [request performWithSuccess:^(id response, CJPaginationInfo *pagination, CJLinksInfo *links) {
+            invoked = YES;
+          }
+                              failure:nil];
+          
+          [[expectFutureValue(theValue(invoked)) shouldEventually] beTrue];
         });
       });
     });
