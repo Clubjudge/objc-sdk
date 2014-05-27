@@ -56,6 +56,39 @@ describe(@"CJPersistentQueueController", ^{
     });
   });
   
+  describe(@"#startMonitoring", ^{
+    __block CJPersistentQueueController *controller;
+    beforeEach(^{
+      controller = [CJPersistentQueueController sharedController];
+    });
+    
+    context(@"When the network can be reached", ^{
+      beforeEach(^{
+        [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable)
+                                                 andReturn:theValue(YES)];
+      });
+      
+      it(@"starts the queue", ^{
+        [[controller.queue should] receive:@selector(startWorking)];
+        
+        [controller startMonitoring];
+      });
+    });
+    
+    context(@"When the network can be reached", ^{
+      beforeEach(^{
+        [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable)
+                                                 andReturn:theValue(NO)];
+      });
+      
+      it(@"starts the queue", ^{
+        [[controller.queue should] receive:@selector(stopWorking)];
+        
+        [controller startMonitoring];
+      });
+    });
+  });
+  
   describe(@"#persistentOperationQueueSerializeObject:", ^{
     __block CJAPIRequest *request;
     __block CJPersistentQueueController *queueController;
@@ -71,7 +104,7 @@ describe(@"CJPersistentQueueController", ^{
     it(@"serializes a CJAPIRequest into a dictionary", ^{
       NSDictionary *data = [queueController persistentOperationQueueSerializeObject:request];
       
-      [[data[@"path"] should] equal:request.path];
+      [[data[@"path"] should] equal:[request.path stringByReplacingOccurrencesOfString:@"/v1" withString:@""]];
       [[data[@"method"] should] equal:request.method];
       [[data[@"embeds"] should] equal:request.embeds];
       [[data[@"fields"] should] equal:request.fields];

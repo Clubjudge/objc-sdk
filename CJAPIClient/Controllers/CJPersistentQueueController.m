@@ -66,7 +66,7 @@ static NSString* theDatabasePath = nil;
   NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithCapacity:5];
   
   if (request.path) {
-    data[@"path"] = request.path;
+    data[@"path"] = [request.path stringByReplacingOccurrencesOfString:@"/v1" withString:@""];
   }
   
   if (request.method) {
@@ -103,12 +103,17 @@ static NSString* theDatabasePath = nil;
     [operation finish];
   }
                       failure:^(NSDictionary *error, NSNumber *statusCode) {
-                        [weakSelf.queue addObject:request];
                         [operation finish];
+                        [weakSelf.queue addObject:request];
                       }];
 }
 
 #pragma mark - Custom
+
+- (void)startMonitoring
+{
+  ([AFNetworkReachabilityManager sharedManager].isReachable) ? [self.queue startWorking] : [self.queue stopWorking];
+}
 
 - (void)setupQueue
 {
