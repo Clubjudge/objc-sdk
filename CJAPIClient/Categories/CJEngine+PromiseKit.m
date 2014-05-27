@@ -12,7 +12,7 @@
 
 - (Promise *)authenticateWithFacebookToken:(NSString *)facebookToken
 {
-  return [Promise new:^(PromiseResolver fulfiller, PromiseResolver rejecter) {
+  return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
     [self authenticateWithFacebookToken:facebookToken withSuccess:^(NSString *token) {
       fulfiller(token);
     } andFailure:^(NSError *error) {
@@ -24,7 +24,7 @@
 - (Promise *)authenticateWithUsername:(NSString *)username
                           andPassword:(NSString *)password
 {
-  return [Promise new:^(PromiseResolver fulfiller, PromiseResolver rejecter) {
+  return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
     [self authenticateWithUsername:username
                        andPassword:password
                        withSuccess:^(NSString *token) {

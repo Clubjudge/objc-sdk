@@ -1,5 +1,5 @@
 @import CoreLocation.CLLocationManagerDelegate;
-#import "Private/macros.m"
+#import "Private/PMKManualReference.h"
 #import "PromiseKit+CoreLocation.h"
 #import "PromiseKit/Promise.h"
 
@@ -17,10 +17,10 @@
 #define PMKLocationManagerCleanup() \
     [manager stopUpdatingLocation]; \
     self.delegate = nil; \
-    __anti_arc_release(self);
+    [self pmk_breakReference];
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    fulfiller(PMKManifold(locations.firstObject, locations));
+    fulfiller(PMKManifold(locations.lastObject, locations));
     PMKLocationManagerCleanup();
 }
 
@@ -39,7 +39,7 @@
     PMKLocationManager *manager = [PMKLocationManager new];
     manager.delegate = manager;
     [manager startUpdatingLocation];
-    __anti_arc_retain(manager);
+    [manager pmk_reference];
     return [Promise new:^(id fulfiller, id rejecter){
         manager->fulfiller = fulfiller;
         manager->rejecter = rejecter;
@@ -53,7 +53,7 @@
 @implementation CLGeocoder (PromiseKit)
 
 + (Promise *)reverseGeocode:(CLLocation *)location {
-    return [Promise new:^(PromiseResolver fulfiller, PromiseResolver rejecter) {
+    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
        [[CLGeocoder new] reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
             if (error) {
                 rejecter(error);
@@ -64,7 +64,7 @@
 }
 
 + (Promise *)geocode:(id)address {
-    return [Promise new:^(PromiseResolver fulfiller, PromiseResolver rejecter) {
+    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
         id handler = ^(NSArray *placemarks, NSError *error) {
             if (error) {
                 rejecter(error);

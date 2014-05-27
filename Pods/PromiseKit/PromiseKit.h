@@ -11,3 +11,9 @@
 #ifdef PMK_MAPKIT
 #import "PromiseKit+MapKit.h"
 #endif
+#ifdef PMK_SOCIALFRAMEWORK
+#import "PromiseKit+SocialFramework.h"
+#endif
+#ifdef PMK_STOREKIT
+#import "PromiseKit+StoreKit.h"
+#endif
