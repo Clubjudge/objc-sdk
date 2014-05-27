@@ -12,14 +12,14 @@
 
 - (Promise *)perform
 {
-  __block PromiseResolver freshFulfiller;
-  __block PromiseResolver freshRejecter;
-  Promise *freshDataPromise = [Promise new:^(PromiseResolver fulfiller, PromiseResolver rejecter) {
+  __block PromiseFulfiller freshFulfiller;
+  __block PromiseRejecter freshRejecter;
+  Promise *freshDataPromise = [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
     freshFulfiller = fulfiller;
     freshRejecter = rejecter;
   }];
   
-  return [Promise new:^(PromiseResolver fulfiller, PromiseResolver rejecter) {
+  return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
     [self performWithSuccess:^(id response, CJPaginationInfo *pagination, CJLinksInfo *links) {
       NSMutableDictionary *responseObject = [NSMutableDictionary dictionaryWithDictionary:@{@"response": response}];
       
@@ -42,7 +42,16 @@
       } else {
         fulfiller(responseObject);
       }
-    } failure:^(NSDictionary *error, NSNumber *statusCode) {
+    } failure:^(NSDictionary *errorDict, NSNumber *statusCode) {
+      NSDictionary *userInfo = @{
+                                 NSLocalizedDescriptionKey: NSLocalizedString(errorDict[@"userMessage"], nil),
+                                 NSLocalizedFailureReasonErrorKey: NSLocalizedString(errorDict[@"developerMessage"], nil)
+                                 };
+      
+      NSError *error = [[NSError alloc] initWithDomain:@"com.clubjudge.cjkit"
+                                                  code:[errorDict[@"errorCode"] integerValue]
+                                              userInfo:userInfo];
+      
       if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad) {
         if ([self.retries integerValue] < kCJAPIRequestMaxRetries) {
           // Serving cached data, attach another Promise

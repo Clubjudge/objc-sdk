@@ -38,10 +38,10 @@ def test!
     when /^(Executed(.?)+)$/
       if stderr.eof?
         summary = $1
-        if /(\d) failures?/.match(summary)[1] == "0"
-          summary.gsub!(/(\d failures?)/, green('\1'))
+        if /(\d+) failures?/.match(summary)[1] == "0"
+          summary.gsub!(/(\d+ failures?)/, green('\1'))
         else
-          summary.gsub!(/(\d failures?)/, red('\1'))
+          summary.gsub!(/(\d+ failures?)/, red('\1'))
         end
         log summary
       end
@@ -69,7 +69,14 @@ def compile!
           -I/tmp/ChuzzleKit \
           /tmp/PromiseKitTests.m \
           /tmp/ChuzzleKit/*.m \
-          -w -o /tmp/PromiseKitTests
+          -Wall -Weverything -Wno-unused-parameter -Wno-missing-field-initializers \
+          -Wno-documentation -Wno-gnu-conditional-omitted-operand \
+          -Wno-pointer-arith -Wno-disabled-macro-expansion \
+          -Wno-gnu-statement-expression -Wno-strict-selector-match -Wno-vla \
+          -Wno-selector -Wno-missing-prototypes -Wno-direct-ivar-access \
+          -Wno-missing-noreturn -Wno-pedantic \
+          -Wno-format-nonliteral \
+          -o /tmp/PromiseKitTests
   EOS
   abort unless system <<-EOS
       install_name_tool -change \
@@ -81,8 +88,6 @@ end
 
 prepare!
 compile!
-
-exec "lldb", "/tmp/PromiseKitTests" if ARGV.include? '-d'
 
 begin              
   require 'webrick'
@@ -104,7 +109,11 @@ end
 
 PMKHTTPD.run! do
   Thread.new do
-    test!
+    if not ARGV.include? '-d'
+      test!
+    else
+      system "lldb /tmp/PromiseKitTests"
+    end
     exit! 0
   end
 end
