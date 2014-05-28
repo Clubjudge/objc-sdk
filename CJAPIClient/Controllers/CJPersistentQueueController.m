@@ -112,7 +112,14 @@ static NSString* theDatabasePath = nil;
 
 - (void)startMonitoring
 {
-  ([AFNetworkReachabilityManager sharedManager].isReachable) ? [self.queue startWorking] : [self.queue stopWorking];
+  __weak typeof(self)weakSelf = self;
+  [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+    if (status == AFNetworkReachabilityStatusNotReachable || status == AFNetworkReachabilityStatusUnknown) {
+      [weakSelf.queue stopWorking];
+    } else {
+      [weakSelf.queue startWorking];
+    }
+  }];
 }
 
 - (void)setupQueue
