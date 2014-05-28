@@ -13,17 +13,18 @@ Pod::Spec.new do |s|
   s.default_subspec      = "base"
 
   s.subspec "base" do |ss|
-    ss.source_files = "CJAPICLient/Engine/*.{h,m}", "CJAPICLient/Models/*.{h,m}", "CJAPICLient/Engine/*.{h,m}", "CJAPICLient/Models/*.{h,m}", "CJAPICLient/Request/*.{h,m}", "CJAPIClient/Categories/CJModel+{Following,Distance,Images}.{h,m}", "CJAPICLient/Categories/NSDate+StringParsing.{h,m}", "CJAPIClient/Serializers/*.{h,m}"
+    ss.source_files = "CJAPICLient/Engine/*.{h,m}", "CJAPICLient/Models/*.{h,m}", "CJAPICLient/Engine/*.{h,m}", "CJAPICLient/Models/*.{h,m}", "CJAPICLient/Request/*.{h,m}", "CJAPIClient/Categories/CJModel+{Following,Distance,Images}.{h,m}", "CJAPICLient/Categories/NSDate+StringParsing.{h,m}", "CJAPIClient/Serializers/*.{h,m}", "CJAPIClient/Controllers/CJPersistentQueueController.{h,m}"
   end
 
   s.subspec "PromiseKit" do |ss|
     ss.dependency "PromiseKit/base"
+    ss.dependency 'CJKit/base'
     ss.source_files = "CJAPIClient/Categories/CJAPIRequest+PromiseKit.{h,m}", "CJAPIClient/Categories/CJEngine+PromiseKit.{h,m}"
   end
 
   s.subspec "BAPersistentOperationQueue" do |ss|
-    ss.dependency "BAPersistentOperationQueue"
-    ss.source_files = "CJAPIClient/Controllers/CJPersistentQueueController.{h,m}", "CJAPIClient/Categories/CJEngine+CJPersistentQueueController.{h,m}"
+    ss.dependency 'CJKit/base'
+    ss.source_files = "CJAPIClient/Categories/CJEngine+CJPersistentQueueController.{h,m}"
   end
 
   s.public_header_files  = "CJAPIClient/**/*.h"
@@ -34,5 +35,6 @@ Pod::Spec.new do |s|
 
   s.dependency           "AFNetworking", "~> 2.2"
   s.dependency           "ObjectiveSugar"
+  s.dependency           "BAPersistentOperationQueue"
 
 end
