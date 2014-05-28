@@ -36,6 +36,10 @@
 		1371311918FC4B43007AA17A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1371311718FC4B43007AA17A /* InfoPlist.strings */; };
 		1371312718FC539C007AA17A /* CJEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1371312618FC539C007AA17A /* CJEngine.m */; };
 		1371312D18FC544F007AA17A /* CJEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1371312C18FC544F007AA17A /* CJEngineTests.m */; };
+		13964F191934A0B2003739AE /* CJPersistentQueueController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13964F181934A0B2003739AE /* CJPersistentQueueController.m */; };
+		13964F1C1934AC18003739AE /* CJPersistentQueueControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13964F1B1934AC18003739AE /* CJPersistentQueueControllerTests.m */; };
+		13964F1E1934AD0D003739AE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 13964F1D1934AD0D003739AE /* libsqlite3.dylib */; };
+		13964F211934CF66003739AE /* CJEngine+CJPersistentQueueController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13964F201934CF66003739AE /* CJEngine+CJPersistentQueueController.m */; };
 		13968CBD19092379008692D1 /* CJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 13968CBC19092379008692D1 /* CJUser.m */; };
 		13968CBF1909294F008692D1 /* CJUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13968CBE1909294F008692D1 /* CJUserTests.m */; };
 		13968CC219093388008692D1 /* CJMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 13968CC119093388008692D1 /* CJMe.m */; };
@@ -127,6 +131,12 @@
 		1371312518FC539C007AA17A /* CJEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEngine.h; sourceTree = "<group>"; };
 		1371312618FC539C007AA17A /* CJEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEngine.m; sourceTree = "<group>"; };
 		1371312C18FC544F007AA17A /* CJEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CJEngineTests.m; path = Engine/CJEngineTests.m; sourceTree = "<group>"; };
+		13964F171934A0B2003739AE /* CJPersistentQueueController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CJPersistentQueueController.h; path = Controllers/CJPersistentQueueController.h; sourceTree = "<group>"; };
+		13964F181934A0B2003739AE /* CJPersistentQueueController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CJPersistentQueueController.m; path = Controllers/CJPersistentQueueController.m; sourceTree = "<group>"; };
+		13964F1B1934AC18003739AE /* CJPersistentQueueControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJPersistentQueueControllerTests.m; sourceTree = "<group>"; };
+		13964F1D1934AD0D003739AE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		13964F1F1934CF66003739AE /* CJEngine+CJPersistentQueueController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CJEngine+CJPersistentQueueController.h"; sourceTree = "<group>"; };
+		13964F201934CF66003739AE /* CJEngine+CJPersistentQueueController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CJEngine+CJPersistentQueueController.m"; sourceTree = "<group>"; };
 		13968CBB19092379008692D1 /* CJUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUser.h; sourceTree = "<group>"; };
 		13968CBC19092379008692D1 /* CJUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUser.m; sourceTree = "<group>"; };
 		13968CBE1909294F008692D1 /* CJUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUserTests.m; sourceTree = "<group>"; };
@@ -180,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13964F1E1934AD0D003739AE /* libsqlite3.dylib in Frameworks */,
 				1371311318FC4B43007AA17A /* libCJAPIClient.a in Frameworks */,
 				1371310D18FC4B43007AA17A /* XCTest.framework in Frameworks */,
 				1371311018FC4B43007AA17A /* UIKit.framework in Frameworks */,
@@ -207,6 +218,8 @@
 			children = (
 				133C45361917CBE500E27D75 /* CJEngine+PromiseKit.h */,
 				133C45371917CBE500E27D75 /* CJEngine+PromiseKit.m */,
+				13964F1F1934CF66003739AE /* CJEngine+CJPersistentQueueController.h */,
+				13964F201934CF66003739AE /* CJEngine+CJPersistentQueueController.m */,
 			);
 			name = CJEngine;
 			sourceTree = "<group>";
@@ -266,6 +279,7 @@
 		137130FD18FC4B43007AA17A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				13964F1D1934AD0D003739AE /* libsqlite3.dylib */,
 				137130FE18FC4B43007AA17A /* Foundation.framework */,
 				1371310C18FC4B43007AA17A /* XCTest.framework */,
 				1371310F18FC4B43007AA17A /* UIKit.framework */,
@@ -278,6 +292,7 @@
 		1371310018FC4B43007AA17A /* CJAPIClient */ = {
 			isa = PBXGroup;
 			children = (
+				13964F161934A09A003739AE /* Controllers */,
 				1316B0951906D5DB00107265 /* Categories */,
 				13980DBB190589B800D449FA /* Models */,
 				13AA62C319056C3D0089C443 /* Serializers */,
@@ -299,6 +314,7 @@
 		1371311418FC4B43007AA17A /* CJAPIClientTests */ = {
 			isa = PBXGroup;
 			children = (
+				13964F1A1934AC00003739AE /* Controllers */,
 				13980DC1190589FC00D449FA /* Models */,
 				13AA62CC1905886A0089C443 /* Request */,
 				1371312818FC53CE007AA17A /* Engine */,
@@ -336,6 +352,23 @@
 				13E6371318FC6AA900D7EB22 /* CJEngineConfigurationTests.m */,
 			);
 			name = Engine;
+			sourceTree = "<group>";
+		};
+		13964F161934A09A003739AE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				13964F171934A0B2003739AE /* CJPersistentQueueController.h */,
+				13964F181934A0B2003739AE /* CJPersistentQueueController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		13964F1A1934AC00003739AE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				13964F1B1934AC18003739AE /* CJPersistentQueueControllerTests.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		13980DBB190589B800D449FA /* Models */ = {
@@ -571,8 +604,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13A3FA13192A6C7F0056A4DC /* CJReview.m in Sources */,
+				13964F191934A0B2003739AE /* CJPersistentQueueController.m in Sources */,
 				1367E7C3190678200022885C /* CJPaginationInfo.m in Sources */,
 				13A25E77190E70E30035122D /* CJModel+Distance.m in Sources */,
+				13964F211934CF66003739AE /* CJEngine+CJPersistentQueueController.m in Sources */,
 				13968CBD19092379008692D1 /* CJUser.m in Sources */,
 				13968CC219093388008692D1 /* CJMe.m in Sources */,
 				13C90275190819E500615874 /* CJArtist.m in Sources */,
@@ -615,6 +650,7 @@
 				139F556A192B5BB10068FC8A /* CJReviewTests.m in Sources */,
 				13E6371418FC6AA900D7EB22 /* CJEngineConfigurationTests.m in Sources */,
 				13A6B5A51909D6730083FFE7 /* CityTests.m in Sources */,
+				13964F1C1934AC18003739AE /* CJPersistentQueueControllerTests.m in Sources */,
 				1367E7C019058A590022885C /* CJModelTests.m in Sources */,
 				13AD9AB218FECF64007D1DD2 /* CJAPIRequestTests.m in Sources */,
 				1367E7C519067BCB0022885C /* CJPaginationInfoTests.m in Sources */,

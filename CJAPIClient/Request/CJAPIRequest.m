@@ -9,6 +9,8 @@
 #import "CJAPIRequest.h"
 #import "CJLinksInfo.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
+#import <AFNetworking/AFNetworkReachabilityManager.h>
+#import "CJPersistentQueueController.h"
 
 #ifdef IS_OS_7_OR_LATER
 #import <AFNetworking/AFHTTPSessionManager.h>
@@ -183,6 +185,12 @@ NSString *const kRequestEmbeds = @"embeds";
 - (void)POSTWithSuccess:(void (^)(id operation, id responseObject))success
                 failure:(CJFailureBlock)failure
 {
+  if ([self shouldSaveRequestForLater]) {
+    [self saveRequestForLater];
+    success(nil, nil);
+    return;
+  }
+  
   [self.sessionManager POST:self.path
                  parameters:[self prepareParameters]
                     success:success
@@ -194,6 +202,12 @@ NSString *const kRequestEmbeds = @"embeds";
 - (void)PUTWithSuccess:(void (^)(id operation, id responseObject))success
                failure:(CJFailureBlock)failure
 {
+  if ([self shouldSaveRequestForLater]) {
+    [self saveRequestForLater];
+    success(nil, nil);
+    return;
+  }
+  
   [self.sessionManager PUT:self.path
                 parameters:[self prepareParameters]
                    success:success
@@ -205,6 +219,12 @@ NSString *const kRequestEmbeds = @"embeds";
 - (void)DELETEWithSuccess:(void (^)(id operation, id responseObject))success
                   failure:(CJFailureBlock)failure
 {
+  if ([self shouldSaveRequestForLater]) {
+    [self saveRequestForLater];
+    success(nil, nil);
+    return;
+  }
+  
   [self.sessionManager DELETE:self.path
                    parameters:[self prepareParameters]
                       success:success
@@ -327,6 +347,21 @@ NSString *const kRequestEmbeds = @"embeds";
   }
   
   return willDelete;
+}
+
+- (BOOL)shouldSaveRequestForLater
+{
+  SEL queueSelector = NSSelectorFromString(@"persistentQueueController");
+  BOOL hasSupport = [[CJEngine sharedEngine] respondsToSelector:queueSelector];
+  BOOL isReachable = [AFNetworkReachabilityManager sharedManager].isReachable;
+  
+  return (hasSupport && !isReachable);
+}
+
+- (void)saveRequestForLater
+{
+  CJPersistentQueueController *queueController = [CJPersistentQueueController sharedController];
+  [queueController.queue addObject:self];
 }
 
 @end

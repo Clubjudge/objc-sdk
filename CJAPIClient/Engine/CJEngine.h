@@ -40,7 +40,7 @@ enum
 };
 typedef NSUInteger CJAPIRequestCachePolicy;
 
-@interface CJEngine : NSObject
+@interface CJEngine : NSObject <NSObject>
 
 /**
  The shared request manager used by all requests to the ClubJudge API.
