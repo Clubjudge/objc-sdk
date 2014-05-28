@@ -58,33 +58,32 @@ describe(@"CJPersistentQueueController", ^{
   
   describe(@"#startMonitoring", ^{
     __block CJPersistentQueueController *controller;
+    __block KWCaptureSpy *spy;
     beforeEach(^{
       controller = [CJPersistentQueueController sharedController];
+      spy = [[AFNetworkReachabilityManager sharedManager] captureArgument:@selector(setReachabilityStatusChangeBlock:)
+                                                                  atIndex:0];
     });
     
     context(@"When the network can be reached", ^{
-      beforeEach(^{
-        [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable)
-                                                 andReturn:theValue(YES)];
-      });
-      
       it(@"starts the queue", ^{
         [[controller.queue should] receive:@selector(startWorking)];
         
         [controller startMonitoring];
+        
+        void (^block)(AFNetworkReachabilityStatus) = spy.argument;
+        block(AFNetworkReachabilityStatusReachableViaWiFi);
       });
     });
     
-    context(@"When the network can be reached", ^{
-      beforeEach(^{
-        [[AFNetworkReachabilityManager sharedManager] stub:@selector(isReachable)
-                                                 andReturn:theValue(NO)];
-      });
-      
+    context(@"When the network can be reached", ^{      
       it(@"starts the queue", ^{
         [[controller.queue should] receive:@selector(stopWorking)];
         
         [controller startMonitoring];
+        
+        void (^block)(AFNetworkReachabilityStatus) = spy.argument;
+        block(AFNetworkReachabilityStatusNotReachable);
       });
     });
   });
