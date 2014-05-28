@@ -1,14 +1,14 @@
 Pod::Spec.new do |s|
 
   s.name                 = "CJKit"
-  s.version              = "1.0.0"
+  s.version              = "1.0.1"
   s.summary              = "An Objective-C wrapper for the ClubJudge API"
   s.homepage             = "https://github.com/clubjudge/objc-sdk"
 
   s.license              = { :type => "MIT", :file => "LICENSE" }
   s.author               = { "Bruno Abrantes" => "bruno.abrantes@clubjudge.com" }
   s.platform             = :ios, "6.0"
-  s.source               = { :git => "https://github.com/clubjudge/objc-sdk.git", :tag => "1.0.0" }
+  s.source               = { :git => "https://github.com/clubjudge/objc-sdk.git", :tag => s.version.to_s }
 
   s.default_subspec      = "base"
 
