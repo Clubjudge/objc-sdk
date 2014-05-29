@@ -13,6 +13,7 @@
 #import "CJUser.h"
 #import "CJComment.h"
 #import "CJRating.h"
+#import "CJReview.h"
 #import "CJLinksInfo.h"
 #import "CJModel+Distance.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
@@ -84,7 +85,8 @@ static NSString *kVenueLinkRatings = @"ratings";
                            @"recent": [CJEvent class],
                            @"comments": [CJComment class],
                            @"followers": [CJUser class],
-                           @"ratings": [CJRating class]
+                           @"ratings": [CJRating class],
+                           @"reviews": [CJReview class]
                            };
     
     // Embeddables
