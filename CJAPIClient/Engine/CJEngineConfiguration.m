@@ -60,7 +60,7 @@ static NSDictionary* configurations = nil;
     configurations = [NSDictionary dictionaryWithObjects:@[
                                                            @{
                                                              @"kAPIBaseURL": @"http://local.clubjudge.com:5000",
-                                                             @"kAuthAPIBaseURL": @"http://local.clubjudge.com:3000/baws/auth"
+                                                             @"kAuthAPIBaseURL": @"http://auth.local.clubjudge.com:3000"
                                                              },
                                                            @{
                                                              @"kAPIBaseURL": @"http://bifrost.staging.clubjudge.com",
