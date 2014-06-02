@@ -138,7 +138,7 @@ describe(@"Engine", ^{
                             };
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return ([req.URL.path isEqualToString:@"/baws/auth/tokens"]);
+          return ([req.URL.path isEqualToString:@"/tokens"]);
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
@@ -189,7 +189,7 @@ describe(@"Engine", ^{
         [CJEngine setUserToken:@"something"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return ([req.URL.path isEqualToString:@"/baws/auth/tokens"]);
+          return ([req.URL.path isEqualToString:@"/tokens"]);
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
@@ -265,7 +265,7 @@ describe(@"Engine", ^{
                             };
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return ([req.URL.path isEqualToString:@"/baws/auth/tokens"]);
+          return ([req.URL.path isEqualToString:@"/tokens"]);
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
@@ -321,7 +321,7 @@ describe(@"Engine", ^{
         [CJEngine setUserToken:@"something"];
         
         stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
-          return ([req.URL.path isEqualToString:@"/baws/auth/tokens"]);
+          return ([req.URL.path isEqualToString:@"/tokens"]);
         } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
           NSError *error;
           NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse

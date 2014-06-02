@@ -24,7 +24,7 @@ describe(@"CJEngineConfiguration", ^{
     it(@"returns the development configuration", ^{
       NSDictionary *targetConfig = @{
                                @"kAPIBaseURL": @"http://local.clubjudge.com:5000",
-                               @"kAuthAPIBaseURL": @"http://local.clubjudge.com:3000/baws/auth"
+                               @"kAuthAPIBaseURL": @"http://auth.local.clubjudge.com:3000"
                                };
       
       NSDictionary *config = [[CJEngineConfiguration sharedConfiguration] configurationForEnvironment:@"development"];
@@ -55,7 +55,7 @@ describe(@"CJEngineConfiguration", ^{
     });
     
     it(@"returns the auth url", ^{
-      [[[[CJEngineConfiguration sharedConfiguration] authAPIBaseURL] should] equal:@"http://local.clubjudge.com:3000/baws/auth"];
+      [[[[CJEngineConfiguration sharedConfiguration] authAPIBaseURL] should] equal:@"http://auth.local.clubjudge.com:3000"];
     });
   });
 });
