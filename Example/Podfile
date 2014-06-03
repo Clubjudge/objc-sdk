@@ -1,0 +1,11 @@
+platform :ios, '6.1'
+
+target :CJKit do
+  pod 'CJKit/PromiseKit', :path => '../'
+  pod 'CJKit/BAPersistentOperationQueue', :path => '../'
+end
+
+target :CJKitTests, :exclusive => true do
+  pod 'Kiwi/XCTest'
+  pod 'OHHTTPStubs'
+end

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5D5206A5-AA6E-42C0-B9C5-8CDEA9FAF6D3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CJKit</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DB5E6267-D980-4FC2-9880-CD8F508FA49B</key>
+		<string>ssh://github.com/Clubjudge/objc-sdk.git</string>
+	</dict>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DB5E6267-D980-4FC2-9880-CD8F508FA49B</key>
+		<string>../../../CJKit</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/Clubjudge/objc-sdk.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DB5E6267-D980-4FC2-9880-CD8F508FA49B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DB5E6267-D980-4FC2-9880-CD8F508FA49B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>objc-sdk</string>
+		</dict>
+	</array>
+</dict>
+</plist>

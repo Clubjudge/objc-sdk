@@ -1,0 +1,1 @@
+PODS_CJKIT_PROMISEKIT_OTHER_LDFLAGS = -framework Foundation
