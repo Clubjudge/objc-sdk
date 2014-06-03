@@ -62,6 +62,11 @@ typedef void (^CJFailureBlock)(NSDictionary* error, NSNumber *statusCode);
  */
 @property (nonatomic, strong) NSNumber *retries;
 
+/**
+ The cache policy for this request. If none is set, the cache policy set in CJEngine is assumed.
+ */
+@property (nonatomic, assign) CJAPIRequestCachePolicy cachePolicy;
+
 ///---------------------
 /// @name Initialization
 ///---------------------

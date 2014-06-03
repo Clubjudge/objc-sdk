@@ -106,6 +106,16 @@ NSString *const kRequestEmbeds = @"embeds";
   _path = path;
 }
 
+#pragma mark - Custom getter
+- (CJAPIRequestCachePolicy)cachePolicy
+{
+  if (_cachePolicy) {
+    return _cachePolicy;
+  } else {
+    return [CJEngine sharedEngine].cachePolicy;
+  }
+}
+
 #pragma mark - Actions
 
 - (void)performWithSuccess:(void (^)(id response, CJPaginationInfo *pagination, CJLinksInfo *links))success
@@ -130,7 +140,7 @@ NSString *const kRequestEmbeds = @"embeds";
                                          success(parsedResponse, pagination, links);
                                        }
                                        
-                                       if ([CJEngine sharedEngine].cachePolicy == CJAPIRequestReturnCacheDataThenLoad && [[AFNetworkReachabilityManager sharedManager] isReachable]) {
+                                       if (self.cachePolicy == CJAPIRequestReturnCacheDataThenLoad && [[AFNetworkReachabilityManager sharedManager] isReachable]) {
                                          if ([self willDeleteCached] && [self.retries integerValue] < kCJAPIRequestMaxRetries) {
                                            self.retries = @([self.retries intValue] + 1);
                                            [self performWithSuccess:success failure:failure];

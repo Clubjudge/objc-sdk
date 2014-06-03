@@ -82,6 +82,29 @@ describe(@"CJAPIRequest", ^{
       });
     });
     
+    describe(@"#cachePolicy", ^{
+      it(@"sets the cachePolicy for this request", ^{
+        CJAPIRequest *request = [CJAPIRequest new];
+        request.cachePolicy = CJAPIRequestReloadIgnoringCacheData;
+        
+        [[theValue(request.cachePolicy) should] equal:theValue(CJAPIRequestReloadIgnoringCacheData)];
+      });
+      
+      context(@"When it is set to nil", ^{
+        __block CJAPIRequest *request;
+        beforeEach(^{
+          request = [CJAPIRequest new];
+          request.cachePolicy = (int)nil;
+
+          [CJEngine sharedEngine].cachePolicy = CJAPIRequestReloadIgnoringCacheData;
+        });
+        
+        it(@"defaults to the cachePolicy set in CJEngine", ^{
+          [[theValue(request.cachePolicy) should] equal:theValue(CJAPIRequestReloadIgnoringCacheData)];
+        });
+      });
+    });
+    
     describe(@"#path", ^{
       it(@"defaults to /", ^{
         CJAPIRequest *request = [CJAPIRequest new];
