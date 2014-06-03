@@ -1,10 +1,6 @@
 platform :ios, '6.1'
 
 target :CJKit do
-  pod 'AFNetworking', '~> 2.2'
-  pod 'ObjectiveSugar'
-  pod 'PromiseKit/base'
-  pod 'BAPersistentOperationQueue'
   pod 'CJKit/PromiseKit', :path => '../'
   pod 'CJKit/BAPersistentOperationQueue', :path => '../'
 end
