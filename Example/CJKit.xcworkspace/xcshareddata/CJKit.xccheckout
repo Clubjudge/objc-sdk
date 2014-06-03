@@ -16,7 +16,7 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DB5E6267-D980-4FC2-9880-CD8F508FA49B</key>
-		<string>../../../objc-sdk</string>
+		<string>../../../CJKit</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/Clubjudge/objc-sdk.git</string>
