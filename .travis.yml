@@ -4,6 +4,8 @@ before_install:
   - brew unlink xctool
   - brew install xctool
   - gem install cocoapods
+  - cd ./Example
+  - pod install
 script:
   - xctool -workspace Example/CJKit.xcworkspace -scheme CJKit -sdk iphonesimulator test
 branches:
