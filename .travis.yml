@@ -5,7 +5,7 @@ before_install:
   - brew install xctool
   - gem install cocoapods
 script:
-  - xctool -workspace CJAPIClient.xcworkspace -scheme CJAPIClient -sdk iphonesimulator test
+  - xctool -workspace Example/CJKit.xcworkspace -scheme CJKit -sdk iphonesimulator test
 branches:
   only:
     - master
