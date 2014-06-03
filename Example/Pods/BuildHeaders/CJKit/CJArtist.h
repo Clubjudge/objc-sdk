@@ -1,0 +1,1 @@
+../../../../Classes/Models/CJArtist.h
