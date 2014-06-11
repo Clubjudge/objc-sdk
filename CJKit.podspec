@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.default_subspec      = "base"
 
   s.subspec "base" do |ss|
-    ss.source_files = "Classes/Engine/*.{h,m}", "Classes/Models/*.{h,m}", "Classes/Engine/*.{h,m}", "Classes/Models/*.{h,m}", "Classes/Request/*.{h,m}", "Classes/Categories/CJModel+{Following,Distance,Images}.{h,m}", "Classes/Categories/NSDate+StringParsing.{h,m}", "Classes/Serializers/*.{h,m}", "Classes/Controllers/CJPersistentQueueController.{h,m}"
+    ss.source_files = "Classes/CJkit.h", "Classes/Engine/*.{h,m}", "Classes/Models/*.{h,m}", "Classes/Engine/*.{h,m}", "Classes/Models/*.{h,m}", "Classes/Request/*.{h,m}", "Classes/Categories/CJModel+{Following,Distance,Images}.{h,m}", "Classes/Categories/NSDate+StringParsing.{h,m}", "Classes/Serializers/*.{h,m}", "Classes/Controllers/CJPersistentQueueController.{h,m}"
   end
 
   s.subspec "PromiseKit" do |ss|
