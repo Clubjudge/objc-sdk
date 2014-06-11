@@ -8,6 +8,8 @@
 
 #import "CJEngine.h"
 #import "CJEngineConfiguration.h"
+#import "CJUser.h"
+#import "CJCity.h"
 
 enum
 {
@@ -131,6 +133,39 @@ static NSString* theUserToken = nil;
                         failure:^(id operation, NSError *error) {
                           [CJEngine setUserToken:nil];
                           
+                          if (failure) {
+                            failure(error);
+                          }
+                        }];
+}
+
+- (void)registerWithUser:(CJUser *)user
+             withSuccess:(CJRegisterSuccessBlock)success
+              andFailure:(CJRegisterFailureBlock)failure
+{
+  NSString *username = user.email;
+  NSString *password = user.password;
+  NSString *firstName = user.firstName;
+  NSString *lastName = user.lastName;
+  CJCity *city = user.address[@"city"];
+  
+  [self.authSessionManager POST:@"users"
+                     parameters:@{
+                                  @"email": username,
+                                  @"password": password,
+                                  @"first_name": firstName,
+                                  @"last_name": lastName,
+                                  @"city": @{@"id": city.Id},
+                                  @"app_key": [CJEngine clientKey]
+                                  }
+                        success:^(id operation, id responseObject) {
+                          CJUser *user = [[CJUser alloc] initWithInfo:responseObject[@"user"]];
+                          
+                          if (success) {
+                            success(user);
+                          }
+                        }
+                        failure:^(id operation, NSError *error) {
                           if (failure) {
                             failure(error);
                           }

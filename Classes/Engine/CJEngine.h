@@ -23,6 +23,8 @@
 #import "JSONResponseSerializerWithData.h"
 #import "CJAPIRequestSerializer.h"
 
+@class CJUser;
+
 enum
 {
   CJAPIRequestUseProtocolCachePolicy = 0,
@@ -122,9 +124,19 @@ typedef NSUInteger CJAPIRequestCachePolicy;
 typedef void (^CJLoginSuccessBlock)(NSString *token);
 
 /**
- A block used for failed login requests. It contains raw error object.
+ A block used for failed login requests. It contains the raw error object.
  */
 typedef void (^CJLoginFailureBlock)(NSError *error);
+
+/**
+ A block used for successful register requests.
+ */
+typedef void (^CJRegisterSuccessBlock)();
+
+/**
+ A block used for failed login requests. It contains the raw error object.
+ */
+typedef void (^CJRegisterFailureBlock)(NSError *error);
 
 /**
  Requests a user access token given a Facebook OAuth token, with success and failure blocks
@@ -140,4 +152,12 @@ typedef void (^CJLoginFailureBlock)(NSError *error);
                      andPassword:(NSString *)password
                      withSuccess:(CJLoginSuccessBlock)success
                       andFailure:(CJLoginFailureBlock)failure;
+
+/**
+ Registers a new user given a CJUser object.
+ */
+- (void)registerWithUser:(CJUser *)user
+             withSuccess:(CJRegisterSuccessBlock)success
+              andFailure:(CJRegisterFailureBlock)failure;
+
 @end

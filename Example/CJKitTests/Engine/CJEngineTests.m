@@ -12,6 +12,8 @@
 #import "CJEngineConfiguration.h"
 #import <OHHTTPStubs/OHHTTPStubs.h>
 #import "CJEngine+PromiseKit.h"
+#import "CJUser.h"
+#import "CJCity.h"
 
 @interface CJEngine()
 
@@ -374,6 +376,137 @@ describe(@"Engine", ^{
         });
       });
       
+    });
+  });
+  
+  describe(@"#registerWithUser:withSuccess:andFailure", ^{
+    
+    __block CJUser *user;
+    beforeEach(^{
+      CJCity *city = [CJCity new];
+      city.Id = @55;
+      
+      user = [CJUser new];
+      user.email = @"a_username";
+      user.password = @"a_password";
+      user.firstName = @"John";
+      user.lastName = @"Doe";
+      user.address = @{@"city": city};
+    });
+    
+    it(@"POSTs a request to the authentication API", ^{
+      CJEngine *engine = [CJEngine sharedEngine];
+      
+      KWCaptureSpy *pathSpy = [engine.authSessionManager captureArgument:@selector(POST:parameters:success:failure:) atIndex:0];
+      KWCaptureSpy *tokenSpy = [engine.authSessionManager captureArgument:@selector(POST:parameters:success:failure:) atIndex:1];
+      
+      [engine registerWithUser:user
+                   withSuccess:nil
+                    andFailure:nil];
+      
+      [[expectFutureValue(pathSpy.argument) shouldEventually] equal:@"users"];
+      [[expectFutureValue(tokenSpy.argument) shouldEventually] equal:@{
+                                                                       @"email": @"a_username",
+                                                                       @"password": @"a_password",
+                                                                       @"first_name": @"John",
+                                                                       @"last_name": @"Doe",
+                                                                       @"city": @{@"id": @55},
+                                                                       @"app_key": [CJEngine clientKey]}];
+    });
+
+    context(@"when POST succeeds", ^{
+      __block NSDictionary *stubbedResponse;
+      __block id<OHHTTPStubsDescriptor> stub = nil;
+      
+      beforeEach(^{
+        stubbedResponse = @{};
+        
+        stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+          return ([req.URL.path isEqualToString:@"/users"]);
+        } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+          NSError *error;
+          NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
+                                                         options:kNilOptions
+                                                           error:&error];
+          
+          return [OHHTTPStubsResponse responseWithData:data
+                                            statusCode:200
+                                               headers:@{@"Content-Type":@"text/json"}];
+        }];
+        
+        stub.name = @"postSucceeds";
+      });
+      
+      afterEach(^{
+        [OHHTTPStubs removeStub:stub];
+      });
+      
+      it(@"invokes the success block", ^{
+        CJEngine *engine = [CJEngine sharedEngine];
+        __block BOOL executed = NO;
+        
+        [engine registerWithUser:user
+                     withSuccess:^{
+                       executed = YES;
+                     }
+                      andFailure:nil];
+        
+        [[expectFutureValue(theValue(executed)) shouldEventually] beYes];
+      });
+    });
+    
+    context(@"when POST fails", ^{
+      __block NSDictionary *stubbedResponse;
+      __block id<OHHTTPStubsDescriptor> stub = nil;
+      
+      beforeEach(^{
+        stubbedResponse = @{
+                            @"error": @"bla"
+                            };
+        
+        stub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *req) {
+          return ([req.URL.path isEqualToString:@"/users"]);
+        } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *req) {
+          NSError *error;
+          NSData *data = [NSJSONSerialization dataWithJSONObject:stubbedResponse
+                                                         options:kNilOptions
+                                                           error:&error];
+          
+          return [OHHTTPStubsResponse responseWithData:data
+                                            statusCode:500
+                                               headers:@{@"Content-Type":@"text/json"}];
+        }];
+        
+        stub.name = @"postFails";
+      });
+      
+      afterEach(^{
+        [OHHTTPStubs removeStub:stub];
+      });
+      
+      it(@"invokes the failure block with the error as an argument", ^{
+        CJEngine *engine = [CJEngine sharedEngine];
+        __block NSError *expectedError = nil;
+        
+        [engine registerWithUser:user
+                     withSuccess:nil
+                      andFailure:^(NSError *error) {
+                        expectedError = error;
+                      }];
+        
+        [[expectFutureValue(expectedError) shouldEventually] beNonNil];
+      });
+
+      describe(@"PromiseKit support", ^{
+        it(@"returns a Promise", ^{
+          CJEngine *engine = [CJEngine sharedEngine];
+          id promise = [engine authenticateWithUsername:@"a_username"
+                                            andPassword:@"a_password"];
+          
+          [[promise should] beKindOfClass:[Promise class]];
+        });
+      });
+
     });
   });
 });
