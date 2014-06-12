@@ -58,6 +58,7 @@ describe(@"User Model", ^{
                            },
                            @"gender": @"male",
                            @"bornOn": @"1986-10-13T00:00:00.000Z",
+                           @"isFacebook": @YES,
                            @"_links": @{
                              @"events": @"http://local.clubjudge.com:5000/v1/users/443/events.json?type=upcoming"
                            }
@@ -185,6 +186,12 @@ describe(@"User Model", ^{
         [[theValue(components.day) should] equal:theValue(13)];
         [[theValue(components.month) should] equal:theValue(10)];
         [[theValue(components.year) should] equal:theValue(1986)];
+      });
+    });
+    
+    describe(@"#isFacebook", ^{
+      it(@"produces a correct mapping", ^{
+        [[theValue(user.isFacebook) should] equal:stub[@"isFacebook"]];
       });
     });
   });
