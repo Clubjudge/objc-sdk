@@ -36,4 +36,15 @@
   }];
 }
 
+- (Promise *)registerWithUser:(CJUser *)user
+{
+  return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+    [self registerWithUser:user withSuccess:^{
+      fulfiller(@YES);
+    } andFailure:^(NSError *error) {
+      rejecter(error);
+    }];
+  }];
+}
+
 @end

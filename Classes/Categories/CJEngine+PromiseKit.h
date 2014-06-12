@@ -8,6 +8,7 @@
 
 #import "CJEngine.h"
 #import <PromiseKit/Promise.h>
+@class CJUser;
 
 @interface CJEngine (PromiseKit)
 
@@ -21,5 +22,10 @@
  */
 - (Promise *)authenticateWithUsername:(NSString *)username
                           andPassword:(NSString *)password;
+
+/**
+ * Returns a Promise for a request to register a user
+ */
+- (Promise *)registerWithUser:(CJUser *)user;
 
 @end

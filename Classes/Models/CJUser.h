@@ -13,6 +13,7 @@
 #pragma mark - Core properties
 
 @property(nonatomic, strong) NSString *email;
+@property(nonatomic, strong) NSString *password;
 @property(nonatomic, strong) NSDictionary *address;
 @property(nonatomic, strong) NSString *firstName;
 @property(nonatomic, strong) NSString *lastName;

@@ -84,7 +84,7 @@
 		1333DE75193E2AC9006EA9B3 /* CJTicketTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJTicketTests.m; sourceTree = "<group>"; };
 		1333DE76193E2AC9006EA9B3 /* CJUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUserTests.m; sourceTree = "<group>"; };
 		1333DE77193E2AC9006EA9B3 /* CJVenueTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJVenueTests.m; sourceTree = "<group>"; };
-		1333DE79193E2AC9006EA9B3 /* CJEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEngineTests.m; sourceTree = "<group>"; };
+		1333DE79193E2AC9006EA9B3 /* CJEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CJEngineTests.m; path = Engine/CJEngineTests.m; sourceTree = "<group>"; };
 		1333DE7A193E2AC9006EA9B3 /* MockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockModel.h; sourceTree = "<group>"; };
 		1333DE7B193E2AC9006EA9B3 /* MockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockModel.m; sourceTree = "<group>"; };
 		24C8B7B05B644EBDAD61F426 /* Pods-CJKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJKit.xcconfig"; path = "Pods/Pods-CJKit.xcconfig"; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 				1333DE75193E2AC9006EA9B3 /* CJTicketTests.m */,
 				1333DE76193E2AC9006EA9B3 /* CJUserTests.m */,
 				1333DE77193E2AC9006EA9B3 /* CJVenueTests.m */,
-				1333DE78193E2AC9006EA9B3 /* Engine */,
+				1333DE79193E2AC9006EA9B3 /* CJEngineTests.m */,
 				1333DE7A193E2AC9006EA9B3 /* MockModel.h */,
 				1333DE7B193E2AC9006EA9B3 /* MockModel.m */,
 				1333DE58193E29F6006EA9B3 /* Supporting Files */,
@@ -210,14 +210,6 @@
 				1333DE5A193E29F6006EA9B3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1333DE78193E2AC9006EA9B3 /* Engine */ = {
-			isa = PBXGroup;
-			children = (
-				1333DE79193E2AC9006EA9B3 /* CJEngineTests.m */,
-			);
-			path = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
