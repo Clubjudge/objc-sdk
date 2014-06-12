@@ -31,5 +31,6 @@
 @property(nonatomic, strong) NSDate *birthdate;
 @property (nonatomic, assign) BOOL friend;
 @property (nonatomic, assign) BOOL pendingFriend;
+@property (nonatomic, assign) BOOL isFacebook;
 
 @end

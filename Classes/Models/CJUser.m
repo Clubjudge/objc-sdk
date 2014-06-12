@@ -31,6 +31,7 @@ static NSString*kUserGender = @"gender";
 static NSString*kUserBirthdate = @"bornOn";
 static NSString*kUserFriend = @"isFriend";
 static NSString*kUserPendingFriend = @"isPendingFriend";
+static NSString*kUserIsFacebook = @"isFacebook";
 
 static NSString*kUserLinkEvents = @"events";
 
@@ -57,6 +58,7 @@ static NSString*kUserLinkEvents = @"events";
     _birthdate = [NSDate dateWithISO8601String:info[kUserBirthdate]];
     _friend = [info[kUserFriend] boolValue];
     _pendingFriend = [info[kUserPendingFriend] boolValue];
+    _isFacebook = [info[kUserIsFacebook] boolValue];
     
     // Links
     self.links.mapping = @{
