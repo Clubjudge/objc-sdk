@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec "PromiseKit" do |ss|
-    ss.dependency "PromiseKit/base", "~> 0.9.8"
+    ss.dependency "PromiseKit/base", "~> 0.9.8.1"
     ss.dependency 'CJKit/base'
     ss.source_files = "Classes/Categories/CJAPIRequest+PromiseKit.{h,m}", "Classes/Categories/CJEngine+PromiseKit.{h,m}"
   end
