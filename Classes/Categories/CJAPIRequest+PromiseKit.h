@@ -15,6 +15,6 @@
  * Returns a Promise that overlays a kitten image.
  * @return A Promise that will `then` a `UIImage *` object.
  */
-- (Promise *)perform;
+- (PMKPromise *)perform;
 
 @end

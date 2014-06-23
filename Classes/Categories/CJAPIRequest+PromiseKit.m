@@ -10,16 +10,16 @@
 
 @implementation CJAPIRequest (PromiseKit)
 
-- (Promise *)perform
+- (PMKPromise *)perform
 {
-  __block PromiseFulfiller freshFulfiller;
-  __block PromiseRejecter freshRejecter;
-  Promise *freshDataPromise = [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+  __block PMKPromiseFulfiller freshFulfiller;
+  __block PMKPromiseRejecter freshRejecter;
+  PMKPromise *freshDataPromise = [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
     freshFulfiller = fulfiller;
     freshRejecter = rejecter;
   }];
   
-  return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+  return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
     [self performWithSuccess:^(id response, CJPaginationInfo *pagination, CJLinksInfo *links) {
       NSMutableDictionary *responseObject = [NSMutableDictionary dictionaryWithDictionary:@{@"response": response}];
       

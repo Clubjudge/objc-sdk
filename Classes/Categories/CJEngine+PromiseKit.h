@@ -15,17 +15,17 @@
 /**
  * Returns a Promise for a request for a user access token given a Facebook OAuth token
  */
-- (Promise *)authenticateWithFacebookToken:(NSString *)facebookToken;
+- (PMKPromise *)authenticateWithFacebookToken:(NSString *)facebookToken;
 
 /**
  * Returns a Promise for a request for a user access token given a username/password combo
  */
-- (Promise *)authenticateWithUsername:(NSString *)username
+- (PMKPromise *)authenticateWithUsername:(NSString *)username
                           andPassword:(NSString *)password;
 
 /**
  * Returns a Promise for a request to register a user
  */
-- (Promise *)registerWithUser:(CJUser *)user;
+- (PMKPromise *)registerWithUser:(CJUser *)user;
 
 @end

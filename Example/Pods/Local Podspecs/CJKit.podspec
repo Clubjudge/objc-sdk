@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                 = "CJKit"
-  s.version              = "1.2.1"
+  s.version              = "1.3.1"
   s.summary              = "An Objective-C wrapper for the ClubJudge API"
   s.homepage             = "https://github.com/clubjudge/objc-sdk"
 
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec "PromiseKit" do |ss|
-    ss.dependency "PromiseKit/base"
+    ss.dependency "PromiseKit/base", "~> 0.9.8"
     ss.dependency 'CJKit/base'
     ss.source_files = "Classes/Categories/CJAPIRequest+PromiseKit.{h,m}", "Classes/Categories/CJEngine+PromiseKit.{h,m}"
   end

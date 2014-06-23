@@ -10,9 +10,9 @@
 
 @implementation CJEngine (PromiseKit)
 
-- (Promise *)authenticateWithFacebookToken:(NSString *)facebookToken
+- (PMKPromise *)authenticateWithFacebookToken:(NSString *)facebookToken
 {
-  return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+  return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
     [self authenticateWithFacebookToken:facebookToken withSuccess:^(NSString *token) {
       fulfiller(token);
     } andFailure:^(NSError *error) {
@@ -21,10 +21,10 @@
   }];
 }
 
-- (Promise *)authenticateWithUsername:(NSString *)username
+- (PMKPromise *)authenticateWithUsername:(NSString *)username
                           andPassword:(NSString *)password
 {
-  return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+  return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
     [self authenticateWithUsername:username
                        andPassword:password
                        withSuccess:^(NSString *token) {
@@ -36,9 +36,9 @@
   }];
 }
 
-- (Promise *)registerWithUser:(CJUser *)user
+- (PMKPromise *)registerWithUser:(CJUser *)user
 {
-  return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+  return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
     [self registerWithUser:user withSuccess:^{
       fulfiller(@YES);
     } andFailure:^(NSError *error) {

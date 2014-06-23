@@ -233,7 +233,7 @@ describe(@"Engine", ^{
         it(@"returns a Promise", ^{
           CJEngine *engine = [CJEngine sharedEngine];
           id promise = [engine authenticateWithFacebookToken:@"123456"];
-          [[promise should] beKindOfClass:[Promise class]];
+          [[promise should] beKindOfClass:[PMKPromise class]];
         });
       });
 
@@ -372,7 +372,7 @@ describe(@"Engine", ^{
           id promise = [engine authenticateWithUsername:@"a_username"
                                             andPassword:@"a_password"];
           
-          [[promise should] beKindOfClass:[Promise class]];
+          [[promise should] beKindOfClass:[PMKPromise class]];
         });
       });
       
@@ -503,7 +503,7 @@ describe(@"Engine", ^{
           id promise = [engine authenticateWithUsername:@"a_username"
                                             andPassword:@"a_password"];
           
-          [[promise should] beKindOfClass:[Promise class]];
+          [[promise should] beKindOfClass:[PMKPromise class]];
         });
       });
 
