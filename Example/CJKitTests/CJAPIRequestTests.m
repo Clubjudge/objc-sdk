@@ -976,7 +976,7 @@ describe(@"CJAPIRequest", ^{
     describe(@"#perform", ^{
       it(@"returns a Promise", ^{
         id promise = [request perform];
-        [[promise should] beKindOfClass:[Promise class]];
+        [[promise should] beKindOfClass:[PMKPromise class]];
       });
       
       context(@"when the request succeeds", ^{
@@ -1018,7 +1018,7 @@ describe(@"CJAPIRequest", ^{
         });
         
         it(@"executes #then with a response dictionary", ^{
-          Promise *myRequest = [request perform];
+          PMKPromise *myRequest = [request perform];
           
           __block BOOL hasResponse = NO;
           __block BOOL hasPagination = NO;
@@ -1063,7 +1063,7 @@ describe(@"CJAPIRequest", ^{
         });
         
         it(@"executes #catch with an error dictionary", ^{
-          Promise *myRequest = [request perform];
+          PMKPromise *myRequest = [request perform];
           
           __block BOOL hasError = NO;
           
@@ -1132,7 +1132,7 @@ describe(@"CJAPIRequest", ^{
             theNextRequest = nextRequest;
           });
           
-          [[expectFutureValue(theNextRequest) shouldEventually] beKindOfClass:[Promise class]];
+          [[expectFutureValue(theNextRequest) shouldEventually] beKindOfClass:[PMKPromise class]];
         });
         
         it(@"fulfills the new Promise with fresh data", ^{
@@ -1141,7 +1141,7 @@ describe(@"CJAPIRequest", ^{
           __block BOOL hasLinks = NO;
           
           [request perform]
-          .then(^(id data, Promise *nextRequest) {
+          .then(^(id data, PMKPromise *nextRequest) {
             return nextRequest;
           })
           .then(^(NSDictionary *result){
