@@ -65,7 +65,8 @@ static NSString *kVenueLinkRatings = @"ratings";
     _reviewCount = info[kVenueReviewCount];
     _socialLinks = info[kVenueSocialLinks];
     
-    unless ([[NSNull null] isEqual:info[kVenueGeolocation][@"lat"]] && [[NSNull null] isEqual:info[kVenueGeolocation][@"lon"]]) {
+    _geolocation = kCLLocationCoordinate2DInvalid;
+    if (info[kVenueGeolocation][@"lat"] && info[kVenueGeolocation][@"lon"]) {
       double lat = [info[kVenueGeolocation][@"lat"] doubleValue];
       double lon = [info[kVenueGeolocation][@"lon"] doubleValue];
       _geolocation = CLLocationCoordinate2DMake(lat, lon);
