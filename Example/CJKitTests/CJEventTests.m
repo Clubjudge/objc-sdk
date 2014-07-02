@@ -354,7 +354,7 @@ describe(@"Event Model", ^{
         [event stub:@selector(isRetinaDisplay) andReturn:theValue(NO)];
         
         NSString *path = [event imagePathForFlyerAtPosition:0
-                                                withSize:120];
+                                                withSize:@"square_120"];
         
         [[path should] equal:@"http://local.clubjudge.com:3000//flyers/87251/square_120.png"];
       });
@@ -365,7 +365,7 @@ describe(@"Event Model", ^{
         [event stub:@selector(isRetinaDisplay) andReturn:theValue(YES)];
         
         NSString *path = [event imagePathForFlyerAtPosition:0
-                                                   withSize:120];
+                                                   withSize:@"square_120"];
         
         [[path should] equal:@"http://local.clubjudge.com:3000//flyers/87251/square_120@2x.png"];
       });

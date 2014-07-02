@@ -127,12 +127,12 @@ static NSString *kVenueLinkRatings = @"ratings";
                      fromLocation:location];
 }
 
-- (NSString *)imagePathForLogoWithSize:(NSInteger)size
+- (NSString *)imagePathForLogoWithSize:(NSString *)size
 {
   return [self imagePathForImageInfo:[_logos firstObject] andSize:size];
 }
 
-- (NSString *)imagePathForBackgroundWithSize:(NSInteger)size
+- (NSString *)imagePathForBackgroundWithSize:(NSString *)size
 {
   return [self imagePathForImageInfo:_background andSize:size];
 }

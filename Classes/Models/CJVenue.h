@@ -44,7 +44,7 @@
 
 - (NSUInteger)distanceFromLocation:(CLLocation *)location;
 
-- (NSString *)imagePathForLogoWithSize:(NSInteger)size;
-- (NSString *)imagePathForBackgroundWithSize:(NSInteger)size;
+- (NSString *)imagePathForLogoWithSize:(NSString *)size;
+- (NSString *)imagePathForBackgroundWithSize:(NSString *)size;
 
 @end

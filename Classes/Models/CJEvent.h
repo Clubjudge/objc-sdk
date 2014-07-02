@@ -52,8 +52,8 @@
 - (NSUInteger)distanceFromLocation:(CLLocation *)location;
 
 - (NSString *)imagePathForFlyerAtPosition:(NSInteger)position
-                                 withSize:(NSInteger)size;
+                                 withSize:(NSString *)size;
 
-- (NSString *)imagePathForBackgroundwithSize:(NSInteger)size;
+- (NSString *)imagePathForBackgroundwithSize:(NSString *)size;
 
 @end
