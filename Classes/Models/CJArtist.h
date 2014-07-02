@@ -38,7 +38,7 @@
 - (void)follow;
 - (void)unfollow;
 
-- (NSString *)imagePathForAvatarWithSize:(NSInteger)size;
-- (NSString *)imagePathForBackgroundWithSize:(NSInteger)size;
+- (NSString *)imagePathForAvatarWithSize:(NSString *)size;
+- (NSString *)imagePathForBackgroundWithSize:(NSString *)size;
 
 @end

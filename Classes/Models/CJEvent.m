@@ -126,16 +126,16 @@ static NSString *kEventLinkVenue = @"venue";
 }
 
 - (NSString *)imagePathForFlyerAtPosition:(NSInteger)position
-                                 withSize:(NSInteger)size
+                                 withSize:(NSString *)size
 {
-  NSAssert((position < _flyers.count), @"There is no flyer at position %d", position);
+  NSAssert((position < _flyers.count), @"There is no flyer at position %lu", position);
   
   NSDictionary *flyer = [_flyers objectAtIndex:position];
   
   return [self imagePathForImageInfo:flyer andSize:size];
 }
 
-- (NSString *)imagePathForBackgroundwithSize:(NSInteger)size
+- (NSString *)imagePathForBackgroundwithSize:(NSString *)size
 {
   return [self imagePathForImageInfo:_background andSize:size];
 }

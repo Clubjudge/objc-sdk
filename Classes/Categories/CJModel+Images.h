@@ -12,6 +12,6 @@
 @interface CJModel (Images)
 
 - (NSString *)imagePathForImageInfo:(NSDictionary *)imageInfo
-                            andSize:(NSInteger)size;
+                            andSize:(NSString *)size;
 
 @end

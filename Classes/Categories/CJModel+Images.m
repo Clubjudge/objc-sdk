@@ -12,17 +12,12 @@
 @implementation CJModel (Images)
 
 - (NSString *)imagePathForImageInfo:(NSDictionary *)imageInfo
-                            andSize:(NSInteger)size
+                            andSize:(NSString *)size
 {
   __block NSString *path = nil;
   
   [imageInfo each:^(NSString *key, NSString *value) {
-    NSRange range = [key rangeOfString:@"_"
-                               options:NSBackwardsSearch];
-    
-    key = [key substringFromIndex:range.location+1];
-    
-    if ([key integerValue] == size) {
+    if ([key isEqualToString:size]) {
       if ([self isRetinaDisplay]) {
         NSURL *url = [NSURL URLWithString:value];
         NSString *extension = [url pathExtension];

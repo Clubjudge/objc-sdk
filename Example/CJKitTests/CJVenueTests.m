@@ -343,7 +343,7 @@ describe(@"Venue Model", ^{
       it(@"returns a URL string", ^{
         [venue stub:@selector(isRetinaDisplay) andReturn:theValue(NO)];
         
-        NSString *path = [venue imagePathForLogoWithSize:120];
+        NSString *path = [venue imagePathForLogoWithSize:@"square_120"];
         
         [[path should] equal:@"http://local.clubjudge.com:3000//venues/2150/square_120.jpg"];
       });
@@ -353,7 +353,7 @@ describe(@"Venue Model", ^{
       it(@"returns a URL string with an @2x modifier", ^{
         [venue stub:@selector(isRetinaDisplay) andReturn:theValue(YES)];
         
-        NSString *path = [venue imagePathForLogoWithSize:120];
+        NSString *path = [venue imagePathForLogoWithSize:@"square_120"];
         
         [[path should] equal:@"http://local.clubjudge.com:3000//venues/2150/square_120@2x.jpg"];
       });
@@ -365,7 +365,7 @@ describe(@"Venue Model", ^{
       it(@"returns a URL string", ^{
         [venue stub:@selector(isRetinaDisplay) andReturn:theValue(NO)];
         
-        NSString *path = [venue imagePathForBackgroundWithSize:120];
+        NSString *path = [venue imagePathForBackgroundWithSize:@"square_120"];
         
         [[path should] equal:@"http://local.clubjudge.com:3000//venues/2150/background//square_120.png"];
       });
@@ -375,7 +375,7 @@ describe(@"Venue Model", ^{
       it(@"returns a URL string with an @2x modifier", ^{
         [venue stub:@selector(isRetinaDisplay) andReturn:theValue(YES)];
         
-        NSString *path = [venue imagePathForBackgroundWithSize:120];
+        NSString *path = [venue imagePathForBackgroundWithSize:@"square_120"];
         
         [[path should] equal:@"http://local.clubjudge.com:3000//venues/2150/background//square_120@2x.png"];
       });

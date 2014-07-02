@@ -95,12 +95,12 @@ static NSString *kArtistLinkGenres = @"musicGenres";
   [self unfollowEntity:@"artist"];
 }
 
-- (NSString *)imagePathForAvatarWithSize:(NSInteger)size
+- (NSString *)imagePathForAvatarWithSize:(NSString *)size
 {
   return [self imagePathForImageInfo:[_avatars firstObject] andSize:size];
 }
 
-- (NSString *)imagePathForBackgroundWithSize:(NSInteger)size
+- (NSString *)imagePathForBackgroundWithSize:(NSString *)size
 {
   return [self imagePathForImageInfo:_background andSize:size];
 }
