@@ -66,7 +66,7 @@ static NSString *kVenueLinkRatings = @"ratings";
     _socialLinks = info[kVenueSocialLinks];
     
     _geolocation = kCLLocationCoordinate2DInvalid;
-    if (info[kVenueGeolocation][@"lat"] && info[kVenueGeolocation][@"lon"]) {
+    if (info[kVenueGeolocation][@"lat"] != [NSNull null] && info[kVenueGeolocation][@"lon"] != [NSNull null]) {
       double lat = [info[kVenueGeolocation][@"lat"] doubleValue];
       double lon = [info[kVenueGeolocation][@"lon"] doubleValue];
       _geolocation = CLLocationCoordinate2DMake(lat, lon);
