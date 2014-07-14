@@ -1,5 +1,6 @@
 language: objective-c
 before_install:
+  - sudo easy_install cpp-coveralls
   - brew update
   - brew unlink xctool
   - brew install xctool
@@ -8,7 +9,9 @@ before_install:
   - pod install
   - cd ../
 script:
-  - xctool -workspace Example/CJKit.xcworkspace -scheme CJKit -sdk iphonesimulator test
+  - xctool -workspace Example/CJKit.xcworkspace -scheme CJKit -sdk iphonesimulator test ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
+after_success:
+  - coveralls -e Pods -e Test
 branches:
   only:
     - master
