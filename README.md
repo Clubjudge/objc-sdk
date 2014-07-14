@@ -4,7 +4,10 @@
 [![Pod Version](http://img.shields.io/cocoapods/v/CJKit.svg?style=flat)](http://cocoadocs.org/docsets/CJKit/)
 [![Pod Platform](http://img.shields.io/cocoapods/p/CJKit.svg?style=flat)](http://cocoadocs.org/docsets/CJKit/)
 [![Pod License](http://img.shields.io/cocoapods/l/CJKit.svg?style=flat)](http://opensource.org/licenses/MIT)
-Objective C SDK for the ClubJudge API.
+
+## What is it?
+
+CJKit is an Objective C SDK for the [ClubJudge API](http://bifrost.clubjudge.com).
 
 ## Requirements
 
