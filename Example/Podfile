@@ -6,6 +6,6 @@ target :CJKit do
 end
 
 target :CJKitTests, :exclusive => true do
-  pod 'Kiwi/XCTest'
+  pod 'Kiwi'
   pod 'OHHTTPStubs'
 end
