@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                 = "CJKit"
-  s.version              = "1.3.2"
+  s.version              = "2.0.2"
   s.summary              = "An Objective-C wrapper for the ClubJudge API"
   s.homepage             = "https://github.com/clubjudge/objc-sdk"
 
@@ -17,13 +17,13 @@ Pod::Spec.new do |s|
   end
 
   s.subspec "PromiseKit" do |ss|
-    ss.dependency "PromiseKit/base", "~> 0.9.8"
-    ss.dependency 'CJKit/base'
+    ss.dependency "PromiseKit/base", "~> 0.9.8.1"
+    ss.dependency 'CJKit/base', "~> #{s.version.to_s}"
     ss.source_files = "Classes/Categories/CJAPIRequest+PromiseKit.{h,m}", "Classes/Categories/CJEngine+PromiseKit.{h,m}"
   end
 
   s.subspec "BAPersistentOperationQueue" do |ss|
-    ss.dependency 'CJKit/base'
+    ss.dependency 'CJKit/base', "~> #{s.version.to_s}"
     ss.source_files = "Classes/Categories/CJEngine+CJPersistentQueueController.{h,m}"
   end
 
