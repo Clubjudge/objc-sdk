@@ -12,7 +12,7 @@ before_install:
 script:
   - xctool -workspace Example/CJKit.xcworkspace -scheme CJKit -sdk iphonesimulator test ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
 after_success:
-  - ./script/coveralls.rb --extension m --exclude-folder Demo --exclude-folder Test --exclude-folder Externals
+  - ./script/coveralls.rb --extension m --exclude-folder Example
 branches:
   only:
     - master
