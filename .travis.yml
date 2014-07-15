@@ -11,7 +11,7 @@ before_install:
 script:
   - xctool -workspace Example/CJKit.xcworkspace -scheme CJKit -sdk iphonesimulator test ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
 after_success:
-  - coveralls -e Pods -e Test
+  - ./script/coveralls.sh
 branches:
   only:
     - master
