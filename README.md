@@ -1,6 +1,7 @@
 # CJKit
 
 [![Build Status](http://img.shields.io/travis/Clubjudge/objc-sdk.svg?style=flat)](https://travis-ci.org/Clubjudge/objc-sdk)
+[![Coverage Status](https://img.shields.io/coveralls/Clubjudge/objc-sdk.svg?style=flat)](https://coveralls.io/r/Clubjudge/objc-sdk)
 [![Pod Version](http://img.shields.io/cocoapods/v/CJKit.svg?style=flat)](http://cocoadocs.org/docsets/CJKit/)
 [![Pod Platform](http://img.shields.io/cocoapods/p/CJKit.svg?style=flat)](http://cocoadocs.org/docsets/CJKit/)
 [![Pod License](http://img.shields.io/cocoapods/l/CJKit.svg?style=flat)](http://opensource.org/licenses/MIT)
