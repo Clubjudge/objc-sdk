@@ -35,8 +35,8 @@
 		1333DE8A193E2AC9006EA9B3 /* CJTicketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1333DE75193E2AC9006EA9B3 /* CJTicketTests.m */; };
 		1333DE8B193E2AC9006EA9B3 /* CJUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1333DE76193E2AC9006EA9B3 /* CJUserTests.m */; };
 		1333DE8C193E2AC9006EA9B3 /* CJVenueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1333DE77193E2AC9006EA9B3 /* CJVenueTests.m */; };
-		1333DE8D193E2AC9006EA9B3 /* CJEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1333DE79193E2AC9006EA9B3 /* CJEngineTests.m */; };
 		1333DE8E193E2AC9006EA9B3 /* MockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1333DE7B193E2AC9006EA9B3 /* MockModel.m */; };
+		1384807F1975422B0050CC2C /* CJEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1384807E1975422B0050CC2C /* CJEngineTests.m */; };
 		3F9A9CA503BF41D9A038F2AE /* libPods-CJKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 340C14C0F67942AFAC102870 /* libPods-CJKit.a */; };
 		F4151FB21C12475481C62C5F /* libPods-CJKitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6BA4BFCD4B404188893D03 /* libPods-CJKitTests.a */; };
 /* End PBXBuildFile section */
@@ -84,9 +84,9 @@
 		1333DE75193E2AC9006EA9B3 /* CJTicketTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJTicketTests.m; sourceTree = "<group>"; };
 		1333DE76193E2AC9006EA9B3 /* CJUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUserTests.m; sourceTree = "<group>"; };
 		1333DE77193E2AC9006EA9B3 /* CJVenueTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJVenueTests.m; sourceTree = "<group>"; };
-		1333DE79193E2AC9006EA9B3 /* CJEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CJEngineTests.m; path = Engine/CJEngineTests.m; sourceTree = "<group>"; };
 		1333DE7A193E2AC9006EA9B3 /* MockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockModel.h; sourceTree = "<group>"; };
 		1333DE7B193E2AC9006EA9B3 /* MockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockModel.m; sourceTree = "<group>"; };
+		1384807E1975422B0050CC2C /* CJEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CJEngineTests.m; path = Engine/CJEngineTests.m; sourceTree = "<group>"; };
 		24C8B7B05B644EBDAD61F426 /* Pods-CJKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CJKit.xcconfig"; path = "Pods/Pods-CJKit.xcconfig"; sourceTree = "<group>"; };
 		340C14C0F67942AFAC102870 /* libPods-CJKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CJKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6BA4BFCD4B404188893D03 /* libPods-CJKitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CJKitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,7 +195,7 @@
 				1333DE75193E2AC9006EA9B3 /* CJTicketTests.m */,
 				1333DE76193E2AC9006EA9B3 /* CJUserTests.m */,
 				1333DE77193E2AC9006EA9B3 /* CJVenueTests.m */,
-				1333DE79193E2AC9006EA9B3 /* CJEngineTests.m */,
+				1384807E1975422B0050CC2C /* CJEngineTests.m */,
 				1333DE7A193E2AC9006EA9B3 /* MockModel.h */,
 				1333DE7B193E2AC9006EA9B3 /* MockModel.m */,
 				1333DE58193E29F6006EA9B3 /* Supporting Files */,
@@ -399,8 +399,8 @@
 				1333DE87193E2AC9006EA9B3 /* CJPersistentQueueControllerTests.m in Sources */,
 				1333DE80193E2AC9006EA9B3 /* CJEngineConfigurationTests.m in Sources */,
 				1333DE7D193E2AC9006EA9B3 /* CJArtistTests.m in Sources */,
+				1384807F1975422B0050CC2C /* CJEngineTests.m in Sources */,
 				1333DE81193E2AC9006EA9B3 /* CJEventTests.m in Sources */,
-				1333DE8D193E2AC9006EA9B3 /* CJEngineTests.m in Sources */,
 				1333DE8E193E2AC9006EA9B3 /* MockModel.m in Sources */,
 				1333DE82193E2AC9006EA9B3 /* CJLinksInfoTests.m in Sources */,
 			);
