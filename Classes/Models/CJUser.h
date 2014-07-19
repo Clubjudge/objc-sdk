@@ -33,4 +33,7 @@
 @property (nonatomic, assign) BOOL pendingFriend;
 @property (nonatomic, assign) BOOL isFacebook;
 
+#pragma mark - Initializers
++ (instancetype)userWithInfo:(NSDictionary *)info;
+
 @end

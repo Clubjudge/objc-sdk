@@ -35,6 +35,13 @@ static NSString*kUserIsFacebook = @"isFacebook";
 
 static NSString*kUserLinkEvents = @"events";
 
+#pragma mark - Initializers
+
++ (instancetype)userWithInfo:(NSDictionary *)info
+{
+  return [[CJUser alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];
