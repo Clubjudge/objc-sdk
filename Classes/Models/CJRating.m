@@ -12,6 +12,13 @@
 
 static NSString *kRatingScore = @"score";
 
+#pragma mark - Initializers
+
++ (instancetype)ratingWithInfo:(NSDictionary *)info
+{
+  return [[CJRating alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

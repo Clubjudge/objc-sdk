@@ -23,8 +23,16 @@ describe(@"Rating Model", ^{
                          };
   
   __block CJRating *rating;
-  beforeAll(^{
+  beforeEach(^{
     rating = [[CJRating alloc] initWithInfo:stub];
+  });
+  
+  describe(@".ratingWithInfo", ^{
+    it(@"Returns a new instance of a CJRating with the provided info", ^{
+      rating = [CJRating ratingWithInfo:stub];
+      
+      [[rating.Id should] equal:stub[@"id"]];
+    });
   });
   
   context(@"Mapping", ^{
