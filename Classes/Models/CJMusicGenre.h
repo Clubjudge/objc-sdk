@@ -15,4 +15,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) BOOL inferred;
 
+#pragma mark - Initializers
++ (instancetype)musicGenreWithInfo:(NSDictionary *)info;
+
 @end
