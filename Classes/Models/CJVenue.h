@@ -37,6 +37,10 @@
 @property(nonatomic, strong) NSArray *recentEvents;
 @property(nonatomic, strong) NSArray *followers;
 
+#pragma mark - Initializers
+
++ (instancetype)venueWithInfo:(NSDictionary *)info;
+
 #pragma mark - Actions
 
 - (void)follow;
