@@ -22,6 +22,13 @@ static NSString *kReviewType = @"type";
 static NSString *kReviewUserId = @"userId";
 static NSString *kReviewValues = @"values";
 
+#pragma mark - Initializers
+
++ (instancetype)reviewWithInfo:(NSDictionary *)info
+{
+  return [[CJReview alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

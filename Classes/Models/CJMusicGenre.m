@@ -14,6 +14,13 @@ static NSString *kMusicGenreParentId = @"parentId";
 static NSString *kMusicGenreName = @"name";
 static NSString *kMusicGenreInferred = @"inferred";
 
+#pragma mark - Initializers
+
++ (instancetype)musicGenreWithInfo:(NSDictionary *)info
+{
+  return [[CJMusicGenre alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

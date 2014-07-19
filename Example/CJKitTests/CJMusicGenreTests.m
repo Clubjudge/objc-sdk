@@ -20,8 +20,16 @@ describe(@"Music Genre Model", ^{
                          };
   
   __block CJMusicGenre *genre;
-  beforeAll(^{
+  beforeEach(^{
     genre = [[CJMusicGenre alloc] initWithInfo:stub];
+  });
+  
+  describe(@".musicGenreWithInfo:", ^{
+    it(@"Returns a new instance of a CJMusicGenre with the provided info", ^{
+      genre = [CJMusicGenre musicGenreWithInfo:stub];
+      
+      [[genre.Id should] equal:stub[@"id"]];
+    });
   });
   
   context(@"Mapping", ^{

@@ -15,6 +15,13 @@ static NSString *kTicketCents = @"cents";
 static NSString *kTicketCurrency = @"currency";
 static NSString *kTicketText = @"text";
 
+#pragma mark - Initializers
+
++ (instancetype)ticketWithInfo:(NSDictionary *)info
+{
+  return [[CJTicket alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

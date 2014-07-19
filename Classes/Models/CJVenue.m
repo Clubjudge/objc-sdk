@@ -50,6 +50,13 @@ static NSString *kVenueLinkComments = @"comments";
 static NSString *kVenueLinkFollowers = @"followers";
 static NSString *kVenueLinkRatings = @"ratings";
 
+#pragma mark - Initializers
+
++ (instancetype)venueWithInfo:(NSDictionary *)info
+{
+  return [[CJVenue alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

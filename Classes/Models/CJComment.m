@@ -17,6 +17,11 @@ static NSString *kCommentCreatedAt = @"timestamp";
 static NSString *kCommentType = @"type";
 static NSString *kCommentUser = @"user";
 
++ (instancetype)commentWithInfo:(NSDictionary *)info
+{
+  return [[CJComment alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

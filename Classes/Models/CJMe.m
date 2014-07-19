@@ -13,6 +13,13 @@
 
 static NSString *kMePreferences = @"preferences";
 
+#pragma mark - Initializers
+
++ (instancetype)meWithInfo:(NSDictionary *)info
+{
+  return [[CJMe alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

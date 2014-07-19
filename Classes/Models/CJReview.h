@@ -24,6 +24,9 @@ typedef enum {
 @property (readonly) NSNumber *userId;
 @property (readonly) NSArray *values;
 
+#pragma mark - Initializers
++ (instancetype)reviewWithInfo:(NSDictionary *)info;
+
 #pragma mark - Helpers
 - (CJAPIRequest *)requestForUser;
 - (CJAPIRequest *)requestForTarget;

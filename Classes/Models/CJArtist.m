@@ -43,6 +43,11 @@ static NSString *kArtistLinkComments = @"comments";
 static NSString *kArtistLinkFollowers = @"followers";
 static NSString *kArtistLinkGenres = @"musicGenres";
 
++ (instancetype)artistWithInfo:(NSDictionary *)info
+{
+  return [[CJArtist alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

@@ -49,8 +49,16 @@ describe(@"Review Model", ^{
                          };
   
   __block CJReview *review;
-  beforeAll(^{
+  beforeEach(^{
     review = [[CJReview alloc] initWithInfo:stub];
+  });
+  
+  describe(@".reviewWithInfo", ^{
+    it(@"Returns a new instance of a CJReview with the provided info", ^{
+      review = [CJReview reviewWithInfo:stub];
+      
+      [[review.Id should] equal:stub[@"id"]];
+    });
   });
   
   context(@"Mapping", ^{

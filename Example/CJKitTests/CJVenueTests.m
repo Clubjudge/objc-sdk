@@ -116,8 +116,16 @@ describe(@"Venue Model", ^{
                          };
   
   __block CJVenue *venue;
-  beforeAll(^{
+  beforeEach(^{
     venue = [[CJVenue alloc] initWithInfo:stub];
+  });
+  
+  describe(@".venueWithInfo", ^{
+    it(@"Returns a new instance of a CJVenue with the provided info", ^{
+      venue = [CJVenue venueWithInfo:stub];
+      
+      [[venue.Id should] equal:stub[@"id"]];
+    });
   });
   
   context(@"Mapping", ^{

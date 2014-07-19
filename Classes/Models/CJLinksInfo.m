@@ -25,9 +25,14 @@ static NSString *kLinksSelf = @"self";
 static NSString *kLinksNext = @"next";
 static NSString *kLinksLast = @"last";
 
-#pragma mark - Initialisation
+#pragma mark - Initializers
 
-- (instancetype) initWithInfo:(NSDictionary *)info
++ (instancetype)linksWithInfo:(NSDictionary *)info
+{
+  return [[CJLinksInfo alloc] initWithInfo:info];
+}
+
+- (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super init];
   

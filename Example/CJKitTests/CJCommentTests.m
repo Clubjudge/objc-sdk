@@ -63,8 +63,16 @@ describe(@"Comment Model", ^{
                          };
   
   __block CJComment *comment;
-  beforeAll(^{
+  beforeEach(^{
     comment = [[CJComment alloc] initWithInfo:stub];
+  });
+  
+  describe(@".commentWithInfo:", ^{
+    it(@"Returns a new instance of a CJComment with the provided info", ^{
+      comment = [CJComment commentWithInfo:stub];
+      
+      [[comment.Id should] equal:stub[@"id"]];
+    });
   });
   
   context(@"Mapping", ^{

@@ -17,10 +17,15 @@ typedef enum {
 @interface CJComment : CJModel
 
 #pragma mark - Core properties
+
 @property (nonatomic, strong) NSString* Id;
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, assign) CommentType type;
 @property (nonatomic, strong) CJUser *user;
+
+#pragma mark - Initializers
+
++ (instancetype)commentWithInfo:(NSDictionary *)info;
 
 @end

@@ -14,6 +14,9 @@
 #pragma mark - Core properties
 @property(nonatomic, strong) NSDictionary *preferences;
 
+#pragma mark - Initializers
++ (instancetype)meWithInfo:(NSDictionary *)info;
+
 #pragma mark - Actions
 - (CJAPIRequest *)requestForUpdate;
 

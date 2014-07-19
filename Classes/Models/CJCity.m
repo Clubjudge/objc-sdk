@@ -16,6 +16,11 @@ static NSString *kCityRegion = @"region";
 static NSString *kCityCountry = @"country";
 static NSString *kCityGeolocation = @"geolocation";
 
++ (instancetype)cityWithInfo:(NSDictionary *)info
+{
+  return [[CJCity alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

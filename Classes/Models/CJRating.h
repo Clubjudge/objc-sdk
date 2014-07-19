@@ -15,4 +15,7 @@
 @property (nonatomic, readonly) NSNumber *score;
 @property (nonatomic, readonly) NSString *textReview;
 
+#pragma mark - Initializers
++ (instancetype)ratingWithInfo:(NSDictionary *)info;
+
 @end

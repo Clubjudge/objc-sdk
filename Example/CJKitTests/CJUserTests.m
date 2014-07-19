@@ -65,8 +65,16 @@ describe(@"User Model", ^{
                          };
   
   __block CJUser *user;
-  beforeAll(^{
+  beforeEach(^{
     user = [[CJUser alloc] initWithInfo:stub];
+  });
+  
+  describe(@".userWithInfo", ^{
+    it(@"Returns a new instance of a CJUser with the provided info", ^{
+      user = [CJUser userWithInfo:stub];
+      
+      [[user.Id should] equal:stub[@"id"]];
+    });
   });
   
   context(@"Mapping", ^{
