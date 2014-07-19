@@ -40,6 +40,14 @@ describe(@"Links info", ^{
     });
   });
   
+  describe(@".linksWithInfo", ^{
+    it(@"returns a new instance of CJLinksInfo with the supplied data", ^{
+      CJLinksInfo *linksInfo = [CJLinksInfo linksWithInfo:linksData];
+
+      [[linksInfo.links should] equal:linksData];
+    });
+  });
+  
   describe(@"#requestForLink:link", ^{
     __block CJAPIRequest *request;
     beforeEach(^{

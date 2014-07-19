@@ -14,10 +14,13 @@
 @property (readonly) NSDictionary *links;
 @property (nonatomic, strong) NSDictionary *mapping;
 
-#pragma mark - Initialisation
+#pragma mark - Initializers
+
++ (instancetype)linksWithInfo:(NSDictionary *)info;
 - (instancetype)initWithInfo:(NSDictionary *)info;
 
 #pragma mark - Request
+
 - (CJAPIRequest *)requestForLink:(NSString *)link;
 
 @end
