@@ -33,8 +33,16 @@ describe(@"City Model", ^{
                          };
   
   __block CJCity *city;
-  beforeAll(^{
+  beforeEach(^{
     city = [[CJCity alloc] initWithInfo:stub];
+  });
+  
+  describe(@".cityWithInfo:", ^{
+    it(@"Returns a new instance of a CJCity with the provided info", ^{
+      city = [CJCity cityWithInfo:stub];
+      
+      [[city.Id should] equal:stub[@"id"]];
+    });
   });
   
   context(@"Mapping", ^{

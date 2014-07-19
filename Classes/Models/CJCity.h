@@ -17,4 +17,8 @@
 @property (readonly) NSDictionary *country;
 @property (readonly) CLLocationCoordinate2D geolocation;
 
+#pragma mark - Initializers
+
++ (instancetype)cityWithInfo:(NSDictionary *)info;
+
 @end
