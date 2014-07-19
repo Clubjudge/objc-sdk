@@ -16,4 +16,7 @@
 @property (nonatomic, strong) NSString *currency;
 @property (nonatomic, strong) NSString *text;
 
+#pragma mark - Initializers
++ (instancetype)ticketWithInfo:(NSDictionary *)info;
+
 @end

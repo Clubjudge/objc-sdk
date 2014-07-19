@@ -20,8 +20,16 @@ describe(@"Ticket Model", ^{
                          };
   
   __block CJTicket *ticket;
-  beforeAll(^{
+  beforeEach(^{
     ticket = [[CJTicket alloc] initWithInfo:stub];
+  });
+  
+  describe(@".ticketWithInfo", ^{
+    it(@"Returns a new instance of a CJTicket with the provided info", ^{
+      ticket = [CJTicket ticketWithInfo:stub];
+      
+      [[ticket.name should] equal:stub[@"name"]];
+    });
   });
   
   context(@"Mapping", ^{
