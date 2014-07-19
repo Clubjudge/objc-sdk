@@ -87,8 +87,16 @@ describe(@"Event Model", ^{
                          };
   
   __block CJEvent *event;
-  beforeAll(^{
+  beforeEach(^{
     event = [[CJEvent alloc] initWithInfo:stub];
+  });
+  
+  describe(@".eventWithInfo:", ^{
+    it(@"Returns a new instance of a CJEvent with the provided info", ^{
+      event = [CJEvent eventWithInfo:stub];
+      
+      [[event.Id should] equal:stub[@"id"]];
+    });
   });
   
   context(@"Mapping", ^{

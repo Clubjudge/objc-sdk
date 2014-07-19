@@ -56,6 +56,11 @@ static NSString *kEventLinkGenres = @"musicGenres";
 static NSString *kEventLinkTickets = @"tickets";
 static NSString *kEventLinkVenue = @"venue";
 
++ (instancetype)eventWithInfo:(NSDictionary *)info
+{
+  return [[CJEvent alloc] initWithInfo:info];
+}
+
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super initWithInfo:info];

@@ -44,6 +44,10 @@
 @property(nonatomic, strong) NSArray *musicGenres;
 @property(nonatomic, strong) NSArray *followers;
 
+#pragma mark - Initializers
+
++ (instancetype)eventWithInfo:(NSDictionary *)info;
+
 #pragma mark - Actions
 
 - (void)follow;
