@@ -37,8 +37,16 @@ describe(@"Me Model", ^{
                          };
   
   __block CJMe *me;
-  beforeAll(^{
+  beforeEach(^{
     me = [[CJMe alloc] initWithInfo:stub];
+  });
+  
+  describe(@".meWithInfo:", ^{
+    it(@"Returns a new instance of a CJMe with the provided info", ^{
+      me = [CJMe meWithInfo:stub];
+      
+      [[me.Id should] equal:stub[@"id"]];
+    });
   });
   
   context(@"Mapping", ^{
