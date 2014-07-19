@@ -87,8 +87,16 @@ describe(@"Artist Model", ^{
                       };
   
   __block CJArtist *artist;
-  beforeAll(^{
+  beforeEach(^{
     artist = [[CJArtist alloc] initWithInfo:stub];
+  });
+  
+  describe(@".artistWithInfo:", ^{
+    it(@"Returns a new instance of a CJArtist with the provided info", ^{
+      artist = [CJArtist artistWithInfo:stub];
+      
+      [[artist.Id should] equal:stub[@"id"]];
+    });
   });
   
   context(@"Mapping", ^{
