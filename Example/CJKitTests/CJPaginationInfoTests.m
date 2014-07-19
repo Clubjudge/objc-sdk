@@ -12,21 +12,28 @@
 SPEC_BEGIN(CJPAGINATIONINFOSPEC)
 
 describe(@"Pagination Info", ^{
-  context(@"When initializing", ^{
+  __block NSDictionary *paginationData;
+  __block CJPaginationInfo *paginationInfo;
+  beforeAll(^{
+    paginationData = @{
+                       @"currentPage": @1,
+                       @"perPage": @10,
+                       @"totalPages": @1,
+                       @"totalItems": @5
+                       };
     
-    __block NSDictionary *paginationData;
-    __block CJPaginationInfo *paginationInfo;
-    beforeAll(^{
-      paginationData = @{
-                         @"currentPage": @1,
-                         @"perPage": @10,
-                         @"totalPages": @1,
-                         @"totalItems": @5
-                         };
+    paginationInfo = [[CJPaginationInfo alloc] initWithInfo:paginationData];
+  });
+  
+  describe(@".paginationWithInfo", ^{
+    it(@"returns a new instance of CJPaginationInfo with the supplied data", ^{
+      CJPaginationInfo *paginationInfo = [CJPaginationInfo paginationWithInfo:paginationData];
       
-      paginationInfo = [[CJPaginationInfo alloc] initWithInfo:paginationData];
+      [[paginationInfo.currentPage should] equal:paginationData[@"currentPage"]];
     });
-    
+  });
+  
+  context(@"When initializing", ^{
     it(@"returns nil if pagination info is null", ^{
       CJPaginationInfo *paginationInfo = [[CJPaginationInfo alloc] initWithInfo:nil];
       

@@ -15,6 +15,9 @@
 @property (readonly) NSNumber *totalPages;
 @property (readonly) NSNumber *totalItems;
 
+#pragma mark - Initializers
+
++ (instancetype)paginationWithInfo:(NSDictionary *)info;
 - (instancetype)initWithInfo:(NSDictionary *)info;
 
 @end

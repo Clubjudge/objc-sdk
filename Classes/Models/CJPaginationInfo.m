@@ -15,7 +15,14 @@ static NSString *kPerPage = @"perPage";
 static NSString *kTotalPages = @"totalPages";
 static NSString *kTotalItems = @"totalItems";
 
-- (instancetype) initWithInfo:(NSDictionary *)info
+#pragma mark - Initializers
+
++ (instancetype)paginationWithInfo:(NSDictionary *)info
+{
+  return [[CJPaginationInfo alloc] initWithInfo:info];
+}
+
+- (instancetype)initWithInfo:(NSDictionary *)info
 {
   self = [super init];
   
