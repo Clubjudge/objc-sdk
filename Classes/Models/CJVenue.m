@@ -63,7 +63,7 @@ static NSString *kVenueLinkRatings = @"ratings";
   if (self && info) {
     // Core properties
     _name = info[kVenueName];
-    _description = info[kVenueDescription];
+    _about = info[kVenueDescription];
     _updatedAt = [NSDate dateWithISO8601String:info[kVenueUpdatedAt]];
     _following = [info[kVenueFollowing] boolValue];
     _followersCount = info[kVenueFollowersCount];

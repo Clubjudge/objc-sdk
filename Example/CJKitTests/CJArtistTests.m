@@ -112,9 +112,9 @@ describe(@"Artist Model", ^{
       });
     });
     
-    describe(@"#description", ^{
+    describe(@"#about", ^{
       it(@"produces a correct mapping", ^{
-        [[artist.description should] equal:stub[@"description"]];
+        [[artist.about should] equal:stub[@"description"]];
       });
     });
 
