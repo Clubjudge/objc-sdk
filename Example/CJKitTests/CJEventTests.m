@@ -170,9 +170,9 @@ describe(@"Event Model", ^{
       });
     });
     
-    describe(@"#description", ^{
+    describe(@"#about", ^{
       it(@"produces a correct mapping", ^{
-        [[event.description should] equal:stub[@"description"]];
+        [[event.about should] equal:stub[@"description"]];
       });
     });
     

@@ -141,9 +141,9 @@ describe(@"Venue Model", ^{
       });
     });
     
-    describe(@"#description", ^{
+    describe(@"#about", ^{
       it(@"produces a correct mapping", ^{
-        [[venue.description should] equal:stub[@"description"]];
+        [[venue.about should] equal:stub[@"description"]];
       });
     });
     

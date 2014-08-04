@@ -14,7 +14,7 @@
 #pragma mark - Core properties
 
 @property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong) NSString *description;
+@property(nonatomic, strong) NSString *about;
 @property(nonatomic, assign) BOOL following;
 @property(nonatomic, strong) NSDate *updatedAt;
 @property(nonatomic, strong) NSNumber *followersCount;

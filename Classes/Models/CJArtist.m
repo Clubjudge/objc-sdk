@@ -54,7 +54,7 @@ static NSString *kArtistLinkGenres = @"musicGenres";
   if (self && info) {
     // Core properties
     _name = info[kArtistName];
-    _description = info[kArtistDescription];
+    _about = info[kArtistDescription];
     _following = [info[kArtistFollowing] boolValue];
     _followersCount = info[kArtistFollowersCount];
     _commentsCount = info[kArtistCommentsCount];

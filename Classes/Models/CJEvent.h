@@ -17,7 +17,7 @@
 
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSArray *flyers;
-@property(nonatomic, strong) NSString *description;
+@property(nonatomic, strong) NSString *about;
 @property(nonatomic, strong) NSDate *startsAt;
 @property(nonatomic, strong) NSDate *endsAt;
 @property(nonatomic, strong) NSDate *reviewEndsAt;
