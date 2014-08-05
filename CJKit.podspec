@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                 = "CJKit"
-  s.version              = "2.1.0"
+  s.version              = "3.0.0"
   s.summary              = "An Objective-C wrapper for the ClubJudge API"
   s.homepage             = "https://github.com/clubjudge/objc-sdk"
 
