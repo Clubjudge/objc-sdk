@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Clubjudge. All rights reserved.
 //
 
+#import "CJAPIRequest.h"
 #import "CJModel.h"
 #import <CoreLocation/CoreLocation.h>
 
@@ -42,6 +43,8 @@
 + (instancetype)venueWithInfo:(NSDictionary *)info;
 
 #pragma mark - Actions
+
++ (CJAPIRequest *)requestForSearchWithTerm:(NSString *)term;
 
 - (void)follow;
 - (void)unfollow;

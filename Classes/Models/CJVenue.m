@@ -116,6 +116,20 @@ static NSString *kVenueLinkRatings = @"ratings";
 
 #pragma mark - Actions
 
++ (CJAPIRequest *)requestForSearchWithTerm:(NSString *)term
+{
+  CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"get"
+                                                       andPath:@"venues/search"];
+  
+  [request setModelClass:[CJVenue class]];
+  [request setParameters:@{@"term": term}];
+  
+  // Searches rarely change, so cache this more aggressively
+  [request setCachePolicy:CJAPIRequestReturnCacheDataElseLoad];
+  
+  return request;
+}
+
 - (void)follow
 {
   [self followEntity:@"venue"];

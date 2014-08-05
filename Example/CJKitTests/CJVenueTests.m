@@ -389,6 +389,17 @@ describe(@"Venue Model", ^{
       });
     });
   });
+  
+  describe(@".requestForSearchWithTerm:", ^{
+    it(@"Produces a correctly configured CJAPIRequest for searching for venues", ^{
+      CJAPIRequest *searchRequest = [CJVenue requestForSearchWithTerm:@"berlin"];
+      
+      [[theValue([searchRequest.path containsString:@"venues/search"]) should] beYes];
+      [[searchRequest.modelClass should] equal:[CJVenue class]];
+      [[searchRequest.parameters[@"term"] should] equal:@"berlin"];
+      [[theValue(searchRequest.cachePolicy) should] equal:theValue(CJAPIRequestReturnCacheDataElseLoad)];
+    });
+  });
 });
 
 SPEC_END
