@@ -10,22 +10,36 @@
 	<string>CJKit</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>A5EF3B625EE4607CBB17DAE3B9566B3A691B824B</key>
+		<string>github.com:Clubjudge/objc-sdk.git</string>
 		<key>DB5E6267-D980-4FC2-9880-CD8F508FA49B</key>
 		<string>ssh://github.com/Clubjudge/objc-sdk.git</string>
 	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Example/CJKit.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>A5EF3B625EE4607CBB17DAE3B9566B3A691B824B</key>
+		<string>../..</string>
 		<key>DB5E6267-D980-4FC2-9880-CD8F508FA49B</key>
-		<string>../../../CJKit</string>
+		<string>../../../objc-sdk</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/Clubjudge/objc-sdk.git</string>
+	<string>github.com:Clubjudge/objc-sdk.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DB5E6267-D980-4FC2-9880-CD8F508FA49B</string>
+	<string>A5EF3B625EE4607CBB17DAE3B9566B3A691B824B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A5EF3B625EE4607CBB17DAE3B9566B3A691B824B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CJKit</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
