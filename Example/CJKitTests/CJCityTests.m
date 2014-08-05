@@ -8,6 +8,7 @@
 
 #import <Kiwi/Kiwi.h>
 #import <CJKit/CJCity.h>
+#import <ObjectiveSugar/ObjectiveSugar.h>
 
 SPEC_BEGIN(CJCITYSPEC)
 
@@ -81,6 +82,17 @@ describe(@"City Model", ^{
         [[theValue(city.geolocation.latitude) should] equal:@55.04434];
         [[theValue(city.geolocation.longitude) should] equal:@9.41741];
       });
+    });
+  });
+  
+  describe(@".requestForSearchWithTerm:", ^{
+    it(@"Produces a correctly configured CJAPIRequest for searching for venues", ^{
+      CJAPIRequest *searchRequest = [CJCity requestForSearchWithTerm:@"berlin"];
+      
+      [[theValue([searchRequest.path containsString:@"cities/search"]) should] beYes];
+      [[searchRequest.modelClass should] equal:[CJCity class]];
+      [[searchRequest.parameters[@"term"] should] equal:@"berlin"];
+      [[theValue(searchRequest.cachePolicy) should] equal:theValue(CJAPIRequestReturnCacheDataElseLoad)];
     });
   });
 });

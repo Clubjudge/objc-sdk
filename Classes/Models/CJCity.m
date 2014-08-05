@@ -38,4 +38,20 @@ static NSString *kCityGeolocation = @"geolocation";
   return self;
 }
 
+#pragma mark - Actions
+
++ (CJAPIRequest *)requestForSearchWithTerm:(NSString *)term
+{
+  CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"get"
+                                                       andPath:@"cities/search"];
+  
+  [request setModelClass:[CJCity class]];
+  [request setParameters:@{@"term": term}];
+  
+  // Searches rarely change, so cache this more aggressively
+  [request setCachePolicy:CJAPIRequestReturnCacheDataElseLoad];
+  
+  return request;
+}
+
 @end
