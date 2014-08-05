@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Clubjudge. All rights reserved.
 //
 
+#import "CJAPIRequest.h"
 #import "CJModel.h"
 #import <CoreLocation/CoreLocation.h>
 
@@ -20,5 +21,9 @@
 #pragma mark - Initializers
 
 + (instancetype)cityWithInfo:(NSDictionary *)info;
+
+#pragma mark - Actions
+
++ (CJAPIRequest *)requestForSearchWithTerm:(NSString *)term;
 
 @end
