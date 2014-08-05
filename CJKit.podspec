@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.subspec "PromiseKit" do |ss|
     ss.dependency "PromiseKit/base", "~> 0.9.8.1"
     ss.dependency 'CJKit/base', "~> #{s.version.to_s}"
-    ss.source_files = "Classes/Categories/CJAPIRequest+PromiseKit.{h,m}", "Classes/Categories/CJEngine+PromiseKit.{h,m}"
+    ss.source_files = "Classes/Categories/CJKit+PromiseKit.{h,m}", "Classes/Categories/CJAPIRequest+PromiseKit.{h,m}", "Classes/Categories/CJEngine+PromiseKit.{h,m}"
   end
 
   s.subspec "BAPersistentOperationQueue" do |ss|
