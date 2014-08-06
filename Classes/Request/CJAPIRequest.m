@@ -11,6 +11,7 @@
 #import <ObjectiveSugar/ObjectiveSugar.h>
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import "CJPersistentQueueController.h"
+#import "CJKit.h"
 
 #ifdef IS_OS_7_OR_LATER
 #import <AFNetworking/AFHTTPSessionManager.h>
@@ -296,7 +297,7 @@ NSString *const kRequestEmbeds = @"embeds";
                   };
   }
   
-  NSLog(@"%@", [self developerMessageFromResponse:response error:jsonError]);
+  DLog(@"%@", [self developerMessageFromResponse:response error:jsonError]);
   
   if (block) {
     block(jsonError, [NSNumber numberWithInteger:response.statusCode]);
