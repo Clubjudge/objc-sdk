@@ -56,20 +56,20 @@
 
 // CJKit/BAPersistentOperationQueue
 #define COCOAPODS_POD_AVAILABLE_CJKit_BAPersistentOperationQueue
-#define COCOAPODS_VERSION_MAJOR_CJKit_BAPersistentOperationQueue 2
-#define COCOAPODS_VERSION_MINOR_CJKit_BAPersistentOperationQueue 1
+#define COCOAPODS_VERSION_MAJOR_CJKit_BAPersistentOperationQueue 3
+#define COCOAPODS_VERSION_MINOR_CJKit_BAPersistentOperationQueue 0
 #define COCOAPODS_VERSION_PATCH_CJKit_BAPersistentOperationQueue 0
 
 // CJKit/PromiseKit
 #define COCOAPODS_POD_AVAILABLE_CJKit_PromiseKit
-#define COCOAPODS_VERSION_MAJOR_CJKit_PromiseKit 2
-#define COCOAPODS_VERSION_MINOR_CJKit_PromiseKit 1
+#define COCOAPODS_VERSION_MAJOR_CJKit_PromiseKit 3
+#define COCOAPODS_VERSION_MINOR_CJKit_PromiseKit 0
 #define COCOAPODS_VERSION_PATCH_CJKit_PromiseKit 0
 
 // CJKit/base
 #define COCOAPODS_POD_AVAILABLE_CJKit_base
-#define COCOAPODS_VERSION_MAJOR_CJKit_base 2
-#define COCOAPODS_VERSION_MINOR_CJKit_base 1
+#define COCOAPODS_VERSION_MAJOR_CJKit_base 3
+#define COCOAPODS_VERSION_MINOR_CJKit_base 0
 #define COCOAPODS_VERSION_PATCH_CJKit_base 0
 
 // FMDB
