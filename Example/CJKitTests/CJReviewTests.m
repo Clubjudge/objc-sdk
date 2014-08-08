@@ -44,7 +44,11 @@ describe(@"Review Model", ^{
                                       @{
                                         @"id": @"global",
                                         @"score": @5.885714285714286
-                                      }
+                                      },
+                                      @{
+                                        @"id": @"text",
+                                        @"score": @"some text rating"
+                                        }
                                     ]
                          };
   
@@ -130,6 +134,12 @@ describe(@"Review Model", ^{
     it(@"sets the correct model class", ^{
       CJAPIRequest *request = [review requestForTarget];
       [[theValue(request.modelClass) should] equal:theValue([CJVenue class])];
+    });
+  });
+  
+  describe(@"#textRating", ^{
+    it(@"returns the correct text rating", ^{
+      [[[review textRating] should] equal:@"some text rating"];
     });
   });
 });
