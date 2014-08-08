@@ -30,5 +30,6 @@ typedef enum {
 #pragma mark - Helpers
 - (CJAPIRequest *)requestForUser;
 - (CJAPIRequest *)requestForTarget;
+- (NSString *)textRating;
 
 @end

@@ -91,4 +91,13 @@ static NSString *kReviewValues = @"values";
   return class;
 }
 
+- (NSString *)textRating
+{
+  CJRating *textRating = [[self.values select:^BOOL(CJRating *rating) {
+    return (rating.textReview != nil);
+  }] firstObject];
+  
+  return textRating.textReview;
+}
+
 @end
