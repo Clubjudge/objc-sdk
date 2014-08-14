@@ -379,6 +379,17 @@ describe(@"Event Model", ^{
       });
     });
   });
+  
+  describe(@".requestForSearchWithTerm:", ^{
+    it(@"Produces a correctly configured CJAPIRequest for searching for events", ^{
+      CJAPIRequest *searchRequest = [CJEvent requestForSearchWithTerm:@"berlin"];
+      
+      [[theValue([searchRequest.path containsString:@"events/search"]) should] beYes];
+      [[searchRequest.modelClass should] equal:[CJEvent class]];
+      [[searchRequest.parameters[@"term"] should] equal:@"berlin"];
+      [[theValue(searchRequest.cachePolicy) should] equal:theValue(CJAPIRequestReturnCacheDataElseLoad)];
+    });
+  });
 });
 
 SPEC_END

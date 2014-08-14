@@ -113,6 +113,22 @@ static NSString *kEventLinkVenue = @"venue";
   return self;
 }
 
+#pragma mark - Actions
+
++ (CJAPIRequest *)requestForSearchWithTerm:(NSString *)term
+{
+  CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"get"
+                                                       andPath:@"events/search"];
+  
+  [request setModelClass:[CJEvent class]];
+  [request setParameters:@{@"term": term}];
+  
+  // Searches rarely change, so cache this more aggressively
+  [request setCachePolicy:CJAPIRequestReturnCacheDataElseLoad];
+  
+  return request;
+}
+
 - (void)follow
 {
   [self followEntity:@"event"];
@@ -133,7 +149,7 @@ static NSString *kEventLinkVenue = @"venue";
 - (NSString *)imagePathForFlyerAtPosition:(NSInteger)position
                                  withSize:(NSString *)size
 {
-  NSAssert((position < _flyers.count), @"There is no flyer at position %lu", position);
+  NSAssert((position < _flyers.count), @"There is no flyer at position %lu", (long)position);
   
   NSDictionary *flyer = [_flyers objectAtIndex:position];
   
