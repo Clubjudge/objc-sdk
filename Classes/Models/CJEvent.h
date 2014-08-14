@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Clubjudge. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "CJModel.h"
+#import "CJAPIRequest.h"
+
 @class CJVenue;
 
 @interface CJEvent : CJModel
@@ -49,6 +50,8 @@
 + (instancetype)eventWithInfo:(NSDictionary *)info;
 
 #pragma mark - Actions
+
++ (CJAPIRequest *)requestForSearchWithTerm:(NSString *)term;
 
 - (void)follow;
 - (void)unfollow;
