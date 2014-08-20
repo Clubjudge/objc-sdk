@@ -23,6 +23,9 @@
 SPEC_BEGIN(CJVENUESPEC)
 
 describe(@"Venue Model", ^{
+  NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+  
   NSDictionary *stub = @{
                          @"address": @{
                            @"city": @{
@@ -222,7 +225,7 @@ describe(@"Venue Model", ^{
     
     describe(@"#updatedAt", ^{
       it(@"produces a correct mapping", ^{
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:venue.updatedAt];
+        NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:venue.updatedAt];
         
         [[theValue(components.day) should] equal:theValue(17)];
         [[theValue(components.month) should] equal:theValue(12)];
