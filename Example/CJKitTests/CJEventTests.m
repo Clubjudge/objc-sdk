@@ -119,7 +119,7 @@ describe(@"Event Model", ^{
         [[theValue(components.day) should] equal:theValue(21)];
         [[theValue(components.month) should] equal:theValue(4)];
         [[theValue(components.year) should] equal:theValue(2014)];
-        [[theValue(components.hour) should] equal:theValue(18)];
+        [[theValue(components.hour) should] equal:theValue(19)];
         [[theValue(components.minute) should] equal:theValue(0)];
         [[theValue(components.second) should] equal:theValue(0)];
       });
@@ -132,7 +132,7 @@ describe(@"Event Model", ^{
         [[theValue(components.day) should] equal:theValue(21)];
         [[theValue(components.month) should] equal:theValue(4)];
         [[theValue(components.year) should] equal:theValue(2014)];
-        [[theValue(components.hour) should] equal:theValue(20)];
+        [[theValue(components.hour) should] equal:theValue(21)];
         [[theValue(components.minute) should] equal:theValue(59)];
         [[theValue(components.second) should] equal:theValue(0)];
       });
@@ -145,7 +145,7 @@ describe(@"Event Model", ^{
         [[theValue(components.day) should] equal:theValue(22)];
         [[theValue(components.month) should] equal:theValue(4)];
         [[theValue(components.year) should] equal:theValue(2014)];
-        [[theValue(components.hour) should] equal:theValue(16)];
+        [[theValue(components.hour) should] equal:theValue(17)];
         [[theValue(components.minute) should] equal:theValue(14)];
         [[theValue(components.second) should] equal:theValue(34)];
       });
@@ -158,7 +158,7 @@ describe(@"Event Model", ^{
         [[theValue(components.day) should] equal:theValue(28)];
         [[theValue(components.month) should] equal:theValue(4)];
         [[theValue(components.year) should] equal:theValue(2014)];
-        [[theValue(components.hour) should] equal:theValue(18)];
+        [[theValue(components.hour) should] equal:theValue(19)];
         [[theValue(components.minute) should] equal:theValue(0)];
         [[theValue(components.second) should] equal:theValue(0)];
       });

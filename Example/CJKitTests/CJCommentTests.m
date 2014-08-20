@@ -95,7 +95,7 @@ describe(@"Comment Model", ^{
         [[theValue(components.day) should] equal:theValue(24)];
         [[theValue(components.month) should] equal:theValue(4)];
         [[theValue(components.year) should] equal:theValue(2014)];
-        [[theValue(components.hour) should] equal:theValue(15)];
+        [[theValue(components.hour) should] equal:theValue(16)];
         [[theValue(components.minute) should] equal:theValue(31)];
         [[theValue(components.second) should] equal:theValue(5)];
       });

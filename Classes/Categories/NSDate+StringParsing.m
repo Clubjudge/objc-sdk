@@ -36,7 +36,7 @@
   NSLocale *locale = [[NSLocale alloc]
                       initWithLocaleIdentifier:@"en_US_POSIX"];
   [dateFormatter setLocale:locale];
-  [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+  [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
   
   NSDate *date = [dateFormatter dateFromString:dateString];
   return date;
