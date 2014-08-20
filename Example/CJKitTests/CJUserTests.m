@@ -12,6 +12,9 @@
 SPEC_BEGIN(CJUSERSPEC)
 
 describe(@"User Model", ^{
+  NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+  
   NSDictionary *stub = @{
                            @"id": @443,
                            @"email": @"bruno.abrantes@clubjudge.com",
@@ -116,7 +119,7 @@ describe(@"User Model", ^{
     
     describe(@"#createdAt", ^{
       it(@"produces a correct mapping", ^{
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:user.createdAt];
+        NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:user.createdAt];
         
         [[theValue(components.day) should] equal:theValue(19)];
         [[theValue(components.month) should] equal:theValue(03)];
@@ -189,7 +192,7 @@ describe(@"User Model", ^{
     
     describe(@"#birthdate", ^{
       it(@"produces a correct mapping", ^{
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:user.birthdate];
+        NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:user.birthdate];
         
         [[theValue(components.day) should] equal:theValue(13)];
         [[theValue(components.month) should] equal:theValue(10)];

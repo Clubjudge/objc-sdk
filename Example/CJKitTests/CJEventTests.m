@@ -24,6 +24,9 @@
 SPEC_BEGIN(CJEVENTSPEC)
 
 describe(@"Event Model", ^{
+  NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+  
   NSDictionary *stub = @{
                          @"id": @55,
                          @"followersCount": @10,
@@ -114,12 +117,12 @@ describe(@"Event Model", ^{
     
     describe(@"#startsAt", ^{
       it(@"produces a correct mapping", ^{
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.startsAt];
+        NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.startsAt];
         
         [[theValue(components.day) should] equal:theValue(21)];
         [[theValue(components.month) should] equal:theValue(4)];
         [[theValue(components.year) should] equal:theValue(2014)];
-        [[theValue(components.hour) should] equal:theValue(19)];
+        [[theValue(components.hour) should] equal:theValue(18)];
         [[theValue(components.minute) should] equal:theValue(0)];
         [[theValue(components.second) should] equal:theValue(0)];
       });
@@ -127,12 +130,12 @@ describe(@"Event Model", ^{
     
     describe(@"#endsAt", ^{
       it(@"produces a correct mapping", ^{
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.endsAt];
+        NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.endsAt];
         
         [[theValue(components.day) should] equal:theValue(21)];
         [[theValue(components.month) should] equal:theValue(4)];
         [[theValue(components.year) should] equal:theValue(2014)];
-        [[theValue(components.hour) should] equal:theValue(21)];
+        [[theValue(components.hour) should] equal:theValue(20)];
         [[theValue(components.minute) should] equal:theValue(59)];
         [[theValue(components.second) should] equal:theValue(0)];
       });
@@ -140,12 +143,12 @@ describe(@"Event Model", ^{
     
     describe(@"#updatedAt", ^{
       it(@"produces a correct mapping", ^{
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.updatedAt];
+        NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.updatedAt];
         
         [[theValue(components.day) should] equal:theValue(22)];
         [[theValue(components.month) should] equal:theValue(4)];
         [[theValue(components.year) should] equal:theValue(2014)];
-        [[theValue(components.hour) should] equal:theValue(17)];
+        [[theValue(components.hour) should] equal:theValue(16)];
         [[theValue(components.minute) should] equal:theValue(14)];
         [[theValue(components.second) should] equal:theValue(34)];
       });
@@ -153,12 +156,12 @@ describe(@"Event Model", ^{
     
     describe(@"#reviewEndsAt", ^{
       it(@"produces a correct mapping", ^{
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.reviewEndsAt];
+        NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:event.reviewEndsAt];
         
         [[theValue(components.day) should] equal:theValue(28)];
         [[theValue(components.month) should] equal:theValue(4)];
         [[theValue(components.year) should] equal:theValue(2014)];
-        [[theValue(components.hour) should] equal:theValue(19)];
+        [[theValue(components.hour) should] equal:theValue(18)];
         [[theValue(components.minute) should] equal:theValue(0)];
         [[theValue(components.second) should] equal:theValue(0)];
       });

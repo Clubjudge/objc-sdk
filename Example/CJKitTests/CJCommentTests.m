@@ -13,6 +13,9 @@
 SPEC_BEGIN(CJCOMMENTSPEC)
 
 describe(@"Comment Model", ^{
+  NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+  
   NSDictionary *stub = @{
                          @"id": @"dab8df0390b14949",
                          @"message": @"This is awesome",
@@ -90,12 +93,12 @@ describe(@"Comment Model", ^{
     
     describe(@"#createdAt", ^{
       it(@"produces a correct mapping", ^{
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:comment.createdAt];
+        NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone fromDate:comment.createdAt];
         
         [[theValue(components.day) should] equal:theValue(24)];
         [[theValue(components.month) should] equal:theValue(4)];
         [[theValue(components.year) should] equal:theValue(2014)];
-        [[theValue(components.hour) should] equal:theValue(16)];
+        [[theValue(components.hour) should] equal:theValue(15)];
         [[theValue(components.minute) should] equal:theValue(31)];
         [[theValue(components.second) should] equal:theValue(5)];
       });
