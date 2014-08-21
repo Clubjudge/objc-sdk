@@ -195,18 +195,55 @@ describe(@"CJAPIRequest", ^{
     __block CJAPIRequest *request;
     __block NSDictionary *parameters;
     
-    beforeEach(^{
-      request = [[CJAPIRequest alloc] init];
-      parameters = @{
-                     @"key1": @"value1",
-                     @"key2": @"value2"
-                     };
+    context(@"When parameters is uninitialized", ^{
+      beforeEach(^{
+        request = [[CJAPIRequest alloc] init];
+        parameters = @{
+                       @"key1": @"value1",
+                       @"key2": @"value2"
+                       };
+      });
+      
+      it(@"sets correctly", ^{
+        [request setParameters:parameters];
+        
+        [[request.parameters should] equal:parameters];
+      });
     });
     
-    it(@"sets correctly", ^{
-      [request setParameters:parameters];
+    context(@"When parameters is initialized", ^{
       
-      [[request.parameters should] equal:parameters];
+      __block NSDictionary *newParameters;
+      
+      beforeEach(^{
+        request = [[CJAPIRequest alloc] init];
+        parameters = @{
+                       @"key1": @"value1",
+                       @"key2": @"value2"
+                       };
+        newParameters = @{
+                          @"key3": @"value3",
+                          @"key4": @"value4"
+                          };
+      
+      });
+      
+      it(@"sets parameters preserving previously set values", ^{
+        [request setParameters:parameters];
+        [[request.parameters should] equal:parameters];
+        
+        [request setParameters:newParameters];
+        
+        NSMutableArray *allKeys = [NSMutableArray arrayWithArray:parameters.allKeys];
+        [allKeys addObjectsFromArray:newParameters.allKeys];
+
+        [[[request.parameters.allKeys sort] should] equal:[allKeys sort]];
+        
+        NSMutableArray *allValues = [NSMutableArray arrayWithArray:parameters.allValues];
+        [allValues addObjectsFromArray:newParameters.allValues];
+        
+        [[[request.parameters.allValues sort] should] equal:[allValues sort]];
+      });
     });
   });
   

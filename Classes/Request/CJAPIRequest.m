@@ -375,4 +375,19 @@ NSString *const kRequestEmbeds = @"embeds";
   [queueController.queue addObject:self];
 }
 
+#pragma mark - Properties 
+
+- (void)setParameters:(NSDictionary *)parameters
+{
+  if(! _parameters) {
+    _parameters = parameters;
+  }
+  else {
+    NSMutableDictionary *tempParameters = [NSMutableDictionary dictionaryWithDictionary:_parameters];
+    [tempParameters addEntriesFromDictionary:parameters];
+    
+    _parameters = [tempParameters copy];
+  }
+}
+
 @end
