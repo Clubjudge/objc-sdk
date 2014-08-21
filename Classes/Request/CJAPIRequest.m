@@ -379,12 +379,10 @@ NSString *const kRequestEmbeds = @"embeds";
 
 - (void)setParameters:(NSDictionary *)parameters
 {
-  if(! _parameters)
-  {
+  if(! _parameters) {
     _parameters = parameters;
   }
-  else
-  {
+  else {
     NSMutableDictionary *tempParameters = [NSMutableDictionary dictionaryWithDictionary:_parameters];
     [tempParameters addEntriesFromDictionary:parameters];
     

@@ -195,7 +195,7 @@ describe(@"CJAPIRequest", ^{
     __block CJAPIRequest *request;
     __block NSDictionary *parameters;
     
-    context(@"parameters is uninitialized", ^{
+    context(@"When parameters is uninitialized", ^{
       beforeEach(^{
         request = [[CJAPIRequest alloc] init];
         parameters = @{
@@ -211,7 +211,7 @@ describe(@"CJAPIRequest", ^{
       });
     });
     
-    context(@"parameters is initialized", ^{
+    context(@"When parameters is initialized", ^{
       
       __block NSDictionary *newParameters;
       
