@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc         = true
 
-  s.dependency           "AFNetworking", "~> 2.2"
+  s.dependency           "AFNetworking", "~> 2.4"
   s.dependency           "ObjectiveSugar"
   s.dependency           "BAPersistentOperationQueue"
 

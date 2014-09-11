@@ -279,7 +279,6 @@ NSString *const kRequestEmbeds = @"embeds";
                        error:(NSError *)error
                        block:(CJFailureBlock)block
 {
-  
   NSHTTPURLResponse *response = (NSHTTPURLResponse *) task.response;
   NSData *errorData = [[error userInfo] objectForKey:JSONResponseSerializerWithDataKey];
   
@@ -293,7 +292,7 @@ NSString *const kRequestEmbeds = @"embeds";
     unless(jsonError) jsonError = @{};    
   } else {
     jsonError = @{
-                  @"developerMessage": [[error userInfo] objectForKey:@"NSLocalizedDescription"]
+                  @"developerMessage": NSLocalizedString(@"Something went wrong!", @"Generic error message for a CJAPIRequest")
                   };
   }
   
