@@ -64,10 +64,10 @@ static NSDictionary* configurations = nil;
                                                              },
                                                            @{
                                                              @"kAPIBaseURL": @"http://bifrost.staging.clubjudge.com",
-                                                             @"kAuthAPIBaseURL": @"http://staging.clubjudge.com/baws/auth"
+                                                             @"kAuthAPIBaseURL": @"http://auth.staging.clubjudge.com"
                                                              },
                                                            @{
-                                                             @"kAPIBaseURL": @"http://bifrost.clubjudge.com",
+                                                             @"kAPIBaseURL": @"https://bifrost.clubjudge.com",
                                                              @"kAuthAPIBaseURL": @"https://auth.clubjudge.com"
                                                              },
                                                            ]
