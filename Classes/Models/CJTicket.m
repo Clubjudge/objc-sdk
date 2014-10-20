@@ -14,6 +14,7 @@ static NSString *kTicketName = @"name";
 static NSString *kTicketCents = @"cents";
 static NSString *kTicketCurrency = @"currency";
 static NSString *kTicketText = @"text";
+static NSString *kTicketURL = @"url";
 
 #pragma mark - Initializers
 
@@ -31,6 +32,7 @@ static NSString *kTicketText = @"text";
     _cents = info[kTicketCents];
     _currency = info[kTicketCurrency];
     _text = info[kTicketText];
+    _url = [NSURL URLWithString:info[kTicketURL]];
   }
   return self;
 }

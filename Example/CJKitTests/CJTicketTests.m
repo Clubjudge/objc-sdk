@@ -16,7 +16,8 @@ describe(@"Ticket Model", ^{
                          @"name": @"Door Sale",
                          @"cents": @5000,
                          @"currency": @"EUR",
-                         @"text": @"€50.00"
+                         @"text": @"€50.00",
+                         @"url": @"http://acme.org/tickets/123"
                          };
   
   __block CJTicket *ticket;
@@ -54,6 +55,12 @@ describe(@"Ticket Model", ^{
     describe(@"#text", ^{
       it(@"produces a correct mapping", ^{
         [[ticket.text should] equal:stub[@"text"]];
+      });
+    });
+    
+    describe(@"#url", ^{
+      it(@"produces a correct mapping", ^{
+        [[[ticket.url absoluteString] should] equal:stub[@"url"]];
       });
     });
   });

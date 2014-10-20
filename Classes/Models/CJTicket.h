@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSNumber *cents;
 @property (nonatomic, strong) NSString *currency;
 @property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSURL *url;
 
 #pragma mark - Initializers
 + (instancetype)ticketWithInfo:(NSDictionary *)info;
