@@ -7,7 +7,6 @@
 //
 
 #import "CJLinksInfo.h"
-#import "CJEngineConfiguration.h"
 #import "CJAPIRequest.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
 
@@ -75,7 +74,7 @@ static NSString *kLinksLast = @"last";
 
 - (NSString *)pathComponentForURL:(NSURL *)url
 {
-  NSString *version = [CJEngineConfiguration sharedConfiguration].APIVersion;
+  NSString *version = [NSString stringWithFormat:@"v%@", [[CJEngine sharedEngine] apiVersion]];
   
   NSArray *components = [[url pathComponents] reject:^BOOL(NSString *component) {
     return ([component isEqualToString:version] || [component isEqualToString:@"/"]);

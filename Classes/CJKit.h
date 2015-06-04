@@ -9,7 +9,6 @@
 #pragma mark - Core
 
 #import "CJEngine.h"
-#import "CJEngineConfiguration.h"
 #import "CJAPIRequest.h"
 #import "CJPersistentQueueController.h"
 

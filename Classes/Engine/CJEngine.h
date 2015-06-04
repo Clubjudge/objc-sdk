@@ -60,6 +60,15 @@ typedef NSUInteger CJAPIRequestCachePolicy;
  */
 @property (nonatomic, assign) CJAPIRequestCachePolicy cachePolicy;
 
+@property (nonatomic, strong) NSString *apiURL;
+@property (nonatomic, strong) NSString *authURL;
+@property (nonatomic, strong) NSString *apiVersion;
+@property (nonatomic, strong) NSString *clientKey;
+@property (nonatomic, strong) NSString *userToken;
+
+- (void)setupSessionManager;
+- (void)setupAuthManager;
+
 ///---------------------
 /// @name Initialization
 ///---------------------
@@ -70,48 +79,6 @@ typedef NSUInteger CJAPIRequestCachePolicy;
  Creates and returns a `CJEngine` object.
  */
 + (CJEngine *)sharedEngine;
-
-///---------------------
-/// @name Client Key
-///---------------------
-
-#pragma mark - Client Key
-
-/**
- Gets the client key that is used in all requests
- */
-+ (NSString *)clientKey;
-
-/**
- Sets the client key to be used in all requests
- */
-+ (void)setClientKey:(NSString *)clientKey;
-
-///---------------------
-/// @name User Token
-///---------------------
-
-#pragma mark - User Token
-
-/**
- Gets the user access token that is used in all requests
- */
-+ (NSString *)userToken;
-
-/**
- Sets the user access token to be used in all requests
- */
-+ (void)setUserToken:(NSString *)userToken;
-
-///---------------------
-/// @name Environment
-///---------------------
-
-#pragma mark - Environment
-/**
- Sets the environment (development, staging or production) to make requests against
- */
-+ (void)setEnvironment:(NSString *)environment;
 
 ///---------------------
 /// @name User Authentication
