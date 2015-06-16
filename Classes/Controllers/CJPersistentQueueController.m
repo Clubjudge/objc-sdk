@@ -66,7 +66,8 @@ static NSString* theDatabasePath = nil;
   NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithCapacity:5];
   
   if (request.path) {
-    data[@"path"] = [request.path stringByReplacingOccurrencesOfString:@"/v1" withString:@""];
+      NSString *version = [NSString stringWithFormat:@"/v%@", [[CJEngine sharedEngine] apiVersion]];
+    data[@"path"] = [request.path stringByReplacingOccurrencesOfString:version withString:@""];
   }
   
   if (request.method) {

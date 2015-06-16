@@ -11,6 +11,7 @@
 #import "NSDate+StringParsing.h"
 #import "CJEvent.h"
 #import "CJUser.h"
+#import "CJTag.h"
 #import "CJComment.h"
 #import "CJRating.h"
 #import "CJReview.h"
@@ -21,22 +22,19 @@
 
 @implementation CJVenue
 
-static NSString *kVenueName = @"name";
-static NSString *kVenueDescription = @"description";
-static NSString *kVenueFollowing = @"follow";
+static NSString *kVenueCreatedAt = @"createdAt";
 static NSString *kVenueUpdatedAt = @"updatedAt";
-static NSString *kVenueFollowersCount = @"followersCount";
+static NSString *kVenueName = @"name";
+static NSString *kVenueClosed = @"closed";
+static NSString *kVenueReviewsCount = @"reviewsCount";
 static NSString *kVenueCommentsCount = @"commentsCount";
-static NSString *kVenueSocialMentionsCount = @"socialMentionsCount";
-static NSString *kVenueReviewCount = @"reviewCount";
-static NSString *kVenueSocialLinks = @"socialLinks";
-static NSString *kVenueLogos = @"logos";
-static NSString *kVenueAddress = @"address";
+static NSString *kVenueFollowersCount = @"followersCount";
+static NSString *kUpcomingEventsCount = @"upcomingEventsCount";
+static NSString *kKeywords = @"keywords";
+static NSString *kVenueTypes = @"venueTypes";
+static NSString *kVenueLogo = @"logo";
 static NSString *kVenueBackground = @"background";
-static NSString *kVenueGeolocation = @"geolocation";
-static NSString *kVenueEmail = @"email";
-static NSString *kVenueWebsiteURL = @"websiteUrl";
-static NSString *kVenuePhoneNumber = @"phoneNumber";
+static NSString *kVenueAddress = @"address";
 
 static NSString *kVenueEvents = @"events";
 static NSString *kVenueUpcomingEvents = @"upcoming";
@@ -49,6 +47,9 @@ static NSString *kVenueLinkRecentEvents = @"recent";
 static NSString *kVenueLinkComments = @"comments";
 static NSString *kVenueLinkFollowers = @"followers";
 static NSString *kVenueLinkRatings = @"ratings";
+static NSString *kVenueLinkDetails = @"details";
+
+@synthesize geolocation = _geolocation;
 
 #pragma mark - Initializers
 
@@ -62,29 +63,27 @@ static NSString *kVenueLinkRatings = @"ratings";
   self = [super initWithInfo:info];
   if (self && info) {
     // Core properties
-    _name = info[kVenueName];
-    _about = info[kVenueDescription];
-    _updatedAt = [NSDate dateWithISO8601String:info[kVenueUpdatedAt]];
-    _following = [info[kVenueFollowing] boolValue];
-    _followersCount = info[kVenueFollowersCount];
-    _commentsCount = info[kVenueCommentsCount];
-    _socialMentionsCount = info[kVenueSocialMentionsCount];
-    _reviewCount = info[kVenueReviewCount];
-    _socialLinks = info[kVenueSocialLinks];
+      _createdAt = [NSDate dateWithISO8601String:info[kVenueCreatedAt]];
+      _updatedAt = [NSDate dateWithISO8601String:info[kVenueUpdatedAt]];
+      _name = info[kVenueName];
+      _closed = [info[kVenueClosed] boolValue];
+      _reviewsCount = info[kVenueReviewsCount];
+      _commentsCount = info[kVenueCommentsCount];
+      _followersCount = info[kVenueFollowersCount];
+      _upcomingEventsCount = info[kVenueUpcomingEvents];
+      _keywords = info[kKeywords];
+      
+      NSMutableArray *venueTypes = [NSMutableArray new];
+      if(info[kVenueTypes]) {
+          for(NSDictionary *venueTypeInfo in info[kVenueTypes]) {
+              [venueTypes addObject:[CJTag tagWithInfo:venueTypeInfo]];
+          }
+      }
+      _venueTypes = venueTypes;
     
-    _geolocation = kCLLocationCoordinate2DInvalid;
-    if (info[kVenueGeolocation][@"lat"] != [NSNull null] && info[kVenueGeolocation][@"lon"] != [NSNull null]) {
-      double lat = [info[kVenueGeolocation][@"lat"] doubleValue];
-      double lon = [info[kVenueGeolocation][@"lon"] doubleValue];
-      _geolocation = CLLocationCoordinate2DMake(lat, lon);
-    }
-    
-    _background = info[kVenueBackground];
-    _address = info[kVenueAddress];
-    _logos = info[kVenueLogos];
-    _email = info[kVenueEmail];
-    _websiteURL = info[kVenueWebsiteURL];
-    _phoneNumber = info[kVenuePhoneNumber];
+      _background = [info[kVenueBackground] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueBackground];
+      _address = [info[kVenueAddress] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueAddress];
+      _logo = info[kVenueLogo];
     
     // Links
     self.links.mapping = @{
@@ -110,8 +109,27 @@ static NSString *kVenueLinkRatings = @"ratings";
     _followers = [(NSArray *) info[kVenueFollowers][@"source"] map:^id(NSDictionary *user) {
       return [[CJUser alloc] initWithInfo:user];
     }];
+      _details = [CJVenueDetails venueDetailsWithInfo:info[kVenueLinkDetails][@"source"]];
   }
   return self;
+}
+
+-(CLLocationCoordinate2D) geolocation {
+    NSDictionary *geolocationDic = nil;
+    if(![_address[@"geolocation"] isEqual:[NSNull null]]) {
+        geolocationDic = _address[@"geolocation"];
+    }
+    else if(![_address[@"city"] isEqual:[NSNull null]] && ![_address[@"city"][@"geolocation"] isEqual:[NSNull null]]) {
+        geolocationDic = _address[@"city"][@"geolocation"];
+    }
+    if(geolocationDic) {
+        double latitute = [geolocationDic[@"lat"] doubleValue];
+        double longitude = [geolocationDic[@"lon"] doubleValue];
+        
+        _geolocation = CLLocationCoordinate2DMake(latitute, longitude);
+    }
+    
+    return _geolocation;
 }
 
 #pragma mark - Actions
@@ -142,15 +160,19 @@ static NSString *kVenueLinkRatings = @"ratings";
 
 - (NSUInteger)distanceFromLocation:(CLLocation *)location
 {
-  CLLocation *venueLocation = [[CLLocation alloc] initWithLatitude:self.geolocation.latitude longitude:self.geolocation.longitude];
-  
-  return [self distanceToLocation:venueLocation
-                     fromLocation:location];
+    if(CLLocationCoordinate2DIsValid([self geolocation])) {
+        CLLocation *venueLocation = [[CLLocation alloc] initWithLatitude:[self geolocation].latitude longitude:[self geolocation].longitude];
+        
+        return [self distanceToLocation:venueLocation
+                           fromLocation:location];
+    }
+    
+    return NSNotFound;
 }
 
 - (NSString *)imagePathForLogoWithSize:(NSString *)size
 {
-  return [self imagePathForImageInfo:[_logos firstObject] andSize:size];
+  return [self imagePathForImageInfo:_logo andSize:size];
 }
 
 - (NSString *)imagePathForBackgroundWithSize:(NSString *)size

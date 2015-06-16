@@ -8,28 +8,29 @@
 
 #import "CJAPIRequest.h"
 #import "CJModel.h"
+#import "CJVenueDetails.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface CJVenue : CJModel
 
 #pragma mark - Core properties
 
-@property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong) NSString *about;
-@property(nonatomic, assign) BOOL following;
+@property(nonatomic, strong) NSDate *createdAt;
 @property(nonatomic, strong) NSDate *updatedAt;
-@property(nonatomic, strong) NSNumber *followersCount;
+@property(nonatomic, strong) NSString *name;
+@property(nonatomic, assign) BOOL closed;
+@property(nonatomic, strong) NSNumber *reviewsCount;
 @property(nonatomic, strong) NSNumber *commentsCount;
-@property(nonatomic, strong) NSNumber *socialMentionsCount;
-@property(nonatomic, strong) NSNumber *reviewCount;
-@property(nonatomic, strong) NSArray *socialLinks;
-@property(nonatomic, assign) CLLocationCoordinate2D geolocation;
+@property(nonatomic, strong) NSNumber *followersCount;
+@property(nonatomic, strong) NSNumber *upcomingEventsCount;
+@property(nonatomic, strong) NSArray *keywords;
+@property(nonatomic, strong) NSArray *venueTypes;
+@property(nonatomic, strong) NSDictionary *logo;
 @property(nonatomic, strong) NSDictionary *background;
 @property(nonatomic, strong) NSDictionary *address;
-@property(nonatomic, strong) NSArray *logos;
-@property(nonatomic, strong) NSString *email;
-@property(nonatomic, strong) NSString *websiteURL;
-@property(nonatomic, strong) NSString *phoneNumber;
+
+#pragma mark - Helper Properties
+@property(nonatomic, assign, readonly) CLLocationCoordinate2D geolocation;
 
 #pragma mark - Embeddables
 
@@ -37,6 +38,7 @@
 @property(nonatomic, strong) NSArray *upcomingEvents;
 @property(nonatomic, strong) NSArray *recentEvents;
 @property(nonatomic, strong) NSArray *followers;
+@property(nonatomic, strong) CJVenueDetails *details;
 
 #pragma mark - Initializers
 
