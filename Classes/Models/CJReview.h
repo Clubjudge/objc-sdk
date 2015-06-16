@@ -17,12 +17,12 @@ typedef enum {
 
 @interface CJReview : CJModel
 
-@property (readonly) NSNumber *points;
-@property (readonly) NSNumber *targetId;
-@property (readonly) NSString *targetType;
-@property (readonly) ReviewType type;
-@property (readonly) NSNumber *userId;
-@property (readonly) NSArray *values;
+@property (nonatomic, strong) NSNumber *points;
+@property (nonatomic, strong) NSNumber *targetId;
+@property (nonatomic, strong) NSString *targetType;
+@property (nonatomic, assign) ReviewType type;
+@property (nonatomic, strong) NSNumber *userId;
+@property (nonatomic, strong) NSArray *values;
 
 #pragma mark - Initializers
 + (instancetype)reviewWithInfo:(NSDictionary *)info;
