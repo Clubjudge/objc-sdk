@@ -12,8 +12,8 @@
 
 #pragma mark - Core properties
 @property (nonatomic, strong) NSString* Id;
-@property (nonatomic, readonly) NSNumber *score;
-@property (nonatomic, readonly) NSString *textReview;
+@property (nonatomic, strong) NSNumber *score;
+@property (nonatomic, strong) NSString *textReview;
 
 #pragma mark - Initializers
 + (instancetype)ratingWithInfo:(NSDictionary *)info;
