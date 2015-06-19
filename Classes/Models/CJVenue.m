@@ -83,7 +83,7 @@ static NSString *kVenueLinkDetails = @"details";
     
       _background = [info[kVenueBackground] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueBackground];
       _address = [info[kVenueAddress] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueAddress];
-      _logo = info[kVenueLogo];
+      _logo = [info[kVenueLogo] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueLogo];
     
     // Links
     self.links.mapping = @{
