@@ -12,15 +12,20 @@
 #import "CJVenue.h"
 #import "CJEvent.h"
 #import <ObjectiveSugar/ObjectiveSugar.h>
+#import "NSDate+StringParsing.h"
 
 @implementation CJReview
 
-static NSString *kReviewPoints = @"points";
+static NSString *kReviewCreatedAt = @"createdAt";
+static NSString *kReviewUpdatedAt = @"updatedAt";
+static NSString *kReviewEdited = @"edited";
+static NSString *kReviewTitle = @"title";
+static NSString *kReviewNegativeComments = @"negativeComments";
+static NSString *kReviewPositiveComments = @"positiveComments";
+static NSString *kReviewScores = @"scores";
 static NSString *kReviewTargetId = @"targetId";
-static NSString *kReviewTargetType = @"targetType";
 static NSString *kReviewType = @"type";
 static NSString *kReviewUserId = @"userId";
-static NSString *kReviewValues = @"values";
 
 #pragma mark - Initializers
 
@@ -33,28 +38,22 @@ static NSString *kReviewValues = @"values";
 {
   self = [super initWithInfo:info];
   if (self && info) {
-    // Core properties
-    _points = info[kReviewPoints];
-    _targetId = info[kReviewTargetId];
-    _targetType = info[kReviewTargetType];
-    _type = [self typeForString:info[kReviewType]];
-    _userId = info[kReviewUserId];
-    _values = [info[kReviewValues] map:^CJRating *(NSDictionary *rating) {
-      return [[CJRating alloc] initWithInfo:rating];
-    }];
+      // Core properties
+      _createdAt = [NSDate dateWithISO8601String:info[kReviewCreatedAt]];
+      _updatedAt = [NSDate dateWithISO8601String:info[kReviewUpdatedAt]];
+      _edited = [info[kReviewEdited] boolValue];
+      _title = info[kReviewTitle];
+      _positiveComments = info[kReviewPositiveComments];
+      _negativeComments = info[kReviewNegativeComments];
+      _scores = [info[kReviewScores] isEqual:[NSNull null]] ? [NSDictionary new] : info[kReviewScores];
+      _targetId = info[kReviewTargetId];
+      _type = info[kReviewType];
+      _userId = info[kReviewUserId];
   }
   return self;
 }
 
 #pragma mark - Helpers
-- (CJAPIRequest *)requestForTarget
-{
-  CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"GET"
-                                                       andPath:[NSString stringWithFormat:@"/%@s/%@", self.targetType, self.targetId]];
-  request.modelClass = [self classForTargetType:self.targetType];
-  
-  return request;
-}
 
 - (CJAPIRequest *)requestForUser
 {
@@ -63,21 +62,6 @@ static NSString *kReviewValues = @"values";
   request.modelClass = [CJUser class];
   
   return request;
-}
-
-- (ReviewType)typeForString:(NSString *)string
-{
-  ReviewType type = kReviewTypeMedium;
-  
-  if ([string isEqualToString:@"expert"]) {
-    type = kReviewTypeExpert;
-  }
-  
-  if ([string isEqualToString:@"short"]) {
-    type = kReviewTypeShort;
-  }
-  
-  return type;
 }
 
 - (Class)classForTargetType:(NSString *)type
@@ -89,15 +73,6 @@ static NSString *kReviewValues = @"values";
   }
   
   return class;
-}
-
-- (NSString *)textRating
-{
-  CJRating *textRating = [[self.values select:^BOOL(CJRating *rating) {
-    return (rating.textReview != nil);
-  }] firstObject];
-  
-  return textRating.textReview;
 }
 
 @end
