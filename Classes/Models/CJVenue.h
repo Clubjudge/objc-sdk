@@ -28,6 +28,7 @@
 @property(nonatomic, strong) NSDictionary *logo;
 @property(nonatomic, strong) NSDictionary *background;
 @property(nonatomic, strong) NSDictionary *address;
+@property(nonatomic, strong) NSDictionary *scores;
 
 #pragma mark - Helper Properties
 @property(nonatomic, assign, readonly) CLLocationCoordinate2D geolocation;

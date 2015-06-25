@@ -35,6 +35,7 @@ static NSString *kVenueTypes = @"venueTypes";
 static NSString *kVenueLogo = @"logo";
 static NSString *kVenueBackground = @"background";
 static NSString *kVenueAddress = @"address";
+static NSString *kVenueScores = @"scores";
 
 static NSString *kVenueEvents = @"events";
 static NSString *kVenueUpcomingEvents = @"upcoming";
@@ -84,6 +85,7 @@ static NSString *kVenueLinkDetails = @"details";
       _background = [info[kVenueBackground] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueBackground];
       _address = [info[kVenueAddress] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueAddress];
       _logo = [info[kVenueLogo] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueLogo];
+      _scores = [info[kVenueScores] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueScores];
     
     // Links
     self.links.mapping = @{
