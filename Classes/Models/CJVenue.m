@@ -139,10 +139,10 @@ static NSString *kVenueLinkDetails = @"details";
 + (CJAPIRequest *)requestForSearchWithTerm:(NSString *)term
 {
   CJAPIRequest *request = [[CJAPIRequest alloc] initWithMethod:@"get"
-                                                       andPath:@"venues/search"];
+                                                       andPath:@"venues"];
   
   [request setModelClass:[CJVenue class]];
-  [request setParameters:@{@"term": term}];
+  [request setParameters:@{@"q": term}];
   
   // Searches rarely change, so cache this more aggressively
   [request setCachePolicy:CJAPIRequestReturnCacheDataElseLoad];
