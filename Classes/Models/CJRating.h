@@ -11,7 +11,7 @@
 @interface CJRating : CJModel
 
 #pragma mark - Core properties
-@property (nonatomic, strong) NSString* Id;
+
 @property (nonatomic, strong) NSNumber *score;
 @property (nonatomic, strong) NSString *textReview;
 
