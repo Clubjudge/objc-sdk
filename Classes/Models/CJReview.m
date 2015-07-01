@@ -26,6 +26,7 @@ static NSString *kReviewScores = @"scores";
 static NSString *kReviewTargetId = @"targetId";
 static NSString *kReviewType = @"type";
 static NSString *kReviewUserId = @"userId";
+static NSString *kReviewUser = @"user";
 
 #pragma mark - Initializers
 
@@ -49,6 +50,8 @@ static NSString *kReviewUserId = @"userId";
       _targetId = info[kReviewTargetId];
       _type = info[kReviewType];
       _userId = info[kReviewUserId];
+      
+      _user = [CJUser userWithInfo:info[kReviewUser][@"source"]];
   }
   return self;
 }

@@ -28,4 +28,8 @@
 #pragma mark - Helpers
 - (CJAPIRequest *)requestForUser;
 
+#pragma mark - Embeddables
+
+@property(nonatomic, strong) CJUser *user;
+
 @end

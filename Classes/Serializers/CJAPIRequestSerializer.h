@@ -10,7 +10,7 @@
 
 @interface CJAPIRequestSerializer : AFJSONRequestSerializer
 
-@property (nonatomic, assign) NSURLRequestCachePolicy cachePolicy;
+
 
 - (instancetype)initWithCachePolicy:(NSURLRequestCachePolicy)cachePolicy;
 
