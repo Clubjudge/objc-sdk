@@ -111,7 +111,7 @@ typedef NSUInteger CJAPISessionManager;
   NSString *password = user.password;
   NSString *firstName = user.firstName;
   NSString *lastName = user.lastName;
-  CJCity *city = user.address[@"city"];
+    CJCity *city = [CJCity cityWithInfo:user.city];
   
   [self.authSessionManager POST:@"users"
                      parameters:@{

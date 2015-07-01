@@ -14,7 +14,7 @@
 @implementation CJUser
 
 static NSString*kUserEmail = @"email";
-static NSString*kUserAddress = @"address";
+static NSString*kUserCity = @"city";
 static NSString*kUserFirstName = @"firstName";
 static NSString*kUserLastName = @"lastName";
 static NSString*kUserFullName = @"fullName";
@@ -48,7 +48,7 @@ static NSString*kUserLinkEvents = @"events";
   if (self && info) {
     // Core properties
     _email = info[kUserEmail];
-    _address = info[kUserAddress];
+    _city = info[kUserCity];
     _firstName = info[kUserFirstName];
     _lastName = info[kUserLastName];
     _fullName = info[kUserFullName];

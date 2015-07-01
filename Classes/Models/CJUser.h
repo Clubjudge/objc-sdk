@@ -14,7 +14,7 @@
 
 @property(nonatomic, strong) NSString *email;
 @property(nonatomic, strong) NSString *password;
-@property(nonatomic, strong) NSDictionary *address;
+@property(nonatomic, strong) NSDictionary *city;
 @property(nonatomic, strong) NSString *firstName;
 @property(nonatomic, strong) NSString *lastName;
 @property(nonatomic, strong) NSString *fullName;
