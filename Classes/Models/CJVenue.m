@@ -11,7 +11,6 @@
 #import "NSDate+StringParsing.h"
 #import "CJEvent.h"
 #import "CJUser.h"
-#import "CJTag.h"
 #import "CJComment.h"
 #import "CJRating.h"
 #import "CJReview.h"
@@ -73,15 +72,9 @@ static NSString *kVenueLinkDetails = @"details";
       _followersCount = info[kVenueFollowersCount];
       _upcomingEventsCount = info[kVenueUpcomingEvents];
       _keywords = info[kKeywords];
-      
-      NSMutableArray *venueTypes = [NSMutableArray new];
-      if(info[kVenueTypes]) {
-          for(NSDictionary *venueTypeInfo in info[kVenueTypes]) {
-              [venueTypes addObject:[CJTag tagWithInfo:venueTypeInfo]];
-          }
-      }
-      _venueTypes = venueTypes;
     
+      _venueTypes = [info[kVenueTypes] isEqual:[NSNull null]] ? [NSArray new] : info[kVenueTypes];
+
       _background = [info[kVenueBackground] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueBackground];
       _address = [info[kVenueAddress] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueAddress];
       _logo = [info[kVenueLogo] isEqual:[NSNull null]] ? [NSDictionary new] : info[kVenueLogo];
